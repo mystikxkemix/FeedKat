@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  DashBoardVC.swift
 //  FeedKat
 //
 //  Created by Mike OLIVA on 13/09/2016.
@@ -8,18 +8,8 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    //MARK : Properties
-    @IBOutlet var texttitle: UILabel!
-    @IBOutlet var edittextfield: UITextField!
-    @IBOutlet var savebutton: UIButton!
-    @IBOutlet var nametext: UILabel!
-
-    @IBAction func onsaveclick(sender: UIButton) {
-        nametext.text = "Name : \(edittextfield.text!)"
-    }
-    
+class DashBoard: UIViewController
+{
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -31,7 +21,4 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
-
 }
-
