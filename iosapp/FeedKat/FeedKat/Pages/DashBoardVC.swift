@@ -14,15 +14,15 @@ class DashBoard: UIViewController
     {
         super.viewDidLoad()
         
-        let v = UIView()
-        v.backgroundColor = UIColor.black
-        v.translatesAutoresizingMaskIntoConstraints = false
+        let banner = UIView()
+        banner.backgroundColor = UIColor.black
+        banner.translatesAutoresizingMaskIntoConstraints = false
         
-        self.view.addSubview(v)
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
+        self.view.addSubview(banner)
+        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
         //v.userInteractionEnabled = true
         //v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resize)))
