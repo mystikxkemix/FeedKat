@@ -16,7 +16,6 @@ class popUp: UIView {
     init(view: UIView, text: String)
     {
         super.init(frame:CGRectMake (0, 0, view.frame.width, view.frame.height))
-        print("width \(view.frame.width) height \(view.frame.height)")
         backgroundColor = UIColor.blackColor()
         self.alpha = 0.5
         
@@ -53,6 +52,8 @@ class popUp: UIView {
 
     func okButtonImplementation(sender:UIButton)
     {
-        hidden = false
+        UICenter.removeFromSuperview()
+        ButonOK.removeFromSuperview()
+        self.removeFromSuperview()
     }
 }
