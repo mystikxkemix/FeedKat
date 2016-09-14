@@ -26,7 +26,6 @@ class ConnectionPage: UIViewController {
             let pop = popUp(view:self.view, text:"Test")
             pop.ViewFunc()
             UIcontent.insertSubview(pop, atIndex: 6)
-
         }
     }
     
