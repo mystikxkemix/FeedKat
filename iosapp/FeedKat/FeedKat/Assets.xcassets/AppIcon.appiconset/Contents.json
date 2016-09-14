@@ -33,13 +33,13 @@
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "IconeApp_FeedKat_80px.png",
+      "filename" : "IconeApp_FeedKat_120px.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "IconeApp_FeedKat_120px.png",
+      "filename" : "IconeApp_FeedKat_180px.png",
       "scale" : "3x"
     },
     {
