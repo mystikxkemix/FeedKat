@@ -16,53 +16,53 @@ class popUp: UIView {
     
     init(view: UIView, text: String)
     {
-        super.init(frame:CGRectMake (0, 0, view.frame.width, view.frame.height))
-        backgroundColor = UIColor.blackColor()
+        super.init(frame:CGRect (x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        backgroundColor = UIColor.black
         self.alpha = 0.5
         
         //---------------------------------------
         UICenter = UIView()
         UICenter.translatesAutoresizingMaskIntoConstraints = false
-        UICenter.backgroundColor = UIColor.whiteColor()
+        UICenter.backgroundColor = UIColor.white
         UICenter.layer.cornerRadius = 10
         
         view.addSubview(UICenter)
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .CenterY, relatedBy: .Equal, toItem: view, attribute: .CenterY, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.3, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 0.8, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.3, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 0.8, constant: 0))
         
         
         //---------------------------------------
         ButonOK = UIButton()
         ButonOK.layer.cornerRadius = 10
         ButonOK.layer.borderWidth = 1
-        ButonOK.layer.borderColor = UIColor.blackColor().CGColor
-        ButonOK.setTitleColor(UIColor.blackColor(), forState: .Normal)
-        ButonOK.setTitle("Ok", forState: UIControlState.Normal)
-        ButonOK.addTarget(self, action: #selector(self.okButtonImplementation), forControlEvents: UIControlEvents.TouchUpInside)
+        ButonOK.layer.borderColor = UIColor.black.cgColor
+        ButonOK.setTitleColor(UIColor.black, for: UIControlState())
+        ButonOK.setTitle("Ok", for: UIControlState())
+        ButonOK.addTarget(self, action: #selector(self.okButtonImplementation), for: UIControlEvents.touchUpInside)
         ButonOK.translatesAutoresizingMaskIntoConstraints = false
         
         UICenter.addSubview(ButonOK)
-        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .Bottom, relatedBy: .Equal, toItem: UICenter, attribute: .Bottom, multiplier: 1, constant: -20))
-        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .CenterX, relatedBy: .Equal, toItem: UICenter, attribute: .CenterX, multiplier: 1, constant: 0))
-        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .Height, relatedBy: .Equal, toItem: UICenter, attribute: .Height, multiplier: 0.1, constant: 0))
-        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .Width, relatedBy: .Equal, toItem: UICenter, attribute: .Width, multiplier: 0.5, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .bottom, relatedBy: .equal, toItem: UICenter, attribute: .bottom, multiplier: 1, constant: -20))
+        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .centerX, relatedBy: .equal, toItem: UICenter, attribute: .centerX, multiplier: 1, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .height, relatedBy: .equal, toItem: UICenter, attribute: .height, multiplier: 0.1, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .width, relatedBy: .equal, toItem: UICenter, attribute: .width, multiplier: 0.5, constant: 0))
         
         
         //---------------------------------------
         Texttile = UILabel()
         Texttile.text = text
-        Texttile.textColor = UIColor.blackColor()
+        Texttile.textColor = UIColor.black
         Texttile.translatesAutoresizingMaskIntoConstraints = false
         Texttile.adjustsFontSizeToFitWidth = true
-        Texttile.textAlignment = NSTextAlignment.Center
+        Texttile.textAlignment = NSTextAlignment.center
         
         UICenter.addSubview(Texttile)
-        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .CenterX, relatedBy: .Equal, toItem: UICenter, attribute: .CenterX, multiplier: 1, constant: 0))
-        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .Top, relatedBy: .Equal, toItem: UICenter, attribute: .Top, multiplier: 1, constant: 10))
-        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .Width, relatedBy: .Equal, toItem: UICenter, attribute: .Width, multiplier: 0.8, constant: 0))
-        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .Height, relatedBy: .Equal, toItem: UICenter, attribute: .Height, multiplier: 0.5, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .centerX, relatedBy: .equal, toItem: UICenter, attribute: .centerX, multiplier: 1, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .top, relatedBy: .equal, toItem: UICenter, attribute: .top, multiplier: 1, constant: 10))
+        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .width, relatedBy: .equal, toItem: UICenter, attribute: .width, multiplier: 0.8, constant: 0))
+        UICenter.addConstraint(NSLayoutConstraint(item: Texttile, attribute: .height, relatedBy: .equal, toItem: UICenter, attribute: .height, multiplier: 0.5, constant: 0))
         
     }
 
@@ -73,11 +73,11 @@ class popUp: UIView {
     
     func ViewFunc()
     {
-        hidden = false
+        isHidden = false
     }
 
 
-    func okButtonImplementation(sender:UIButton)
+    func okButtonImplementation(_ sender:UIButton)
     {
         UICenter.removeFromSuperview()
         ButonOK.removeFromSuperview()

@@ -15,17 +15,17 @@ class ConnectionPage: UIViewController {
     @IBOutlet var password: UITextField!
     @IBOutlet var UIcontent: UIView!
     
-    @IBAction func tryConnection(sender: UIButton)
+    @IBAction func tryConnection(_ sender: UIButton)
     {
         if(account.text == "ADMIN" && password.text == "pwd")
         {
-            self.performSegueWithIdentifier("gotoDashBoard", sender: self)
+            self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
         }
         else
         {
             let pop = popUp(view:self.view, text:"User or Password invalid")
             pop.ViewFunc()
-            UIcontent.insertSubview(pop, atIndex: 6)
+            UIcontent.insertSubview(pop, at: 6)
         }
         
         //self.performSegueWithIdentifier("gotoDashBoard", sender: self)

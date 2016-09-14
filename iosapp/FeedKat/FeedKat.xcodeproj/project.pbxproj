@@ -7,13 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
+		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
+		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
 		27AF5AB01D88977E0045C752 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF5AAF1D88977E0045C752 /* extensions.swift */; };
-		27AF5AB21D889BB10045C752 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF5AB11D889BB10045C752 /* DashBoardVC.swift */; };
-		27AF5AB41D889DF90045C752 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AF5AB31D889DF90045C752 /* Launch Screen.storyboard */; };
-		27CDF03D1D87FC020042CCE7 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27CDF03C1D87FC020042CCE7 /* PopUp.swift */; };
+		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
+		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
 		27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */; };
-		27FFCE6E1D87DDB1005718E2 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE6D1D87DDB1005718E2 /* ConnectionPage.swift */; };
-		27FFCE711D87DDB1005718E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27FFCE6F1D87DDB1005718E2 /* Main.storyboard */; };
 		27FFCE731D87DDB1005718E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 27FFCE721D87DDB1005718E2 /* Assets.xcassets */; };
 		27FFCE811D87DDB1005718E2 /* FeedKatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE801D87DDB1005718E2 /* FeedKatTests.swift */; };
 		27FFCE8C1D87DDB1005718E2 /* FeedKatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE8B1D87DDB1005718E2 /* FeedKatUITests.swift */; };
@@ -37,14 +37,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
+		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
+		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
 		27AF5AAF1D88977E0045C752 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
-		27AF5AB11D889BB10045C752 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardVC.swift; sourceTree = "<group>"; };
-		27AF5AB31D889DF90045C752 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		27CDF03C1D87FC020042CCE7 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
+		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
+		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27FFCE681D87DDB1005718E2 /* FeedKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		27FFCE6D1D87DDB1005718E2 /* ConnectionPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionPage.swift; sourceTree = "<group>"; };
-		27FFCE701D87DDB1005718E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27FFCE721D87DDB1005718E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27FFCE771D87DDB1005718E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		27FFCE7C1D87DDB1005718E2 /* FeedKatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FeedKatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -80,6 +80,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2728470B1D89728A007DD040 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				272847101D8972D8007DD040 /* PopUp.swift */,
+			);
+			name = Tools;
+			sourceTree = "<group>";
+		};
+		2728470F1D8972B1007DD040 /* Pages */ = {
+			isa = PBXGroup;
+			children = (
+				272847121D8972E1007DD040 /* ConnectionPage.swift */,
+				272847131D8972E1007DD040 /* DashBoardVC.swift */,
+			);
+			name = Pages;
+			sourceTree = "<group>";
+		};
+		272847161D897306007DD040 /* Storyboard */ = {
+			isa = PBXGroup;
+			children = (
+				27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */,
+				27AFC40A1D89737A005EDEDD /* Main.storyboard */,
+			);
+			name = Storyboard;
+			sourceTree = "<group>";
+		};
 		27FFCE5F1D87DDB1005718E2 = {
 			isa = PBXGroup;
 			children = (
@@ -103,15 +129,13 @@
 		27FFCE6A1D87DDB1005718E2 /* FeedKat */ = {
 			isa = PBXGroup;
 			children = (
+				272847161D897306007DD040 /* Storyboard */,
+				2728470F1D8972B1007DD040 /* Pages */,
+				2728470B1D89728A007DD040 /* Tools */,
 				27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */,
-				27FFCE6D1D87DDB1005718E2 /* ConnectionPage.swift */,
-				27FFCE6F1D87DDB1005718E2 /* Main.storyboard */,
 				27FFCE721D87DDB1005718E2 /* Assets.xcassets */,
 				27FFCE771D87DDB1005718E2 /* Info.plist */,
-				27CDF03C1D87FC020042CCE7 /* PopUp.swift */,
 				27AF5AAF1D88977E0045C752 /* extensions.swift */,
-				27AF5AB11D889BB10045C752 /* DashBoardVC.swift */,
-				27AF5AB31D889DF90045C752 /* Launch Screen.storyboard */,
 			);
 			path = FeedKat;
 			sourceTree = "<group>";
@@ -203,14 +227,17 @@
 					27FFCE671D87DDB1005718E2 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 5LNP68677F;
+						LastSwiftMigration = 0800;
 						ProvisioningStyle = Automatic;
 					};
 					27FFCE7B1D87DDB1005718E2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 27FFCE671D87DDB1005718E2;
 					};
 					27FFCE861D87DDB1005718E2 = {
 						CreatedOnToolsVersion = 7.3.1;
+						LastSwiftMigration = 0800;
 						TestTargetID = 27FFCE671D87DDB1005718E2;
 					};
 				};
@@ -240,9 +267,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27AF5AB41D889DF90045C752 /* Launch Screen.storyboard in Resources */,
+				27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */,
+				27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */,
 				27FFCE731D87DDB1005718E2 /* Assets.xcassets in Resources */,
-				27FFCE711D87DDB1005718E2 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -267,10 +294,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				27FFCE6E1D87DDB1005718E2 /* ConnectionPage.swift in Sources */,
-				27CDF03D1D87FC020042CCE7 /* PopUp.swift in Sources */,
-				27AF5AB21D889BB10045C752 /* DashBoardVC.swift in Sources */,
+				272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
+				272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */,
+				272847111D8972D8007DD040 /* PopUp.swift in Sources */,
 				27AF5AB01D88977E0045C752 /* extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,10 +334,18 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		27FFCE6F1D87DDB1005718E2 /* Main.storyboard */ = {
+		27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				27FFCE701D87DDB1005718E2 /* Base */,
+				27AFC4091D89737A005EDEDD /* Base */,
+			);
+			name = "Launch Screen.storyboard";
+			sourceTree = "<group>";
+		};
+		27AFC40A1D89737A005EDEDD /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				27AFC40B1D89737A005EDEDD /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -420,7 +455,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -437,7 +472,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKat;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -450,6 +485,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FeedKat.app/FeedKat";
 			};
 			name = Debug;
@@ -462,6 +498,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKatTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/FeedKat.app/FeedKat";
 			};
 			name = Release;
@@ -473,6 +510,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FeedKat;
 			};
 			name = Debug;
@@ -484,6 +522,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = polytech.FeedKatUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_TARGET_NAME = FeedKat;
 			};
 			name = Release;

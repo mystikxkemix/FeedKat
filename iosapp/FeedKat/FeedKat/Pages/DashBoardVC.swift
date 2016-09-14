@@ -15,14 +15,14 @@ class DashBoard: UIViewController
         super.viewDidLoad()
         
         let v = UIView()
-        v.backgroundColor = UIColor.blackColor()
+        v.backgroundColor = UIColor.black
         v.translatesAutoresizingMaskIntoConstraints = false
         
         self.view.addSubview(v)
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .CenterX, relatedBy: .Equal, toItem: view, attribute: .CenterX, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .Top, relatedBy: .Equal, toItem: view, attribute: .Top, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .Height, relatedBy: .Equal, toItem: view, attribute: .Height, multiplier: 0.1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: v, attribute: .Width, relatedBy: .Equal, toItem: view, attribute: .Width, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: v, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: v, attribute: .top, relatedBy: .equal, toItem: view, attribute: .top, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: v, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: v, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
         //v.userInteractionEnabled = true
         //v.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.resize)))
@@ -30,12 +30,12 @@ class DashBoard: UIViewController
         // Do any additional setup after loading the view, typically from a nib.
     }
     
-    func resize(sender: AnyObject)
+    func resize(_ sender: AnyObject)
     {
         let v = sender.view as UIView
         
-        v.transform = CGAffineTransformMakeScale(0.5, 0.5)
-        v.transform = CGAffineTransformMakeRotation(CGFloat(M_PI / 2))
+        v.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        v.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI / 2))
     }
     
     override func didReceiveMemoryWarning()
