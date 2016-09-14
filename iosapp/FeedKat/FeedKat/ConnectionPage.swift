@@ -23,10 +23,12 @@ class ConnectionPage: UIViewController {
         }
         else
         {
-            let pop = popUp(view:self.view, text:"Test")
+            let pop = popUp(view:self.view, text:"User or Password invalid")
             pop.ViewFunc()
             UIcontent.insertSubview(pop, atIndex: 6)
         }
+        
+        //self.performSegueWithIdentifier("gotoDashBoard", sender: self)
     }
     
     
