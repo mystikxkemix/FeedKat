@@ -27,8 +27,6 @@ class ConnectionPage: UIViewController {
             pop.ViewFunc()
             UIcontent.insertSubview(pop, at: 6)
         }
-        
-        //self.performSegueWithIdentifier("gotoDashBoard", sender: self)
     }
     
     
