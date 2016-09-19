@@ -2,7 +2,47 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context="polytech.feedkat.MainActivity">
+    android:background="#67A4F0"
+    tools:context="polytech.feedkat.MainActivity"
+    android:id="@+id/main_content">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/Line_content"
+        android:gravity="center_vertical">
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/Account"
+            android:layout_gravity="center_horizontal"
+            android:hint="Adresse mail"
+            android:layout_margin="10dp"
+            android:gravity="center" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/Password"
+            android:layout_gravity="center"
+            android:hint="Mot de passe"
+            android:layout_margin="10dp"
+            android:gravity="center" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Connexion"
+            android:id="@+id/Valide_co"
+            android:layout_gravity="bottom|center_horizontal"
+            android:background="#FF9600"
+            android:layout_margin="10dp" />
+    </LinearLayout>
 
 </FrameLayout>
