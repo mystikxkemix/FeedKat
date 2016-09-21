@@ -10,7 +10,6 @@ import UIKit
 
 class DashBoard: GenVC
 {
-    var view: UIView!
     
     override func viewDidLoad()
     {
