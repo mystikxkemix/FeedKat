@@ -19,6 +19,7 @@ class GenVC : UIViewController
     {
         super.viewDidLoad()
         
+        
         banner = UIView()
         banner.backgroundColor = Static.OrangeColor
         banner.translatesAutoresizingMaskIntoConstraints = false
