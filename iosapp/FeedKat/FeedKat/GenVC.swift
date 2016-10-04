@@ -14,6 +14,7 @@ class GenVC : UIViewController
     var top:UIView!
     var UITitle:UILabel!
     var scrollView:UIScrollView!
+    var imgbot:[UIImageView] = []
     
     override func viewDidLoad()
     {
@@ -49,7 +50,6 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.78, constant: 0))
         
-        initTop(title: "Accueil", index: 1)
         initBanner()
     }
     
@@ -71,22 +71,24 @@ class GenVC : UIViewController
     
     func initBanner()
     {
-        let icon_height = (UIScreen.main.bounds.size.height/10)*0.8
-        let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/4
-        var imgbot = [UIImageView]()
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
+        let icon_height = (UIScreen.main.bounds.size.height/10)*0.5
+        let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/8
+        
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_home", height: icon_height)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_cats", height: icon_height)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_setting", height: icon_height)))
         
         for i in 0...(imgbot.count-1)
         {
-            imgbot[i].frame = CGRect(x: CGFloat(i+1)*icon_space + CGFloat(i)*icon_height,
-                                     y:(UIScreen.main.bounds.size.height/10)*0.1,
+            imgbot[i].frame = CGRect(x: CGFloat(3*i+1)*icon_space + CGFloat(i)*icon_height,
+                                     y:((UIScreen.main.bounds.size.height/10) - icon_height)/2,
                                      width: icon_height,
                                      height: icon_height)
             bot.addSubview(imgbot[i])
         }
     }
+    
+    
     
     override func didReceiveMemoryWarning()
     {

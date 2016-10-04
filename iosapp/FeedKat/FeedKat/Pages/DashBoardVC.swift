@@ -14,6 +14,7 @@ class DashBoard: GenVC
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        initTop(title: "Accueil", index: 1)
     }
     
     func loadTiles()
