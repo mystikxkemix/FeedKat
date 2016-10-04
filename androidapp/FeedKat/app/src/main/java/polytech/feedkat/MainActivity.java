@@ -1,10 +1,13 @@
 package polytech.feedkat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
@@ -18,7 +21,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         FrameLayout main = (FrameLayout)findViewById(R.id.main_content);
 
-        TextView t = new TextView(this);
+        final TextView t = new TextView(this);
         t.setText("FeedKat, pour une alimentation au poil");
         t.setTextSize(20);
         t.setGravity(View.TEXT_ALIGNMENT_CENTER);
@@ -30,6 +33,27 @@ public class MainActivity extends Activity {
         t.setLayoutParams(lp);
 
         main.addView(t);
+
+        final Button button = (Button) findViewById(R.id.Valide_co);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                EditText compte = (EditText)findViewById(R.id.Account);
+                EditText pass   = (EditText)findViewById(R.id.Password);
+
+                if((compte.getText().toString().equals("michael.heidelberger@free.fr"))&&(pass.getText().toString().equals("lolmdr")))
+                {
+                    System.out.println("connexion success");
+                    Intent intent = new Intent(MainActivity.this,NavigationActivity.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    System.out.println("connexion fail");
+                    t.setText("Combinaison mail / password erronée");
+                }
+            }
+        });
+
     }
 
     @Override

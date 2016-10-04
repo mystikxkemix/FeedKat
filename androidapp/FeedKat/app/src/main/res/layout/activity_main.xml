@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/Line_content"
-        android:gravity="center_vertical">
+        android:gravity="center_vertical"
+        android:weightSum="1">
 
         <EditText
             android:layout_width="wrap_content"
@@ -42,7 +43,23 @@
             android:id="@+id/Valide_co"
             android:layout_gravity="bottom|center_horizontal"
             android:background="#FF9600"
-            android:layout_margin="10dp" />
+            android:layout_margin="10dp"
+            android:enabled="true" />
     </LinearLayout>
+
+    <ViewStub
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewStub"
+        android:layout_gravity="right|top" />
+
+    <ImageView
+        android:layout_width="91dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/logo"
+        android:layout_weight="0.21"
+        android:src="@mipmap/ic_launcher"
+        android:layout_marginTop="100dp"
+        android:layout_gravity="center_horizontal" />
 
 </FrameLayout>
