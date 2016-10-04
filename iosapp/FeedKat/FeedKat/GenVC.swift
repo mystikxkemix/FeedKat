@@ -49,7 +49,7 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.78, constant: 0))
         
-        initTop(title: "DashBoard", index: 1)
+        initTop(title: "Accueil", index: 1)
         initBanner()
     }
     
@@ -71,18 +71,19 @@ class GenVC : UIViewController
     
     func initBanner()
     {
-        let icon_width = UIScreen.main.bounds.size.width/6
-        let icon_space = (UIScreen.main.bounds.size.width-icon_width*4)/5
+        let icon_height = (UIScreen.main.bounds.size.height/10)*0.8
+        let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/4
         var imgbot = [UIImageView]()
-        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
-        
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon", height: icon_height)))
         
         for i in 0...(imgbot.count-1)
         {
-            imgbot[i].frame = CGRect(x: CGFloat(i+1)*icon_space + CGFloat(i)*icon_width, y:0, width: icon_width, height: icon_width)
+            imgbot[i].frame = CGRect(x: CGFloat(i+1)*icon_space + CGFloat(i)*icon_height,
+                                     y:(UIScreen.main.bounds.size.height/10)*0.1,
+                                     width: icon_height,
+                                     height: icon_height)
             bot.addSubview(imgbot[i])
         }
     }
