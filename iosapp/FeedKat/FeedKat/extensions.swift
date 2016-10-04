@@ -14,4 +14,9 @@ extension UIView
     {
         return self.frame.height
     }
+    
+    func getWidth() -> CGFloat
+    {
+        return self.frame.width
+    }
 }

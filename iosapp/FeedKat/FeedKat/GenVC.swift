@@ -10,7 +10,7 @@ import UIKit
 
 class GenVC : UIViewController
 {
-    var banner:UIView!
+    var bot:UIView!
     var top:UIView!
     var UITitle:UILabel!
     var scrollView:UIScrollView!
@@ -19,15 +19,15 @@ class GenVC : UIViewController
     {
         super.viewDidLoad()
         
-        banner = UIView()
-        banner.backgroundColor = Static.OrangeColor
-        banner.translatesAutoresizingMaskIntoConstraints = false
+        bot = UIView()
+        bot.backgroundColor = Static.OrangeColor
+        bot.translatesAutoresizingMaskIntoConstraints = false
         
-        view.addSubview(banner)
-        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
+        view.addSubview(bot)
+        view.addConstraint(NSLayoutConstraint(item: bot, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bot, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bot, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: bot, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
         top = UIView()
         top.backgroundColor = Static.OrangeColor
@@ -44,15 +44,16 @@ class GenVC : UIViewController
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(scrollView)
-        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: banner, attribute: .top, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: bot, attribute: .top, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: top, attribute: .bottom, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.78, constant: 0))
         
-        initView(title: "DashBoard", index: 1)
+        initTop(title: "DashBoard", index: 1)
+        initBanner()
     }
     
-    func initView(title:String, index:Int)
+    func initTop(title:String, index:Int)
     {
         UITitle = UILabel()
         UITitle.translatesAutoresizingMaskIntoConstraints = false
@@ -66,12 +67,24 @@ class GenVC : UIViewController
         top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .centerX, relatedBy: .equal, toItem: top, attribute: .centerX, multiplier: 1, constant: 0))
         top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .centerY, relatedBy: .equal, toItem: top, attribute: .centerY, multiplier: 1, constant: 5))
         
-        //top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UITitle.bounds.width))
-        //top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: UITitle.bounds.height))
+    }
+    
+    func initBanner()
+    {
+        let icon_width = UIScreen.main.bounds.size.width/6
+        let icon_space = (UIScreen.main.bounds.size.width-icon_width*4)/5
+        var imgbot = [UIImageView]()
+        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
+        imgbot.append(UIImageView(image: Static.getScaledImageWithWidth("Icon", width: icon_width)))
         
         
-        
-        
+        for i in 0...(imgbot.count-1)
+        {
+            imgbot[i].frame = CGRect(x: CGFloat(i+1)*icon_space + CGFloat(i)*icon_width, y:0, width: icon_width, height: icon_width)
+            bot.addSubview(imgbot[i])
+        }
     }
     
     override func didReceiveMemoryWarning()
