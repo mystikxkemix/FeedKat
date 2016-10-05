@@ -21,6 +21,18 @@ class DashBoard: GenVC
         imgbot[2].addTarget(self, action: #selector(DashBoard.gotoO), for: .touchUpInside)
     }
     
+    override func loadTiles()
+    {
+        list_tile.append(Tile(title:""))
+        list_tile.append(Tile(title:""))
+        list_tile.append(Tile(title:""))
+        //        list_tile.append(Tile(title:""))
+        //        list_tile.append(Tile(title:""))
+        //        list_tile.append(Tile(title:""))
+        
+        super.loadTiles()
+    }
+    
     func gotoO()
     {
         self.performSegue(withIdentifier: "fromDBtoO", sender: self)

@@ -12,6 +12,12 @@ class Static {
     static var OrangeColor = UIColor(colorLiteralRed: 1, green: 150/255, blue: 0, alpha: 1)
     static var BlueColor = UIColor(colorLiteralRed: 103/255, green: 164/255, blue: 240/255, alpha: 1)
     static var WhiteGrayColor = UIColor(colorLiteralRed: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+    static let screenWidth = UIScreen.main.bounds.size.width
+    static let screenHeight = UIScreen.main.bounds.size.height
+    static let tileHeight = Static.screenHeight*0.15
+    static let tileWidth = Static.screenWidth
+    static let tileSpacing = Static.screenHeight*0.035
+    static let tileMarging = Static.screenHeight*0.05
     
     static func scaleUIImageToSize(_ image: UIImage, size: CGSize) -> UIImage
     {
