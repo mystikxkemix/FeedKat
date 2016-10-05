@@ -14,14 +14,15 @@ class GenVC : UIViewController
     var top:UIView!
     var UITitle:UILabel!
     var scrollView:UIScrollView!
-    var imgbot:[UIImageView] = []
+    var imgbot:[UIButton] = []
+    let icon_height = (UIScreen.main.bounds.size.height/10)*0.5
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         bot = UIView()
-        bot.backgroundColor = Static.OrangeColor
+        bot.backgroundColor = Static.BlueColor
         bot.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(bot)
@@ -31,7 +32,7 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: bot, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
         top = UIView()
-        top.backgroundColor = Static.OrangeColor
+        top.backgroundColor = Static.BlueColor
         top.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(top)
@@ -41,7 +42,7 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: top, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
         scrollView = UIScrollView()
-        scrollView.backgroundColor = UIColor.white
+        scrollView.backgroundColor = Static.WhiteGrayColor
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(scrollView)
@@ -53,7 +54,7 @@ class GenVC : UIViewController
         initBanner()
     }
     
-    func initTop(title:String, index:Int)
+    func initTop(title:String)
     {
         UITitle = UILabel()
         UITitle.translatesAutoresizingMaskIntoConstraints = false
@@ -71,12 +72,14 @@ class GenVC : UIViewController
     
     func initBanner()
     {
-        let icon_height = (UIScreen.main.bounds.size.height/10)*0.5
         let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/8
+        imgbot.append(UIButton())
+        imgbot.append(UIButton())
+        imgbot.append(UIButton())
         
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_home", height: icon_height)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_cats", height: icon_height)))
-        imgbot.append(UIImageView(image: Static.getScaledImageWithHeight("Icon_setting", height: icon_height)))
+        imgbot[0].setImage(Static.getScaledImageWithHeight("Icon_home", height: icon_height), for: UIControlState())
+        imgbot[1].setImage(Static.getScaledImageWithHeight("Icon_cats", height: icon_height), for: UIControlState())
+        imgbot[2].setImage(Static.getScaledImageWithHeight("Icon_setting", height: icon_height), for: UIControlState())
         
         for i in 0...(imgbot.count-1)
         {
@@ -88,7 +91,10 @@ class GenVC : UIViewController
         }
     }
     
-    
+    func loadTiles()
+    {
+        
+    }
     
     override func didReceiveMemoryWarning()
     {

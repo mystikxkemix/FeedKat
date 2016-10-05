@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501801DA4E87400A018A3 /* CatBoardVC.swift */; };
+		272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501821DA4E91300A018A3 /* OptionBoardVC.swift */; };
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
@@ -40,6 +42,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		272501801DA4E87400A018A3 /* CatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatBoardVC.swift; path = Pages/CatBoardVC.swift; sourceTree = "<group>"; };
+		272501821DA4E91300A018A3 /* OptionBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionBoardVC.swift; path = Pages/OptionBoardVC.swift; sourceTree = "<group>"; };
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
@@ -102,6 +106,8 @@
 				272847121D8972E1007DD040 /* ConnectionPage.swift */,
 				272847131D8972E1007DD040 /* DashBoardVC.swift */,
 				27B5151D1D8FD6BC00F7991F /* GenVC.swift */,
+				272501801DA4E87400A018A3 /* CatBoardVC.swift */,
+				272501821DA4E91300A018A3 /* OptionBoardVC.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -313,6 +319,8 @@
 			files = (
 				27B5151E1D8FD6BC00F7991F /* GenVC.swift in Sources */,
 				272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */,
+				272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */,
+				272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
 				272DBE351D9011B0001709D1 /* Tile.swift in Sources */,
 				272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */,
