@@ -14,9 +14,7 @@ class OptionBoard : GenVC
     {
         super.viewDidLoad()
         initTop(title: "Options")
-        imgbot[0].setImage(Static.getScaledImageWithHeight("Icon_home", height: icon_height), for: UIControlState())
-        imgbot[1].setImage(Static.getScaledImageWithHeight("Icon_cats", height: icon_height), for: UIControlState())
-        imgbot[2].setImage(Static.getScaledImageWithHeight("Icon_setting_pressed", height: icon_height), for: UIControlState())
+        initBanner(i: 2)
         
         imgbot[0].addTarget(self, action: #selector(OptionBoard.gotoDB), for: .touchUpInside)
         imgbot[1].addTarget(self, action: #selector(OptionBoard.gotoC), for: .touchUpInside)

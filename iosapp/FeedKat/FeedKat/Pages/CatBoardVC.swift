@@ -14,9 +14,7 @@ class CatBoard : GenVC
     {
         super.viewDidLoad()
         initTop(title: "Chats")
-        imgbot[0].setImage(Static.getScaledImageWithHeight("Icon_home", height: icon_height), for: UIControlState())
-        imgbot[1].setImage(Static.getScaledImageWithHeight("Icon_cats_pressed", height: icon_height), for: UIControlState())
-        imgbot[2].setImage(Static.getScaledImageWithHeight("Icon_setting", height: icon_height), for: UIControlState())
+        initBanner(i: 1)
         
         imgbot[0].addTarget(self, action: #selector(CatBoard.gotoDB), for: .touchUpInside)
         imgbot[2].addTarget(self, action: #selector(CatBoard.gotoO), for: .touchUpInside)

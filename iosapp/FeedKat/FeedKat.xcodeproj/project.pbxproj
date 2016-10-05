@@ -9,12 +9,12 @@
 /* Begin PBXBuildFile section */
 		272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501801DA4E87400A018A3 /* CatBoardVC.swift */; };
 		272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501821DA4E91300A018A3 /* OptionBoardVC.swift */; };
+		272501851DA4FF4A00A018A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 272501841DA4FF4A00A018A3 /* Assets.xcassets */; };
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
 		272DBE351D9011B0001709D1 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272DBE341D9011B0001709D1 /* Tile.swift */; };
 		278DF8EE1D8FCE3400E19959 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 278DF8ED1D8FCE3400E19959 /* Static.swift */; };
-		279A26141D90872C009D7544 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 279A26131D90872C009D7544 /* Assets.xcassets */; };
 		27AF5AB01D88977E0045C752 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27AF5AAF1D88977E0045C752 /* extensions.swift */; };
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
@@ -44,12 +44,12 @@
 /* Begin PBXFileReference section */
 		272501801DA4E87400A018A3 /* CatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatBoardVC.swift; path = Pages/CatBoardVC.swift; sourceTree = "<group>"; };
 		272501821DA4E91300A018A3 /* OptionBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionBoardVC.swift; path = Pages/OptionBoardVC.swift; sourceTree = "<group>"; };
+		272501841DA4FF4A00A018A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
 		272DBE341D9011B0001709D1 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		278DF8ED1D8FCE3400E19959 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Static.swift; sourceTree = "<group>"; };
-		279A26131D90872C009D7544 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		27AF5AAF1D88977E0045C752 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -151,7 +151,7 @@
 		27FFCE6A1D87DDB1005718E2 /* FeedKat */ = {
 			isa = PBXGroup;
 			children = (
-				279A26131D90872C009D7544 /* Assets.xcassets */,
+				272501841DA4FF4A00A018A3 /* Assets.xcassets */,
 				2781AAED1D899F8100476018 /* Ext */,
 				272847161D897306007DD040 /* Storyboard */,
 				2728470F1D8972B1007DD040 /* Pages */,
@@ -291,7 +291,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */,
-				279A26141D90872C009D7544 /* Assets.xcassets in Resources */,
+				272501851DA4FF4A00A018A3 /* Assets.xcassets in Resources */,
 				27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

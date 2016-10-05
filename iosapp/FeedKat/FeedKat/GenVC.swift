@@ -50,8 +50,6 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: top, attribute: .bottom, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.78, constant: 0))
-        
-        initBanner()
     }
     
     func initTop(title:String)
@@ -70,25 +68,35 @@ class GenVC : UIViewController
         
     }
     
-    func initBanner()
+    func initBanner(i:Int)
     {
-        let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/8
+        let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/6
         imgbot.append(UIButton())
         imgbot.append(UIButton())
         imgbot.append(UIButton())
         
         imgbot[0].setImage(Static.getScaledImageWithHeight("Icon_home", height: icon_height), for: UIControlState())
         imgbot[1].setImage(Static.getScaledImageWithHeight("Icon_cats", height: icon_height), for: UIControlState())
-        imgbot[2].setImage(Static.getScaledImageWithHeight("Icon_setting", height: icon_height), for: UIControlState())
+        imgbot[2].setImage(Static.getScaledImageWithHeight("Icon_settings", height: icon_height), for: UIControlState())
         
         for i in 0...(imgbot.count-1)
         {
-            imgbot[i].frame = CGRect(x: CGFloat(3*i+1)*icon_space + CGFloat(i)*icon_height,
+            imgbot[i].frame = CGRect(x: icon_space + CGFloat(i)*(UIScreen.main.bounds.size.width/3),
                                      y:((UIScreen.main.bounds.size.height/10) - icon_height)/2,
                                      width: icon_height,
                                      height: icon_height)
             bot.addSubview(imgbot[i])
         }
+        
+        var bar : UIView
+        bar = UIView(frame: CGRect(x: CGFloat(i)*UIScreen.main.bounds.size.width/3,
+                                   y: 0,
+                                   width:UIScreen.main.bounds.size.width/3,
+                                   height: UIScreen.main.bounds.size.height/100))
+        bar.backgroundColor = Static.OrangeColor
+        
+        bot.addSubview(bar)
+        
     }
     
     func loadTiles()
