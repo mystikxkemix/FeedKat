@@ -2,7 +2,9 @@ package polytech.feedkat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +16,23 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
     private View mContentView;
 
+    private void initStatic()
+    {
+        Display display = getWindowManager().getDefaultDisplay();
+        Point point = new Point();
+        display.getRealSize(point);
+        Static.screen_x = point.x;
+        Static.screen_y = point.y;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_main);
+
+        initStatic();
+
         FrameLayout main = (FrameLayout)findViewById(R.id.main_content);
 
         final TextView t = new TextView(this);
@@ -40,17 +54,17 @@ public class MainActivity extends Activity {
                 EditText compte = (EditText)findViewById(R.id.Account);
                 EditText pass   = (EditText)findViewById(R.id.Password);
 
-                if((compte.getText().toString().equals("michael.heidelberger@free.fr"))&&(pass.getText().toString().equals("lolmdr")))
-                {
-                    System.out.println("connexion success");
+//                if((compte.getText().toString().equals("michael.heidelberger@free.fr"))&&(pass.getText().toString().equals("lolmdr")))
+//                {
+//                    System.out.println("connexion success");
                     Intent intent = new Intent(MainActivity.this,NavigationActivity.class);
                     startActivity(intent);
-                }
-                else
-                {
-                    System.out.println("connexion fail");
-                    t.setText("Combinaison mail / password erronée");
-                }
+//                }
+//                else
+//                {
+//                    System.out.println("connexion fail");
+//                    t.setText("Combinaison mail / password erronée");
+//                }
             }
         });
 
