@@ -19,6 +19,8 @@
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
 		27B5151E1D8FD6BC00F7991F /* GenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B5151D1D8FD6BC00F7991F /* GenVC.swift */; };
+		27D76B361DA67C05001363B5 /* DashCatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D76B351DA67C05001363B5 /* DashCatTile.swift */; };
+		27D76B381DA6A31A001363B5 /* AlertTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27D76B371DA6A31A001363B5 /* AlertTile.swift */; };
 		27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */; };
 		27FFCE811D87DDB1005718E2 /* FeedKatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE801D87DDB1005718E2 /* FeedKatTests.swift */; };
 		27FFCE8C1D87DDB1005718E2 /* FeedKatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE8B1D87DDB1005718E2 /* FeedKatUITests.swift */; };
@@ -54,6 +56,8 @@
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27B5151D1D8FD6BC00F7991F /* GenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenVC.swift; sourceTree = "<group>"; };
+		27D76B351DA67C05001363B5 /* DashCatTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashCatTile.swift; path = Tools/DashCatTile.swift; sourceTree = "<group>"; };
+		27D76B371DA6A31A001363B5 /* AlertTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AlertTile.swift; path = Tools/AlertTile.swift; sourceTree = "<group>"; };
 		27FFCE681D87DDB1005718E2 /* FeedKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27FFCE771D87DDB1005718E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 				272847101D8972D8007DD040 /* PopUp.swift */,
 				278DF8ED1D8FCE3400E19959 /* Static.swift */,
 				272DBE341D9011B0001709D1 /* Tile.swift */,
+				27D76B351DA67C05001363B5 /* DashCatTile.swift */,
+				27D76B371DA6A31A001363B5 /* AlertTile.swift */,
 			);
 			name = Tools;
 			sourceTree = "<group>";
@@ -319,7 +325,9 @@
 			files = (
 				27B5151E1D8FD6BC00F7991F /* GenVC.swift in Sources */,
 				272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */,
+				27D76B361DA67C05001363B5 /* DashCatTile.swift in Sources */,
 				272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */,
+				27D76B381DA6A31A001363B5 /* AlertTile.swift in Sources */,
 				272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
 				272DBE351D9011B0001709D1 /* Tile.swift in Sources */,

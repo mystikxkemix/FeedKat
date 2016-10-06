@@ -20,19 +20,19 @@ class CatBoard : GenVC
         imgbot[2].addTarget(self, action: #selector(CatBoard.gotoO), for: .touchUpInside)
     }
     
-    override func loadTiles()
+    override func loadScroll()
     {
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
         
-        super.loadTiles()
+        super.loadScroll()
     }
     
     func gotoDB()

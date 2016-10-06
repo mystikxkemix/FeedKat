@@ -17,16 +17,16 @@ class ConnectionPage: UIViewController {
     
     @IBAction func tryConnection(_ sender: UIButton)
     {
-        /*if(account.text == "ADMIN" && password.text == "pwd")
-        {*/
+//        if(account.text == "ADMIN" && password.text == "pwd")
+//        {
             self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
-        /*}
-        else
-        {
-            let pop = popUp(view:self.view, text:"User or Password invalid")
-            pop.ViewFunc()
-            UIcontent.insertSubview(pop, at: 6)
-        }*/
+//        }
+//        else
+//        {
+//            let pop = popUp(view:self.view, text:"User or Password invalid")
+//            pop.ViewFunc()
+//            UIcontent.insertSubview(pop, at: 6)
+//        }
     }
     
     

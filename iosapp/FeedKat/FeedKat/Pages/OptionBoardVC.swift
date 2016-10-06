@@ -20,19 +20,19 @@ class OptionBoard : GenVC
         imgbot[1].addTarget(self, action: #selector(OptionBoard.gotoC), for: .touchUpInside)
     }
     
-    override func loadTiles()
+    override func loadScroll()
     {
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
-        list_tile.append(Tile(title:""))
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
+        list_tile.append(Tile())
         //        list_tile.append(Tile(title:""))
         //        list_tile.append(Tile(title:""))
         //        list_tile.append(Tile(title:""))
         
-        super.loadTiles()
+        super.loadScroll()
     }
     
     func gotoDB()

@@ -16,7 +16,7 @@ class GenVC : UIViewController
     var scrollView:UIScrollView!
     var container:UIStackView!
     var imgbot:[UIButton] = []
-    var list_tile:Array<Tile> = []
+    var list_tile = [Tile]()
     let icon_height = (UIScreen.main.bounds.size.height/10)*0.5
     
     override func viewDidLoad()
@@ -43,21 +43,19 @@ class GenVC : UIViewController
         view.addConstraint(NSLayoutConstraint(item: top, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.12, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: top, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         
-//        scrollView = UIScrollView(frame: CGRect(x: 0, y: Static.screenHeight*0.12, width: Static.screenWidth, height: Static.screenHeight*0.78))
         scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.layer.masksToBounds = true
-//        scrollView.backgroundColor = UIColor.black
         scrollView.translatesAutoresizingMaskIntoConstraints = false
-//
+
         view.addSubview(scrollView)
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: bot, attribute: .top, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: top, attribute: .bottom, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 1, constant: 0))
         view.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.78, constant: 0))
         
-        loadTiles()
+        loadScroll()
         
     }
     
@@ -107,21 +105,21 @@ class GenVC : UIViewController
         bot.addSubview(bar)
     }
     
-    func loadTiles()
+    func loadScroll()
     {
-        var heightStack:CGFloat
-        heightStack = 0
+        var heightStack : CGFloat = 0
         
         for _ in list_tile
         {
             heightStack += (Static.tileSpacing + Static.tileHeight)
         }
+        heightStack -= Static.tileSpacing
         
-        container = UIStackView(frame : CGRect(x: Static.tileMarging/4, y: Static.tileSpacing/2, width: Static.tileWidth - Static.tileMarging/2, height: heightStack))
-        container.autoresizesSubviews = false
+        container = UIStackView(frame : CGRect(x: Static.tileMarging, y: Static.tileSpacing/2, width: Static.tileWidth, height: heightStack))
+        container.autoresizesSubviews = true
         container.axis = .vertical
         container.spacing = Static.tileSpacing
-        container.distribution = .fillEqually
+        container.distribution = .fillProportionally
         
         scrollView.addSubview(container)
         

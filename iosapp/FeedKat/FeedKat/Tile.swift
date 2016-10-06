@@ -10,13 +10,15 @@ import UIKit
 
 class Tile:UIView
 {
+    var banner:UIView!
     
-    init(title:String)
+    init()
     {
-        super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth - Static.tileMarging/2, height: Static.tileHeight))
+        super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight))
+        self.heightAnchor.constraint(equalToConstant: Static.tileHeight).isActive = true
         backgroundColor = UIColor.white
         
-        let banner = UIView()
+        banner = UIView()
         banner.translatesAutoresizingMaskIntoConstraints = false
         banner.backgroundColor = Static.OrangeColor
         addSubview(banner)
