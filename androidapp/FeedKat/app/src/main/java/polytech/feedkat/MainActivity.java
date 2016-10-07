@@ -2,8 +2,11 @@ package polytech.feedkat;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Point;
+import android.hardware.camera2.params.BlackLevelPattern;
 import android.os.Bundle;
+import android.support.v7.widget.VectorEnabledTintResources;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -23,9 +26,14 @@ public class MainActivity extends Activity {
         display.getRealSize(point);
         Static.screen_x = point.x;
         Static.screen_y = point.y;
+        Static.ecart_bordure = (int)(Static.screen_y*0.0125);
+        Static.ecart_tuile = (int)(Static.screen_y*0.035);
+        Static.tuile_x=Static.screen_x-2*Static.ecart_bordure;
+        Static.tuile_y=(int)(Static.screen_y*0.15);
     }
 
     @Override
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -35,9 +43,16 @@ public class MainActivity extends Activity {
 
         FrameLayout main = (FrameLayout)findViewById(R.id.main_content);
 
+        EditText account = (EditText)findViewById(R.id.Account);
+        account.setHintTextColor(Color.parseColor("#88333333"));
+
+        EditText pwd = (EditText)findViewById(R.id.Password);
+        pwd.setHintTextColor(Color.parseColor("#88333333"));
+
         final TextView t = new TextView(this);
         t.setText("FeedKat, pour une alimentation au poil");
         t.setTextSize(20);
+        t.setTextColor(Color.BLACK);
         t.setGravity(View.TEXT_ALIGNMENT_CENTER);
 
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -56,7 +71,6 @@ public class MainActivity extends Activity {
 
 //                if((compte.getText().toString().equals("michael.heidelberger@free.fr"))&&(pass.getText().toString().equals("lolmdr")))
 //                {
-//                    System.out.println("connexion success");
                     Intent intent = new Intent(MainActivity.this,NavigationActivity.class);
                     startActivity(intent);
 //                }
