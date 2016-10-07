@@ -16,16 +16,20 @@ class AlertTile:Tile
         backgroundColor = Static.RedColor
         banner.removeFromSuperview()
         
-        let ico = UIImageView()
-        ico.image = Static.getScaledImageWithHeight("Icon_alert", height: Static.tileHeight*0.7)
-        ico.translatesAutoresizingMaskIntoConstraints = false
-        
+        let ico = UIImageView(frame: CGRect(x: Static.tileWidth*0.02, y: (Static.tileHeight-Static.iconAlertSize)/2, width: Static.iconAlertSize, height: Static.iconAlertSize))
+        ico.image = Static.getScaledImageWithHeight("Icon_alert", height: Static.iconAlertSize)
         addSubview(ico)
-        addConstraint(NSLayoutConstraint(item: ico, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
-//        addConstraint(NSLayoutConstraint(item: ico, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: ico, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0))
-//        addConstraint(NSLayoutConstraint(item: ico, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
-//        addConstraint(NSLayoutConstraint(item: ico, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.3, constant: 0))
+        
+        let marg = Static.tileWidth*0.02 + Static.iconAlertSize + Static.tileWidth*0.02
+        
+        let text = UILabel(frame: CGRect(x: marg, y: 0, width: Static.tileWidth-marg-Static.tileWidth*0.02, height: Static.tileHeight))
+        text.numberOfLines = 3
+        text.textColor = UIColor.white
+        text.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
+        text.textAlignment = NSTextAlignment.center
+        text.text = title
+        
+        addSubview(text)
         
     }
     

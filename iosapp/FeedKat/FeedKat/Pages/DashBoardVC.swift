@@ -23,7 +23,7 @@ class DashBoard: GenVC
     
     override func loadScroll()
     {
-        list_tile.append(AlertTile(title:""))
+        list_tile.append(AlertTile(title:"Votre distributeur n'a plus de croquette"))
         list_tile.append(Tile())
         list_tile.append(Tile())
         //        list_tile.append(Tile(title:""))
