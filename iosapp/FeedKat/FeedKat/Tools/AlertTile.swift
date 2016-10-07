@@ -22,7 +22,7 @@ class AlertTile:Tile
         
         let marg = Static.tileWidth*0.02 + Static.iconAlertSize + Static.tileWidth*0.02
         
-        let text = UILabel(frame: CGRect(x: marg, y: 0, width: Static.tileWidth-marg-Static.tileWidth*0.02, height: Static.tileHeight))
+        let text = UILabel(frame: CGRect(x: marg, y: Static.tileWidth*0.02, width: Static.tileWidth-marg-Static.tileWidth*0.02, height: Static.tileHeight-Static.tileWidth*0.04))
         text.numberOfLines = 3
         text.textColor = UIColor.white
         text.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
@@ -30,7 +30,6 @@ class AlertTile:Tile
         text.text = title
         
         addSubview(text)
-        
     }
     
     required init?(coder aDecoder: NSCoder)

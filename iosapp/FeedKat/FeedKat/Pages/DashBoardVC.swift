@@ -24,7 +24,8 @@ class DashBoard: GenVC
     override func loadScroll()
     {
         list_tile.append(AlertTile(title:"Votre distributeur n'a plus de croquette"))
-        list_tile.append(Tile())
+        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: "Prince royal", State: 1, Status: "Votre chat va bien"))
+        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: "Filou", State: 2, Status: "Votre chat n'a pas mangé depuis 3 jours"))
         list_tile.append(Tile())
         //        list_tile.append(Tile(title:""))
         //        list_tile.append(Tile(title:""))
