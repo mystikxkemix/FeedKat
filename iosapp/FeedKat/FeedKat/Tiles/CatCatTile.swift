@@ -12,7 +12,7 @@ class CatcatTile: Tile
 {
     init(Image: UIImage, Name:String)
     {
-        
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder)

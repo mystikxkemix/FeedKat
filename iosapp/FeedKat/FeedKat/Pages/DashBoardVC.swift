@@ -16,9 +16,10 @@ class DashBoard: GenVC
         super.viewDidLoad()
         initTop(title: "Accueil")
         initBanner(i: 0)
-                
-        imgbot[1].addTarget(self, action: #selector(DashBoard.gotoC), for: .touchUpInside)
-        imgbot[2].addTarget(self, action: #selector(DashBoard.gotoO), for: .touchUpInside)
+        
+        UIBot[1].addTarget(self, action: #selector(DashBoard.gotoC), for: .touchUpInside)
+        UIBot[2].addTarget(self, action: #selector(DashBoard.gotoO), for: .touchUpInside)
+        
     }
     
     override func loadScroll()

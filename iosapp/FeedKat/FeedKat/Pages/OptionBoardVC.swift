@@ -16,8 +16,9 @@ class OptionBoard : GenVC
         initTop(title: "Options")
         initBanner(i: 2)
         
-        imgbot[0].addTarget(self, action: #selector(OptionBoard.gotoDB), for: .touchUpInside)
-        imgbot[1].addTarget(self, action: #selector(OptionBoard.gotoC), for: .touchUpInside)
+        UIBot[0].addTarget(self, action: #selector(OptionBoard.gotoDB), for: .touchUpInside)
+        UIBot[1].addTarget(self, action: #selector(OptionBoard.gotoC), for: .touchUpInside)
+        
     }
     
     override func loadScroll()

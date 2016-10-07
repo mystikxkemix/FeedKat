@@ -44,8 +44,8 @@ class DashDistTile:Tile
         UIStatus.text = "Niveau de croquette :"
         UIStatus.numberOfLines=2
         UIStatus.textColor = UIColor.black
-        UIStatus.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
-        UIStatus.textAlignment = NSTextAlignment.center
+        UIStatus.font = UIFont(name: "Arial Rounded MT", size: 18)
+//        UIStatus.textAlignment = NSTextAlignment.center
         addSubview(UIStatus)
         
         if(Fill > 75)

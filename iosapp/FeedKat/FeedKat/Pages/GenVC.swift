@@ -15,8 +15,8 @@ class GenVC : UIViewController
     var UITitle:UILabel!
     var scrollView:UIScrollView!
     var container:UIStackView!
-    var imgbot:[UIButton] = []
     var list_tile = [Tile]()
+    var UIBot = [UIButton]()
     let icon_height = (UIScreen.main.bounds.size.height/10)*0.5
     
     override func viewDidLoad()
@@ -77,10 +77,15 @@ class GenVC : UIViewController
     
     func initBanner(i:Int)
     {
+        var imgbot:[UIButton] = []
         let icon_space = (UIScreen.main.bounds.size.width-icon_height*3)/6
         imgbot.append(UIButton())
         imgbot.append(UIButton())
         imgbot.append(UIButton())
+        
+        UIBot.append(UIButton())
+        UIBot.append(UIButton())
+        UIBot.append(UIButton())
         
         imgbot[0].setImage(Static.getScaledImageWithHeight("Icon_home", height: icon_height), for: UIControlState())
         imgbot[1].setImage(Static.getScaledImageWithHeight("Icon_cats", height: icon_height), for: UIControlState())
@@ -88,11 +93,14 @@ class GenVC : UIViewController
         
         for i in 0...(imgbot.count-1)
         {
-            imgbot[i].frame = CGRect(x: icon_space + CGFloat(i)*(UIScreen.main.bounds.size.width/3),
-                                     y:((UIScreen.main.bounds.size.height/10) - icon_height)/2,
+            imgbot[i].frame = CGRect(x: icon_space + CGFloat(i)*(Static.screenWidth/3),
+                                     y:((Static.screenHeight/10) - icon_height)/2,
                                      width: icon_height,
                                      height: icon_height)
+            UIBot[i].frame = CGRect(x: CGFloat(i)*Static.screenWidth/3, y: 0, width: Static.screenWidth/3, height: Static.screenHeight)
             bot.addSubview(imgbot[i])
+            bot.addSubview(UIBot[i])
+
         }
         
         var bar : UIView

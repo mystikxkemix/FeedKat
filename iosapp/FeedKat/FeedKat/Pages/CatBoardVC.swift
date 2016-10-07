@@ -16,8 +16,9 @@ class CatBoard : GenVC
         initTop(title: "Chats")
         initBanner(i: 1)
         
-        imgbot[0].addTarget(self, action: #selector(CatBoard.gotoDB), for: .touchUpInside)
-        imgbot[2].addTarget(self, action: #selector(CatBoard.gotoO), for: .touchUpInside)
+        UIBot[0].addTarget(self, action: #selector(CatBoard.gotoDB), for: .touchUpInside)
+        UIBot[2].addTarget(self, action: #selector(CatBoard.gotoO), for: .touchUpInside)
+        
     }
     
     override func loadScroll()
