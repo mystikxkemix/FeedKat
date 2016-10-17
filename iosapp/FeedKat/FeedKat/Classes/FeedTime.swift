@@ -1,5 +1,5 @@
 //
-//  Cat.swift
+//  FeedTime.swift
 //  FeedKat
 //
 //  Created by Mike OLIVA on 07/10/2016.
@@ -8,10 +8,7 @@
 
 import UIKit
 
-class Cat:NSObject
+class FeedTime:NSObject
 {
-    init(ID: Int, Name: String, Birhdate:Date)
-    {
-        
-    }
+    
 }
