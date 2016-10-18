@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="94bc1dfb84dcc8b6f6f8f7cc726d7b2dd39c1574">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-24.2.1_748291e0a5953b412c024e326e446d9aa0d3b017/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="e7f3132168957eefc46229fc32c3bd464642b71e">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-ui-24.2.1_d70cbd59cfabea80d5413372cf66adbd46abf998/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/24.2.1/support-annotations-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="8de3aafecbdf98a61db6427f008f2d515bcd2544">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-24.2.1_67474b2e429ff366d2ed678a9f07f424f9c0d0a8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="9c4c3bc902450c39ed54de170db4fb12aea20a35">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-core-utils-24.2.1_eac75332a20cc833c477eb49a49ed18b2539f82f/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.volley/volley/1.0.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="2cd4b982617e544728de0782d718a58ce1b06e3f">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.volley-volley-1.0.0_9b1f4a0de0651946b4544c7f46c44de615f1b00a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/8.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d0dda274b703dd9c5bb056867649d22b4171ae7d">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-8.1.0_6796792f5cb2edd6f6b9e6a6c46424ad8b0edecb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="886db5152725aa47fd71bfe92aefdc4e0fef9da5">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_da05ff5c46e4d06122d280c6a932ddc3cf470322/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="5f64d657e838e8375135c0f6057a7ff8fab6a50e">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_ea2ef3fc77199c97d1b851b0cef762765fcbc93b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-fragment/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="b9a1ac78ad7ef3abedc4a4b30cd92bcacb939d1f">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-fragment-24.2.1_288c1925b93a7979dc48530439119f712654b2b3/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="0ecb4b595fa0f0f8018a149ace3ea6525624f94e">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-compat-24.2.1_7ff9dcbdbfbe6451b03ec583eb350e4ca7719ca6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/8.1.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="4477ea44f5ec5ad064022a22691732d7638ff197">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-8.1.0_98614c9f371cc8be8c96ba49cb89727fc3bb04c0/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7e4389bd133359a2ff88623ff1e4ff93d6e6f780">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_4686aaab6ae73337285bba4db75ad12d8c7e4ba9/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-v4/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-24.2.1_98ebc2fd38fb2eab15d2df84df1ec98e4f3a8955/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="fbf8da429efd5ad21e02e3e5ecaa1efc4167878d">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_19423c7b5d2e1c325b95d40e7ec1ee690faef17c/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-core-ui/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="867dad63c33388ff8c7644b236579355036d075f">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_24d158e811a1ed93c3fe86882d458e7bf9d06b29/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="43b2dba6b5a0b14527961b75329d0b90025f15ea">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-24.2.1_014c7d918a29f439c2df788664f27730bc2c36c6/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-core-utils/24.2.1/jars/libs/internal_impl-24.2.1.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="935a969265b2a166b2d20415423f5f6e90fe16e0">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-24.2.1_60c73c760e6b76d4dbc43de2f2ec90b5a735086b/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-media-compat/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="09b462bbcb77650284bd6614f1a32f360ef369f8">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-media-compat-24.2.1_11e79c57beb55b398e65cc4a1feb6cef085ba9d1/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="7eeab7d395e5881ab4c66eb53d18b419e47e6a36">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6802b4c35974899b4ccd20aa21d043b5d836eaeb/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/24.2.1/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="24.0.2"
+        sha1="d5c731fc64c03dfe04d51134955b483551c35849">
+        <dex dex="/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-24.2.1_2b3dca092fb04070327f7455023ff6ea8f64c57d/classes.dex" />
+    </item>
+
+</items>

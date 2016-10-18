@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="polytech.feedkat.NavigationActivity"
+    android:background="@color/colorPrimary"
+    android:focusableInTouchMode="false"
+    android:id="@+id/menu"
+    android:clipChildren="false"
+    >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top|center"
+        android:id="@+id/body">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/scroll"
+            android:contextClickable="false" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/body_scroll"
+                android:clipChildren="false">
+
+            </FrameLayout>
+        </ScrollView>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal|top"
+        android:id="@+id/header"
+        android:clickable="true"
+        android:background="@color/colorPrimaryDark"></FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:id="@+id/footer">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonSettings"
+            android:layout_gravity="right|bottom"
+            android:background="@drawable/icon_settings" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonCat"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/icon_cat"
+            android:clickable="true" />
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/buttonHome"
+            android:layout_gravity="left|bottom"
+            android:background="@drawable/icon_home" />
+    </FrameLayout>
+
+</FrameLayout>

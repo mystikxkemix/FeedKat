@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/res/merged/debug/menu/menu_tab.xml",
+        "source": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/src/main/res/menu/menu_tab.xml"
+    },
+    {
+        "merged": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/res/merged/debug/menu/menu.xml",
+        "source": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/src/main/res/menu/menu.xml"
+    },
+    {
+        "merged": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/res/merged/debug/menu/global.xml",
+        "source": "/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/src/main/res/menu/global.xml"
+    }
+]
