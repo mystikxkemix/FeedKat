@@ -16,8 +16,9 @@ class popUp: UIView {
     
     init(view: UIView, text: String)
     {
-        super.init(frame:CGRect (x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        super.init(frame:CGRect (x: 0, y: 0, width: view.getWidth(), height: view.getHeight()))
         backgroundColor = UIColor.black
+//        translatesAutoresizingMaskIntoConstraints = false
         self.alpha = 0.5
         
         //---------------------------------------
@@ -26,11 +27,11 @@ class popUp: UIView {
         UICenter.backgroundColor = UIColor.white
         UICenter.layer.cornerRadius = 10
         
-        view.addSubview(UICenter)
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.3, constant: 0))
-        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 0.8, constant: 0))
+        addSubview(UICenter)
+        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.3, constant: 0))
+        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 0.8, constant: 0))
         
         
         //---------------------------------------

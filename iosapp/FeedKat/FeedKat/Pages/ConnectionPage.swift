@@ -17,16 +17,21 @@ class ConnectionPage: UIViewController {
     
     @IBAction func tryConnection(_ sender: UIButton)
     {
-//        if(account.text == "ADMIN" && password.text == "pwd")
-//        {
-            self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
-//        }
-//        else
-//        {
-//            let pop = popUp(view:self.view, text:"User or Password invalid")
-//            pop.ViewFunc()
-//            UIcontent.insertSubview(pop, at: 6)
-//        }
+        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+        {
+            response, error in
+            if(error == nil)
+            {
+                self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+            }
+            else
+            {
+//                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrecte")
+//                pop.ViewFunc()
+//                self.UIcontent.addSubview(pop)
+                print("login error")
+            }
+        }
     }
     
     
