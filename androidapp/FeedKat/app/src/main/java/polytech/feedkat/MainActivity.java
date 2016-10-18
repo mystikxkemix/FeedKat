@@ -16,6 +16,11 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+
+import org.json.JSONObject;
+
 public class MainActivity extends Activity {
     private View mContentView;
 
@@ -40,6 +45,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
 
         initStatic();
+        FeedKatAPI.getInstance(getApplicationContext());
 
         FrameLayout main = (FrameLayout)findViewById(R.id.main_content);
 
@@ -66,19 +72,22 @@ public class MainActivity extends Activity {
         final Button button = (Button) findViewById(R.id.Valide_co);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                EditText compte = (EditText)findViewById(R.id.Account);
-                EditText pass   = (EditText)findViewById(R.id.Password);
+            EditText compte = (EditText)findViewById(R.id.Account);
+            EditText pass   = (EditText)findViewById(R.id.Password);
 
-//                if((compte.getText().toString().equals("michael.heidelberger@free.fr"))&&(pass.getText().toString().equals("lolmdr")))
-//                {
+            FeedKatAPI.getInstance(null).login(compte.getText().toString(), pass.getText().toString(), new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
                     Intent intent = new Intent(MainActivity.this,NavigationActivity.class);
                     startActivity(intent);
-//                }
-//                else
-//                {
-//                    System.out.println("connexion fail");
-//                    t.setText("Combinaison mail / password erronée");
-//                }
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    t.setText("Combinaison mail / password erronée");
+                }
+            });
+
             }
         });
 

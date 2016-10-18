@@ -10,9 +10,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-/**
- * Created by olivierlafon on 06/10/2016.
- */
 public class TuileChat extends tuile{
 
     protected ImageView chat;

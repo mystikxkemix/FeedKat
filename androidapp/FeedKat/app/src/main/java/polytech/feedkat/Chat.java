@@ -17,7 +17,6 @@ public class Chat extends FrameLayout
 
         int i;
 
-        System.out.println("Truc:  "+ chat_scroll);
         ArrayList<tuile> list = new ArrayList<>();
         for(i = 0;i<2;i++)
         {
