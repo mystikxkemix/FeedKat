@@ -20,18 +20,48 @@ class ConnectionPage: UIViewController {
         FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
         {
             response, error in
-            if(error == nil)
+            if(error == nil && response != nil)
             {
-                self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+                let id = response!.value(forKey: "is_user") as? Int ?? -1
+                if(id != -1)
+                {
+                    print("ID : \(id)")
+                    Static.userId = id
+                    FeedKatAPI.getCatbyUserId(id)
+                    {
+                        response, error in
+                        if(error != nil)
+                        {
+                            print("res : \(response)")
+                            if(response != nil)
+                            {
+                                self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+                            }
+                        }
+                        else
+                        {
+                            print("error getCatbyId : \(error)")
+                        }
+                    }
+                }
+                else
+                {
+                    print("error Id ")
+                }
             }
             else
             {
-//                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrecte")
-//                pop.ViewFunc()
+                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrecte")
 //                self.UIcontent.addSubview(pop)
-                print("login error")
+                pop.ViewFunc()
+                print("loginvarror")
             }
         }
+    }
+    
+    @IBAction func gotoRegister(_ sender: UIButton)
+    {
+        self.performSegue(withIdentifier: "gotoRegister", sender: self)
     }
     
     

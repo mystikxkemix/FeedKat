@@ -21,6 +21,7 @@ class Static {
     static let tileWidth = Static.screenWidth - 2*tileMarging
     static let tileSpacing = Static.screenHeight*0.035
     static let iconAlertSize = Static.tileHeight*0.8
+    static var userId = -1
     
     
     static func scaleUIImageToSize(_ image: UIImage, size: CGSize) -> UIImage

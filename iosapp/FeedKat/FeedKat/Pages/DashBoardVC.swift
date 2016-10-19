@@ -26,7 +26,7 @@ class DashBoard: GenVC
     {
         list_tile.append(AlertTile(title:"Votre distributeur n'a plus de croquette"))
         list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: "Prince royal", State: 1, Status: "Votre chat va bien"))
-        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: "Filou", State: 2, Status: "Votre chat n'a pas mangé depuis 3 jours"))
+        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("photo_batmane", height: Static.tileHeight), Name: "Batmane", State: 1, Status: "Votre chat a très bien mangé ce week-end"))
         list_tile.append(DashDistTile(Name:"Truc", Fill:25))
         list_tile.append(DashDistTile(Name:"Truc", Fill:100))
         //        list_tile.append(Tile(title:""))

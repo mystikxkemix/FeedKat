@@ -20,6 +20,7 @@ class popUp: UIView {
         backgroundColor = UIColor.black
 //        translatesAutoresizingMaskIntoConstraints = false
         self.alpha = 0.5
+        view.addSubview(self)
         
         //---------------------------------------
         UICenter = UIView()
@@ -27,11 +28,11 @@ class popUp: UIView {
         UICenter.backgroundColor = UIColor.white
         UICenter.layer.cornerRadius = 10
         
-        addSubview(UICenter)
-        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.3, constant: 0))
-        addConstraint(NSLayoutConstraint(item: UICenter, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 0.8, constant: 0))
+        view.addSubview(UICenter)
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .centerY, relatedBy: .equal, toItem: view, attribute: .centerY, multiplier: 1, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .height, relatedBy: .equal, toItem: view, attribute: .height, multiplier: 0.3, constant: 0))
+        view.addConstraint(NSLayoutConstraint(item: UICenter, attribute: .width, relatedBy: .equal, toItem: view, attribute: .width, multiplier: 0.8, constant: 0))
         
         
         //---------------------------------------
@@ -49,6 +50,7 @@ class popUp: UIView {
         UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .centerX, relatedBy: .equal, toItem: UICenter, attribute: .centerX, multiplier: 1, constant: 0))
         UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .height, relatedBy: .equal, toItem: UICenter, attribute: .height, multiplier: 0.1, constant: 0))
         UICenter.addConstraint(NSLayoutConstraint(item: ButonOK, attribute: .width, relatedBy: .equal, toItem: UICenter, attribute: .width, multiplier: 0.5, constant: 0))
+        ButonOK.layoutIfNeeded()
         
         
         //---------------------------------------

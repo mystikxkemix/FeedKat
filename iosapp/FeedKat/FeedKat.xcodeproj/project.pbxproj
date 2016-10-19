@@ -24,6 +24,7 @@
 		274F9F7E1DA7F0110051DCE8 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F791DA7F0110051DCE8 /* Tile.swift */; };
 		274F9F811DA7F0580051DCE8 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F801DA7F0580051DCE8 /* Cat.swift */; };
 		274F9F831DA7F9C60051DCE8 /* FeedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F821DA7F9C60051DCE8 /* FeedTime.swift */; };
+		27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */; };
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
 		27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */; };
@@ -70,6 +71,7 @@
 		274F9F791DA7F0110051DCE8 /* Tile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tile.swift; path = Tiles/Tile.swift; sourceTree = "<group>"; };
 		274F9F801DA7F0580051DCE8 /* Cat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cat.swift; path = Classes/Cat.swift; sourceTree = "<group>"; };
 		274F9F821DA7F9C60051DCE8 /* FeedTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTime.swift; path = Classes/FeedTime.swift; sourceTree = "<group>"; };
+		27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterPage.swift; path = Pages/RegisterPage.swift; sourceTree = "<group>"; };
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedkatAPI.swift; sourceTree = "<group>"; };
@@ -147,6 +149,7 @@
 				272847131D8972E1007DD040 /* DashBoardVC.swift */,
 				272501801DA4E87400A018A3 /* CatBoardVC.swift */,
 				272501821DA4E91300A018A3 /* OptionBoardVC.swift */,
+				27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */,
 				274F9F831DA7F9C60051DCE8 /* FeedTime.swift in Sources */,
 				272847111D8972D8007DD040 /* PopUp.swift in Sources */,
+				27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */,
 				274F9F7C1DA7F0110051DCE8 /* DashCatTile.swift in Sources */,
 				274F9F741DA7F0080051DCE8 /* Static.swift in Sources */,
 			);
