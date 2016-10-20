@@ -10,8 +10,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 
 function deleteId($idCol, $idVal, $table) {
-	/*
+	global $app;
+	
 	$r = $app['db']->query('delete from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
+	
 	
 	$error = ($r !== false) ? 0 : 1;
     $post = array(
@@ -19,10 +21,10 @@ function deleteId($idCol, $idVal, $table) {
         $idCol  => $idVal
     );
     $json = $app['db']->query('select * from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
-	*/
-	$json = array('test');
+
 	return $json;
 }
+
 
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
@@ -31,38 +33,33 @@ $app->before(function (Request $request) {
     }
 });
 
+require_once('sql.inc.php');
 
 //configure database connection
-$app->register(new Silex\Provider\DoctrineServiceProvider(), array(
-    'db.options' => array(
-        'driver' => 'pdo_mysql',
-        'host' => '127.0.0.1',
-        'dbname' => 'feedkat',
-        'user' => 'root',
-        'password' => '',
-        'charset' => 'utf8',
-    ),
-));
+$app->register(new Silex\Provider\DoctrineServiceProvider(), 
+	$db_options
+);
 
 
 $app->get('/', function () {
-    return 'Hello world';
+    return 'TEST - Hello world';
 });
 
-$app->get('/hello/{name}', function ($name) use ($app) {
-    return 'Hello ' . $app->escape($name);
-});	
-
-
-/*
-CAT MANAGEMENT
-*/
-require_once('cats.php');
 
 /*
 FEED TIMES MANAGEMENT
 */
 require_once('feedtimes.php');
+
+/*
+USER
+*/
+require_once('user.php');
+
+/*
+CAT MANAGEMENT
+*/
+require_once('cats.php');
 
 /*
 CAT COLLAR MANAGEMENT
