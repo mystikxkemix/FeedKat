@@ -85,7 +85,6 @@ $app->post('/login',  function (Request $request) use ($app) {
 	
 	$data = array(
 		'error' => $error
-		'password' => $pass_bdd
 	);
 	
 	//$data['debug'] = 'SELECT mail,password from user WHERE mail = \''.$mail.'\'';
