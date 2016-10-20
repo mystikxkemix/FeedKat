@@ -12,8 +12,8 @@ import Alamofire
 open class FeedKatAPI:NSObject
 {
     fileprivate static var isLocal = true
-    fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/web/index.php"
-    fileprivate static var localServerAddr = "http://192.168.43.12:80/api/web/index.php"
+    fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/index.php"
+    fileprivate static var localServerAddr = "http://192.168.43.12:80/api/index.php"
     
     open static func login(_ mail: String!, password: String!, handler: @escaping (NSDictionary?, NSError?) -> ())
     {
@@ -87,8 +87,6 @@ open class FeedKatAPI:NSObject
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/user/\(userId!)"
         
-        print("link : \(link)")
-        
         Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON
             { response in
@@ -97,7 +95,6 @@ open class FeedKatAPI:NSObject
                     let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
                     if (error == 0)
                     {
-                        print("JSON : \(JSON)")
                         handler(JSON as? NSDictionary, nil)
                         return
                     }

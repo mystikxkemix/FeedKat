@@ -22,21 +22,24 @@ class ConnectionPage: UIViewController {
             response, error in
             if(error == nil && response != nil)
             {
-                let id = response!.value(forKey: "is_user") as? Int ?? -1
-                if(id != -1)
+                let id = response!.value(forKey: "id_user") as? String
+                if(id != nil)
                 {
-                    print("ID : \(id)")
-                    Static.userId = id
-                    FeedKatAPI.getCatbyUserId(id)
+                    Static.userId = Int(id!)!
+                    FeedKatAPI.getCatbyUserId(Static.userId)
                     {
                         response, error in
-                        if(error != nil)
+                        if(error == nil)
                         {
-                            print("res : \(response)")
-                            if(response != nil)
+                            let ar = response?.value(forKey: "cats") as? [NSDictionary]
+                            if(ar != nil)
                             {
-                                self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+                                for a in ar!
+                                {
+                                    a.value(forKey: "")
+                                }
                             }
+                            self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
                         }
                         else
                         {
@@ -46,15 +49,14 @@ class ConnectionPage: UIViewController {
                 }
                 else
                 {
-                    print("error Id ")
+                    print("error Id")
                 }
             }
             else
             {
-                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrecte")
+                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
 //                self.UIcontent.addSubview(pop)
                 pop.ViewFunc()
-                print("loginvarror")
             }
         }
     }

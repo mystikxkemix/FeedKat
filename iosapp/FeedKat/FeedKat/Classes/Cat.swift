@@ -10,8 +10,18 @@ import UIKit
 
 class Cat:NSObject
 {
+    static var list:[Cat]
+    
+    static func getList() -> [Cat]
+    {
+        return list
+    }
+    
     init(ID: Int, Name: String, Birhdate:Date)
     {
-        
+        if(list == nil)
+        {
+            list = []
+        }
     }
 }
