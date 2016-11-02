@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class TuileChat extends tuile{
 
     protected ImageView chat;
@@ -20,16 +22,21 @@ public class TuileChat extends tuile{
         super(context, index);
 
         chat = new ImageView(context);
-        FrameLayout.LayoutParams lp_c = new FrameLayout.LayoutParams((int)(Static.tuile_y*0.8),(int)(Static.tuile_y*0.8));
-        lp_c.setMargins((int)(Static.tuile_x*0.02), 0, 0, 0);
+        FrameLayout.LayoutParams lp_c = new FrameLayout.LayoutParams((int)(Static.tuile_y),(int)(Static.tuile_y));
+        lp_c.setMargins((int)(Static.tuile_x*0.01), 0, 0, 0);
         lp_c.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
         chat.setLayoutParams(lp_c);
-        chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+        if(photo.equals("")){
+            chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+        }
+        else{
+            Picasso.with(getContext()).load(photo).into(chat);
+        }
         addView(chat);
 
         etat_chat = new ImageView(context);
         FrameLayout.LayoutParams lp_etat = new FrameLayout.LayoutParams((int)(Static.tuile_y*0.35), (int)(Static.tuile_y*0.35));
-        lp_etat.setMargins((int)(Static.tuile_x*0.02)+(int)(Static.tuile_y*0.8), 0, 0, (int)(Static.tuile_x*0.02));
+        lp_etat.setMargins((int)(Static.tuile_x*0.02)+Static.tuile_y, 0, 0, (int)(Static.tuile_x*0.02));
         lp_etat.gravity = Gravity.LEFT | Gravity.BOTTOM;
         etat_chat.setLayoutParams(lp_etat);
         etat_chat.setAlpha((float) 0.3);

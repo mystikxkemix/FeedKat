@@ -41,12 +41,8 @@ public class ListeChat {
             }
         }
 
-        if (photo.equals("null")){
-            c_photo = photo;
-        }
-        else{
-            c_photo = "getResources().getDrawable(R.drawable.logo_feedkat_300px)";
-        }
+        c_photo = photo;
+
         if(list == null)
             list = new ArrayList<>();
         list.add(this);
