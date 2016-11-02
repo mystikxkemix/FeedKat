@@ -27,8 +27,8 @@ public class FeedKatAPI
 
     private boolean isLocal = true;
     //private String localServerAddr = "http://10.0.2.2:3000"; // localhost with emulator
-    private String localServerAddr = "http://192.168.43.12:80/api/web/index.php";
-    private String prodServerAddr = "http://feedkat.ddns.net:80/api/web/index.php";
+    private String localServerAddr = "http://192.168.43.12:80/api/index.php";
+    private String prodServerAddr = "http://feedkat.ddns.net:80/api/index.php";
 
     private FeedKatAPI(Context context)
     {
@@ -114,7 +114,7 @@ public class FeedKatAPI
                     }
                     else
                     {
-                        onSuccess.onResponse(null);
+                        onSuccess.onResponse(response);
                     }
 
                 } catch (JSONException e) {
@@ -179,7 +179,7 @@ public class FeedKatAPI
         addToRequestQueue(req);
     }
 
-    public void getUser(String id, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    public void getUser(int id, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
     {
         String link = isLocal ? localServerAddr : prodServerAddr;
         link += "/user/"+id;
@@ -213,7 +213,7 @@ public class FeedKatAPI
         addToRequestQueue(req);
     }
 
-    public void getCatbyUserId(String id, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    public void getCatbyUserId(int id, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
     {
         String link = isLocal ? localServerAddr : prodServerAddr;
         link += "/cat/user/"+id;
@@ -223,13 +223,13 @@ public class FeedKatAPI
             public void onResponse(JSONObject response)
             {
                 try {
-                    if(response.getInt("error") == 1)
+                    if(response.getInt("error") == 0)
                     {
-
+                        onSuccess.onResponse(response);
                     }
                     else
                     {
-
+                        onError.onErrorResponse(getVolleyError(103, "Utilisateur inconnu"));
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -239,9 +239,42 @@ public class FeedKatAPI
             @Override
             public void onErrorResponse(VolleyError error)
             {
-
+                onError.onErrorResponse(error);
             }
         });
+        addToRequestQueue(req);
+    }
+
+    public void createCat(String name, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    {
+        String link = isLocal ? localServerAddr : prodServerAddr;
+        link += "/cat";
+
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("name", name);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, link, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                onSuccess.onResponse(response);
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                if (onError != null) onError.onErrorResponse(error);
+            }
+        });
+
+        addToRequestQueue(req);
     }
 
 }

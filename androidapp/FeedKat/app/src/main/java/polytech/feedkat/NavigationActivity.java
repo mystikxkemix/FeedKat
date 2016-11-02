@@ -1,6 +1,7 @@
 package polytech.feedkat;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -8,11 +9,6 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
-
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.api.GoogleApiClient;
-
-import java.util.Set;
 
 public class NavigationActivity extends Activity {
 
@@ -28,15 +24,12 @@ public class NavigationActivity extends Activity {
     private FrameLayout.LayoutParams lp_barre;
     private FrameLayout barre_orange;
     private View chat_view, accueil_view, settings_view;
-    /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
-     */
-    private GoogleApiClient client;
+    private int id_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        id_user = getIntent().getIntExtra("id_user", -1);
         setContentView(R.layout.activity_navigation);
 
         //Création des variables
@@ -109,14 +102,18 @@ public class NavigationActivity extends Activity {
         FrameLayout.LayoutParams lp_header = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, Static.screen_y / 10);
         lp_header.gravity = Gravity.CENTER_HORIZONTAL | Gravity.TOP;
         header.setLayoutParams(lp_header);
+
+
+
+
+
         //Texte header
         t.setGravity(View.TEXT_ALIGNMENT_CENTER);
         t.setTextSize(20);
-        t.setText("Accueil");
-        accueil = new Accueil(this, body_scroll);
+        t.setText("Acceuil");
+        accueil = new Accueil(this, body_scroll,id_user);
         chat = new Chat(this,chat_scroll);
         settings = new Settings(this, settings_scroll);
-
 
         FrameLayout.LayoutParams lp_text = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         lp_text.gravity = Gravity.CENTER;
@@ -135,7 +132,7 @@ public class NavigationActivity extends Activity {
                 barre_orange.setLayoutParams(lp_barre);
                 scroll.removeAllViews();
                 Runtime.getRuntime().gc();
-                accueil = new Accueil(getApplicationContext(), body_scroll);
+                accueil = new Accueil(getApplicationContext(), body_scroll, id_user);
                 scroll.addView(body_scroll);
             }
         });
@@ -161,49 +158,16 @@ public class NavigationActivity extends Activity {
                 Runtime.getRuntime().gc();
             }
         });
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
     }
 
     @Override
     public void onStart() {
         super.onStart();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        client.connect();
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "Navigation Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://polytech.feedkat/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.start(client, viewAction);
     }
 
     @Override
     public void onStop() {
         super.onStop();
-
-        // ATTENTION: This was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-//        Action viewAction = Action.newAction(
-//                Action.TYPE_VIEW, // TODO: choose an action type.
-//                "Navigation Page", // TODO: Define a title for the content shown.
-//                // TODO: If you have web page content that matches this app activity's content,
-//                // make sure this auto-generated web page URL is correct.
-//                // Otherwise, set the URL to null.
-//                Uri.parse("http://host/path"),
-//                // TODO: Make sure this auto-generated app URL is correct.
-//                Uri.parse("android-app://polytech.feedkat/http/host/path")
-//        );
-//        AppIndex.AppIndexApi.end(client, viewAction);
-        client.disconnect();
     }
 
     public void onBackPressed(){
@@ -212,7 +176,7 @@ public class NavigationActivity extends Activity {
         barre_orange.setLayoutParams(lp_barre);
         scroll.removeAllViews();
         Runtime.getRuntime().gc();
-        accueil = new Accueil(getApplicationContext(), body_scroll);
+        accueil = new Accueil(getApplicationContext(), body_scroll, id_user);
         scroll.addView(body_scroll);
         return;
     }

@@ -47,6 +47,15 @@
             android:background="@color/colorPrimaryDark"
             android:layout_margin="10dp"
             android:enabled="true" />
+
+        <Button
+            android:text="Inscription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/register"
+            android:background="@color/colorPrimaryDark"
+            android:hapticFeedbackEnabled="false"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <ViewStub

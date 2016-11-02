@@ -15,7 +15,7 @@ public class TuileChat extends tuile{
     protected ImageView chat;
     protected ImageView etat_chat;
     protected TextView chat_text, nom_chat;
-    public TuileChat(Context context, int index)
+    public TuileChat(Context context, int index, String name, String message, int statut, String photo)
     {
         super(context, index);
 
@@ -33,7 +33,13 @@ public class TuileChat extends tuile{
         lp_etat.gravity = Gravity.LEFT | Gravity.BOTTOM;
         etat_chat.setLayoutParams(lp_etat);
         etat_chat.setAlpha((float) 0.3);
-        etat_chat.setBackground(getResources().getDrawable(R.drawable.icon_check));
+        if(statut==1){
+            etat_chat.setBackground(getResources().getDrawable(R.drawable.icon_check));
+        }
+        else{
+            etat_chat.setBackground(getResources().getDrawable(R.drawable.icon_cross));
+        }
+
         addView(etat_chat);
 
 
@@ -45,7 +51,7 @@ public class TuileChat extends tuile{
         nom_chat.setGravity(Gravity.CENTER);
         nom_chat.setTextSize(20);
         nom_chat.setTextColor(context.getResources().getColor(R.color.colorBarre));
-        nom_chat.setText("Deadpool");
+        nom_chat.setText(name);
         addView(nom_chat);
 
         chat_text = new TextView(context);
@@ -55,7 +61,7 @@ public class TuileChat extends tuile{
         chat_text.setLayoutParams(lp_chatText);
         chat_text.setGravity(Gravity.CENTER);
         chat_text.setTextColor(Color.BLACK);
-        chat_text.setText("Votre chat a pris son repas pile dans les temps.");
+        chat_text.setText(message);
         addView(chat_text);
 
 

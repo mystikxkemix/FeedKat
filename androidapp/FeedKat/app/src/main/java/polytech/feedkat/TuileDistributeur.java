@@ -42,7 +42,7 @@ public class TuileDistributeur extends tuile {
         nom_distrib.setGravity(Gravity.CENTER);
         nom_distrib.setTextSize(20);
         nom_distrib.setTextColor(context.getResources().getColor(R.color.colorBarre));
-        nom_distrib.setText("Respo Alimentation");
+        nom_distrib.setText("Distributeur_salon");
         addView(nom_distrib);
 
         distrib_text = new View(context);

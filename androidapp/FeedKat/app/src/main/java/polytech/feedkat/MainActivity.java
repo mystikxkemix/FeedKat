@@ -19,10 +19,16 @@ import android.widget.TextView;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 public class MainActivity extends Activity {
-    private View mContentView;
+
+    private Popup fail_co;
+    FrameLayout main;
+    public UserData user = new UserData();
+    int id;
 
     private void initStatic()
     {
@@ -47,7 +53,11 @@ public class MainActivity extends Activity {
         initStatic();
         FeedKatAPI.getInstance(getApplicationContext());
 
-        FrameLayout main = (FrameLayout)findViewById(R.id.main_content);
+        main = (FrameLayout)findViewById(R.id.main_content);
+        final EditText compte = (EditText)findViewById(R.id.Account);
+        final EditText pass   = (EditText)findViewById(R.id.Password);
+        final Button register = (Button)findViewById(R.id.register);
+        final Button button = (Button) findViewById(R.id.Valide_co);
 
         EditText account = (EditText)findViewById(R.id.Account);
         account.setHintTextColor(Color.parseColor("#88333333"));
@@ -66,28 +76,81 @@ public class MainActivity extends Activity {
         lp.setMargins(0,50,0,0);
 
         t.setLayoutParams(lp);
-
         main.addView(t);
 
-        final Button button = (Button) findViewById(R.id.Valide_co);
+        button.setWidth(Static.screen_x/2);
+        register.setWidth(Static.screen_x/2);
+
+
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-            EditText compte = (EditText)findViewById(R.id.Account);
-            EditText pass   = (EditText)findViewById(R.id.Password);
+
 
             FeedKatAPI.getInstance(null).login(compte.getText().toString(), pass.getText().toString(), new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
-                    Intent intent = new Intent(MainActivity.this,NavigationActivity.class);
-                    startActivity(intent);
+                    try {
+                        System.out.println(response);
+                        int id = response.getInt("id_user");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    try
+                    {
+                        id = response.getInt("id_user");
+                    }
+                    catch (JSONException e)
+                    {
+                        e.printStackTrace();
+                    }
+                    user.setId_user(id);
+
+                    FeedKatAPI.getInstance(null).getCatbyUserId(id, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            System.out.println(response);
+                            try {
+                                JSONArray cats = response.getJSONArray("cats");
+                                for (int i = 0; i < cats.length(); i++) {
+                                    JSONObject cat = cats.getJSONObject(i);
+                                    new ListeChat(cat.getInt("id_cat"), cat.getString("name"), cat.getInt("ok"), cat.getString("status"), cat.getString("photo"), cat.getString("birth"), cat.getInt("id_dispenser"), cat.getJSONArray("feed_times"));
+                                }
+                                startActivity(new Intent(MainActivity.this,NavigationActivity.class));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+
+
                 }
             }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    t.setText("Combinaison mail / password erronée");
+                    fail_co = new Popup(getApplicationContext(), "Combinaion mail / mot de passe incorrecte", new Response.Listener() {
+                        @Override
+                        public void onResponse(Object response) {
+                            main.removeView(fail_co);
+                        }
+
+                    });
+                    main.addView(fail_co);
                 }
             });
 
+            }
+        });
+
+        register.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this,Register.class);
+                startActivity(intent);
             }
         });
 
