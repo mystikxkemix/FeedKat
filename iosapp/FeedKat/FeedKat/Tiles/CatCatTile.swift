@@ -122,6 +122,7 @@ class CatCatTile: Tile
         UiNextFeed.textColor = UIColor.black
         UiNextFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 15)
         UiNextFeed.textAlignment = NSTextAlignment.left
+
         addSubview(UiNextFeed)
         
     }
