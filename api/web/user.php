@@ -76,7 +76,7 @@ $app->post('/login',  function (Request $request) use ($app) {
 		}
 		else {
 		// l’utilisateur n’a pas saisi le bon mot de passe
-			$error = 1;
+			$error = 2;
 		}
 	}
 	else
