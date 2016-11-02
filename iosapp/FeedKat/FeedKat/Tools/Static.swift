@@ -6,6 +6,7 @@
 //  Copyright © 2016 Mike OLIVA. All rights reserved.
 //
 
+import Foundation
 import UIKit
 
 class Static {
@@ -22,6 +23,9 @@ class Static {
     static let tileSpacing = Static.screenHeight*0.035
     static let iconAlertSize = Static.tileHeight*0.8
     static var userId = -1
+    static let nowMinute = Calendar.current.component(.minute, from: Date())
+    static let nowHour = Calendar.current.component(.hour, from: Date())
+    static let nowDay = Calendar.current.component(.day, from: Date())
     
     
     static func scaleUIImageToSize(_ image: UIImage, size: CGSize) -> UIImage
@@ -70,5 +74,18 @@ class Static {
         let width = img.size.width * ratio
         
         return scaleUIImageToSize(img, size: CGSize(width: width, height: height))
+    }
+    
+    static func StringToInt(str : String) -> [Int]
+    {
+        var res:[Int] = []
+        let fullNameArr = str.components(separatedBy: ":")
+
+        for a in fullNameArr
+        {
+            res.append(Int(a)!)
+        }
+        
+        return res
     }
 }

@@ -26,4 +26,14 @@ class FeedTime:NSObject {
         self.Enable = Enable
         super.init()
     }
+    
+    override init()
+    {   self.ID = -1
+        self.Id_cat = -1
+        self.Id_dispenser = -1
+        self.Weight = -1
+        self.Hour = ""
+        self.Enable = false
+        super.init()
+    }
 }

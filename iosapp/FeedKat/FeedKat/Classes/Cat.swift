@@ -24,7 +24,6 @@ class Cat:NSObject
         return list
     }
     
-    
     init(ID: Int, Name: String, Message:String, Photo:String, Status:Int, FeedTimes : [NSDictionary]?)
     {
         self.Name = Name

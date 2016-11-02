@@ -35,7 +35,7 @@ class DashCatTile:Tile
             case 1:
                 UiIcon.image = Static.getScaledImageWithHeight("Icon_check", height: iconsize)
                 break
-            case 2:
+            case 0:
                 UiIcon.image = Static.getScaledImageWithHeight("Icon_cross", height: iconsize)
                 break
             default:
