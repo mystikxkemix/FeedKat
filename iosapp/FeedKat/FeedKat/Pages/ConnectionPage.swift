@@ -36,9 +36,17 @@ class ConnectionPage: UIViewController {
                             {
                                 for a in ar!
                                 {
-                                    a.value(forKey: "")
+                                    let name = a.value(forKey: "name") as! String
+                                    let ids = a.value(forKey: "id_cat") as! String
+                                    let id = Int(ids)!
+                                    let message = a.value(forKey: "status") as! String
+                                    let status = a.value(forKey: "ok") as! Int
+                                    let photo = a.value(forKey: "photo") as! String
+                                    let feed = a.value(forKey: "feed_times") as? [NSDictionary]
+                                    _ = Cat(ID: id, Name: name, Message: message, Photo: photo, Status:status, FeedTimes: feed)
                                 }
                             }
+                            
                             self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
                         }
                         else
@@ -54,8 +62,8 @@ class ConnectionPage: UIViewController {
             }
             else
             {
+                print("error ConnectionPage : \(error)")
                 let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
-//                self.UIcontent.addSubview(pop)
                 pop.ViewFunc()
             }
         }

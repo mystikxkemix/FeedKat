@@ -10,10 +10,10 @@ import UIKit
 
 class DashCatTile:Tile
 {
-    var UIImage:UIImageView!
-    var UIIcon:UIImageView!
-    var UIName:UILabel!
-    var UIStatus:UILabel!
+    var UiImage:UIImageView!
+    var UiIcon:UIImageView!
+    var UiName:UILabel!
+    var UiStatus:UILabel!
     
     init(Im: UIImage, Name:String, State:Int, Status:String)
     {
@@ -22,44 +22,44 @@ class DashCatTile:Tile
         let marg=Static.tileWidth*0.03+Static.tileHeight
         let iconsize = Static.tileHeight*0.35
         
-        UIImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: 0, width: Static.tileHeight, height: Static.tileHeight))
+        UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: 0, width: Static.tileHeight, height: Static.tileHeight))
         
-        UIName = UILabel(frame: CGRect(x: marg, y: Static.tileWidth*0.02, width: Static.tileWidth*0.98-marg, height: Static.tileHeight*0.3))
-        UIIcon = UIImageView(frame: CGRect(x: marg - Static.tileWidth*0.01, y: Static.tileHeight*0.57-Static.tileWidth*0.02, width: iconsize, height: iconsize))
-        UIIcon.alpha = 0.3
+        UiName = UILabel(frame: CGRect(x: marg, y: Static.tileWidth*0.02, width: Static.tileWidth*0.98-marg, height: Static.tileHeight*0.3))
+        UiIcon = UIImageView(frame: CGRect(x: marg - Static.tileWidth*0.01, y: Static.tileHeight*0.57-Static.tileWidth*0.02, width: iconsize, height: iconsize))
+        UiIcon.alpha = 0.3
         
-        UIStatus = UILabel(frame: CGRect(x: marg + iconsize, y: Static.tileHeight*0.5-Static.tileWidth*0.02, width: Static.tileWidth*0.98-marg-iconsize, height: Static.tileHeight*0.5))
+        UiStatus = UILabel(frame: CGRect(x: marg + iconsize, y: Static.tileHeight*0.5-Static.tileWidth*0.02, width: Static.tileWidth*0.98-marg-iconsize, height: Static.tileHeight*0.5))
         
         switch State
         {
             case 1:
-                UIIcon.image = Static.getScaledImageWithHeight("Icon_check", height: iconsize)
+                UiIcon.image = Static.getScaledImageWithHeight("Icon_check", height: iconsize)
                 break
             case 2:
-                UIIcon.image = Static.getScaledImageWithHeight("Icon_cross", height: iconsize)
+                UiIcon.image = Static.getScaledImageWithHeight("Icon_cross", height: iconsize)
                 break
             default:
                 break
         }
         
-        UIImage.image = Im
-        addSubview(UIImage)
+        UiImage.image = Im
+        addSubview(UiImage)
         
-        addSubview(UIIcon)
+        addSubview(UiIcon)
         
-        UIName.text = Name
-        UIName.textColor = Static.OrangeColor
-        UIName.numberOfLines = 1
-        UIName.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
-        UIName.textAlignment = NSTextAlignment.center
-        addSubview(UIName)
+        UiName.text = Name
+        UiName.textColor = Static.OrangeColor
+        UiName.numberOfLines = 1
+        UiName.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
+        UiName.textAlignment = NSTextAlignment.center
+        addSubview(UiName)
         
-        UIStatus.text = Status
-        UIStatus.numberOfLines=2
-        UIStatus.textColor = UIColor.black
-        UIStatus.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
-        UIStatus.textAlignment = NSTextAlignment.center
-        addSubview(UIStatus)
+        UiStatus.text = Status
+        UiStatus.numberOfLines=2
+        UiStatus.textColor = UIColor.black
+        UiStatus.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        UiStatus.textAlignment = NSTextAlignment.center
+        addSubview(UiStatus)
         
     }
     

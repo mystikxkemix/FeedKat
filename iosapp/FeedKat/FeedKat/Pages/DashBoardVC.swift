@@ -19,19 +19,30 @@ class DashBoard: GenVC
         
         UIBot[1].addTarget(self, action: #selector(DashBoard.gotoC), for: .touchUpInside)
         UIBot[2].addTarget(self, action: #selector(DashBoard.gotoO), for: .touchUpInside)
-        
     }
     
     override func loadScroll()
     {
-        list_tile.append(AlertTile(title:"Votre distributeur n'a plus de croquette"))
-        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: "Prince royal", State: 1, Status: "Votre chat va bien"))
-        list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("photo_batmane", height: Static.tileHeight), Name: "Batmane", State: 1, Status: "Votre chat a très bien mangé ce week-end"))
-        list_tile.append(DashDistTile(Name:"Truc", Fill:25))
-        list_tile.append(DashDistTile(Name:"Truc", Fill:100))
-        //        list_tile.append(Tile(title:""))
-        //        list_tile.append(Tile(title:""))
-        //        list_tile.append(Tile(title:""))
+        
+        if(Cat.getList().count != 0)
+        {
+        
+            for cat in Cat.getList()
+            {
+                if(cat.getPhoto() != "")
+                {
+                    list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("photo_batmane", height: Static.tileHeight), Name: cat.getName(), State: cat.getStatus(), Status: cat.getMessage()))
+                }
+                else
+                {
+                    list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: cat.getName(), State: cat.getStatus(), Status: cat.getMessage()))
+                }
+            }
+        }
+        else
+        {
+            list_tile.append(AddCatTile())
+        }
         
         super.loadScroll()
     }

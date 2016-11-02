@@ -28,6 +28,8 @@
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
 		27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */; };
+		27EDD2661DC9DCFB00C685DB /* AddCatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */; };
+		27EDD2681DC9EC5A00C685DB /* Dispenser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD2671DC9EC5A00C685DB /* Dispenser.swift */; };
 		27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */; };
 		27FFCE811D87DDB1005718E2 /* FeedKatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE801D87DDB1005718E2 /* FeedKatTests.swift */; };
 		27FFCE8C1D87DDB1005718E2 /* FeedKatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE8B1D87DDB1005718E2 /* FeedKatUITests.swift */; };
@@ -75,6 +77,8 @@
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedkatAPI.swift; sourceTree = "<group>"; };
+		27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddCatTile.swift; path = Tiles/AddCatTile.swift; sourceTree = "<group>"; };
+		27EDD2671DC9EC5A00C685DB /* Dispenser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dispenser.swift; path = Classes/Dispenser.swift; sourceTree = "<group>"; };
 		27FFCE681D87DDB1005718E2 /* FeedKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		27FFCE771D87DDB1005718E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -171,6 +175,7 @@
 				274F9F771DA7F0110051DCE8 /* DashCatTile.swift */,
 				274F9F781DA7F0110051DCE8 /* DashDistTile.swift */,
 				274F9F791DA7F0110051DCE8 /* Tile.swift */,
+				27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */,
 			);
 			name = Tiles;
 			sourceTree = "<group>";
@@ -180,6 +185,7 @@
 			children = (
 				274F9F801DA7F0580051DCE8 /* Cat.swift */,
 				274F9F821DA7F9C60051DCE8 /* FeedTime.swift */,
+				27EDD2671DC9EC5A00C685DB /* Dispenser.swift */,
 			);
 			name = Classes;
 			sourceTree = "<group>";
@@ -539,6 +545,7 @@
 				274F9F701DA7EFFF0051DCE8 /* GenVC.swift in Sources */,
 				272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */,
 				274F9F811DA7F0580051DCE8 /* Cat.swift in Sources */,
+				27EDD2661DC9DCFB00C685DB /* AddCatTile.swift in Sources */,
 				274F9F7B1DA7F0110051DCE8 /* CatCatTile.swift in Sources */,
 				274F9F7E1DA7F0110051DCE8 /* Tile.swift in Sources */,
 				272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */,
@@ -546,6 +553,7 @@
 				274F9F7D1DA7F0110051DCE8 /* DashDistTile.swift in Sources */,
 				274F9F7A1DA7F0110051DCE8 /* AlertTile.swift in Sources */,
 				272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */,
+				27EDD2681DC9EC5A00C685DB /* Dispenser.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
 				272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */,
 				27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */,

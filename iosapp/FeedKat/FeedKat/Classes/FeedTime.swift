@@ -8,7 +8,22 @@
 
 import UIKit
 
-class FeedTime:NSObject
-{
+class FeedTime:NSObject {
+    var ID:Int
+    var Id_cat:Int
+    var Id_dispenser:Int
+    var Weight:Int
+    var Hour:String
+    var Enable:Bool
     
+    init(ID:Int, Id_cat:Int, Id_dispenser:Int, Weight:Int, Hour:String, Enable:Bool)
+    {
+        self.ID = ID
+        self.Id_cat = Id_cat
+        self.Id_dispenser = Id_dispenser
+        self.Weight = Weight
+        self.Hour = Hour
+        self.Enable = Enable
+        super.init()
+    }
 }

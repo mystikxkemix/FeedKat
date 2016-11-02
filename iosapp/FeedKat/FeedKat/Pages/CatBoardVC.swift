@@ -23,16 +23,15 @@ class CatBoard : GenVC
     
     override func loadScroll()
     {
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        
+        if(Cat.getList().count != 0)
+        {
+            
+            for a in Cat.getList()
+            {
+                list_tile.append(CatCatTile(cat: a))
+            }
+        }
+        list_tile.append(AddCatTile())
         super.loadScroll()
     }
     

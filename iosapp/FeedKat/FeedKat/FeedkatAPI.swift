@@ -1,11 +1,3 @@
-//
-//  FeedkatAPI.swift
-//  FeedKat
-//
-//  Created by Mike OLIVA on 18/10/2016.
-//  Copyright © 2016 Mike OLIVA. All rights reserved.
-//
-
 import Foundation
 import Alamofire
 
@@ -108,10 +100,42 @@ open class FeedKatAPI:NSObject
                 {
                     handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
                     return
-
                 }
                 
             }
+    }
+    
+    open static func getCatDetails(_ catId:Int!, handler: @escaping (NSDictionary?, NSError?)->())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/\(catId)/details"
+        
+        Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
+            .responseJSON
+            { response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+                
+        }
+
+        
     }
 
 }
