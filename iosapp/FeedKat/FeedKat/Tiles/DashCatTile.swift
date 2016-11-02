@@ -15,7 +15,7 @@ class DashCatTile:Tile
     var UiName:UILabel!
     var UiStatus:UILabel!
     
-    init(Im: UIImage, Name:String, State:Int, Status:String)
+    init(cat:Cat)
     {
         super.init()
         
@@ -30,7 +30,7 @@ class DashCatTile:Tile
         
         UiStatus = UILabel(frame: CGRect(x: marg + iconsize, y: Static.tileHeight*0.5-Static.tileWidth*0.02, width: Static.tileWidth*0.98-marg-iconsize, height: Static.tileHeight*0.5))
         
-        switch State
+        switch cat.getStatus()
         {
             case 1:
                 UiIcon.image = Static.getScaledImageWithHeight("Icon_check", height: iconsize)
@@ -42,19 +42,28 @@ class DashCatTile:Tile
                 break
         }
         
-        UiImage.image = Im
+        if(cat.getPhoto() != "")
+        {
+            if let checkedUrl = URL(string: cat.getPhoto())
+            {
+                UiImage.contentMode = .scaleAspectFit
+                FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+            }
+        }
+        
+        UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
         addSubview(UiImage)
         
         addSubview(UiIcon)
         
-        UiName.text = Name
+        UiName.text = cat.getName()
         UiName.textColor = Static.OrangeColor
         UiName.numberOfLines = 1
         UiName.font = UIFont(name: "Arial Rounded MT Bold", size: 22)
         UiName.textAlignment = NSTextAlignment.center
         addSubview(UiName)
         
-        UiStatus.text = Status
+        UiStatus.text = cat.getMessage()
         UiStatus.numberOfLines=2
         UiStatus.textColor = UIColor.black
         UiStatus.font = UIFont(name: "Arial Rounded MT Bold", size: 18)

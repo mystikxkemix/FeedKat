@@ -29,18 +29,20 @@ class CatCatTile: Tile
         
         UiNextFeed = UILabel(frame: CGRect(x: marg + iconsize, y: Static.tileHeight*0.7, width: Static.tileWidth*0.98-marg-iconsize, height: Static.tileHeight*0.2))
         
-        var Im:UIImage
-        
         if(cat.getPhoto() != "")
         {
-            Im = Static.getScaledImageWithHeight("photo_batmane", height: Static.tileHeight)
-        }
-        else
-        {
-            Im = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+            if(cat.getPhoto() != "")
+            {
+                if let checkedUrl = URL(string: cat.getPhoto())
+                {
+                    UiImage.contentMode = .scaleAspectFit
+                    FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+                }
+            }
         }
         
-        UiImage.image = Im
+        UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+
         addSubview(UiImage)
         
         UiName.text = cat.getName()

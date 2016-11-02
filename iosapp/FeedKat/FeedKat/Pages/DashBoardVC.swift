@@ -29,14 +29,7 @@ class DashBoard: GenVC
         
             for cat in Cat.getList()
             {
-                if(cat.getPhoto() != "")
-                {
-                    list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("photo_batmane", height: Static.tileHeight), Name: cat.getName(), State: cat.getStatus(), Status: cat.getMessage()))
-                }
-                else
-                {
-                    list_tile.append(DashCatTile(Im: Static.getScaledImageWithHeight("Icon", height: Static.tileHeight), Name: cat.getName(), State: cat.getStatus(), Status: cat.getMessage()))
-                }
+                list_tile.append(DashCatTile(cat: cat))
             }
         }
         else

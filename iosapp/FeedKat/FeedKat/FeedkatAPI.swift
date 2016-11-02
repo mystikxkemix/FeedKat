@@ -7,6 +7,24 @@ open class FeedKatAPI:NSObject
     fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/index.php"
     fileprivate static var localServerAddr = "http://192.168.43.12:80/api/index.php"
     
+    open static func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
+        URLSession.shared.dataTask(with: url)
+        {   (data, response, error) in
+                completion(data, response, error)
+        }.resume()
+    }
+    
+    open static func downloadImage(url: URL, view : UIImageView)
+    {
+        getDataFromUrl(url: url)
+        { (data, response, error)  in
+            guard let data = data, error == nil else { return }
+            DispatchQueue.main.async() { () -> Void in
+                view.image = UIImage(data: data)
+            }
+        }
+    }
+    
     open static func login(_ mail: String!, password: String!, handler: @escaping (NSDictionary?, NSError?) -> ())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/login"
@@ -134,8 +152,6 @@ open class FeedKatAPI:NSObject
                 }
                 
         }
-
-        
     }
 
 }
