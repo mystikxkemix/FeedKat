@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 // API : get all cats
 $app->get('/cat', function() use ($app) {
-    $cats = $app['db']->fetchAll('select c.*, group_concat(d.id_dispenser) id_dispenser, u.id_user from cat c left join cat_dispenser cd using(id_cat) left join dispenser d using(id_dispenser) join user u using(id_user) ');
+    $cats = $app['db']->fetchAll('select c.*, group_concat(distinct d.id_dispenser) id_dispenser, u.id_user from cat c left join cat_dispenser cd using(id_cat) left join dispenser d using(id_dispenser) join user u using(id_user)');
 	$cats[0]['id_dispenser'] = explode(',', $cats[0]['id_dispenser']);
 	return $app->json($cats);
 });
