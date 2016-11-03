@@ -32,7 +32,16 @@ class DashBoard: GenVC
                 list_tile.append(DashCatTile(cat: cat))
             }
         }
-        else
+        
+        if(Dispenser.getList().count != 0)
+        {
+            for a in Dispenser.getList()
+            {
+                list_tile.append(DashDistTile(disp: a))
+            }
+        }
+        
+        if(Dispenser.getList().count != 0 && Cat.getList().count != 0)
         {
             list_tile.append(AddCatTile())
         }

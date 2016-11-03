@@ -31,13 +31,10 @@ class CatCatTile: Tile
         
         if(cat.getPhoto() != "")
         {
-            if(cat.getPhoto() != "")
+            if let checkedUrl = URL(string: cat.getPhoto())
             {
-                if let checkedUrl = URL(string: cat.getPhoto())
-                {
                     UiImage.contentMode = .scaleAspectFit
                     FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
-                }
             }
         }
         
@@ -115,7 +112,7 @@ class CatCatTile: Tile
                 }
                 else
                 {
-                UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[0] - Static.nowHour + 24)h"
+                    UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[0] - Static.nowHour + 24)h"
                 }
             }
         }

@@ -46,8 +46,35 @@ class ConnectionPage: UIViewController {
                                     _ = Cat(ID: id, Name: name, Message: message, Photo: photo, Status:status, FeedTimes: feed)
                                 }
                             }
-                            
-                            self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+
+                            FeedKatAPI.getDispById(Static.userId)
+                            {
+                                response, error in
+                                if(error == nil)
+                                {
+                                    let ar = response?.value(forKey: "dispensers") as? [NSDictionary]
+                                    if(ar != nil)
+                                    {
+                                        for a in ar!
+                                        {
+                                            let name = a.value(forKey: "name") as! String
+                                            let sid = a.value(forKey: "id_dispenser") as! String
+                                            let id = Int(sid)!
+                                            let sstock = a.value(forKey: "stock") as! String
+                                            let stock = Int(sstock)!
+                                            
+                                            _ = Dispenser(ID: id, Name: name, Status: stock)
+                                        }
+                                    }
+                                    self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+                                }
+                                else
+                                {
+                                    print("\(error)")
+                                }
+                                
+                                
+                            }
                         }
                         else
                         {

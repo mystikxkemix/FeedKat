@@ -23,16 +23,6 @@ class OptionBoard : GenVC
     
     override func loadScroll()
     {
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        list_tile.append(Tile())
-        //        list_tile.append(Tile(title:""))
-        //        list_tile.append(Tile(title:""))
-        //        list_tile.append(Tile(title:""))
-        
         super.loadScroll()
     }
     
