@@ -67,6 +67,12 @@ CAT COLLAR MANAGEMENT
 require_once('catcollar.php');
 
 
+/*
+DISPENSER MANAGEMENT
+*/
+require_once('dispenser.php');
+
+
 
 
 
