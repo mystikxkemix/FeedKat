@@ -8,17 +8,17 @@
 
 import UIKit
 
-class DashBoard: GenVC
+class DashBoardVC: GenVC
 {
-    
+    var catId:Int = -1
     override func viewDidLoad()
     {
         super.viewDidLoad()
         initTop(title: "Accueil")
         initBanner(i: 0)
         
-        UIBot[1].addTarget(self, action: #selector(DashBoard.gotoC), for: .touchUpInside)
-        UIBot[2].addTarget(self, action: #selector(DashBoard.gotoO), for: .touchUpInside)
+        UIBot[1].addTarget(self, action: #selector(DashBoardVC.gotoC), for: .touchUpInside)
+        UIBot[2].addTarget(self, action: #selector(DashBoardVC.gotoO), for: .touchUpInside)
     }
     
     override func loadScroll()
@@ -27,9 +27,12 @@ class DashBoard: GenVC
         if(Cat.getList().count != 0)
         {
         
-            for cat in Cat.getList()
+            for a in Cat.getList()
             {
-                list_tile.append(DashCatTile(cat: cat))
+                let catt = DashCatTile(cat:a)
+                catt.tag = Cat.getList().index(of: a)!
+                catt.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.gotoCD(_:))))
+                list_tile.append(catt)
             }
         }
         
@@ -58,6 +61,25 @@ class DashBoard: GenVC
     {
         self.performSegue(withIdentifier: "fromDBtoC", sender: self)
     }
+    
+    func gotoCD(_ sender: AnyObject)
+    {
+        let view = sender.view as UIView
+        self.catId = view.tag
+        self.performSegue(withIdentifier: "gotoCDfromDB", sender: self)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "gotoCDfromDB"
+        {
+            let dst = segue.destination as! GenVC as! DetailsCatBoardVC
+            dst.catId = self.catId
+            dst.fromC = false
+        }
+        
+    }
+
     
     override func didReceiveMemoryWarning()
     {

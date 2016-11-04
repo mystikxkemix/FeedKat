@@ -14,6 +14,7 @@
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
+		2738C7561DCCD29100ADFA11 /* DetailsCatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738C7551DCCD29100ADFA11 /* DetailsCatVC.swift */; };
 		274F9F701DA7EFFF0051DCE8 /* GenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */; };
 		274F9F731DA7F0080051DCE8 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F711DA7F0080051DCE8 /* extensions.swift */; };
 		274F9F741DA7F0080051DCE8 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F721DA7F0080051DCE8 /* Static.swift */; };
@@ -63,6 +64,7 @@
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
+		2738C7551DCCD29100ADFA11 /* DetailsCatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsCatVC.swift; path = Pages/DetailsCatVC.swift; sourceTree = "<group>"; };
 		274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenVC.swift; path = Pages/GenVC.swift; sourceTree = "<group>"; };
 		274F9F711DA7F0080051DCE8 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = Tools/extensions.swift; sourceTree = "<group>"; };
 		274F9F721DA7F0080051DCE8 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Static.swift; path = Tools/Static.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				272501801DA4E87400A018A3 /* CatBoardVC.swift */,
 				272501821DA4E91300A018A3 /* OptionBoardVC.swift */,
 				27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */,
+				2738C7551DCCD29100ADFA11 /* DetailsCatVC.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -562,6 +565,7 @@
 				27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */,
 				274F9F7C1DA7F0110051DCE8 /* DashCatTile.swift in Sources */,
 				274F9F741DA7F0080051DCE8 /* Static.swift in Sources */,
+				2738C7561DCCD29100ADFA11 /* DetailsCatVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

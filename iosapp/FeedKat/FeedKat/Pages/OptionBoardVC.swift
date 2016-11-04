@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OptionBoard : GenVC
+class OptionBoardVC : GenVC
 {
     override func viewDidLoad()
     {
@@ -16,8 +16,8 @@ class OptionBoard : GenVC
         initTop(title: "Options")
         initBanner(i: 2)
         
-        UIBot[0].addTarget(self, action: #selector(OptionBoard.gotoDB), for: .touchUpInside)
-        UIBot[1].addTarget(self, action: #selector(OptionBoard.gotoC), for: .touchUpInside)
+        UIBot[0].addTarget(self, action: #selector(OptionBoardVC.gotoDB), for: .touchUpInside)
+        UIBot[1].addTarget(self, action: #selector(OptionBoardVC.gotoC), for: .touchUpInside)
         
     }
     

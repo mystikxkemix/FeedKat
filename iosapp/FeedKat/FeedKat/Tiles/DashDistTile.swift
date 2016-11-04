@@ -45,11 +45,9 @@ class DashDistTile:Tile
         UIStatus.numberOfLines=2
         UIStatus.textColor = UIColor.black
         UIStatus.font = UIFont(name: "Arial Rounded MT", size: 18)
-//        UIStatus.textAlignment = NSTextAlignment.center
         addSubview(UIStatus)
         
-//        let nb = disp.getStatus()
-        let nb = 60
+        let nb = disp.getStatus()
         
         if(nb >= 75)
         {

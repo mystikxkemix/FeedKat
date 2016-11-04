@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -19,40 +22,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1dj-sR-Tw1">
-                                <frame key="frameInset" minX="40" minY="179" width="294" height="30"/>
+                                <rect key="frame" x="40" y="179" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nom de compte" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ANG-LB-P6A">
-                                <frame key="frameInset" minX="106" minY="150" width="162" height="21"/>
+                                <rect key="frame" x="106" y="150" width="162" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.67117964659685869" green="0.67117964659685869" blue="0.67117964659685869" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mot de passe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gOj-5R-ojT">
-                                <frame key="frameInset" minX="135" minY="249" width="104" height="21"/>
+                                <rect key="frame" x="135" y="249" width="104" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.60784313725490191" green="0.60784313725490191" blue="0.60784313725490191" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yzh-WZ-Mcn">
-                                <frame key="frameInset" minX="40" minY="278" width="294" height="30"/>
+                                <rect key="frame" x="40" y="278" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" secureTextEntry="YES"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="FeedKat, une alimentation au poil" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nge-3C-wRk">
-                                <frame key="frameInset" minX="28" minY="40" width="319" height="47"/>
+                                <rect key="frame" x="28" y="40" width="319" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snU-ro-fr7">
-                                <frame key="frameInset" minX="158" minY="316" width="58" height="30"/>
+                                <rect key="frame" x="158" y="316" width="58" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="S'inscire"/>
                                 <connections>
@@ -60,7 +63,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45b-es-LdO">
-                                <frame key="frameInset" minX="129" minY="412" width="117" height="30"/>
+                                <rect key="frame" x="129" y="412" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Connexion"/>
@@ -84,10 +87,10 @@
             </objects>
             <point key="canvasLocation" x="-346.39999999999998" y="242.42878560719643"/>
         </scene>
-        <!--Dash Board-->
+        <!--Dash BoardVC-->
         <scene sceneID="9ij-UG-HsU">
             <objects>
-                <viewController id="P4R-OT-QVY" customClass="DashBoard" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="P4R-OT-QVY" customClass="DashBoardVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="dJn-KW-hrv"/>
                         <viewControllerLayoutGuide type="bottom" id="kPh-xG-Z5n"/>
@@ -100,6 +103,7 @@
                     <connections>
                         <segue destination="GZI-CS-CBk" kind="show" identifier="fromDBtoO" animates="NO" id="GG2-dU-dMO"/>
                         <segue destination="7kh-6F-N9V" kind="show" identifier="fromDBtoC" animates="NO" id="IbZ-Ql-tYZ"/>
+                        <segue destination="l8O-Dm-xwz" kind="show" identifier="gotoCDfromDB" id="Vsr-Lh-XfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Z1-yv-mCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -119,38 +123,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Inscription" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3eN-NA-hVq">
-                                <frame key="frameInset" minX="28" minY="28" width="319" height="47"/>
+                                <rect key="frame" x="28" y="28" width="319" height="47"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f3F-g2-jqe" userLabel="Mail">
-                                <frame key="frameInset" minX="40" minY="119" width="294" height="30"/>
+                                <rect key="frame" x="40" y="119" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Nzr-oM-Chz" userLabel="FirstName">
-                                <frame key="frameInset" minX="40" minY="202" width="294" height="30"/>
+                                <rect key="frame" x="40" y="202" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z8k-Rb-GuS" userLabel="Name">
-                                <frame key="frameInset" minX="40" minY="279" width="294" height="30"/>
+                                <rect key="frame" x="40" y="279" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" keyboardType="namePhonePad" returnKeyType="next"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D3n-lL-akE" userLabel="Password">
-                                <frame key="frameInset" minX="40" minY="359" width="294" height="30"/>
+                                <rect key="frame" x="40" y="359" width="294" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" secureTextEntry="YES"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZJ4-y6-Zjv">
-                                <frame key="frameInset" minX="133" minY="450" width="109" height="30"/>
+                                <rect key="frame" x="133" y="450" width="109" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                 <state key="normal" title="S'inscire"/>
@@ -159,28 +163,28 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Adresse mail" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CGj-mm-J8S">
-                                <frame key="frameInset" minX="106" minY="90" width="162" height="21"/>
+                                <rect key="frame" x="106" y="90" width="162" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.67117964659999996" green="0.67117964659999996" blue="0.67117964659999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Prénom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fZw-aM-hLS">
-                                <frame key="frameInset" minX="106" minY="173" width="162" height="21"/>
+                                <rect key="frame" x="106" y="173" width="162" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.67117964659999996" green="0.67117964659999996" blue="0.67117964659999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nom" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uOK-qX-QAM">
-                                <frame key="frameInset" minX="106" minY="250" width="162" height="21"/>
+                                <rect key="frame" x="106" y="250" width="162" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.67117964659999996" green="0.67117964659999996" blue="0.67117964659999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Mot de passe" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0nL-kf-xpc">
-                                <frame key="frameInset" minX="106" minY="330" width="162" height="21"/>
+                                <rect key="frame" x="106" y="330" width="162" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.67117964659999996" green="0.67117964659999996" blue="0.67117964659999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -201,10 +205,10 @@
             </objects>
             <point key="canvasLocation" x="183.19999999999999" y="964.76761619190415"/>
         </scene>
-        <!--Option Board-->
+        <!--Option BoardVC-->
         <scene sceneID="azu-IG-s6y">
             <objects>
-                <viewController id="GZI-CS-CBk" customClass="OptionBoard" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="GZI-CS-CBk" customClass="OptionBoardVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9OU-Ye-DXA"/>
                         <viewControllerLayoutGuide type="bottom" id="RVO-hl-tod"/>
@@ -223,10 +227,10 @@
             </objects>
             <point key="canvasLocation" x="1986" y="-403"/>
         </scene>
-        <!--Cat Board-->
+        <!--Cat BoardVC-->
         <scene sceneID="Voe-vQ-kvN">
             <objects>
-                <viewController id="7kh-6F-N9V" customClass="CatBoard" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="7kh-6F-N9V" customClass="CatBoardVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="PT8-Ld-ocx"/>
                         <viewControllerLayoutGuide type="bottom" id="o4y-Km-5I0"/>
@@ -239,16 +243,17 @@
                     <connections>
                         <segue destination="P4R-OT-QVY" kind="show" identifier="fromCtoDB" animates="NO" id="EsU-UM-X64"/>
                         <segue destination="GZI-CS-CBk" kind="show" identifier="fromCtoO" animates="NO" id="kMD-lF-dxu"/>
+                        <segue destination="l8O-Dm-xwz" kind="show" identifier="gotoCDfromC" action="showDetailViewController:sender:" id="CuO-B0-f83"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6E-KH-mot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2106" y="1085"/>
         </scene>
-        <!--View Controller-->
+        <!--Details Cat BoardVC-->
         <scene sceneID="WqN-Z1-JRZ">
             <objects>
-                <viewController id="l8O-Dm-xwz" sceneMemberID="viewController">
+                <viewController id="l8O-Dm-xwz" customClass="DetailsCatBoardVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Swz-hE-yvo"/>
                         <viewControllerLayoutGuide type="bottom" id="edy-hX-nfF"/>
@@ -258,10 +263,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
+                    <connections>
+                        <segue destination="7kh-6F-N9V" kind="show" identifier="gotoCfromCD" id="uru-KZ-2Y1"/>
+                        <segue destination="P4R-OT-QVY" kind="show" identifier="gotoDBfromCD" id="abK-Xf-G0d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ji4-rc-MJ5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3548" y="1084"/>
+            <point key="canvasLocation" x="3551" y="732"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="94Z-Se-cbp">
@@ -283,8 +292,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="5dD-tN-y1J"/>
-        <segue reference="IbZ-Ql-tYZ"/>
+        <segue reference="Vsr-Lh-XfT"/>
+        <segue reference="abK-Xf-G0d"/>
         <segue reference="GG2-dU-dMO"/>
+        <segue reference="uru-KZ-2Y1"/>
     </inferredMetricsTieBreakers>
 </document>

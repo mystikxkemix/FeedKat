@@ -8,16 +8,18 @@
 
 import UIKit
 
-class CatBoard : GenVC
+class CatBoardVC : GenVC
 {
+    var catId:Int = -1
+    
     override func viewDidLoad()
     {
         super.viewDidLoad()
         initTop(title: "Chats")
         initBanner(i: 1)
         
-        UIBot[0].addTarget(self, action: #selector(CatBoard.gotoDB), for: .touchUpInside)
-        UIBot[2].addTarget(self, action: #selector(CatBoard.gotoO), for: .touchUpInside)
+        UIBot[0].addTarget(self, action: #selector(CatBoardVC.gotoDB), for: .touchUpInside)
+        UIBot[2].addTarget(self, action: #selector(CatBoardVC.gotoO), for: .touchUpInside)
         
     }
     
@@ -28,7 +30,10 @@ class CatBoard : GenVC
             
             for a in Cat.getList()
             {
-                list_tile.append(CatCatTile(cat: a))
+                let catt = CatCatTile(cat:a)
+                catt.tag = Cat.getList().index(of: a)!
+                catt.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.gotoCD(_:))))
+                list_tile.append(catt)
             }
         }
         list_tile.append(AddCatTile())
@@ -44,6 +49,27 @@ class CatBoard : GenVC
     {
         self.performSegue(withIdentifier: "fromCtoO", sender: self)
     }
+    
+    func gotoCD(_ sender: AnyObject)
+    {
+        let view = sender.view as UIView
+        self.catId = view.tag
+        self.performSegue(withIdentifier: "gotoCDfromC", sender: self)
+        
+    }
+    
+    // Prepare data to be sent when a segue is performed
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?)
+    {
+        if segue.identifier == "gotoCDfromC"
+        {
+            let dst = segue.destination as! GenVC as! DetailsCatBoardVC
+            dst.catId = self.catId
+            dst.fromC = true
+        }
+        
+    }
+
     
     override func didReceiveMemoryWarning()
     {
