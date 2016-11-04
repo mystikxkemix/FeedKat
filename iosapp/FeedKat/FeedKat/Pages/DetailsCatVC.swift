@@ -12,7 +12,7 @@ class DetailsCatBoardVC : GenVC
 {
     var catId:Int = -1
     var cat:Cat? = nil
-    var fromC:Bool = false
+    var fromC:Bool? = nil
     
     override func viewDidLoad()
     {
@@ -21,12 +21,12 @@ class DetailsCatBoardVC : GenVC
         initTop(title: cat!.getName())
         bot.removeFromSuperview()
         
-        let arrow = UIImageView(frame: CGRect(x: Int(Static.screenWidth*0.01), y: Int(Static.screenHeight*0.03), width: Int(Static.screenHeight*0.06), height: Int(Static.screenHeight*0.06)))
-        arrow.image = Static.getScaledImageWithHeight("Arrow_left", height: Static.screenHeight*0.06)
-        arrow.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.gotoBack(_:))))
+        let arrow = UIButton(frame: CGRect(x: Int(Static.screenWidth*0.03), y: Int(Static.screenHeight*0.05), width: Int(Static.screenHeight*0.05), height: Int(Static.screenHeight*0.05)))
+        arrow.setImage(Static.getScaledImageWithHeight("Arrow_left", height: Static.screenHeight*0.05), for: UIControlState())
         
         top.addSubview(arrow)
-        
+        arrow.addTarget(self, action: #selector(self.gotoBack(_:)), for: .touchUpInside)
+
         
     }
     
@@ -37,13 +37,13 @@ class DetailsCatBoardVC : GenVC
     
     func gotoBack(_ sender: AnyObject)
     {
-        if(fromC)
+        if(fromC!)
         {
-            self.performSegue(withIdentifier: "fromCDtoC", sender: self)
+            self.performSegue(withIdentifier: "gotoCfromCD", sender: self)
         }
         else
         {
-            self.performSegue(withIdentifier: "fromCDtoDB", sender: self)
+            self.performSegue(withIdentifier: "gotoDBfromCD", sender: self)
         }
     }
     

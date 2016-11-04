@@ -77,7 +77,6 @@ class DashBoardVC: GenVC
             dst.catId = self.catId
             dst.fromC = false
         }
-        
     }
 
     

@@ -103,7 +103,7 @@
                     <connections>
                         <segue destination="GZI-CS-CBk" kind="show" identifier="fromDBtoO" animates="NO" id="GG2-dU-dMO"/>
                         <segue destination="7kh-6F-N9V" kind="show" identifier="fromDBtoC" animates="NO" id="IbZ-Ql-tYZ"/>
-                        <segue destination="l8O-Dm-xwz" kind="show" identifier="gotoCDfromDB" id="Vsr-Lh-XfT"/>
+                        <segue destination="l8O-Dm-xwz" kind="presentation" identifier="gotoCDfromDB" modalTransitionStyle="crossDissolve" id="Vsr-Lh-XfT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Z1-yv-mCn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -243,7 +243,7 @@
                     <connections>
                         <segue destination="P4R-OT-QVY" kind="show" identifier="fromCtoDB" animates="NO" id="EsU-UM-X64"/>
                         <segue destination="GZI-CS-CBk" kind="show" identifier="fromCtoO" animates="NO" id="kMD-lF-dxu"/>
-                        <segue destination="l8O-Dm-xwz" kind="show" identifier="gotoCDfromC" action="showDetailViewController:sender:" id="CuO-B0-f83"/>
+                        <segue destination="l8O-Dm-xwz" kind="presentation" identifier="gotoCDfromC" modalTransitionStyle="crossDissolve" id="CuO-B0-f83"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6E-KH-mot" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -292,9 +292,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="Vsr-Lh-XfT"/>
+        <segue reference="CuO-B0-f83"/>
+        <segue reference="uru-KZ-2Y1"/>
         <segue reference="abK-Xf-G0d"/>
         <segue reference="GG2-dU-dMO"/>
-        <segue reference="uru-KZ-2Y1"/>
     </inferredMetricsTieBreakers>
 </document>
