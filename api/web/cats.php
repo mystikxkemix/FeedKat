@@ -143,8 +143,38 @@ $app->delete('/cat/{id}', function(Request $request) use ($app) {
 	return $app->json(deleteId('id_cat',$id,'cat'), 201);
 });
 
-/*
-$app->put('/feedtimes', function (Request $request) use ($app) {
-	$data_feedtime = array('id_cat','id_dispenser','time','weight','enabled');
-	*/
+// API : update a cat
+$app->post('/cat', function (Request $request) use ($app) {
+	$id = $request->request->get('id_cat');
+	
+	$cols = array('name','birth','photo');
+	
+	$upd_col = array();
+	foreach($cols as $col)
+		if($request->request->get($col) != '') {
+			if($col == 'photo') // photo is transmitted in base64
+				$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+			else
+				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
+		}
+	
+	$upd_sql = "update cat set ";
+	$upd_sql .= implode(', ',$upd_col);
+	$upd_sql .= " where id_cat = $id";
+	
+	$r = $app['db']->query($upd_sql);
+	
+	if($r !== false)
+		$error = 0;
+	else
+		$error = 1;
+	
+    $post = array(
+        'error' => $error,
+        'id_cat'  => $request->request->get('id_cat')
+    );
+	
+	return $app->json($post);
+});
+
 ?>
