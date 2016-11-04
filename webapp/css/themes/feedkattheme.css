@@ -31,6 +31,7 @@ legend,
 .ui-input-search input {
 	color: inherit;
 	text-shadow: inherit;
+	background: white;
 }
 /* Form labels (overrides font-weight bold in bars, and mini font-size) */
 .ui-mobile label,
@@ -577,7 +578,14 @@ div.ui-grid-a.grid-a-25_75 > div.ui-block-b .ui-tile-info{
 	padding-top:0.4em;
 	font-size:1.25em;
 	color:#ff9600;
+	display:inline-block;
 }
+
+.tile-icon-edit {
+	float:right;
+	cursor: pointer;
+}
+
 .tile-icon-info {
 	position:absolute;
 	margin-left:2em;
@@ -697,4 +705,9 @@ a.ui-btn.ui-tile:hover{
 /*
 html.ui-mobile ul.ui-listview-inset {
 	margin:0.5em 0;
+}*/
+/*
+.ui-input-text input{
+	
+	
 }*/

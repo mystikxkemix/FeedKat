@@ -63,9 +63,15 @@
 								<img src="icons/Logo_FeedKat_300px.png" height="150" width="150">
 							</div>
 							<div class="tile-description">
-								<div class="tile-title" >
-									Aide
-								</div>	
+									<div class="tile-title" >
+										Aide
+									</div>
+									<div class="ui-field-contain">
+										<label for="text-12">Nom :</label>
+										<input type="text" id="text-12" value="Oni le chat">
+									</div>
+									<input type="date" data-clear-btn="false" name="date-1" id="date-1" value="">
+									
 							</div>
 						</div>
 						

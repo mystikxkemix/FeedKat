@@ -83,7 +83,7 @@ $(document).on('pagebeforeshow', '#page-info',function () {
 		var output_block_distrib_b = "";
 		var icon_info = "";
 		
-		 data.dispensers[0].stock = 60;
+		//data.dispensers[0].stock = 80;
 		
 		for(let i = 0; i < data.dispensers.length; i++)		
 		{	
@@ -156,8 +156,7 @@ $(document).on('pagebeforeshow', '#page-info',function () {
 
 $(document).on('pagebeforeshow', '#page-cat',function(event){ 
 
-	
-
+	var currentCat = 0;
 	var param = window.location.href.split("?")[1];//$(this).data("url").split("?")[1];
 	if(param == undefined)
 	{
@@ -172,6 +171,7 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 	{
 		
 		refreshInfo(param);
+		currentCat = param;
 	
 		var output_list_cat = "";
 		
@@ -180,8 +180,9 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 			output_list_cat +=
 			"<div class=\"ui-tile-btn ui-shadow\" id=\"cat"+ i +"\">" + data.cats[i].name + "</div>" ;
 
-			$.mobile.document.on( "click", "#cat"+i, function() {
+			$(document).on( "click", "#cat"+i, function() {
 				refreshInfo(i);
+				currentCat = i;
 				if (window.history.replaceState) {
 				    window.history.replaceState({page:'chats.php?id='+i}, 'titre', 'chats.php?id='+i);
 				}
@@ -198,7 +199,7 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 	
 
 		function refreshInfo(parameter) 
-		{
+		{		
 			if(data.cats[parameter].photo == "")
 			{
 				data.cats[parameter].photo = "icons/Logo_FeedKat_300px.png";
@@ -211,8 +212,9 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 			"<div class=\"tile-description\">" +
 				"<div class=\"tile-title\">" +
 					data.cats[parameter].name +
-				"</div>";
-				
+				"</div>" +
+				"<img src=\"icons/edit-64.png\" class=\"tile-icon-edit\" id=\"icon-edit\" height=\"40\" width=\"40\">";
+
 				if(data.cats[parameter].ok == 0)
 				{
 					output +=
@@ -233,7 +235,7 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 				
 					"<div class=\"ui-block-a\">" +
 						"<div class=\"tile-details-a\">" +
-							"<div>Anniversaire :</div>" +
+							"<div>Date de naissance :</div>" +
 							"<div>Poids :</div>" +
 							"<div>Activité :</div>" +
 							"<div>Batterie collier :</div>" +
@@ -243,9 +245,9 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 					"<div class=\"ui-block-b\">" +
 						"<div class=\"tile-details-b\">" +
 							"<div>" + data.cats[parameter].birth + "</div>" +
-							"<div>8 Kg</div>" +
-							"<div>Ok</div>" +
-							"<div>100% (6 mois)</div>" +
+							"<div>" + "8 Kg" + "</div>" +
+							"<div>" + "Ok" + "</div>" +
+							"<div>" + "100% (6 mois)" + "</div>" +
 						"</div>" +
 					"</div>" +
 					
@@ -256,7 +258,19 @@ $(document).on('pagebeforeshow', '#page-cat',function(event){
 			
 			//document.getElementById('info-content').innerHTML = output;
 			$('.info-content').html(output);
+			
+			
+			
+ 
 		}
+		/*
+				$(document).on( "click", "#icon-edit", function() {
+					//currentCat = i;
+					//alert("lol");
+					
+					$.post( "http://feedkat.ddns.net/api/index.php/cat", { id_cat: 2, name: "Oni lololololol" } );
+				});
+		*/
 	});
 	
 });
