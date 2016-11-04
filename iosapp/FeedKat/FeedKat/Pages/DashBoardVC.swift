@@ -41,7 +41,7 @@ class DashBoard: GenVC
             }
         }
         
-        if(Dispenser.getList().count != 0 && Cat.getList().count != 0)
+        if(Dispenser.getList().count == 0 && Cat.getList().count == 0)
         {
             list_tile.append(AddCatTile())
         }

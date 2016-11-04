@@ -48,15 +48,18 @@ class DashDistTile:Tile
 //        UIStatus.textAlignment = NSTextAlignment.center
         addSubview(UIStatus)
         
-        if(disp.getStatus() > 75)
+//        let nb = disp.getStatus()
+        let nb = 60
+        
+        if(nb >= 75)
         {
-            UIBar.backgroundColor = UIColor.green
+            UIBar.backgroundColor = Static.GreenColor
         }
-        else if(disp.getStatus() > 50)
+        else if(nb >= 50)
         {
-            UIBar.backgroundColor = UIColor.yellow
+            UIBar.backgroundColor = Static.YellowColor
         }
-        else if(disp.getStatus() > 25)
+        else if(nb >= 25)
         {
             UIBar.backgroundColor = Static.OrangeColor
         }

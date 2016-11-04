@@ -3,7 +3,7 @@ import Alamofire
 
 open class FeedKatAPI:NSObject
 {
-    fileprivate static var isLocal = true
+    fileprivate static var isLocal = false
     fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/index.php"
     fileprivate static var localServerAddr = "http://192.168.43.12:80/api/index.php"
     
@@ -52,6 +52,7 @@ open class FeedKatAPI:NSObject
                 }
                 else
                 {
+                    print(response)
                     handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
                     return
                 }

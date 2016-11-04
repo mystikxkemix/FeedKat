@@ -15,7 +15,9 @@ class Tile:UIView
     init()
     {
         super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight))
+        //super.init(frame:CGRect())
         self.heightAnchor.constraint(equalToConstant: Static.tileHeight).isActive = true
+        self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
         backgroundColor = UIColor.white
         
         banner = UIView()
