@@ -20,8 +20,8 @@ class Cat:NSObject
     var feeds:[FeedTime]
     var image:UIImage? = nil
     var loaded:Bool = false
-    var weight:Int = -1
-    var statusBaterie:Int = -1
+    var weight:Int = 1000
+    var statusBaterie:Int = 75
     
     static func getList() -> [Cat]
     {
@@ -70,7 +70,7 @@ class Cat:NSObject
             response, error in
             if(error == nil)
             {
-                
+                self.loaded = true
                 handler(true)
             }
             else

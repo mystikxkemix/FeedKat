@@ -187,5 +187,40 @@ open class FeedKatAPI:NSObject
                 }
         }
     }
+    
+    open static func modifyCat(_ catId:Int!, key:String!, data:NSObject, handler:@escaping(NSDictionary?, NSError?) -> ())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat"
+        
+        var params = Parameters()
+        _ = params.updateValue("id_cat", forKey: catId)
+        _ = params.updateValue(data, forKey: key)
+        
+        Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON
+            { response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+
+    }
 
 }

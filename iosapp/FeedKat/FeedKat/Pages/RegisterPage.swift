@@ -10,7 +10,6 @@ import UIKit
 
 class RegisterPage : UIViewController
 {
-    
     @IBOutlet var mail: UITextField!
     @IBOutlet var pass: UITextField!
     @IBOutlet var name: UITextField!
@@ -28,7 +27,7 @@ class RegisterPage : UIViewController
             else
             {
 //                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrecte")
-//                //                self.UIcontent.addSubview(pop)
+//                self.UIcontent.addSubview(pop)
 //                pop.ViewFunc()
                 print("login error : \(error)")
             }

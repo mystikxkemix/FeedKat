@@ -5,6 +5,10 @@ class TabTile:Tile
     var UiImage:UIImageView!
     var cat:Cat
     var type:Int?
+    var nameText:UILabel?
+    var nameEdit:UITextField?
+    var name:String = ""
+    var eLabel:UILabel?
     
     init(cat:Cat, type:Int)
     {
@@ -14,7 +18,7 @@ class TabTile:Tile
         self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         top.backgroundColor = Static.BlueColor
-        var title:String
+        var title:String = ""
         switch type
         {
         case 0:
@@ -23,8 +27,7 @@ class TabTile:Tile
             title = "FeedTimes"
         case 2:
             title = "Graphiques"
-        default:
-            title = "test"
+        default: break
         }
         let tLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         tLabel.text = title
@@ -54,6 +57,39 @@ class TabTile:Tile
     
     func initInfo()
     {
+        let offsetx = Static.tileWidth*0.04 + Static.tileHeight*1.2
+        let offsety = Static.tileHeight*0.6 + Static.tileWidth*0.02
+        self.name = cat.getName()
+        
+        eLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth - Static.tileWidth*0.02, height: Static.tileHeight*0.6))
+        eLabel!.text = "Editer"
+        eLabel!.textColor = Static.OrangeColor
+        eLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        eLabel!.textAlignment = NSTextAlignment.right
+        eLabel!.isUserInteractionEnabled = true
+        let aSelector : Selector = #selector(TabTile.lblTapped)
+        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+        tapGesture.numberOfTapsRequired = 1
+        eLabel!.addGestureRecognizer(tapGesture)
+        
+        nameText = UILabel(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.8 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
+        nameText!.text = name
+        nameText!.textColor = UIColor.black
+        nameText!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        nameText!.textAlignment = NSTextAlignment.left
+        nameText!.isHidden = false
+        
+        nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.8 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
+        nameEdit!.text = name
+        nameEdit!.textColor = Static.BlueColor
+        nameEdit!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        nameEdit!.textAlignment = NSTextAlignment.left
+        nameEdit!.isHidden = true
+
+        addSubview(nameText!)
+        addSubview(nameEdit!)
+        addSubview(eLabel!)
+        
         UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: Static.tileHeight*0.6, width: Static.tileHeight*1.2, height: Static.tileHeight*1.2))
         
         if(self.cat.getPhoto() != "")
@@ -83,7 +119,19 @@ class TabTile:Tile
         
         addSubview(UiImage)
         
+        let bat = UILabel(frame: CGRect(x: offsetx, y: offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.3))
+        bat.text = "Batterie : \(cat.statusBaterie)%"
+        bat.textColor = UIColor.black
+        bat.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        bat.textAlignment = NSTextAlignment.left
+        addSubview(bat)
         
+        let weight = UILabel(frame: CGRect(x: offsetx, y: offsety + Static.tileHeight*0.3, width: Static.tileWidth*0.6, height: Static.tileHeight*0.3))
+        weight.text = "Poids : \(Double(cat.weight)*0.001)Kg"
+        weight.textColor = UIColor.black
+        weight.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        weight.textAlignment = NSTextAlignment.left
+        addSubview(weight)
         
     }
     
@@ -95,6 +143,41 @@ class TabTile:Tile
     func initGraph()
     {
         
+    }
+    
+    func lblTapped()
+    {
+        if(nameText!.isHidden)
+        {
+            _ = textFieldShouldReturn(userText: nameEdit!)
+        }
+        else
+        {
+            eLabel!.text = "Valider"
+            nameText!.isHidden = true
+            nameEdit!.isHidden = false
+            nameText!.text = nameEdit!.text
+
+        }
+    }
+    
+    func textFieldShouldReturn(userText: UITextField) -> Bool
+    {
+        userText.resignFirstResponder()
+        nameEdit!.isHidden = true
+        nameText!.isHidden = false
+        nameText!.text = nameEdit!.text
+        eLabel!.text = "Editer"
+        
+        FeedKatAPI.modifyCat(cat.getID(), key: "name", data: name as NSObject)
+        {
+            response, error in
+            if(error != nil)
+            {
+                self.cat.Name = self.name
+            }
+        }
+        return true
     }
     
     required init?(coder aDecoder: NSCoder)
