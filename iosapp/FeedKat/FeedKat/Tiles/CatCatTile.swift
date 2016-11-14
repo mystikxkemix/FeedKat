@@ -31,15 +31,28 @@ class CatCatTile: Tile
         
         if(cat.getPhoto() != "")
         {
-            if let checkedUrl = URL(string: cat.getPhoto())
+            if(cat.image == nil)
             {
+                self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+                if let checkedUrl = URL(string: cat.getPhoto())
+                {
                     UiImage.contentMode = .scaleAspectFit
                     FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+                    {
+                        data in
+                        cat.image = data
+                    }
+                }
+            }
+            else
+            {
+                UiImage.image = cat.image!
             }
         }
-        
-        UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
-
+        else
+        {
+            UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+        }
         addSubview(UiImage)
         
         UiName.text = cat.getName()

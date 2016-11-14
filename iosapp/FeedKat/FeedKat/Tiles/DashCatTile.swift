@@ -44,14 +44,32 @@ class DashCatTile:Tile
         
         if(cat.getPhoto() != "")
         {
-            if let checkedUrl = URL(string: cat.getPhoto())
+            if(cat.image == nil)
             {
-                UiImage.contentMode = .scaleAspectFit
-                FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+                self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+                if let checkedUrl = URL(string: cat.getPhoto())
+                {
+                    UiImage.contentMode = .scaleAspectFit
+                    FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+                    {
+                        data in
+                        cat.image = data
+                    }
+                }
+            }
+            else
+            {
+                UiImage.image = cat.image!
             }
         }
+        else
+        {
+            UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+        }
         
-        UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+        addSubview(UiImage)
+
+        
         addSubview(UiImage)
         
         addSubview(UiIcon)

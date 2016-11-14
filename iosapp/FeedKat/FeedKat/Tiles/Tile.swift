@@ -23,7 +23,8 @@ class Tile:UIView
         {
             self.heightAnchor.constraint(equalToConstant: Static.tileHeight*3).isActive = true
         }
-            self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
+        
+        self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
         backgroundColor = UIColor.white
         
         banner = UIView()

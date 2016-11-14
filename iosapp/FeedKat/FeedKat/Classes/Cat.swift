@@ -18,6 +18,10 @@ class Cat:NSObject
     var Photo:String
     var Birthdate:String
     var feeds:[FeedTime]
+    var image:UIImage? = nil
+    var loaded:Bool = false
+    var weight:Int = -1
+    var statusBaterie:Int = -1
     
     static func getList() -> [Cat]
     {
@@ -54,14 +58,24 @@ class Cat:NSObject
         Cat.list.append(self)
     }
     
-    func getDetails() -> ()
+    func getDetails(handler: @escaping(Bool?)->())
     {
+        if(loaded)
+        {
+            handler(true)
+            return
+        }
         FeedKatAPI.getCatDetails(ID)
         {
             response, error in
             if(error == nil)
             {
-                print(response)
+                
+                handler(true)
+            }
+            else
+            {
+                handler(false)
             }
         }
     }

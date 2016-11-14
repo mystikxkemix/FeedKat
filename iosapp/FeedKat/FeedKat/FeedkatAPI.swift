@@ -14,13 +14,14 @@ open class FeedKatAPI:NSObject
         }.resume()
     }
     
-    open static func downloadImage(url: URL, view : UIImageView)
+    open static func downloadImage(url: URL, view : UIImageView, handler: @escaping(UIImage?) -> ())
     {
         getDataFromUrl(url: url)
         { (data, response, error)  in
             guard let data = data, error == nil else { return }
             DispatchQueue.main.async() { () -> Void in
                 view.image = UIImage(data: data)
+                handler(UIImage(data: data))
             }
         }
     }

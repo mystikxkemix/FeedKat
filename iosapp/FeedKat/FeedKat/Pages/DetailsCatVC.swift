@@ -58,6 +58,19 @@ class DetailsCatBoardVC : UIViewController
         
         top.addSubview(arrow)
         arrow.addTarget(self, action: #selector(self.gotoBack(_:)), for: .touchUpInside)
+        
+        cat!.getDetails()
+        {
+            res in
+            if(res!)
+            {
+                for a in self.list_tile
+                {
+                    let b = a as! TabTile
+                    b.setContent(type: b.type!)
+                }
+            }
+        }
     }
     
     func initTop(title:String)
