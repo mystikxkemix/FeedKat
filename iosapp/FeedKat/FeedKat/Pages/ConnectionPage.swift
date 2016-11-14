@@ -17,7 +17,8 @@ class ConnectionPage: UIViewController {
     
     @IBAction func tryConnection(_ sender: UIButton)
     {
-        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+        //FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
         {
             response, error in
             if(error == nil && response != nil)

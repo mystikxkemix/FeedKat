@@ -26,6 +26,7 @@
 		274F9F811DA7F0580051DCE8 /* Cat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F801DA7F0580051DCE8 /* Cat.swift */; };
 		274F9F831DA7F9C60051DCE8 /* FeedTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F821DA7F9C60051DCE8 /* FeedTime.swift */; };
 		27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */; };
+		275FBEA01DD9ADA2007E5C9A /* TabTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275FBE9F1DD9ADA2007E5C9A /* TabTile.swift */; };
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
 		27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */; };
@@ -76,6 +77,7 @@
 		274F9F801DA7F0580051DCE8 /* Cat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Cat.swift; path = Classes/Cat.swift; sourceTree = "<group>"; };
 		274F9F821DA7F9C60051DCE8 /* FeedTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FeedTime.swift; path = Classes/FeedTime.swift; sourceTree = "<group>"; };
 		27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterPage.swift; path = Pages/RegisterPage.swift; sourceTree = "<group>"; };
+		275FBE9F1DD9ADA2007E5C9A /* TabTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabTile.swift; path = Tiles/TabTile.swift; sourceTree = "<group>"; };
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedkatAPI.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				274F9F781DA7F0110051DCE8 /* DashDistTile.swift */,
 				274F9F791DA7F0110051DCE8 /* Tile.swift */,
 				27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */,
+				275FBE9F1DD9ADA2007E5C9A /* TabTile.swift */,
 			);
 			name = Tiles;
 			sourceTree = "<group>";
@@ -566,6 +569,7 @@
 				274F9F7C1DA7F0110051DCE8 /* DashCatTile.swift in Sources */,
 				274F9F741DA7F0080051DCE8 /* Static.swift in Sources */,
 				2738C7561DCCD29100ADFA11 /* DetailsCatVC.swift in Sources */,
+				275FBEA01DD9ADA2007E5C9A /* TabTile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

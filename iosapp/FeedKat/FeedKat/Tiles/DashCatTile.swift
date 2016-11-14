@@ -17,7 +17,7 @@ class DashCatTile:Tile
     
     init(cat:Cat)
     {
-        super.init()
+        super.init(type: -1)
         
         let marg=Static.tileWidth*0.03+Static.tileHeight
         let iconsize = Static.tileHeight*0.35

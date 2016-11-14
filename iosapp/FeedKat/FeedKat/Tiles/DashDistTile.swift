@@ -18,7 +18,7 @@ class DashDistTile:Tile
     
     init(disp: Dispenser)
     {
-        super.init()
+        super.init(type: -1)
         
         let marg=Static.tileWidth*0.03+Static.tileHeight
         

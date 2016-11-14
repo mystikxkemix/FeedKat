@@ -12,12 +12,18 @@ class Tile:UIView
 {
     var banner:UIView!
     
-    init()
+    init(type: Int)
     {
         super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight))
-        //super.init(frame:CGRect())
-        self.heightAnchor.constraint(equalToConstant: Static.tileHeight).isActive = true
-        self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
+        if(type == -1)
+        {
+            self.heightAnchor.constraint(equalToConstant: Static.tileHeight).isActive = true
+        }
+        else
+        {
+            self.heightAnchor.constraint(equalToConstant: Static.tileHeight*3).isActive = true
+        }
+            self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
         backgroundColor = UIColor.white
         
         banner = UIView()

@@ -12,7 +12,7 @@ class AlertTile:Tile
 {
     init(title:String)
     {
-        super.init()
+        super.init(type: -1)
         backgroundColor = Static.RedColor
         banner.removeFromSuperview()
         

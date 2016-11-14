@@ -12,9 +12,9 @@ class AddCatTile : Tile
 {
     var UIIcon:UIImageView!
     
-    override init()
+    init()
     {
-        super.init()
+        super.init(type : -1)
         translatesAutoresizingMaskIntoConstraints = false
         
         UIIcon = UIImageView()

@@ -63,7 +63,7 @@ class CatBoardVC : GenVC
     {
         if segue.identifier == "gotoCDfromC"
         {
-            let dst = segue.destination as! GenVC as! DetailsCatBoardVC
+            let dst = segue.destination as! DetailsCatBoardVC
             dst.catId = self.catId
             dst.fromC = true
         }
