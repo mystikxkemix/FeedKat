@@ -93,9 +93,9 @@ class DetailsCatBoardVC : UIViewController
     {
         var heightStack : CGFloat = 0
         
-        list_tile.append(TabTile(cat: cat!, type: 0))
-        list_tile.append(TabTile(cat: cat!, type: 1))
-        list_tile.append(TabTile(cat: cat!, type: 2))
+        list_tile.append(TabTile(cat: cat!, type: 0, parent:self))
+        list_tile.append(TabTile(cat: cat!, type: 1, parent:self))
+        list_tile.append(TabTile(cat: cat!, type: 2, parent:self))
 
         for a in list_tile
         {

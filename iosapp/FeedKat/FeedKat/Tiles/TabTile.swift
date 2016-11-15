@@ -10,11 +10,13 @@ class TabTile:Tile
     var name:String = ""
     var eLabel:UILabel?
     var tLabel:UILabel?
+    var parent:DetailsCatBoardVC
     
-    init(cat:Cat, type:Int)
+    init(cat:Cat, type:Int, parent:DetailsCatBoardVC)
     {
         self.cat = cat
         self.type = type
+        self.parent = parent
         super.init(type: type)
         self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
@@ -176,10 +178,8 @@ class TabTile:Tile
             response, error in
             if(error == nil)
             {
-                print("Ici")
                 self.cat.Name = self.name
-                self.tLabel!.text = self.name
-                
+                self.parent.UITitle.text = self.name
             }
         }
         return true
