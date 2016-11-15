@@ -21,14 +21,14 @@ class Cat:NSObject
     var image:UIImage? = nil
     var loaded:Bool = false
     var weight:Int = 1000
-    var statusBaterie:Int = 75
+    var statusBattery:Int = 75
     
     static func getList() -> [Cat]
     {
         return list
     }
     
-    init(ID: Int, Name: String, Message:String, Photo:String, Status:Int, FeedTimes : [NSDictionary]?)
+    init(ID: Int, Name: String, Message:String, Photo:String, Status:Int, Weight:Int, FeedTimes : [NSDictionary]?)
     {
         self.Name = Name
         self.ID = ID
@@ -36,6 +36,7 @@ class Cat:NSObject
         self.Status = Status
         self.Photo = Photo
         self.Birthdate=""
+        self.weight = Weight
         self.feeds = []
         if(FeedTimes != nil)
         {
@@ -70,6 +71,8 @@ class Cat:NSObject
             response, error in
             if(error == nil)
             {
+                let cats = (response?.value(forKey: "cats") as! NSArray)[0] as! NSDictionary
+                self.statusBattery = cats.value(forKey: "battery") as? Int ?? -1
                 self.loaded = true
                 handler(true)
             }

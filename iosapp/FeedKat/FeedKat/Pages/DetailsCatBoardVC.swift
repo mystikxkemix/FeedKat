@@ -62,14 +62,14 @@ class DetailsCatBoardVC : UIViewController
         cat!.getDetails()
         {
             res in
-//            if(res!)
-//            {
+            if(res!)
+            {
                 for a in self.list_tile
                 {
                     let b = a as! TabTile
                     b.setContent(type: b.type!)
                 }
-//            }
+            }
         }
     }
     

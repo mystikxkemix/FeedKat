@@ -53,7 +53,6 @@ open class FeedKatAPI:NSObject
                 }
                 else
                 {
-                    print(response)
                     handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
                     return
                 }
@@ -129,8 +128,6 @@ open class FeedKatAPI:NSObject
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/dispenser/user/\(userId!)"
         
-        print("link : \(link)")
-        
         Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON
             { response in
@@ -160,7 +157,7 @@ open class FeedKatAPI:NSObject
     
     open static func getCatDetails(_ catId:Int!, handler: @escaping (NSDictionary?, NSError?)->())
     {
-        let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/\(catId)/details"
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/\(catId!)/details"
         
         Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON
@@ -218,7 +215,6 @@ open class FeedKatAPI:NSObject
                 }
                 else
                 {
-                    print("HEEEEEEEREEEE !")
                     handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
                     return
                     

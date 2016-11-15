@@ -127,7 +127,7 @@ class TabTile:Tile
         addSubview(UiImage)
         
         let bat = UILabel(frame: CGRect(x: offsetx, y: offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.3))
-        bat.text = "Batterie : \(cat.statusBaterie)%"
+        bat.text = "Batterie : \(cat.statusBattery)%"
         bat.textColor = UIColor.black
         bat.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         bat.textAlignment = NSTextAlignment.left
