@@ -137,6 +137,75 @@ $app->get('/cat/dispenser/{id}', function($id) use ($app) {
 });
 
 
+// API : get cats by user ID
+// battery, weight, daily_activity
+$app->get('/cat/{id}/details', function($id) use ($app) {
+	global $addr;
+	$res = $app['db']->fetchAll('select id_user from user u where u.id_user = \''.$id.'\'');
+	if(count($res) == 0)
+	{
+		$data['error'] = 1;
+	}
+	else
+	{
+		/*
+		$cats = $app['db']->fetchAll('select c.id_cat, c.name, c.photo from cat c join cat_dispenser cd using(id_cat) join dispenser d using(id_dispenser) join user u using(id_user) where u.id_user = \''.$id.'\'');
+		
+		$data['error'] = 0;
+		$data['cats'] = $cats;
+		foreach($data['cats'] as $icat => $kcat) {
+			$data['cats'][$icat]['ok'] = 1;
+			$data['cats'][$icat]['status'] = 'Votre chat est COOL';
+		}
+		*/
+		
+		$r = $app['db']->query('select
+			c.id_cat,
+			c.name,
+			c.birth,
+			if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo, 
+			d.id_dispenser, 
+			u.id_user, 
+			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
+			from cat c join cat_dispenser cd using(id_cat) join dispenser d using(id_dispenser) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
+			where c.id_cat = \''.$id.'\' 
+				group by c.id_cat');
+		
+		
+		
+		$cats = $r->fetchAll();
+		$r->closeCursor();
+		$data['error'] = 0;
+		$data['cats'] = $cats;
+		foreach($data['cats'] as $icat => $kcat) {
+			$data['cats'][$icat]['ok'] = 1;
+			if($icat == 0)
+				$data['cats'][$icat]['ok'] = 0;
+			$data['cats'][$icat]['status'] = $data['cats'][$icat]['name'].' va bien !';
+			if($icat == 0) {
+				$data['cats'][$icat]['status'] = 'Attention à la nutrition d';
+				if(in_array(substr($data['cats'][$icat]['name'],0,1),array('A','E','I','O','U','Y')))
+					$data['cats'][$icat]['status'] .= '\'';
+				else
+					$data['cats'][$icat]['status'] .= 'e';
+				$data['cats'][$icat]['status'] .= $data['cats'][$icat]['name'];
+			}
+			$feedtimes = explode(',',$data['cats'][$icat]['feed_times']);
+			$data['cats'][$icat]['feed_times'] = array();
+			foreach($feedtimes as $k => $v) {
+				if($v != '') {
+					$feedtime = explode('||',$v);
+					$data['cats'][$icat]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+				}
+			}
+			$data['cats'][$icat]['battery'] = 67;
+		}
+	}
+	
+	return $app->json($data);
+});
+
+
 // API : delete a cat
 $app->delete('/cat/{id}', function(Request $request) use ($app) {
 	$id = $request->request->get('id_cat');
