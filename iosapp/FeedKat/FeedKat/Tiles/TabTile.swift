@@ -32,11 +32,11 @@ class TabTile:Tile
             title = "Graphiques"
         default: break
         }
-        tLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
+        tLabel = UILabel(frame: CGRect(x: Static.tileWidth*0.02, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         tLabel!.text = title
         tLabel!.textColor = UIColor.white
         tLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
-        tLabel!.textAlignment = NSTextAlignment.center
+//        tLabel!.textAlignment = NSTextAlignment.center
         
         top.addSubview(tLabel!)
         self.addSubview(top)
@@ -66,7 +66,7 @@ class TabTile:Tile
         
         eLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth - Static.tileWidth*0.02, height: Static.tileHeight*0.6))
         eLabel!.text = "Editer"
-        eLabel!.textColor = Static.OrangeColor
+        eLabel!.textColor = UIColor.white
         eLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         eLabel!.textAlignment = NSTextAlignment.right
         eLabel!.isUserInteractionEnabled = true
@@ -76,18 +76,22 @@ class TabTile:Tile
         eLabel!.addGestureRecognizer(tapGesture)
         
         nameText = UILabel(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
-        nameText!.text = name
+        nameText!.text = "Nom : " + name
         nameText!.textColor = UIColor.black
         nameText!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         nameText!.textAlignment = NSTextAlignment.left
         nameText!.isHidden = false
         
-        nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
+        nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.4, height: Static.tileHeight*0.2))
         nameEdit!.text = name
         nameEdit!.textColor = Static.BlueColor
         nameEdit!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         nameEdit!.textAlignment = NSTextAlignment.left
         nameEdit!.isHidden = true
+        nameEdit!.autocorrectionType = .no
+        nameEdit!.textAlignment = .center
+        nameEdit!.layer.borderWidth = 1
+        nameEdit!.layer.cornerRadius = 10
 
         addSubview(nameText!)
         addSubview(nameEdit!)
@@ -157,10 +161,9 @@ class TabTile:Tile
         else
         {
             eLabel!.text = "Valider"
+            eLabel!.textColor = UIColor.red
             nameText!.isHidden = true
             nameEdit!.isHidden = false
-            nameText!.text = nameEdit!.text
-
         }
     }
     
@@ -169,9 +172,10 @@ class TabTile:Tile
         userText.resignFirstResponder()
         nameEdit!.isHidden = true
         nameText!.isHidden = false
-        nameText!.text = nameEdit!.text
-        eLabel!.text = "Editer"
         name = nameEdit!.text!
+        nameText!.text = "Nom : " + name
+        eLabel!.text = "Editer"
+        eLabel!.textColor = UIColor.white
         
         FeedKatAPI.modifyCat(cat.getID(), key: "name", data: name as NSObject)
         {
