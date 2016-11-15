@@ -199,6 +199,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 				}
 			}
 			$data['cats'][$icat]['battery'] = 67;
+			$data['cats'][$icat]['weight'] = 4670;
 		}
 	}
 	
