@@ -9,6 +9,7 @@ class TabTile:Tile
     var nameEdit:UITextField?
     var name:String = ""
     var eLabel:UILabel?
+    var tLabel:UILabel?
     
     init(cat:Cat, type:Int)
     {
@@ -29,13 +30,13 @@ class TabTile:Tile
             title = "Graphiques"
         default: break
         }
-        let tLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
-        tLabel.text = title
-        tLabel.textColor = UIColor.white
-        tLabel.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
-        tLabel.textAlignment = NSTextAlignment.center
+        tLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
+        tLabel!.text = title
+        tLabel!.textColor = UIColor.white
+        tLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
+        tLabel!.textAlignment = NSTextAlignment.center
         
-        top.addSubview(tLabel)
+        top.addSubview(tLabel!)
         self.addSubview(top)
         
     }
@@ -72,14 +73,14 @@ class TabTile:Tile
         tapGesture.numberOfTapsRequired = 1
         eLabel!.addGestureRecognizer(tapGesture)
         
-        nameText = UILabel(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.8 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
+        nameText = UILabel(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
         nameText!.text = name
         nameText!.textColor = UIColor.black
         nameText!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         nameText!.textAlignment = NSTextAlignment.left
         nameText!.isHidden = false
         
-        nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.8 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
+        nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.2))
         nameEdit!.text = name
         nameEdit!.textColor = Static.BlueColor
         nameEdit!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
@@ -168,13 +169,17 @@ class TabTile:Tile
         nameText!.isHidden = false
         nameText!.text = nameEdit!.text
         eLabel!.text = "Editer"
+        name = nameEdit!.text!
         
         FeedKatAPI.modifyCat(cat.getID(), key: "name", data: name as NSObject)
         {
             response, error in
-            if(error != nil)
+            if(error == nil)
             {
+                print("Ici")
                 self.cat.Name = self.name
+                self.tLabel!.text = self.name
+                
             }
         }
         return true
