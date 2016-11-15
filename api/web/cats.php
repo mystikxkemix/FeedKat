@@ -54,12 +54,18 @@ $app->get('/cat/{id}', function($id) use ($app) {
 		if(photo!=\'\',1,0) photo, d.id_dispenser, u.id_user, 
 		group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
 		from cat c left join cat_dispenser cd using(id_cat) left join dispenser d using(id_dispenser) left join user u using(id_user) left join feed_times f using(id_cat) 
-		where c.id_cat = \''.$id.'\'');
-	$feedtimes = explode(',',$cats[0]['feed_times']);
-	$cats[0]['feed_times'] = array();
-	foreach($feedtimes as $k => $v) {
-		$feedtime = explode('||',$v);
-		$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+		where c.id_cat = \''.$id.'\' group by c.id_cat');
+	if(count($cats) > 0) {
+		$feedtimes = explode(',',$cats[0]['feed_times']);
+		$cats[0]['feed_times'] = array();
+		foreach($feedtimes as $k => $v) {
+			$feedtime = explode('||',$v);
+			$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+		}
+		$cats['error'] = 0;
+	}
+	else {
+		$cats['error'] = 1;
 	}
 	return $app->json($cats);
 });
@@ -143,7 +149,7 @@ $app->get('/cat/dispenser/{id}', function($id) use ($app) {
 // battery, weight, daily_activity
 $app->get('/cat/{id}/details', function($id) use ($app) {
 	global $addr;
-	$res = $app['db']->fetchAll('select id_user from user u where u.id_user = \''.$id.'\'');
+	$res = $app['db']->fetchAll('select id_cat from cat c where c.id_cat = \''.$id.'\'');
 	if(count($res) == 0)
 	{
 		$data['error'] = 1;
