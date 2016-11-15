@@ -124,6 +124,8 @@ $app->get('/cat/user/{id}', function($id) use ($app) {
 					$data['cats'][$icat]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
 				}
 			}
+			$data['cats'][$icat]['battery'] = 67;
+			$data['cats'][$icat]['weight'] = 4670;
 		}
 	}
 	
