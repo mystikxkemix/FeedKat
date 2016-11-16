@@ -8,10 +8,11 @@
 
 import UIKit
 
-class DetailsCatBoardVC : UIViewController
+class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
     var top:UIView!
     var UITitle:UILabel!
+    var UiImage:UIImageView!
     var scrollView:UIScrollView!
     var container:UIStackView!
     var list_tile = [Tile]()
@@ -20,12 +21,44 @@ class DetailsCatBoardVC : UIViewController
     var catId:Int = -1
     var cat:Cat? = nil
     var fromC:Bool? = nil
+    var InfoTab:TabTile?
+    var imagePicker = UIImagePickerController()
+    var isNewImage = false
     
     override func viewDidLoad()
     {
         self.cat = Cat.getList()[catId]
         
         super.viewDidLoad()
+        
+        UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: Static.tileHeight*0.6, width: Static.tileHeight*1.2, height: Static.tileHeight*1.2))
+        
+        if(self.cat?.getPhoto() != "")
+        {
+            if(self.cat?.image == nil)
+            {
+                self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+                if let checkedUrl = URL(string: (cat?.getPhoto())!)
+                {
+                    UiImage.contentMode = .scaleAspectFit
+                    FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
+                    {
+                        data in
+                        self.cat?.image = data
+                    }
+                }
+            }
+            else
+            {
+                UiImage.image = cat?.image!
+            }
+        }
+        else
+        {
+            self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+        }
+        
+        UiImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailsCatBoardVC.pickImage)))
         
         top = UIView()
         top.backgroundColor = Static.BlueColor
@@ -93,9 +126,10 @@ class DetailsCatBoardVC : UIViewController
     {
         var heightStack : CGFloat = 0
         
-        list_tile.append(TabTile(cat: cat!, type: 0, parent:self))
-        list_tile.append(TabTile(cat: cat!, type: 1, parent:self))
-        list_tile.append(TabTile(cat: cat!, type: 2, parent:self))
+        InfoTab = TabTile(cat: cat!, type: 0, parent:self, UiImage: self.UiImage)
+        list_tile.append(InfoTab!)
+        list_tile.append(TabTile(cat: cat!, type: 1, parent:self, UiImage: nil))
+        list_tile.append(TabTile(cat: cat!, type: 2, parent:self, UiImage: nil))
 
         for a in list_tile
         {
@@ -132,6 +166,39 @@ class DetailsCatBoardVC : UIViewController
         {
             self.performSegue(withIdentifier: "gotoDBfromCD", sender: self)
         }
+    }
+    
+    func pickImage()
+    {
+        imagePicker.delegate = self
+        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+        imagePicker.allowsEditing = true
+        
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController!, didFinishPickingImage image: UIImage!, editingInfo: NSDictionary!)
+    {
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        var newImg = UIImage()
+        
+        if (image.size.width > image.size.height)
+        {
+            newImg = Static.getScaledUIImageWithHeight(image, height: Static.tileHeight*1.2)
+        }
+        else
+        {
+            newImg = Static.getScaledUIImageWithWidth(image, width: Static.tileHeight*1.2)
+        }
+        
+        newImg = Static.cropImgToCenter(newImg, size: Static.tileHeight*1.2)
+        
+        cat?.image = newImg
+        InfoTab!.UiImage.image = newImg
+        
+        isNewImage = true
     }
     
     override func didReceiveMemoryWarning()

@@ -1,6 +1,6 @@
 import UIKit
 
-class TabTile:Tile
+class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDelegate
 {
     var UiImage:UIImageView!
     var cat:Cat
@@ -12,7 +12,7 @@ class TabTile:Tile
     var tLabel:UILabel?
     var parent:DetailsCatBoardVC
     
-    init(cat:Cat, type:Int, parent:DetailsCatBoardVC)
+    init(cat:Cat, type:Int, parent:DetailsCatBoardVC, UiImage:UIImageView?)
     {
         self.cat = cat
         self.type = type
@@ -26,6 +26,7 @@ class TabTile:Tile
         {
         case 0:
             title = "Informations"
+            self.UiImage = UiImage!
         case 1:
             title = "FeedTimes"
         case 2:
@@ -36,7 +37,6 @@ class TabTile:Tile
         tLabel!.text = title
         tLabel!.textColor = UIColor.white
         tLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
-//        tLabel!.textAlignment = NSTextAlignment.center
         
         top.addSubview(tLabel!)
         self.addSubview(top)
@@ -97,34 +97,8 @@ class TabTile:Tile
         addSubview(nameEdit!)
         addSubview(eLabel!)
         
-        UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: Static.tileHeight*0.6, width: Static.tileHeight*1.2, height: Static.tileHeight*1.2))
-        
-        if(self.cat.getPhoto() != "")
-        {
-            if(self.cat.image == nil)
-            {
-                self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
-                if let checkedUrl = URL(string: cat.getPhoto())
-                {
-                    UiImage.contentMode = .scaleAspectFit
-                    FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
-                    {
-                        data in
-                        self.cat.image = data
-                    }
-                }
-            }
-            else
-            {
-                UiImage.image = cat.image!
-            }
-        }
-        else
-        {
-            self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
-        }
-        
         addSubview(UiImage)
+        
         
         let bat = UILabel(frame: CGRect(x: offsetx, y: offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.3))
         bat.text = "Batterie : \(cat.statusBattery)%"
@@ -160,6 +134,7 @@ class TabTile:Tile
         }
         else
         {
+            UiImage.isUserInteractionEnabled = true
             eLabel!.text = "Valider"
             eLabel!.textColor = UIColor.red
             nameText!.isHidden = true
@@ -170,6 +145,7 @@ class TabTile:Tile
     func textFieldShouldReturn(userText: UITextField) -> Bool
     {
         userText.resignFirstResponder()
+        UiImage.isUserInteractionEnabled = false
         nameEdit!.isHidden = true
         nameText!.isHidden = false
         name = nameEdit!.text!
@@ -184,6 +160,16 @@ class TabTile:Tile
             {
                 self.cat.Name = self.name
                 self.parent.UITitle.text = self.name
+            }
+        }
+        
+        let imgdata:NSData = UIImagePNGRepresentation(UiImage.image!)! as NSData
+        FeedKatAPI.modifyCat(cat.getID(), key: "photo", data:imgdata.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters) as NSObject)
+        {
+            response, error in
+            if(error == nil)
+            {
+                self.cat.image = self.UiImage.image
             }
         }
         return true
