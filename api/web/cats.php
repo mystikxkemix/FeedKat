@@ -233,8 +233,10 @@ $app->post('/cat', function (Request $request) use ($app) {
 			if($col == 'photo') { // photo is transmitted in base64
 				if(strlen($request->request->get($col)) < 1)
 					$upd_col[] = $col.' = NULL';
-				else
-					$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+				else {
+					if(base64_decode($request->request->get($col)) === false)
+						$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+				}
 			}
 			else
 				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
@@ -253,7 +255,9 @@ $app->post('/cat', function (Request $request) use ($app) {
 	
     $post = array(
         'error' => $error,
-        'id_cat'  => $request->request->get('id_cat')
+        'id_cat'  => $request->request->get('id_cat'),
+	'sql' => $upd_sql,
+	'postdata' => $request->request->all()
     );
 	
 	return $app->json($post);
