@@ -29,9 +29,9 @@ class CatCatTile: Tile
         
         UiNextFeed = UILabel(frame: CGRect(x: marg + iconsize, y: Static.tileHeight*0.7, width: Static.tileWidth*0.98-marg-iconsize, height: Static.tileHeight*0.2))
         
-        if(cat.getPhoto() != "")
+        if(cat.image == nil)
         {
-            if(cat.image == nil)
+            if(cat.getPhoto() != "")
             {
                 self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
                 if let checkedUrl = URL(string: cat.getPhoto())
@@ -46,12 +46,12 @@ class CatCatTile: Tile
             }
             else
             {
-                UiImage.image = cat.image!
+                UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
             }
         }
         else
         {
-            UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+            UiImage.image = cat.image!
         }
         addSubview(UiImage)
         

@@ -33,9 +33,9 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
         
         UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: Static.tileHeight*0.6, width: Static.tileHeight*1.2, height: Static.tileHeight*1.2))
         
-        if(self.cat?.getPhoto() != "")
+        if(self.cat?.image == nil)
         {
-            if(self.cat?.image == nil)
+            if(self.cat?.getPhoto() != "")
             {
                 self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
                 if let checkedUrl = URL(string: (cat?.getPhoto())!)
@@ -50,12 +50,12 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
             }
             else
             {
-                UiImage.image = cat?.image!
+                UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
             }
         }
         else
         {
-            self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+            self.UiImage.image = self.cat?.image!
         }
         
         UiImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailsCatBoardVC.pickImage)))

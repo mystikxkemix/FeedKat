@@ -42,9 +42,9 @@ class DashCatTile:Tile
                 break
         }
         
-        if(cat.getPhoto() != "")
+        if(cat.image == nil)
         {
-            if(cat.image == nil)
+            if(cat.getPhoto() != "")
             {
                 self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
                 if let checkedUrl = URL(string: cat.getPhoto())
@@ -59,12 +59,12 @@ class DashCatTile:Tile
             }
             else
             {
-                UiImage.image = cat.image!
+                UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
             }
         }
         else
         {
-            UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
+            UiImage.image = cat.image!
         }
         
         addSubview(UiImage)

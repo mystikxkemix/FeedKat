@@ -153,23 +153,18 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         eLabel!.text = "Editer"
         eLabel!.textColor = UIColor.white
         
-        FeedKatAPI.modifyCat(cat.getID(), key: "name", data: name as NSObject)
+        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: self.UiImage.image)
         {
             response, error in
             if(error == nil)
             {
                 self.cat.Name = self.name
                 self.parent.UITitle.text = self.name
-            }
-        }
-        
-        let imgdata:NSData = UIImagePNGRepresentation(UiImage.image!)! as NSData
-        FeedKatAPI.modifyCat(cat.getID(), key: "photo", data:imgdata.base64EncodedString(options: NSData.Base64EncodingOptions.lineLength64Characters) as NSObject)
-        {
-            response, error in
-            if(error == nil)
-            {
                 self.cat.image = self.UiImage.image
+            }
+            else
+            {
+                print("err : \(error)")
             }
         }
         return true
