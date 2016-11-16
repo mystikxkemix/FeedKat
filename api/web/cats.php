@@ -230,8 +230,12 @@ $app->post('/cat', function (Request $request) use ($app) {
 	$upd_col = array();
 	foreach($cols as $col)
 		if($request->request->get($col) != '') {
-			if($col == 'photo') // photo is transmitted in base64
-				$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+			if($col == 'photo') { // photo is transmitted in base64
+				if(strlen($request->request->get($col)) < 1)
+					$upd_col[] = $col.' = NULL';
+				else
+					$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+			}
 			else
 				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
 		}
