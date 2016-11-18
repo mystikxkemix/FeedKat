@@ -153,14 +153,14 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         eLabel!.text = "Editer"
         eLabel!.textColor = UIColor.white
         
-        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: self.UiImage.image)
+        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: (parent.isNewImage ? self.UiImage.image : nil))
         {
             response, error in
             if(error == nil)
             {
                 self.cat.Name = self.name
                 self.parent.UITitle.text = self.name
-                self.cat.image = self.UiImage.image
+                if(self.parent.isNewImage){self.cat.image = self.UiImage.image}
             }
             else
             {

@@ -43,7 +43,6 @@ class ConnectionPage: UIViewController {
                                     let message = a.value(forKey: "status") as! String
                                     let status = a.value(forKey: "ok") as! Int
                                     let photo = a.value(forKey: "photo") as! String
-                                    print("\(id) : \(photo)")
                                     let weight = a.value(forKey: "weight") as! Int
                                     let feed = a.value(forKey: "feed_times") as? [NSDictionary]
                                     _ = Cat(ID: id, Name: name, Message: message, Photo: photo, Status:status, Weight:weight, FeedTimes: feed)

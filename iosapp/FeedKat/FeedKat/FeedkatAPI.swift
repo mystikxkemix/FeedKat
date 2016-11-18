@@ -192,40 +192,33 @@ open class FeedKatAPI:NSObject
         var params = Parameters()
         params.updateValue(catId, forKey: "id_cat")
         params.updateValue(name, forKey: "name")
-        
-        Alamofire.upload(multipartFormData: { multipartFormData in
-            for (key, value) in params
+        if(UiImage != nil) {params.updateValue(UiImage!.base64(format: ImageFormat.PNG), forKey: "photo")}
+
+        Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON
             {
-                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key)
-            }
-            if (UiImage != nil)
-            {
-                multipartFormData.append(UIImagePNGRepresentation(UiImage!)!, withName: "photo", fileName: "image.png", mimeType: "image/png")
-            }
-        }, to: link, method: HTTPMethod.post) { encodingResult in
-            switch encodingResult
-            {
-            case .success(let upload, _, _):
-                    upload.responseJSON
+                response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
                     {
-                        response in
-                        if (response.result.isSuccess)
-                        {
-                            let value = response.result.value as! NSDictionary
-                            print("value : \(value)")
-                            handler(value,nil)
-                            return
-                        }
-                        else
-                        {
-                            handler(nil, NSError(domain: "Fuck", code: 1, userInfo: nil))
-                        }
+                        handler(JSON as? NSDictionary, nil)
+                        return
                     }
-            case .failure:
-                handler(nil, NSError(domain: "Could not connect to the server. Try again.", code: 66, userInfo: nil))
-                return
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
             }
-        }
 
     }
 
