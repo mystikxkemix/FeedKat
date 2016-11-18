@@ -16,7 +16,7 @@ class Cat:NSObject
     var Status:Int
     var Message:String
     var Photo:String
-    var Birthdate:String
+    var Birthdate:Date
     var feeds:[FeedTime]
     var image:UIImage? = nil
     var loaded:Bool = false
@@ -35,7 +35,7 @@ class Cat:NSObject
         self.Message = Message
         self.Status = Status
         self.Photo = Photo
-        self.Birthdate=""
+        self.Birthdate=Date()
         self.weight = Weight
         self.feeds = []
         if(FeedTimes != nil)
@@ -74,6 +74,12 @@ class Cat:NSObject
                 let cats = (response?.value(forKey: "cats") as! NSArray)[0] as! NSDictionary
                 self.statusBattery = cats.value(forKey: "battery") as? Int ?? -1
                 self.loaded = true
+                let sDate = cats.value(forKey: "birth") as? String ?? ""
+                let dateFormatter = DateFormatter()
+                dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
+                dateFormatter.dateFormat = "yyyy-MM-dd"
+                self.Birthdate = dateFormatter.date(from: sDate)!
+                
                 handler(true)
             }
             else
@@ -108,7 +114,7 @@ class Cat:NSObject
         return self.Status
     }
     
-    func getBirthdate() -> String
+    func getBirthdate() -> Date
     {
         return self.Birthdate;
     }

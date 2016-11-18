@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate
+class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate
 {
     var top:UIView!
     var UITitle:UILabel!
@@ -24,10 +24,14 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
     var InfoTab:TabTile?
     var imagePicker = UIImagePickerController()
     var isNewImage = false
-    
+    var isNewDate = false
+    let timeFormatter = DateFormatter()
+    var dateView:UITextField?
+
     override func viewDidLoad()
     {
         self.cat = Cat.getList()[catId]
+        let offsety = Static.tileHeight*0.6 + Static.tileWidth*0.02
         
         super.viewDidLoad()
         
@@ -59,6 +63,24 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
         }
         
         UiImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailsCatBoardVC.pickImage)))
+        
+        timeFormatter.dateStyle = .medium
+        timeFormatter.timeStyle = .none
+        
+        dateView = UITextField(frame : CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.5 + offsety, width: Static.tileWidth*0.4, height: Static.tileHeight*0.2))
+        dateView!.delegate = self
+        dateView!.textColor = Static.BlueColor
+        dateView!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        dateView!.textAlignment = .center
+        dateView!.layer.borderWidth = 1
+        dateView!.layer.borderColor = UIColor.black.cgColor
+        dateView!.layer.cornerRadius = 10
+        dateView!.isHidden = true
+        dateView!.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
+//        dateView.attributedPlaceholder = NSAttributedString(string: NSLocalizedString("BIRTHDATE", comment: ""), attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+//        cell.addSubview(dateView)
+        
+        dateView!.addTarget(self, action: #selector(DetailsCatBoardVC.dateField(_:)), for: .editingDidBegin)
         
         top = UIView()
         top.backgroundColor = Static.BlueColor
@@ -126,10 +148,10 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
     {
         var heightStack : CGFloat = 0
         
-        InfoTab = TabTile(cat: cat!, type: 0, parent:self, UiImage: self.UiImage)
+        InfoTab = TabTile(cat: cat!, type: 0, parent:self, UiImage: self.UiImage, UiDate: self.dateView)
         list_tile.append(InfoTab!)
-        list_tile.append(TabTile(cat: cat!, type: 1, parent:self, UiImage: nil))
-        list_tile.append(TabTile(cat: cat!, type: 2, parent:self, UiImage: nil))
+        list_tile.append(TabTile(cat: cat!, type: 1, parent:self, UiImage: nil, UiDate: nil))
+        list_tile.append(TabTile(cat: cat!, type: 2, parent:self, UiImage: nil, UiDate: nil))
 
         for a in list_tile
         {
@@ -172,7 +194,9 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
     {
         imagePicker.delegate = self
         imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
-        imagePicker.allowsEditing = true
+        imagePicker.allowsEditing = false
+//        imagePicker.sourceType = .camera
+//        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
         
         self.present(imagePicker, animated: true, completion: nil)
     }
@@ -200,6 +224,26 @@ class DetailsCatBoardVC : UIViewController, UINavigationControllerDelegate, UIIm
         
         isNewImage = true
     }
+    
+    func dateField(_ sender: UITextView)
+    {
+        let datePickerView  : UIDatePicker = UIDatePicker()
+        datePickerView.datePickerMode = UIDatePickerMode.date
+        sender.inputView = datePickerView
+        datePickerView.addTarget(self, action: #selector(DetailsCatBoardVC.handleDatePicker(_:)), for: UIControlEvents.valueChanged)
+    }
+    
+    func handleDatePicker(_ sender: UIDatePicker)
+    {
+        InfoTab!.eDate!.text = timeFormatter.string(from: sender.date)
+        self.InfoTab!.date! = sender.date
+    }
+    
+    func txtFieldDidChange(textField: UITextField)
+    {
+        self.isNewDate = true
+    }
+
     
     override func didReceiveMemoryWarning()
     {

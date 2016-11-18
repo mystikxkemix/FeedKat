@@ -1,6 +1,6 @@
 import UIKit
 
-class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDelegate
+class TabTile:Tile
 {
     var UiImage:UIImageView!
     var cat:Cat
@@ -11,12 +11,17 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
     var eLabel:UILabel?
     var tLabel:UILabel?
     var parent:DetailsCatBoardVC
+    var tDate:UILabel?
+    var eDate:UITextField?
+    var date:Date?
+    let timeFormatter = DateFormatter()
     
-    init(cat:Cat, type:Int, parent:DetailsCatBoardVC, UiImage:UIImageView?)
+    init(cat:Cat, type:Int, parent:DetailsCatBoardVC, UiImage:UIImageView?, UiDate:UITextField?)
     {
         self.cat = cat
         self.type = type
         self.parent = parent
+        self.eDate = UiDate
         super.init(type: type)
         self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
@@ -63,6 +68,13 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         let offsetx = Static.tileWidth*0.04 + Static.tileHeight*1.2
         let offsety = Static.tileHeight*0.6 + Static.tileWidth*0.02
         self.name = cat.getName()
+        self.date = cat.Birthdate
+        
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TabTile.resignResponder)))
+        timeFormatter.dateStyle = .medium
+        timeFormatter.timeStyle = .none
+    
+        eDate!.text = timeFormatter.string(from: self.date!)
         
         eLabel = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth - Static.tileWidth*0.02, height: Static.tileHeight*0.6))
         eLabel!.text = "Editer"
@@ -82,6 +94,13 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         nameText!.textAlignment = NSTextAlignment.left
         nameText!.isHidden = false
         
+        tDate = UILabel(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.5 + offsety, width: Static.tileWidth*0.8, height: Static.tileHeight*0.2))
+        tDate!.textColor = UIColor.black
+        tDate!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        tDate!.textAlignment = NSTextAlignment.left
+        tDate!.isHidden = false
+        reloadDate()
+        
         nameEdit = UITextField(frame:CGRect(x: Static.tileWidth*0.03, y: Static.tileHeight*1.2 + offsety, width: Static.tileWidth*0.4, height: Static.tileHeight*0.2))
         nameEdit!.text = name
         nameEdit!.textColor = Static.BlueColor
@@ -98,6 +117,9 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         addSubview(eLabel!)
         
         addSubview(UiImage)
+        
+        addSubview(tDate!)
+        addSubview(eDate!)
         
         
         let bat = UILabel(frame: CGRect(x: offsetx, y: offsety, width: Static.tileWidth*0.6, height: Static.tileHeight*0.3))
@@ -139,21 +161,26 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
             eLabel!.textColor = UIColor.red
             nameText!.isHidden = true
             nameEdit!.isHidden = false
+            eDate!.isHidden = false
+            tDate!.isHidden = true
         }
     }
     
     func textFieldShouldReturn(userText: UITextField) -> Bool
     {
-        userText.resignFirstResponder()
+        resignResponder()
         UiImage.isUserInteractionEnabled = false
         nameEdit!.isHidden = true
         nameText!.isHidden = false
+        eDate!.isHidden = true
+        tDate!.isHidden = false
         name = nameEdit!.text!
         nameText!.text = "Nom : " + name
         eLabel!.text = "Editer"
         eLabel!.textColor = UIColor.white
+        reloadDate()
         
-        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: (parent.isNewImage ? self.UiImage.image : nil))
+        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: (parent.isNewImage ? self.UiImage.image : nil), birth: self.date)
         {
             response, error in
             if(error == nil)
@@ -161,6 +188,9 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
                 self.cat.Name = self.name
                 self.parent.UITitle.text = self.name
                 if(self.parent.isNewImage){self.cat.image = self.UiImage.image}
+                self.cat.Birthdate = self.date!
+                self.parent.isNewImage = false
+                self.parent.isNewDate = false
             }
             else
             {
@@ -170,6 +200,16 @@ class TabTile:Tile, UIImagePickerControllerDelegate, UINavigationControllerDeleg
         return true
     }
     
+    func reloadDate()
+    {
+        tDate!.text = "Naissance : \(timeFormatter.string(from: self.date!))"
+    }
+    
+    func resignResponder()
+    {
+        eDate?.resignFirstResponder()
+        nameEdit?.resignFirstResponder()
+    }
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")

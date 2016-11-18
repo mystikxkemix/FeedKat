@@ -185,7 +185,7 @@ open class FeedKatAPI:NSObject
             }
     }
     
-    open static func modifyCat(_ catId:Int!, name:String!, UiImage:UIImage?, handler:@escaping(NSDictionary?, NSError?) -> ())
+    open static func modifyCat(_ catId:Int!, name:String!, UiImage:UIImage?, birth:Date?, handler:@escaping(NSDictionary?, NSError?) -> ())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat"
         
@@ -193,6 +193,18 @@ open class FeedKatAPI:NSObject
         params.updateValue(catId, forKey: "id_cat")
         params.updateValue(name, forKey: "name")
         if(UiImage != nil) {params.updateValue(UiImage!.base64(format: ImageFormat.PNG), forKey: "photo")}
+        
+        if(birth != nil)
+        {
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.day, .month, .year], from: birth!)
+            let year = components.year! < 1000 ? "1000" : "\(components.year!)"
+            let month = components.month! < 10 ? "0\(components.month!)" : "\(components.month!)"
+            let day = components.day! < 10 ? "0\(components.day!)" : "\(components.day!)"
+            
+            let birthdate = "\(year)-\(month)-\(day)"
+            params.updateValue(birthdate, forKey: "birth")
+        }
 
         Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON
