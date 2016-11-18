@@ -54,14 +54,6 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snU-ro-fr7">
-                                <rect key="frame" x="158" y="316" width="58" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="S'inscire"/>
-                                <connections>
-                                    <action selector="gotoRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWB-6x-wfg"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45b-es-LdO">
                                 <rect key="frame" x="129" y="412" width="117" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -69,6 +61,14 @@
                                 <state key="normal" title="Connexion"/>
                                 <connections>
                                     <action selector="tryConnection:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iRj-ez-9zY"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="snU-ro-fr7">
+                                <rect key="frame" x="152" y="316" width="71" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="S'inscrire"/>
+                                <connections>
+                                    <action selector="gotoRegister:" destination="BYZ-38-t0r" eventType="touchUpInside" id="NWB-6x-wfg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -292,9 +292,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="CuO-B0-f83"/>
-        <segue reference="uru-KZ-2Y1"/>
-        <segue reference="abK-Xf-G0d"/>
         <segue reference="GG2-dU-dMO"/>
+        <segue reference="3YL-D0-56A"/>
+        <segue reference="uru-KZ-2Y1"/>
+        <segue reference="CuO-B0-f83"/>
     </inferredMetricsTieBreakers>
 </document>
