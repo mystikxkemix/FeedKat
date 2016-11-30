@@ -211,6 +211,7 @@ class TabTile:Tile
         }
         
         let set1Activity = BarChartDataSet(values: yValsActivity, label: "Steps Taken")
+        set1Activity.setColor(Static.OrangeColor)
         
         let dataActivity = BarChartData(dataSet: set1Activity)
         dataActivity.setValueFont(UIFont(name: "Avenir", size: 12))
@@ -248,7 +249,9 @@ class TabTile:Tile
             yValsWeight.append(ChartDataEntry(x: Double(Float(idx)), y: Double(idx)))
         }
         
-        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Steps Taken")
+        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids")
+//        set1Weight.fillColor = Static.OrangeColor
+        set1Weight.setColor(Static.OrangeColor)
         
         let dataWeight = LineChartData(dataSet: set1Weight)
         dataWeight.setValueFont(UIFont(name: "Avenir", size: 12))
