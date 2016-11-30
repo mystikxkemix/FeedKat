@@ -30,8 +30,8 @@ class TabTile:Tile
             self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
             self.UiImage = UiImage!
         case 1:
-            self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.6 + Static.tileSpacing*0.5))
-            self.heightAnchor.constraint(equalToConstant: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.6 + Static.tileSpacing*0.5)).isActive = true
+            self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5))
+            self.heightAnchor.constraint(equalToConstant: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5)).isActive = true
         case 2:
             self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
         default: break
@@ -157,24 +157,24 @@ class TabTile:Tile
         var v:UIView
         for feed in cat.feeds
         {
-            v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.6 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.6))
+            v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
             i+=1
             addSubview(v)
             
-            let text1 = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
-            text1.text = " - \(feed.Weight)g à \(feed.Hour)"
+            let text1 = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
+            text1.text = "- \(feed.Weight)g à \(feed.Hour)"
             text1.textColor = UIColor.black
-            text1.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+            text1.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
             text1.textAlignment = NSTextAlignment.left
             
             v.addSubview(text1)
         }
         
-        let ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.6 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.6))
+        let ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.5))
         ajout.text = "Ajouter un FeedTime"
         ajout.textColor = UIColor.darkGray
         ajout.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
-        ajout.textAlignment = NSTextAlignment.left
+        ajout.textAlignment = NSTextAlignment.center
         addSubview(ajout)
     }
     
