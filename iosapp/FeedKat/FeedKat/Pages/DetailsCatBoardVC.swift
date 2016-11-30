@@ -122,7 +122,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
                 for a in self.list_tile
                 {
                     let b = a as! TabTile
-                    b.setContent(type: b.type!)
+                    b.setContent()
                 }
             }
         }
@@ -155,7 +155,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
 
         for a in list_tile
         {
-            heightStack += (Static.tileSpacing + a.getWidth())
+            heightStack += (Static.tileSpacing + a.getHeight())
         }
         heightStack -= Static.tileSpacing
         
@@ -193,10 +193,10 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
     func pickImage()
     {
         imagePicker.delegate = self
-//        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
-//        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+        imagePicker.allowsEditing = false
+//        imagePicker.sourceType = .camera
+//        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
         
         self.present(imagePicker, animated: true, completion: nil)
     }

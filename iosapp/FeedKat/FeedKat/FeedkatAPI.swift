@@ -4,7 +4,8 @@ import Alamofire
 open class FeedKatAPI:NSObject
 {
     fileprivate static var isLocal = false
-    fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/index.php"
+    //fileprivate static var prodServerAddr = "http://feedkat.ddns.net:80/api/index.php"
+    fileprivate static var prodServerAddr = "http://89.3.239.45:80/api/index.php"
     fileprivate static var localServerAddr = "http://192.168.43.12:80/api/index.php"
     
     open static func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {

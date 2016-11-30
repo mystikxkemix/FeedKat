@@ -10,11 +10,11 @@
 		22019D7EE7CDA607E978EB25 /* Pods_FeedKat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9231BA54E1F7BEFAB5CF3D83 /* Pods_FeedKat.framework */; };
 		272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501801DA4E87400A018A3 /* CatBoardVC.swift */; };
 		272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501821DA4E91300A018A3 /* OptionBoardVC.swift */; };
-		272501851DA4FF4A00A018A3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 272501841DA4FF4A00A018A3 /* Assets.xcassets */; };
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
 		2738C7561DCCD29100ADFA11 /* DetailsCatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */; };
+		274610571DEF0D0E00BEE8E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 274610561DEF0D0E00BEE8E6 /* Assets.xcassets */; };
 		274F9F701DA7EFFF0051DCE8 /* GenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */; };
 		274F9F731DA7F0080051DCE8 /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F711DA7F0080051DCE8 /* extensions.swift */; };
 		274F9F741DA7F0080051DCE8 /* Static.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F721DA7F0080051DCE8 /* Static.swift */; };
@@ -61,11 +61,11 @@
 		12BFD84A5786A56030A31DB8 /* Pods-FeedKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedKat/Pods-FeedKat.release.xcconfig"; sourceTree = "<group>"; };
 		272501801DA4E87400A018A3 /* CatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatBoardVC.swift; path = Pages/CatBoardVC.swift; sourceTree = "<group>"; };
 		272501821DA4E91300A018A3 /* OptionBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionBoardVC.swift; path = Pages/OptionBoardVC.swift; sourceTree = "<group>"; };
-		272501841DA4FF4A00A018A3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
 		2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsCatBoardVC.swift; path = Pages/DetailsCatBoardVC.swift; sourceTree = "<group>"; };
+		274610561DEF0D0E00BEE8E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenVC.swift; path = Pages/GenVC.swift; sourceTree = "<group>"; };
 		274F9F711DA7F0080051DCE8 /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = extensions.swift; path = Tools/extensions.swift; sourceTree = "<group>"; };
 		274F9F721DA7F0080051DCE8 /* Static.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Static.swift; path = Tools/Static.swift; sourceTree = "<group>"; };
@@ -221,9 +221,9 @@
 		27FFCE6A1D87DDB1005718E2 /* FeedKat */ = {
 			isa = PBXGroup;
 			children = (
+				274610561DEF0D0E00BEE8E6 /* Assets.xcassets */,
 				274F9F7F1DA7F0160051DCE8 /* Classes */,
 				2745CA571DA7EF8D00B3A771 /* Tiles */,
-				272501841DA4FF4A00A018A3 /* Assets.xcassets */,
 				272847161D897306007DD040 /* Storyboard */,
 				2728470F1D8972B1007DD040 /* Pages */,
 				2728470B1D89728A007DD040 /* Tools */,
@@ -384,7 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */,
-				272501851DA4FF4A00A018A3 /* Assets.xcassets in Resources */,
+				274610571DEF0D0E00BEE8E6 /* Assets.xcassets in Resources */,
 				27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

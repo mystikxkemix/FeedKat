@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3AE7C9B58F978FE180DA14467FA0B295"
+               BlueprintIdentifier = "809363A644FCB63142810988AC60C7BA"
                BuildableName = "Pods_FeedKat.framework"
                BlueprintName = "Pods-FeedKat"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "3AE7C9B58F978FE180DA14467FA0B295"
+            BlueprintIdentifier = "809363A644FCB63142810988AC60C7BA"
             BuildableName = "Pods_FeedKat.framework"
             BlueprintName = "Pods-FeedKat"
             ReferencedContainer = "container:Pods.xcodeproj">

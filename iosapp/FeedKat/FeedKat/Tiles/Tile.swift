@@ -14,13 +14,14 @@ class Tile:UIView
     
     init(type: Int)
     {
-        super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight))
         if(type == -1)
         {
+            super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight))
             self.heightAnchor.constraint(equalToConstant: Static.tileHeight).isActive = true
         }
         else
         {
+            super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3))
             self.heightAnchor.constraint(equalToConstant: Static.tileHeight*3).isActive = true
         }
         

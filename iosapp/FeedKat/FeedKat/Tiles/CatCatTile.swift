@@ -112,6 +112,8 @@ class CatCatTile: Tile
         
         if(cat.getFeeds().count != 0)
         {
+            if(next.Hour != "")
+            {
             h = Static.StringToInt(str: next.Hour)
             if( (h[0]-Static.nowHour) == 0)
             {
@@ -127,6 +129,7 @@ class CatCatTile: Tile
                 {
                     UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[0] - Static.nowHour + 24)h"
                 }
+            }
             }
         }
         

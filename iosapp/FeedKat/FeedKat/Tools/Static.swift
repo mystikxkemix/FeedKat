@@ -82,6 +82,7 @@ class Static {
     {
         var res:[Int] = []
         let fullNameArr = str.components(separatedBy: ":")
+        print("str : \(str)")
 
         for a in fullNameArr
         {
