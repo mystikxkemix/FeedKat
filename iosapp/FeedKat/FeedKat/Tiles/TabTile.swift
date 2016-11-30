@@ -1,4 +1,5 @@
 import UIKit
+import Charts
 
 class TabTile:Tile
 {
@@ -33,7 +34,8 @@ class TabTile:Tile
             self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5))
             self.heightAnchor.constraint(equalToConstant: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5)).isActive = true
         case 2:
-            self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
+            self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*6)
+            self.heightAnchor.constraint(equalToConstant: Static.tileHeight*6).isActive = true
         default: break
         }
         
@@ -180,6 +182,79 @@ class TabTile:Tile
     
     func initGraph()
     {
+        let titleActivity = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: Static.tileHeight*0.55, width: Static.tileWidth, height: Static.tileHeight*0.4))
+        titleActivity.text = "Activité :"
+        titleActivity.textColor = UIColor.black
+        titleActivity.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
+        titleActivity.textAlignment = NSTextAlignment.left
+        
+        addSubview(titleActivity)
+        
+        let barActivity = BarChartView(frame: CGRect(x: Static.tileWidth*0.06, y: Static.tileHeight*0.9, width: Static.tileWidth*0.9, height: Static.tileHeight*2.2))
+        
+        barActivity.chartDescription?.text = "";
+        barActivity.noDataText = "Data will be loaded soon."
+        
+        barActivity.drawBarShadowEnabled = false
+        barActivity.drawValueAboveBarEnabled = false
+        
+        barActivity.maxVisibleCount = 6
+        barActivity.fitBars = true
+        barActivity.pinchZoomEnabled = true
+        barActivity.drawGridBackgroundEnabled = false
+        barActivity.drawBordersEnabled = false
+        barActivity.dragEnabled = false
+        
+        var yValsActivity: [BarChartDataEntry] = []
+        for idx in 0...6 {
+            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(idx)))
+        }
+        
+        let set1Activity = BarChartDataSet(values: yValsActivity, label: "Steps Taken")
+        
+        let dataActivity = BarChartData(dataSet: set1Activity)
+        dataActivity.setValueFont(UIFont(name: "Avenir", size: 12))
+        barActivity.data = dataActivity
+        
+        addSubview(barActivity)
+        
+        let titleWeight = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: Static.tileHeight*3.25, width: Static.tileWidth, height: Static.tileHeight*0.4))
+        titleWeight.text = "Poids :"
+        titleWeight.textColor = UIColor.black
+        titleWeight.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
+        titleWeight.textAlignment = NSTextAlignment.left
+        
+        addSubview(titleWeight)
+        
+        let lineWeight = LineChartView(frame: CGRect(x: Static.tileWidth*0.06, y: Static.tileHeight*3.6, width: Static.tileWidth*0.9, height: Static.tileHeight*2.2))
+        
+        lineWeight.chartDescription?.text = "";
+        lineWeight.noDataText = "Data will be loaded soon."
+        
+//        lineWeight.drawBarShadowEnabled = false
+//        lineWeight.drawValueAboveBarEnabled = true
+        lineWeight.tintColor = UIColor.black
+        
+        lineWeight.maxVisibleCount = 6
+//        lineWeight.fitBars = true
+        lineWeight.pinchZoomEnabled = false
+        lineWeight.drawGridBackgroundEnabled = true
+        lineWeight.drawBordersEnabled = false
+        lineWeight.dragEnabled = false
+        
+        var yValsWeight: [ChartDataEntry] = []
+
+        for idx in 0...6 {
+            yValsWeight.append(ChartDataEntry(x: Double(Float(idx)), y: Double(idx)))
+        }
+        
+        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Steps Taken")
+        
+        let dataWeight = LineChartData(dataSet: set1Weight)
+        dataWeight.setValueFont(UIFont(name: "Avenir", size: 12))
+        lineWeight.data = dataWeight
+        
+        addSubview(lineWeight)
         
     }
     
