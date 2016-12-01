@@ -1,7 +1,7 @@
 import UIKit
 import Charts
 
-class TabTile:Tile
+class TabTile:Tile, UITextFieldDelegate
 {
     var UiImage:UIImageView!
     var cat:Cat
@@ -15,7 +15,15 @@ class TabTile:Tile
     var tDate:UILabel?
     var eDate:UITextField?
     var date:Date?
+    var text1:UILabel?
+    
+    
+    var eFeed:[UILabel] = []
+    var tFeed:[UILabel] = []
+    var modWeight:[UITextField] = []
+    var modHour:[UITextField] = []
     let timeFormatter = DateFormatter()
+    var feedList:[FeedTime] = []
     
     init(cat:Cat, type:Int, parent:DetailsCatBoardVC, UiImage:UIImageView?, UiDate:UITextField?)
     {
@@ -85,7 +93,7 @@ class TabTile:Tile
         self.name = cat.getName()
         self.date = cat.Birthdate
         
-        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TabTile.resignResponder)))
+        self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TabTile.resignInfoResponder)))
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
     
@@ -97,7 +105,7 @@ class TabTile:Tile
         eLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
         eLabel!.textAlignment = NSTextAlignment.right
         eLabel!.isUserInteractionEnabled = true
-        let aSelector : Selector = #selector(TabTile.lblTapped)
+        let aSelector : Selector = #selector(TabTile.InfoTapped)
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
         eLabel!.addGestureRecognizer(tapGesture)
@@ -159,17 +167,68 @@ class TabTile:Tile
         var v:UIView
         for feed in cat.feeds
         {
+            self.feedList.append(feed)
             v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
-            i+=1
+            
             addSubview(v)
             
-            let text1 = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
-            text1.text = "- \(feed.Weight)g à \(feed.Hour)"
-            text1.textColor = UIColor.black
-            text1.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
-            text1.textAlignment = NSTextAlignment.left
+            let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
+            utFeed.text = "- \(feed.Weight)g à \(feed.Hour)"
+            utFeed.textColor = UIColor.black
+            utFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
+            utFeed.textAlignment = NSTextAlignment.left
             
-            v.addSubview(text1)
+            tFeed.append(utFeed)
+            
+            let ueFeed = UILabel(frame: CGRect(x: Static.tileWidth*0.7, y: 0, width: Static.tileWidth*0.2, height: Static.tileHeight*0.5))
+            ueFeed.text = "Editer"
+            ueFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+            ueFeed.textAlignment = NSTextAlignment.right
+            ueFeed.isUserInteractionEnabled = true
+            ueFeed.tag = i-1
+            let aSelector : Selector = #selector(TabTile.FeedTapped)
+            let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+            tapGesture.numberOfTapsRequired = 1
+            ueFeed.addGestureRecognizer(tapGesture)
+            
+            eFeed.append(ueFeed)
+
+            let umodWeight = UITextField(frame: CGRect(x: 0, y: 0, width: Static.tileWidth*0.2, height: Static.tileHeight*0.5))
+            umodWeight.text = "\(feed.Weight)"
+            umodWeight.delegate = self
+            umodWeight.textColor = Static.BlueColor
+            umodWeight.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+            umodWeight.textAlignment = .center
+            umodWeight.layer.borderWidth = 1
+            umodWeight.layer.borderColor = UIColor.black.cgColor
+            umodWeight.layer.cornerRadius = 10
+            umodWeight.isHidden = true
+            //umodWeight.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
+            //umodWeight.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .ed)
+            
+            
+            self.modWeight.append(umodWeight)
+            
+            let umodHour = UITextField(frame: CGRect(x: Static.tileWidth*0.3, y: 0, width: Static.tileWidth*0.3, height: Static.tileHeight*0.5))
+            umodHour.text = "\(feed.Hour)"
+            umodHour.delegate = self
+            umodHour.textColor = Static.BlueColor
+            umodHour.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+            umodHour.textAlignment = .center
+            umodHour.layer.borderWidth = 1
+            umodHour.layer.borderColor = UIColor.black.cgColor
+            umodHour.layer.cornerRadius = 10
+            umodHour.isHidden = true
+            //umodHour.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
+            umodHour.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .editingDidBegin)
+            
+            modHour.append(umodHour)
+            
+            v.addSubview(utFeed)
+            v.addSubview(ueFeed)
+            v.addSubview(umodWeight)
+            v.addSubview(umodHour)
+            i+=1
         }
         
         let ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.5))
@@ -245,11 +304,11 @@ class TabTile:Tile
         
     }
     
-    func lblTapped()
+    func InfoTapped()
     {
         if(nameText!.isHidden)
         {
-            _ = textFieldShouldReturn(userText: nameEdit!)
+            _ = InfoShouldReturn(userText: nameEdit!)
         }
         else
         {
@@ -263,9 +322,27 @@ class TabTile:Tile
         }
     }
     
-    func textFieldShouldReturn(userText: UITextField) -> Bool
+    func FeedTapped()
     {
-        resignResponder()
+        let idx = 0
+        
+        if(!modHour[idx].isHidden)
+        {
+            _ = FeedShouldReturn(userText: modHour[idx])
+        }
+        else
+        {
+            modHour[idx].isHidden = false
+            modWeight[idx].isHidden = false
+            tFeed[idx].isHidden = true
+            eFeed[idx].text = "Valider"
+            eFeed[idx].textColor = UIColor.red
+        }
+    }
+    
+    func InfoShouldReturn(userText: UITextField) -> Bool
+    {
+        resignInfoResponder()
         UiImage.isUserInteractionEnabled = false
         nameEdit!.isHidden = true
         nameText!.isHidden = false
@@ -297,16 +374,67 @@ class TabTile:Tile
         return true
     }
     
+    func FeedShouldReturn(userText: UITextField) -> Bool
+    {
+        resignFeedResponder()
+        
+        modHour[currentInd].isHidden = true
+        modWeight[currentInd].isHidden = true
+        tFeed[currentInd].isHidden = false
+        eFeed[currentInd].text = "Editer"
+        eFeed[currentInd].textColor = UIColor.black
+        
+        feedList[currentInd].Weight = Int(modWeight[currentInd].text!)!
+        feedList[currentInd].Hour = modHour[currentInd].text!
+        
+        reloadFeed()
+        
+        return true
+    }
+    
     func reloadDate()
     {
         tDate!.text = "Naissance : \(timeFormatter.string(from: self.date!))"
     }
     
-    func resignResponder()
+    func reloadFeed()
+    {
+        tFeed[currentInd].text = "- \(feedList[currentInd].Weight)g à \(feedList[currentInd].Hour)"
+    }
+    
+    func resignInfoResponder()
     {
         eDate?.resignFirstResponder()
         nameEdit?.resignFirstResponder()
     }
+    
+    func resignFeedResponder()
+    {
+        modHour[currentInd].resignFirstResponder()
+        modWeight[currentInd].resignFirstResponder()
+    }
+    
+    private var currentInd = 0
+    
+    func feedTimeField(_ sender: UITextField)
+    {
+        currentInd = modHour.index(of: sender)!
+        
+        let feedPickerView  : UIDatePicker = UIDatePicker()
+        feedPickerView.datePickerMode = UIDatePickerMode.time
+        sender.inputView = feedPickerView
+        feedPickerView.addTarget(self, action: #selector(TabTile.handleFeedTimePicker(_:)), for: UIControlEvents.valueChanged)
+    }
+    
+    func handleFeedTimePicker(_ sender: UIDatePicker)
+    {
+//        InfoTab!.eDate!.text = timeFormatter.string(from: sender.time)
+//        self.InfoTab!.date! = sender.date
+        let feedFormatter = DateFormatter()
+        feedFormatter.dateFormat = "H:mm"
+        modHour[currentInd].text = feedFormatter.string(from: sender.date)
+    }
+    
     required init?(coder aDecoder: NSCoder)
     {
         fatalError("init(coder:) has not been implemented")

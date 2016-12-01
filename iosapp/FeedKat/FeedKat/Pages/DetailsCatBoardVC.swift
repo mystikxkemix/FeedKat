@@ -244,7 +244,6 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
     {
         self.isNewDate = true
     }
-
     
     override func didReceiveMemoryWarning()
     {
