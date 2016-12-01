@@ -203,8 +203,7 @@ class TabTile:Tile, UITextFieldDelegate
             umodWeight.layer.borderColor = UIColor.black.cgColor
             umodWeight.layer.cornerRadius = 10
             umodWeight.isHidden = true
-            //umodWeight.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
-            //umodWeight.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .ed)
+            umodWeight.keyboardType = .numberPad
             
             
             self.modWeight.append(umodWeight)
