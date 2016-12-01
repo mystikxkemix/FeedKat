@@ -10,12 +10,13 @@ import Foundation
 import UIKit
 
 class Static {
-    static var OrangeColor = UIColor(colorLiteralRed: 1, green: 150/255, blue: 0, alpha: 1)
-    static var GreenColor = UIColor(colorLiteralRed: 110/255, green: 1, blue: 110/255, alpha: 1)
-    static var BlueColor = UIColor(colorLiteralRed: 103/255, green: 164/255, blue: 240/255, alpha: 1)
-    static var WhiteGrayColor = UIColor(colorLiteralRed: 235/255, green: 235/255, blue: 235/255, alpha: 1)
-    static var RedColor = UIColor(colorLiteralRed: 1, green: 110/255, blue: 110/255, alpha: 1)
-    static var YellowColor = UIColor(colorLiteralRed: 245/255, green: 245/255, blue: 80/255, alpha: 1)
+    static let OrangeColor = UIColor(colorLiteralRed: 1, green: 150/255, blue: 0, alpha: 1)
+    static let GreenColor = UIColor(colorLiteralRed: 110/255, green: 1, blue: 110/255, alpha: 1)
+    static let BlueColor = UIColor(colorLiteralRed: 103/255, green: 164/255, blue: 240/255, alpha: 1)
+    static let WhiteGrayColor = UIColor(colorLiteralRed: 235/255, green: 235/255, blue: 235/255, alpha: 1)
+    static let RedColor = UIColor(colorLiteralRed: 1, green: 110/255, blue: 110/255, alpha: 1)
+    static let YellowColor = UIColor(colorLiteralRed: 245/255, green: 245/255, blue: 80/255, alpha: 1)
+    static let TransparentColor = UIColor(colorLiteralRed: 1, green: 150/255, blue: 0, alpha: 0)
     
     static let screenWidth = UIScreen.main.bounds.size.width
     static let screenHeight = UIScreen.main.bounds.size.height

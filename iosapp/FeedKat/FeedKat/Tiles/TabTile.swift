@@ -203,18 +203,19 @@ class TabTile:Tile
         barActivity.pinchZoomEnabled = true
         barActivity.drawGridBackgroundEnabled = false
         barActivity.drawBordersEnabled = false
-        barActivity.dragEnabled = false
+        barActivity.dragEnabled = true
         
         var yValsActivity: [BarChartDataEntry] = []
-        for idx in 0...6 {
-            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(idx)))
+        let tabActivity = [1000, 1500, 1300, 2000, 500, 1200, 1000, 1500, 1300, 2000, 500, 1200]
+        for idx in 0..<tabActivity.count {
+            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(tabActivity[idx])))
         }
         
-        let set1Activity = BarChartDataSet(values: yValsActivity, label: "Steps Taken")
+        let set1Activity = BarChartDataSet(values: yValsActivity, label: "Activité")
         set1Activity.setColor(Static.OrangeColor)
         
         let dataActivity = BarChartData(dataSet: set1Activity)
-        dataActivity.setValueFont(UIFont(name: "Avenir", size: 12))
+        dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 12))
         barActivity.data = dataActivity
         
         addSubview(barActivity)
@@ -244,17 +245,18 @@ class TabTile:Tile
         lineWeight.dragEnabled = false
         
         var yValsWeight: [ChartDataEntry] = []
-
-        for idx in 0...6 {
-            yValsWeight.append(ChartDataEntry(x: Double(Float(idx)), y: Double(idx)))
+        let tabWeight = [4.5, 4.3, 3.8, 4.9, 4, 3.0]
+        for idy in 0..<tabWeight.count {
+            yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(tabWeight[idy])))
         }
         
         let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids")
-//        set1Weight.fillColor = Static.OrangeColor
+        set1Weight.setCircleColor(Static.TransparentColor)
+        set1Weight.circleHoleColor = Static.BlueColor
         set1Weight.setColor(Static.OrangeColor)
         
         let dataWeight = LineChartData(dataSet: set1Weight)
-        dataWeight.setValueFont(UIFont(name: "Avenir", size: 12))
+        dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 12))
         lineWeight.data = dataWeight
         
         addSubview(lineWeight)
