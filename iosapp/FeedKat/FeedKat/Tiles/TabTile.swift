@@ -182,13 +182,6 @@ class TabTile:Tile
     
     func initGraph()
     {
-        let titleActivity = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: Static.tileHeight*0.55, width: Static.tileWidth, height: Static.tileHeight*0.4))
-        titleActivity.text = "Activité :"
-        titleActivity.textColor = UIColor.black
-        titleActivity.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
-        titleActivity.textAlignment = NSTextAlignment.left
-        
-        addSubview(titleActivity)
         
         let barActivity = BarChartView(frame: CGRect(x: Static.tileWidth*0.06, y: Static.tileHeight*0.9, width: Static.tileWidth*0.9, height: Static.tileHeight*2.2))
         
@@ -215,34 +208,23 @@ class TabTile:Tile
         set1Activity.setColor(Static.OrangeColor)
         
         let dataActivity = BarChartData(dataSet: set1Activity)
-        dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 12))
+        dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 20))
         barActivity.data = dataActivity
         
         addSubview(barActivity)
-        
-        let titleWeight = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: Static.tileHeight*3.25, width: Static.tileWidth, height: Static.tileHeight*0.4))
-        titleWeight.text = "Poids :"
-        titleWeight.textColor = UIColor.black
-        titleWeight.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
-        titleWeight.textAlignment = NSTextAlignment.left
-        
-        addSubview(titleWeight)
         
         let lineWeight = LineChartView(frame: CGRect(x: Static.tileWidth*0.06, y: Static.tileHeight*3.6, width: Static.tileWidth*0.9, height: Static.tileHeight*2.2))
         
         lineWeight.chartDescription?.text = "";
         lineWeight.noDataText = "Data will be loaded soon."
         
-//        lineWeight.drawBarShadowEnabled = false
-//        lineWeight.drawValueAboveBarEnabled = true
         lineWeight.tintColor = UIColor.black
         
         lineWeight.maxVisibleCount = 6
-//        lineWeight.fitBars = true
         lineWeight.pinchZoomEnabled = false
         lineWeight.drawGridBackgroundEnabled = true
         lineWeight.drawBordersEnabled = false
-        lineWeight.dragEnabled = false
+        lineWeight.dragEnabled = true
         
         var yValsWeight: [ChartDataEntry] = []
         let tabWeight = [4.5, 4.3, 3.8, 4.9, 4, 3.0]
@@ -252,11 +234,11 @@ class TabTile:Tile
         
         let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids")
         set1Weight.setCircleColor(Static.TransparentColor)
-        set1Weight.circleHoleColor = Static.BlueColor
-        set1Weight.setColor(Static.OrangeColor)
+        set1Weight.circleHoleColor = Static.OrangeColor
+        set1Weight.setColor(Static.BlueColor)
         
         let dataWeight = LineChartData(dataSet: set1Weight)
-        dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 12))
+        dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 20))
         lineWeight.data = dataWeight
         
         addSubview(lineWeight)
