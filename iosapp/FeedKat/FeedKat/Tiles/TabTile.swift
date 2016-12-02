@@ -57,6 +57,16 @@ class TabTile:Tile, UITextFieldDelegate
             view.removeFromSuperview()
         }
         
+        banner = UIView()
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        banner.backgroundColor = Static.OrangeColor
+        addSubview(banner)
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.01, constant: 0))
+        banner.heightAnchor.constraint(equalToConstant: <#T##CGFloat#>)
+        
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         top.backgroundColor = Static.BlueColor
         var title:String = ""

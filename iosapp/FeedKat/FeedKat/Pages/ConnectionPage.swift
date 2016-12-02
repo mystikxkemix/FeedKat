@@ -18,6 +18,7 @@ class ConnectionPage: UIViewController {
     @IBAction func tryConnection(_ sender: UIButton)
     {
         //FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+        Static.startLoading(view: self.view)
         FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
         {
             response, error in
@@ -68,10 +69,12 @@ class ConnectionPage: UIViewController {
                                             _ = Dispenser(ID: id, Name: name, Status: stock)
                                         }
                                     }
+                                    Static.stopLoading()
                                     self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
                                 }
                                 else
                                 {
+                                    Static.stopLoading()
                                     print("\(error)")
                                 }
                                 
@@ -80,19 +83,23 @@ class ConnectionPage: UIViewController {
                         }
                         else
                         {
+                            Static.stopLoading()
                             print("error getCatbyId : \(error)")
                         }
                     }
                 }
                 else
                 {
-                    print("error Id")
+                    Static.stopLoading()
+                    print("error ConnectionPage : \(error)")
+                    let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
+                    pop.ViewFunc()
                 }
             }
             else
             {
-                print("error ConnectionPage : \(error)")
-                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
+                Static.stopLoading()
+                let pop = popUp(view: self.UIcontent, text: "Serveur introuvable")
                 pop.ViewFunc()
             }
         }
