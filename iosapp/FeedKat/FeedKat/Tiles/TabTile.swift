@@ -20,7 +20,6 @@ class TabTile:Tile, UITextFieldDelegate
     var ajout: UILabel!
     var feedTimeViews = [UIView]()
     
-    
     var eFeed:[UILabel] = []
     var tFeed:[UILabel] = []
     var modWeight:[UITextField] = []
@@ -245,11 +244,11 @@ class TabTile:Tile, UITextFieldDelegate
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
         
-        ajout.sizeToFit()
-        ajout.height *= 1.2
-        ajout.width *= 1.2
-        ajout.layer.cornerRadius = 5
-        ajout.layer.borderWidth = 1
+//        ajout.sizeToFit()
+//        ajout.height *= 1.2
+//        ajout.width *= 1.2
+//        ajout.layer.cornerRadius = 5
+//        ajout.layer.borderWidth = 1
         
         ajout.addGestureRecognizer(tapGesture)
         
@@ -401,10 +400,20 @@ class TabTile:Tile, UITextFieldDelegate
         eFeed[currentInd].text = "Editer"
         eFeed[currentInd].textColor = UIColor.black
         
-        feedList[currentInd].Weight = Int(modWeight[currentInd].text!)!
-        feedList[currentInd].Hour = modHour[currentInd].text!
-        
-        reloadFeed()
+        FeedKatAPI.modifyFeedTime(feedList[currentInd].ID, weight: Int(modWeight[currentInd].text!)!, Time: modHour[currentInd].text!)
+        {
+            response, error in
+            if(error == nil)
+            {
+                self.feedList[self.currentInd].Weight = Int(self.modWeight[self.currentInd].text!)!
+                self.feedList[self.currentInd].Hour = self.modHour[self.currentInd].text!
+                self.reloadFeed()
+            }
+            else
+            {
+                print("err : \(error)")
+            }
+        }
         
         return true
     }

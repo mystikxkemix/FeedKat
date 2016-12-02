@@ -235,6 +235,43 @@ open class FeedKatAPI:NSObject
 
     }
 
+    open static func modifyFeedTime(_ feedtimeId:Int!, weight:Int, Time:String, handler:@escaping(NSDictionary?, NSError?)->())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/feedtimes"
+        
+        var params = Parameters()
+        params.updateValue(feedtimeId, forKey: "id_feedtime")
+        params.updateValue(weight, forKey: "weight")
+        params.updateValue("\(Time):00", forKey: "time")
+        
+        Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON
+            {
+                response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+
+    }
+    
     open static func addFeedTime(_ catId:Int!, handler:@escaping(NSDictionary?, NSError?) -> ())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/feedtimes"
