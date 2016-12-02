@@ -47,10 +47,18 @@ class TabTile:Tile, UITextFieldDelegate
         default: break
         }
         
+    }
+    
+    func setContent()
+    {
+        for view in self.subviews {
+            view.removeFromSuperview()
+        }
+        
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         top.backgroundColor = Static.BlueColor
         var title:String = ""
-        switch type
+        switch type!
         {
         case 0:
             title = "Informations"
@@ -65,14 +73,10 @@ class TabTile:Tile, UITextFieldDelegate
         tLabel!.text = title
         tLabel!.textColor = UIColor.white
         tLabel!.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
-        
         top.addSubview(tLabel!)
         self.addSubview(top)
+
         
-    }
-    
-    func setContent()
-    {
         switch type!
         {
         case 0:
@@ -205,7 +209,6 @@ class TabTile:Tile, UITextFieldDelegate
             umodWeight.isHidden = true
             umodWeight.keyboardType = .numberPad
             
-            
             self.modWeight.append(umodWeight)
             
             let umodHour = UITextField(frame: CGRect(x: Static.tileWidth*0.3, y: 0, width: Static.tileWidth*0.3, height: Static.tileHeight*0.5))
@@ -235,6 +238,12 @@ class TabTile:Tile, UITextFieldDelegate
         ajout.textColor = UIColor.darkGray
         ajout.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
         ajout.textAlignment = NSTextAlignment.center
+        ajout.isUserInteractionEnabled = true
+        let aSelector : Selector = #selector(TabTile.addFeedTime)
+        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+        tapGesture.numberOfTapsRequired = 1
+        ajout.addGestureRecognizer(tapGesture)
+        
         addSubview(ajout)
     }
     
@@ -432,6 +441,29 @@ class TabTile:Tile, UITextFieldDelegate
         let feedFormatter = DateFormatter()
         feedFormatter.dateFormat = "H:mm"
         modHour[currentInd].text = feedFormatter.string(from: sender.date)
+    }
+    
+    func addFeedTime()
+    {
+        Static.startLoading(view: parent.view)
+        FeedKatAPI.addFeedTime(cat.getID())
+        {
+            response, error in
+            if(error == nil)
+            {
+                //print("JSON : \(response)")
+                let ids_ft = response!.value(forKey: "id_feedtime") as! String
+                let id_ft = Int(ids_ft)!
+                
+                self.cat.feeds.append(FeedTime(ID: id_ft, Id_cat: self.cat.getID(), Id_dispenser: 0, Weight: 0, Hour: "00:00", Enable: true))
+                Static.stopLoading()
+                self.setContent()
+            }
+            else
+            {
+                print("err : \(error)")
+            }
+        }
     }
     
     required init?(coder aDecoder: NSCoder)

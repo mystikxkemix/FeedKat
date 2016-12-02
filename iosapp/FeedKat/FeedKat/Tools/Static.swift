@@ -30,6 +30,12 @@ class Static {
     static let nowHour = Calendar.current.component(.hour, from: Date())
     static let nowDay = Calendar.current.component(.day, from: Date())
     
+    public static var isLoading: Bool = false
+    public static var isShowingPopup: Bool = false
+    fileprivate static var loadingBG : UIView?
+    fileprivate static var loadingHandler : (() -> ())?
+    fileprivate static var loadingButton : UIButton?
+    
     
     static func scaleUIImageToSize(_ image: UIImage, size: CGSize) -> UIImage
     {
@@ -130,4 +136,39 @@ class Static {
         
         return image
     }
+    
+    static func startLoading(view: UIView)
+    {
+        isLoading = true
+        loadingBG = UIView(frame: CGRect(x: 0, y: 0, width: view.getWidth(), height: view.getHeight()))
+        loadingBG!.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        view.addSubview(loadingBG!)
+        
+        let activity = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.white)
+        let size = 50 as CGFloat
+        activity.frame = CGRect(x: (view.getWidth() - size) / 2, y: (view.getHeight() - size) / 2, width: size, height: size)
+        loadingBG!.addSubview(activity)
+        activity.startAnimating()
+    }
+    
+    static func stopLoading()
+    {
+        if (loadingBG == nil || !isLoading) { return }
+        isLoading = false
+        for v in (loadingBG?.subviews)!
+        {
+            v.removeFromSuperview()
+        }
+        loadingBG?.removeFromSuperview()
+        loadingBG = nil
+        loadingButton?.removeFromSuperview()
+        loadingButton = nil
+        loadingHandler = nil
+    }
+    
+    static func delay(_ delay: Double, closure:@escaping ()->())
+    {
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
+
 }

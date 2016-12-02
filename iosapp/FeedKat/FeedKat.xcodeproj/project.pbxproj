@@ -29,7 +29,7 @@
 		275FBEA01DD9ADA2007E5C9A /* TabTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275FBE9F1DD9ADA2007E5C9A /* TabTile.swift */; };
 		27AFC40E1D897480005EDEDD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC40A1D89737A005EDEDD /* Main.storyboard */; };
 		27AFC40F1D897487005EDEDD /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 27AFC4081D89737A005EDEDD /* Launch Screen.storyboard */; };
-		27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */; };
+		27BB5E201DB65E66007EE366 /* FeedKatAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27BB5E1F1DB65E66007EE366 /* FeedKatAPI.swift */; };
 		27EDD2661DC9DCFB00C685DB /* AddCatTile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */; };
 		27EDD2681DC9EC5A00C685DB /* Dispenser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27EDD2671DC9EC5A00C685DB /* Dispenser.swift */; };
 		27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */; };
@@ -80,7 +80,7 @@
 		275FBE9F1DD9ADA2007E5C9A /* TabTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabTile.swift; path = Tiles/TabTile.swift; sourceTree = "<group>"; };
 		27AFC4091D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = "Base.lproj/Launch Screen.storyboard"; sourceTree = "<group>"; };
 		27AFC40B1D89737A005EDEDD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedkatAPI.swift; sourceTree = "<group>"; };
+		27BB5E1F1DB65E66007EE366 /* FeedKatAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedKatAPI.swift; sourceTree = "<group>"; };
 		27EDD2651DC9DCFB00C685DB /* AddCatTile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddCatTile.swift; path = Tiles/AddCatTile.swift; sourceTree = "<group>"; };
 		27EDD2671DC9EC5A00C685DB /* Dispenser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dispenser.swift; path = Classes/Dispenser.swift; sourceTree = "<group>"; };
 		27FFCE681D87DDB1005718E2 /* FeedKat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FeedKat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -229,7 +229,7 @@
 				2728470B1D89728A007DD040 /* Tools */,
 				27FFCE6B1D87DDB1005718E2 /* AppDelegate.swift */,
 				27FFCE771D87DDB1005718E2 /* Info.plist */,
-				27BB5E1F1DB65E66007EE366 /* FeedkatAPI.swift */,
+				27BB5E1F1DB65E66007EE366 /* FeedKatAPI.swift */,
 			);
 			path = FeedKat;
 			sourceTree = "<group>";
@@ -562,7 +562,7 @@
 				27EDD2681DC9EC5A00C685DB /* Dispenser.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
 				272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */,
-				27BB5E201DB65E66007EE366 /* FeedkatAPI.swift in Sources */,
+				27BB5E201DB65E66007EE366 /* FeedKatAPI.swift in Sources */,
 				274F9F831DA7F9C60051DCE8 /* FeedTime.swift in Sources */,
 				272847111D8972D8007DD040 /* PopUp.swift in Sources */,
 				27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */,
