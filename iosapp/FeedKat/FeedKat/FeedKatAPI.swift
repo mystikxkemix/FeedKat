@@ -288,7 +288,6 @@ open class FeedKatAPI:NSObject
                 response in
                 if let JSON = response.result.value
                 {
-                    print("JSON : \(JSON)")
                     let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
                     if (error == 0)
                     {

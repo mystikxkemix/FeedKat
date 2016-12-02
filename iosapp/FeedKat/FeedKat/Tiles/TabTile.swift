@@ -411,9 +411,10 @@ class TabTile:Tile, UITextFieldDelegate
             }
             else
             {
-                print("err : \(error)")
+                
             }
         }
+    
         
         return true
     }
@@ -477,12 +478,72 @@ class TabTile:Tile, UITextFieldDelegate
                 Static.stopLoading()
                 //self.setContent()
                 
+                let feed = self.cat.feeds.last
+                
                 let height = self.subviews.last!.height
                 let y = self.subviews.last!.y + height + Static.tileSpacing * 0.5
                 
-                let tmp = UIView(frame: CGRect(x: 0, y: y, width: self.width, height: 100))
-                tmp.backgroundColor = UIColor.blue
+//                let tmp = UIView(frame: CGRect(x: 0, y: y, width: self.width, height: 100))
+//                tmp.backgroundColor = UIColor.blue
+//                self.addSubview(tmp)
+                
+                 let tmp   = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: y, width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
                 self.addSubview(tmp)
+                
+                let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
+                utFeed.text = "- \(feed!.Weight)g à \(feed!.Hour)"
+                utFeed.textColor = UIColor.black
+                utFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
+                utFeed.textAlignment = NSTextAlignment.left
+                
+                self.tFeed.append(utFeed)
+                
+                let ueFeed = UILabel(frame: CGRect(x: Static.tileWidth*0.7, y: 0, width: Static.tileWidth*0.2, height: Static.tileHeight*0.5))
+                ueFeed.text = "Editer"
+                ueFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+                ueFeed.textAlignment = NSTextAlignment.right
+                ueFeed.isUserInteractionEnabled = true
+                let aSelector : Selector = #selector(TabTile.FeedTapped)
+                let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+                tapGesture.numberOfTapsRequired = 1
+                ueFeed.addGestureRecognizer(tapGesture)
+                
+                self.eFeed.append(ueFeed)
+                
+                let umodWeight = UITextField(frame: CGRect(x: 0, y: 0, width: Static.tileWidth*0.2, height: Static.tileHeight*0.5))
+                umodWeight.text = "\(feed!.Weight)"
+                umodWeight.delegate = self
+                umodWeight.textColor = Static.BlueColor
+                umodWeight.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+                umodWeight.textAlignment = .center
+                umodWeight.layer.borderWidth = 1
+                umodWeight.layer.borderColor = UIColor.black.cgColor
+                umodWeight.layer.cornerRadius = 10
+                umodWeight.isHidden = true
+                umodWeight.keyboardType = .numberPad
+                
+                self.modWeight.append(umodWeight)
+                
+                let umodHour = UITextField(frame: CGRect(x: Static.tileWidth*0.3, y: 0, width: Static.tileWidth*0.3, height: Static.tileHeight*0.5))
+                umodHour.text = "\(feed!.Hour)"
+                umodHour.delegate = self
+                umodHour.textColor = Static.BlueColor
+                umodHour.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+                umodHour.textAlignment = .center
+                umodHour.layer.borderWidth = 1
+                umodHour.layer.borderColor = UIColor.black.cgColor
+                umodHour.layer.cornerRadius = 10
+                umodHour.isHidden = true
+                //umodHour.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
+                umodHour.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .editingDidBegin)
+                
+                self.modHour.append(umodHour)
+                
+                tmp.addSubview(utFeed)
+                tmp.addSubview(ueFeed)
+                tmp.addSubview(umodWeight)
+                tmp.addSubview(umodHour)
+
                 
                 let offset = Static.tileSpacing * 0.5
                 
