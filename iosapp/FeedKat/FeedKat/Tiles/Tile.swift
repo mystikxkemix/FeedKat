@@ -22,8 +22,29 @@ class Tile:UIView
         else
         {
             super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3))
-            self.heightAnchor.constraint(equalToConstant: Static.tileHeight*3).isActive = true
+            if(type != 2)
+            {
+                self.heightAnchor.constraint(equalToConstant: Static.tileHeight*3).isActive = true
+            }
         }
+        
+        self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
+        backgroundColor = UIColor.white
+        
+        banner = UIView()
+        banner.translatesAutoresizingMaskIntoConstraints = false
+        banner.backgroundColor = Static.OrangeColor
+        addSubview(banner)
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.01, constant: 0))
+    }
+    
+    init(height: CGFloat)
+    {
+        super.init(frame:CGRect (x: 0, y: 0, width: Static.tileWidth, height: height))
+        self.heightAnchor.constraint(equalToConstant: height).isActive = true
         
         self.widthAnchor.constraint(equalToConstant: Static.tileWidth).isActive = true
         backgroundColor = UIColor.white

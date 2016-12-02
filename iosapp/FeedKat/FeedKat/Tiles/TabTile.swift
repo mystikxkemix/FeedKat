@@ -33,20 +33,27 @@ class TabTile:Tile, UITextFieldDelegate
         self.type = type
         self.parent = parent
         self.eDate = UiDate
-        super.init(type: type)
+        
         
         switch type
         {
         case 0:
+            super.init(type: type)
             self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*3)
             self.UiImage = UiImage!
+            break
         case 1:
-            self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5))
-            self.heightAnchor.constraint(equalToConstant: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5)).isActive = true
+            super.init(height: CGFloat(cat.feeds.count+2)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5))
+            break
         case 2:
+            super.init(type: type)
             self.frame = CGRect (x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*6)
             self.heightAnchor.constraint(equalToConstant: Static.tileHeight*6).isActive = true
-        default: break
+            
+            break
+        default:
+            super.init(type: type)
+            break
         }
         
     }
@@ -63,9 +70,7 @@ class TabTile:Tile, UITextFieldDelegate
         addSubview(banner)
         addConstraint(NSLayoutConstraint(item: banner, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
-        addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.01, constant: 0))
-        banner.heightAnchor.constraint(equalToConstant: <#T##CGFloat#>)
         
         let top = UIView(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.6))
         top.backgroundColor = Static.BlueColor
