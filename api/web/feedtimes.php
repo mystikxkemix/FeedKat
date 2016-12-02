@@ -108,8 +108,8 @@ $app->put('/feedtimes', function (Request $request) use ($app) {
         'id_feedtime'  => $app['db']->lastInsertId()
     );
 	
-    $times = $app['db']->fetchAll('select * from feed_times');
-	return $app->json($times);
+    //$times = $app['db']->fetchAll('select * from feed_times');
+	return $app->json($post);
 });
 
 
