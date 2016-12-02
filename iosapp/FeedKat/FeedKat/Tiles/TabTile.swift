@@ -17,6 +17,9 @@ class TabTile:Tile, UITextFieldDelegate
     var date:Date?
     var text1:UILabel?
     
+    var ajout: UILabel!
+    var feedTimeViews = [UIView]()
+    
     
     var eFeed:[UILabel] = []
     var tFeed:[UILabel] = []
@@ -173,7 +176,6 @@ class TabTile:Tile, UITextFieldDelegate
         {
             self.feedList.append(feed)
             v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
-            
             addSubview(v)
             
             let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
@@ -233,7 +235,7 @@ class TabTile:Tile, UITextFieldDelegate
             i+=1
         }
         
-        let ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.5))
+        ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.5))
         ajout.text = "Ajouter un FeedTime"
         ajout.textColor = UIColor.darkGray
         ajout.font = UIFont(name: "Arial Rounded MT Bold", size: 14)
@@ -242,9 +244,16 @@ class TabTile:Tile, UITextFieldDelegate
         let aSelector : Selector = #selector(TabTile.addFeedTime)
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
+        
+        ajout.sizeToFit()
+        ajout.height *= 1.2
+        ajout.width *= 1.2
+        ajout.layer.cornerRadius = 5
+        ajout.layer.borderWidth = 1
+        
         ajout.addGestureRecognizer(tapGesture)
         
-        addSubview(ajout)
+        insertSubview(ajout, at: 0)
     }
     
     func initGraph()
@@ -457,7 +466,21 @@ class TabTile:Tile, UITextFieldDelegate
                 
                 self.cat.feeds.append(FeedTime(ID: id_ft, Id_cat: self.cat.getID(), Id_dispenser: 0, Weight: 0, Hour: "00:00", Enable: true))
                 Static.stopLoading()
-                self.setContent()
+                //self.setContent()
+                
+                let height = self.subviews.last!.height
+                let y = self.subviews.last!.y + height + Static.tileSpacing * 0.5
+                
+                let tmp = UIView(frame: CGRect(x: 0, y: y, width: self.width, height: 100))
+                tmp.backgroundColor = UIColor.blue
+                self.addSubview(tmp)
+                
+                let offset = Static.tileSpacing * 0.5
+                
+                self.height += tmp.height + offset
+                self.parent.list_tile.last!.y += tmp.height + offset
+                self.ajout.y += tmp.height + offset
+                self.parent.scrollView.contentSize.height += tmp.height + offset
             }
             else
             {
