@@ -20,9 +20,9 @@ function deleteId($idCol, $idVal, $table) {
         'error' => $error,
         $idCol  => $idVal
     );
-    $json = $app['db']->query('select * from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
+    //$json = $app['db']->query('select * from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
 
-	return $json;
+	return $post;
 }
 
 
