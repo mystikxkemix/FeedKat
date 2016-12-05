@@ -234,6 +234,50 @@ open class FeedKatAPI:NSObject
             }
 
     }
+    
+    open static func addCat(id_user: Int, name: String, Birthdate: Date, image:UIImage?, handler:@escaping(NSDictionary?, NSError?)->())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat"
+        
+        var params = Parameters()
+        params.updateValue(id_user, forKey: "id_user")
+        params.updateValue(name, forKey: "name")
+        if(image != nil) {params.updateValue(image!.base64(format: ImageFormat.PNG), forKey: "photo")}
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.day, .month, .year], from: Birthdate)
+        let year = components.year! < 1000 ? "1000" : "\(components.year!)"
+        let month = components.month! < 10 ? "0\(components.month!)" : "\(components.month!)"
+        let day = components.day! < 10 ? "0\(components.day!)" : "\(components.day!)"
+        
+        let birthdate = "\(year)-\(month)-\(day)"
+        params.updateValue(birthdate, forKey: "birth")
+        
+        Alamofire.request(link, method: HTTPMethod.put, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON
+            {
+                response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+    }
 
     open static func modifyFeedTime(_ feedtimeId:Int!, weight:Int, Time:String, handler:@escaping(NSDictionary?, NSError?)->())
     {

@@ -10,7 +10,7 @@ import UIKit
 
 class AlertTile:Tile
 {
-    init(title:String)
+    override init(title:String)
     {
         super.init(type: -1)
         backgroundColor = Static.RedColor

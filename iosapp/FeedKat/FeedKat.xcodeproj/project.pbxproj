@@ -14,6 +14,7 @@
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
+		27325A3D1DF60A75004AC6CF /* AddDispVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27325A3C1DF60A75004AC6CF /* AddDispVC.swift */; };
 		2738C7561DCCD29100ADFA11 /* DetailsCatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */; };
 		274610571DEF0D0E00BEE8E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 274610561DEF0D0E00BEE8E6 /* Assets.xcassets */; };
 		274F9F701DA7EFFF0051DCE8 /* GenVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */; };
@@ -66,6 +67,7 @@
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
+		27325A3C1DF60A75004AC6CF /* AddDispVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDispVC.swift; path = Pages/AddDispVC.swift; sourceTree = "<group>"; };
 		2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsCatBoardVC.swift; path = Pages/DetailsCatBoardVC.swift; sourceTree = "<group>"; };
 		274610561DEF0D0E00BEE8E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		274F9F6F1DA7EFFF0051DCE8 /* GenVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = GenVC.swift; path = Pages/GenVC.swift; sourceTree = "<group>"; };
@@ -162,6 +164,7 @@
 				27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */,
 				2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */,
 				2706EF1B1DF5E4FB00268466 /* AddCatVC.swift */,
+				27325A3C1DF60A75004AC6CF /* AddDispVC.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				274F9F7A1DA7F0110051DCE8 /* AlertTile.swift in Sources */,
 				272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */,
 				27EDD2681DC9EC5A00C685DB /* Dispenser.swift in Sources */,
+				27325A3D1DF60A75004AC6CF /* AddDispVC.swift in Sources */,
 				27FFCE6C1D87DDB1005718E2 /* AppDelegate.swift in Sources */,
 				272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */,
 				27BB5E201DB65E66007EE366 /* FeedKatAPI.swift in Sources */,

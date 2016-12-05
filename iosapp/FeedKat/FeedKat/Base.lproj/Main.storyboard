@@ -221,6 +221,7 @@
                     <connections>
                         <segue destination="P4R-OT-QVY" kind="show" identifier="fromOtoDB" animates="NO" id="PHU-YE-bc3"/>
                         <segue destination="7kh-6F-N9V" kind="show" identifier="fromOtoC" animates="NO" id="2Wq-lx-4cP"/>
+                        <segue destination="5gN-6v-vA7" kind="show" identifier="gotoADfromOB" id="Msm-zN-twa"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9v-OV-JMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -250,6 +251,27 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6E-KH-mot" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2106" y="1085"/>
+        </scene>
+        <!--Add DispVC-->
+        <scene sceneID="UJ9-ml-6eE">
+            <objects>
+                <viewController id="5gN-6v-vA7" customClass="AddDispVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="7IU-Eo-2Xb"/>
+                        <viewControllerLayoutGuide type="bottom" id="dek-Iq-b6t"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="v9N-VO-jIp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                    </view>
+                    <connections>
+                        <segue destination="GZI-CS-CBk" kind="show" identifier="gotoOBfromAD" id="POx-zS-wLU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cTd-Sr-mq8" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3212" y="-403"/>
         </scene>
         <!--Details Cat BoardVC-->
         <scene sceneID="WqN-Z1-JRZ">
@@ -296,9 +318,9 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="uru-KZ-2Y1"/>
+        <segue reference="POx-zS-wLU"/>
+        <segue reference="2Wq-lx-4cP"/>
+        <segue reference="PHU-YE-bc3"/>
         <segue reference="CuO-B0-f83"/>
-        <segue reference="EsU-UM-X64"/>
-        <segue reference="kMD-lF-dxu"/>
     </inferredMetricsTieBreakers>
 </document>

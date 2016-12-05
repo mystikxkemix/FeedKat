@@ -18,6 +18,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     var isNewImage = false;
     let timeFormatter = DateFormatter()
     var imagePicker = UIImagePickerController()
+    var date:Date = Date()
     
     override func viewDidLoad()
     {
@@ -39,6 +40,13 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         bot.addConstraint(NSLayoutConstraint(item: botv, attribute: .centerX, relatedBy: .equal, toItem: bot, attribute: .centerX, multiplier: 1, constant: 0))
         bot.addConstraint(NSLayoutConstraint(item: botv, attribute: .centerY, relatedBy: .equal, toItem: bot, attribute: .centerY, multiplier: 1, constant: 0))
         
+        botv.isUserInteractionEnabled = true
+        let aSelector : Selector = #selector(self.saveCat)
+        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+        tapGesture.numberOfTapsRequired = 1
+        botv.addGestureRecognizer(tapGesture)
+
+        
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
         
@@ -49,10 +57,10 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         arrow.addTarget(self, action: #selector(self.gotoBack), for: .touchUpInside)
         
         view.isUserInteractionEnabled = true
-        let aSelector : Selector = #selector(self.resignResponder)
-        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
-        tapGesture.numberOfTapsRequired = 1
-        view.addGestureRecognizer(tapGesture)
+        let vSelector : Selector = #selector(self.resignResponder)
+        let vapGesture = UITapGestureRecognizer(target: self, action: vSelector)
+        vapGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(vapGesture)
         
         
         modImage.image = Static.getScaledImageWithWidth("Icon", width: Static.screenWidth*0.4)
@@ -84,8 +92,6 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         modBirthday.addTarget(self, action: #selector(self.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
         modBirthday.addTarget(self, action: #selector(self.dateField(_:)), for: .editingDidBegin)
         view.addSubview(modBirthday)
-        
-        
         
     }
     
@@ -135,6 +141,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     func handleDatePicker(_ sender: UIDatePicker)
     {
         modBirthday.text = timeFormatter.string(from: sender.date)
+        self.date = sender.date
     }
     
     func txtFieldDidChange(textField: UITextField)
@@ -146,6 +153,26 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     {
         modBirthday.resignFirstResponder()
         modName.resignFirstResponder()
+    }
+    
+    func saveCat()
+    {
+        if(modName.text! != "Nom" && modBirthday.text! != "Anniversaire")
+        {
+            
+            FeedKatAPI.addCat(id_user: Static.userId,name: modName.text!, Birthdate: self.date, image: self.isNewImage ? self.modImage.image! : nil)
+            {
+                response, error in
+                
+                if(error == nil)
+                {
+                    let sId = response!.value(forKey: "id_cat") as! String
+                    let Id = Int(sId)!
+                    
+                    _ = Cat(ID: Id, Name: self.modName.text!, Message: "", Photo: self.modImage.image!.base64(format: .PNG), Status: 10, Weight: 0, FeedTimes: nil)
+                }
+            }
+        }
     }
     
     func gotoBack()

@@ -23,7 +23,24 @@ class OptionBoardVC : GenVC
     
     override func loadScroll()
     {
+        let AddDisp = Tile(title: "Ajouter un distributeur")
+        let Logout = Tile(title: "Deconnexion")
+        list_tile.append(AddDisp)
+        list_tile.append(Logout)
+        
+        AddDisp.isUserInteractionEnabled = true
+        let aSelector : Selector = #selector(self.gotoAD)
+        let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
+        tapGesture.numberOfTapsRequired = 1
+        
+        AddDisp.addGestureRecognizer(tapGesture)
+        
         super.loadScroll()
+    }
+    
+    func gotoAD()
+    {
+        self.performSegue(withIdentifier: "gotoADfromOB", sender: self)
     }
     
     func gotoDB()
