@@ -29,6 +29,7 @@ public class Accueil extends FrameLayout
     {
         super(context);
         int k, l;
+        tuile.resetEnd();
         for(k = 0 ; k < ListeChat.getList().size(); k++){
             final ListeChat lc = ListeChat.getList().get(k);
             TuileChat tu = new TuileChat(context, k, lc);
@@ -41,8 +42,6 @@ public class Accueil extends FrameLayout
             body_scroll.addView(tu_d);
         }
         l++;
-
-
 
         lpbot = new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, Static.screen_y/10 + Static.ecart_tuile*2);
         lpbot.setMargins(0,(k+l-2)*(Static.tuile_y+Static.ecart_tuile)+Static.ecart_tuile,0,0);

@@ -23,6 +23,7 @@ public class Chat extends FrameLayout
     {
         super(context);
         int k;
+        tuile.resetEnd();
         for(k = 0 ; k < ListeChat.getList().size(); k++){
             ListeChat lc = ListeChat.getList().get(k);
             CatDetailTile tu = new CatDetailTile(context,k,lc);

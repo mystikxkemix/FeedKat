@@ -353,4 +353,86 @@ public class FeedKatAPI
 
         addToRequestQueue(req);
     }
+
+
+    public void ModifyFeedTime(int  id, int weight, String date, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError) {
+        String link = isLocal ? localServerAddr : prodServerAddr;
+        link += "/feedtimes";
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("id_feedtime", id);
+            params.put("weight", weight);
+            params.put("time", date);
+            System.out.println(date);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, link, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getInt("error") == 0) {
+                        onSuccess.onResponse(response);
+                    } else {
+                        onError.onErrorResponse(getVolleyError(102, "This feedtime doesn't exist"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (onError != null) onError.onErrorResponse(error);
+            }
+        });
+
+        addToRequestQueue(req);
+    }
+
+    public void AddFeedtime(int  id_cat, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError) {
+        String link = isLocal ? localServerAddr : prodServerAddr;
+        link += "/feedtimes";
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("id_cat", id_cat);
+            params.put("weight", 0);
+            params.put("time", "00:00:00");
+            params.put("enabled",1);
+            params.put("id_dispenser",2);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.PUT, link, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    if (response.getInt("error") == 0) {
+                        onSuccess.onResponse(response);
+                    } else {
+                        onError.onErrorResponse(getVolleyError(102, "This feedtime doesn't exist"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                if (onError != null) onError.onErrorResponse(error);
+            }
+        });
+
+        addToRequestQueue(req);
+    }
 }

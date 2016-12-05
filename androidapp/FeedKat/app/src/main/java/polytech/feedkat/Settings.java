@@ -16,7 +16,7 @@ public class Settings extends FrameLayout
         super(context);
 
         int i;
-
+        tuile.resetEnd();
         ArrayList<tuile> list = new ArrayList<>();
         for(i = 0;i<3;i++)
         {

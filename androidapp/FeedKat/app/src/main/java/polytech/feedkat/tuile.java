@@ -14,15 +14,22 @@ import android.widget.FrameLayout;
 public class tuile extends FrameLayout
 {
     protected View v;
+    private static int endPrev = 0;
+
+    public static void resetEnd()
+    {
+        endPrev = 0;
+    }
 
     public tuile(Context context, int index, int type)
     {
         super(context);
         this.setBackgroundColor(Color.WHITE);
         FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(Static.tuile_x,type*Static.tuile_y);
-        lp.setMargins(Static.ecart_bordure,index*(type*Static.tuile_y+Static.ecart_tuile)+Static.ecart_tuile/2,Static.ecart_bordure,0);
+        lp.setMargins(Static.ecart_bordure,endPrev+Static.ecart_tuile/2,Static.ecart_bordure,Static.ecart_bordure/2);
         this.setLayoutParams(lp);
 
+        endPrev += type*Static.tuile_y + Static.ecart_tuile;
 
         v = new View(context);
 
