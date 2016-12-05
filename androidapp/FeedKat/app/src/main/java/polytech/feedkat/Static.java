@@ -23,7 +23,7 @@ public class Static {
         return Base64.encodeToString(b, Base64.DEFAULT);
     }
 
-    public static Bitmap getProfileImage(Context context, String image, int size, Boolean cropImage)
+    public static Bitmap getProfileImage(Context context, String image)
     {
         Bitmap res;
         if( !image.equalsIgnoreCase("") ){

@@ -1,5 +1,6 @@
 package polytech.feedkat;
 
+import android.Manifest;
 import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -10,10 +11,14 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.text.format.DateFormat;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +29,6 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.TimePicker;
-import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -33,9 +37,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Locale;
 
 /**
  * Created by kevin on 16/11/2016.
@@ -72,6 +74,7 @@ public class FocusedCatTile extends Activity{
         lp_scroll.setMargins(0,Static.screen_y / 10,0,0);
         scroll.setLayoutParams(lp_scroll);
         id_chat = getIntent().getIntExtra("id_cat", -1);
+        Log.v("FocusedCatTile", "id_cat" + id_chat);
         last_page = getIntent().getIntExtra("last_page", 0);
         mode = getIntent().getIntExtra("mode",0);
         isEditable = getIntent().getIntExtra("isEditable",0);
@@ -145,22 +148,43 @@ public class FocusedCatTile extends Activity{
         edit_info.setLayoutParams(lp_edit_info);
         barre_info.addView(edit_info);
 
-
-        if(mode==0){
-
-            photo_cat = new ImageView(getApplicationContext());
-            FrameLayout.LayoutParams lp_c = new FrameLayout.LayoutParams((int)(Static.tuile_y*1.2),(int)(Static.tuile_y*1.2));
-            lp_c.setMargins(Static.tuile_x/100, (int)(Static.tuile_y*0.6), 0, 0);
-            lp_c.gravity = Gravity.LEFT | Gravity.TOP;
-            photo_cat.setLayoutParams(lp_c);
+        photo_cat = new ImageView(this);
+        FrameLayout.LayoutParams lp_c = new FrameLayout.LayoutParams((int)(Static.tuile_y*1.2),(int)(Static.tuile_y*1.2));
+        lp_c.setMargins(Static.tuile_x/100, (int)(Static.tuile_y*0.6), 0, 0);
+        lp_c.gravity = Gravity.LEFT | Gravity.TOP;
+        photo_cat.setLayoutParams(lp_c);
+        if(cat.tmp_photo == null){
             if(cat.c_photo.equals("")){
                 photo_cat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
             }
             else{
-                Picasso.with(getApplicationContext()).load(cat.c_photo).into(photo_cat);
-            }
-            informations.addView(photo_cat);
+                Picasso.with(getApplicationContext()).load(cat.c_photo).into(photo_cat, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        cat.tmp_photo = Static.convertProfileImage(((BitmapDrawable)photo_cat.getDrawable()).getBitmap());
+                    }
 
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+            }
+        }
+        else
+        {
+            photo_cat.setImageBitmap(Static.getProfileImage(getApplicationContext(), cat.tmp_photo));
+        }
+
+        informations.addView(photo_cat);
+
+        if(mode==0){
+            photo_cat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    return;
+                }
+            });
 
             nom = new TextView(getApplicationContext());
             nom.setText("Nom : " + cat.c_name);
@@ -183,22 +207,21 @@ public class FocusedCatTile extends Activity{
         }
         else{
 
-            photo_cat = new ImageView(getApplicationContext());
-            FrameLayout.LayoutParams lp_c = new FrameLayout.LayoutParams((int)(Static.tuile_y*1.2),(int)(Static.tuile_y*1.2));
-            lp_c.setMargins(Static.tuile_x/100, (int)(Static.tuile_y*0.6), 0, 0);
-            lp_c.gravity = Gravity.LEFT | Gravity.TOP;
-            photo_cat.setLayoutParams(lp_c);
-            if(cat.c_photo.equals("")){
-                photo_cat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
-            }
-            else{
-                Picasso.with(getApplicationContext()).load(cat.c_photo).into(photo_cat);
-            }
-            informations.addView(photo_cat);
             photo_cat.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
+                public void onClick(View v) {
+                    if (ContextCompat.checkSelfPermission(v.getContext(), Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED)
+                    {
 
-                        }
+                        Intent i = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                        startActivityForResult(i, RESULT_LOAD_IMAGE);
+                    }
+                    else
+                    {
+                        ActivityCompat.requestPermissions((Activity)v.getContext(),
+                                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                MY_PERMISSIONS_REQUEST_READ_STORAGE);
+                    }
+                }
             });
 
             nom = new TextView(getApplicationContext());
@@ -283,8 +306,6 @@ public class FocusedCatTile extends Activity{
         text_ft.setLayoutParams(lp_text_ft);
         barre_ft.addView(text_ft);
 
-        System.out.println("index_ft = "+index_ft);
-        System.out.println("isEditable = " + isEditable);
         for(f =0 ; f < cat.ft.size(); f++) {
 
             if ((isEditable == 1) && (index_ft == f)) {
@@ -338,7 +359,6 @@ public class FocusedCatTile extends Activity{
                         FeedKatAPI.getInstance(null).ModifyFeedTime(cat.ft.get(index_ft).f_id, Integer.parseInt(poids.getText().toString()), etime.getText().toString(), new Response.Listener<JSONObject>() {
                             @Override
                             public void onResponse(JSONObject response) {
-                                System.out.println("ok");
                                 cat.ft.get(index_ft).f_weight = Integer.parseInt(poids.getText().toString());
                                 cat.ft.get(index_ft).f_time = etime.getText().toString();
                                 startActivity(intent);
@@ -346,7 +366,6 @@ public class FocusedCatTile extends Activity{
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-                                System.out.println("nok");
                             }
                         });
                     }
@@ -403,7 +422,6 @@ public class FocusedCatTile extends Activity{
                 FeedKatAPI.getInstance(null).AddFeedtime(cat.c_id, new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
-                        System.out.println("ok");
                         try {
                             Feedtimes newfeed = new Feedtimes(response.getInt("id_feedtime"),1,"00:00:00",0,1);
                             cat.ft.add(newfeed);
@@ -415,7 +433,7 @@ public class FocusedCatTile extends Activity{
                 }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        System.out.println("nok");
+
                     }
                 });
             }
@@ -444,6 +462,13 @@ public class FocusedCatTile extends Activity{
         barre_graph.addView(text_graph);
 
 
+
+
+
+
+
+
+
         edit_info.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 final Intent intent = new Intent(FocusedCatTile.this, FocusedCatTile.class);
@@ -455,20 +480,26 @@ public class FocusedCatTile extends Activity{
                 }
                 else{
                     intent.putExtra("mode",0);
-                    FeedKatAPI.getInstance(null).ModifyCat(cat.c_id, name.getText().toString(), getEnglishDate(ebirth.getText().toString()), new Response.Listener<JSONObject>() {
+                    FeedKatAPI.getInstance(null).ModifyCat(cat.c_id, name.getText().toString(), getEnglishDate(ebirth.getText().toString()), picture, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            System.out.println("ok");
+                            Log.v("ReturnModify", "on Succuess");
                             cat.c_name= name.getText().toString();
                             cat.c_date_naissance = getEnglishDate(ebirth.getText().toString());
-                            ListeChat.getList().get(id_chat).c_name = cat.c_name;
-                            ListeChat.getList().get(id_chat).c_date_naissance = cat.c_date_naissance;
+//                            ListeChat.getList().get(id_chat).c_name = cat.c_name;
+//                            ListeChat.getList().get(id_chat).c_date_naissance = cat.c_date_naissance;
+                            if(picture != null) cat.tmp_photo = picture;
                             startActivity(intent);
                         }
                     }, new Response.ErrorListener() {
                         @Override
-                        public void onErrorResponse(VolleyError error) {
-                            System.out.println("nok");
+                        public void onErrorResponse(VolleyError error)
+                        {
+                            Log.v("ReturnModify", "on error");
+                            cat.c_name= name.getText().toString();
+                            cat.c_date_naissance = getEnglishDate(ebirth.getText().toString());
+                            if(picture != null) cat.tmp_photo = picture;
+                            startActivity(intent);
                         }
                     });
                 }
@@ -498,7 +529,6 @@ public class FocusedCatTile extends Activity{
         mois = date.substring(5,7);
         jour = date.substring(8,10);
         FrenchDate = jour + "-" + mois + "-" + annee;
-        System.out.println("date = "+date);
         return FrenchDate;
     }
 
@@ -524,7 +554,7 @@ public class FocusedCatTile extends Activity{
             String picturePath = cursor.getString(columnIndex);
             cursor.close();
             picture = Static.convertProfileImage(BitmapFactory.decodeFile(picturePath));
-            photo_cat.setImageBitmap(Static.getProfileImage(this, picture, (int)(Static.tuile_y*1.2), true));
+            photo_cat.setImageBitmap(Static.getProfileImage(this, picture));
         }
     }
 
@@ -595,7 +625,14 @@ public class FocusedCatTile extends Activity{
             else{
                 newday = ""+day;
             }
-            ebirth.setText(newday + "-" + (month +1) + "-" + year);
+            if(month < 10 ){
+                ebirth.setText(newday + "-0" + (month +1) + "-" + year);
+            }
+            else{
+                ebirth.setText(newday + "-" + (month +1) + "-" + year);
+            }
+
+
         }
     }
 

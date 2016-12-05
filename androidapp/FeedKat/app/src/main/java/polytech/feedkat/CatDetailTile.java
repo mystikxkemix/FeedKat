@@ -2,6 +2,7 @@ package polytech.feedkat;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.Gravity;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -57,13 +58,11 @@ public class CatDetailTile extends tuile{
         old_total = 23*60*60 + 59*60 + 59;
         for(int i = 0; i < nb_feedtimes ; i++)
         {
-            System.out.println(cat.ft.get(i).f_time);
             ft_h = cat.ft.get(i).f_time.substring(0,2);
             ft_m = cat.ft.get(i).f_time.substring(3,5);
             ft_s = cat.ft.get(i).f_time.substring(6,8);
 
             ft_total = (Integer.parseInt(ft_h)*60 + Integer.parseInt(ft_h))*60 + Integer.parseInt(ft_s)-720;
-            System.out.println(ft_total);
             if ((time_total - ft_total) > 0){
                 next_total = ft_total + (24*60*60-time_total);
             }
@@ -88,13 +87,39 @@ public class CatDetailTile extends tuile{
         lp_c.setMargins((int)(Static.tuile_x*0.01), 0, 0, 0);
         lp_c.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
         chat.setLayoutParams(lp_c);
-        if(cat.c_photo.equals("")){
+        /*if(cat.c_photo.equals("")){
             chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
         }
         else{
             Picasso.with(getContext()).load(cat.c_photo).into(chat);
         }
+        addView(chat);*/
+
+        if(my_cat.tmp_photo == null){
+            if(my_cat.c_photo.equals("")){
+                chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+            }
+            else{
+                Picasso.with(context).load(my_cat.c_photo).into(chat, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        my_cat.tmp_photo = Static.convertProfileImage(((BitmapDrawable)chat.getDrawable()).getBitmap());
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+            }
+        }
+        else
+        {
+            chat.setImageBitmap(Static.getProfileImage(context, my_cat.tmp_photo));
+        }
         addView(chat);
+
+
 
         nom_chat = new TextView(context);
         FrameLayout.LayoutParams lp_chatNom = new FrameLayout.LayoutParams(Static.tuile_x - (int)(Static.tuile_y*0.8)-(int)(Static.tuile_x*0.02)*3, (int)(Static.tuile_y*0.8)/2);

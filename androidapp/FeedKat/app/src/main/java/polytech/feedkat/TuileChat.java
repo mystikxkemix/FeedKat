@@ -3,6 +3,7 @@ package polytech.feedkat;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.text.InputFilter;
 import android.view.Gravity;
 import android.view.View;
@@ -31,11 +32,35 @@ public class TuileChat extends tuile{
         lp_c.setMargins((int)(Static.tuile_x*0.01), 0, 0, 0);
         lp_c.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
         chat.setLayoutParams(lp_c);
-        if(lc.c_photo.equals("")){
-            chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+//        if(lc.c_photo.equals("")){
+//            chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+//        }
+//        else{
+//            Picasso.with(getContext()).load(lc.c_photo).into(chat);
+//        }
+//        addView(chat);
+
+        if(my_cat.tmp_photo == null){
+            if(my_cat.c_photo.equals("")){
+                chat.setBackground(getResources().getDrawable(R.drawable.logo_feedkat_300px));
+            }
+            else{
+                Picasso.with(context).load(my_cat.c_photo).into(chat, new com.squareup.picasso.Callback() {
+                    @Override
+                    public void onSuccess() {
+                        my_cat.tmp_photo = Static.convertProfileImage(((BitmapDrawable)chat.getDrawable()).getBitmap());
+                    }
+
+                    @Override
+                    public void onError() {
+
+                    }
+                });
+            }
         }
-        else{
-            Picasso.with(getContext()).load(lc.c_photo).into(chat);
+        else
+        {
+            chat.setImageBitmap(Static.getProfileImage(context, my_cat.tmp_photo));
         }
         addView(chat);
 

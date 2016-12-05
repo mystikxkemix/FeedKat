@@ -90,7 +90,6 @@ public class MainActivity extends Activity {
                 @Override
                 public void onResponse(JSONObject response) {
                     try {
-                        System.out.println(response);
                         int id = response.getInt("id_user");
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -129,7 +128,6 @@ public class MainActivity extends Activity {
                         @Override
                         public void onResponse(JSONObject response) {
                             try {
-                                System.out.println(response);
                                 JSONArray disp = response.getJSONArray("dispensers");
                                 for (int i = 0; i < disp.length(); i++) {
                                     JSONObject dispenser = disp.getJSONObject(i);

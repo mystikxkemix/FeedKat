@@ -193,7 +193,7 @@ public class NavigationActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(NavigationActivity.this, FocusedCatTile.class);
-                    intent.putExtra("id_cat", lc.c_id);
+                    intent.putExtra("id_cat", new Integer(lc.c_id));
                     intent.putExtra("last_page", 0);
                     startActivity(intent);
                 }
@@ -206,7 +206,7 @@ public class NavigationActivity extends Activity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(NavigationActivity.this, FocusedCatTile.class);
-                    intent.putExtra("id_cat", lc.c_id);
+                    intent.putExtra("id_cat", new Integer(lc.c_id));
                     intent.putExtra("last_page", 1);
                     startActivity(intent);
                 }

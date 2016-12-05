@@ -18,6 +18,7 @@ public class ListeChat {
     int c_statut;
     String c_message;
     String c_photo;
+    String tmp_photo=null;
     String c_date_naissance;
     int c_dispenser;
     int c_poids;

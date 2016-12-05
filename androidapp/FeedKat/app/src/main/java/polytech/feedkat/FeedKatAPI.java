@@ -309,7 +309,7 @@ public class FeedKatAPI
         addToRequestQueue(req);
     }
 
-    public void ModifyCat(int  id, String name,String birth, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    public void ModifyCat(int  id, String name, String birth, String photo, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
     {
         String link = isLocal ? localServerAddr : prodServerAddr;
         link+="/cat";
@@ -320,6 +320,7 @@ public class FeedKatAPI
             params.put("id_cat", id);
             params.put("name", name);
             params.put("birth", birth);
+            if(photo != null) params.put("photo", photo);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
@@ -365,7 +366,6 @@ public class FeedKatAPI
             params.put("id_feedtime", id);
             params.put("weight", weight);
             params.put("time", date);
-            System.out.println(date);
         } catch (JSONException e) {
             e.printStackTrace();
             return;
