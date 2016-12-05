@@ -24,6 +24,7 @@ class TabTile:Tile, UITextFieldDelegate
     var tFeed:[UILabel] = []
     var modWeight:[UITextField] = []
     var modHour:[UITextField] = []
+    var deleteList:[UIImageView] = []
     let timeFormatter = DateFormatter()
     var feedList:[FeedTime] = []
     
@@ -33,7 +34,6 @@ class TabTile:Tile, UITextFieldDelegate
         self.type = type
         self.parent = parent
         self.eDate = UiDate
-        
         
         switch type
         {
@@ -191,6 +191,7 @@ class TabTile:Tile, UITextFieldDelegate
             self.feedList.append(feed)
             v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
             addSubview(v)
+            self.feedTimeViews.append(v)
             
             let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
             utFeed.text = "- \(feed.Weight)g à \(feed.Hour)"
@@ -206,7 +207,7 @@ class TabTile:Tile, UITextFieldDelegate
             ueFeed.textAlignment = NSTextAlignment.right
             ueFeed.isUserInteractionEnabled = true
             ueFeed.tag = i-1
-            let aSelector : Selector = #selector(TabTile.FeedTapped)
+            let aSelector : Selector = #selector(TabTile.FeedTapped(_:))
             let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
             tapGesture.numberOfTapsRequired = 1
             ueFeed.addGestureRecognizer(tapGesture)
@@ -240,12 +241,24 @@ class TabTile:Tile, UITextFieldDelegate
             //umodHour.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
             umodHour.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .editingDidBegin)
             
-            modHour.append(umodHour)
+            self.modHour.append(umodHour)
+            
+            let iDelete = UIImageView(frame: CGRect(x: Static.tileWidth*0.62, y: Static.tileHeight*0.1, width: Static.tileHeight*0.3, height: Static.tileHeight*0.3))
+            iDelete.image = Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight*0.5)
+            iDelete.isHidden = true;
+            iDelete.isUserInteractionEnabled = true
+            let aSelectorD : Selector = #selector(TabTile.deleteFeedTime)
+            let tapGestureD = UITapGestureRecognizer(target: self, action: aSelectorD)
+            tapGestureD.numberOfTapsRequired = 1
+            iDelete.addGestureRecognizer(tapGestureD)
+            
+            self.deleteList.append(iDelete)
             
             v.addSubview(utFeed)
             v.addSubview(ueFeed)
             v.addSubview(umodWeight)
             v.addSubview(umodHour)
+            v.addSubview(iDelete)
             i+=1
         }
         
@@ -258,12 +271,6 @@ class TabTile:Tile, UITextFieldDelegate
         let aSelector : Selector = #selector(TabTile.addFeedTime)
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
-        
-//        ajout.sizeToFit()
-//        ajout.height *= 1.2
-//        ajout.width *= 1.2
-//        ajout.layer.cornerRadius = 5
-//        ajout.layer.borderWidth = 1
         
         ajout.addGestureRecognizer(tapGesture)
         
@@ -353,21 +360,23 @@ class TabTile:Tile, UITextFieldDelegate
         }
     }
     
-    func FeedTapped()
+    func FeedTapped(_ sender: UITapGestureRecognizer)
     {
-        let idx = 0
+        let idx = eFeed.index(of: sender.view! as! UILabel)
+        currentInd = idx!
         
-        if(!modHour[idx].isHidden)
+        if(!modHour[currentInd].isHidden)
         {
-            _ = FeedShouldReturn(userText: modHour[idx])
+            _ = FeedShouldReturn(userText: modHour[currentInd])
         }
         else
         {
-            modHour[idx].isHidden = false
-            modWeight[idx].isHidden = false
-            tFeed[idx].isHidden = true
-            eFeed[idx].text = "Valider"
-            eFeed[idx].textColor = UIColor.red
+            modHour[currentInd].isHidden = false
+            modWeight[currentInd].isHidden = false
+            deleteList[currentInd].isHidden = false
+            tFeed[currentInd].isHidden = true
+            eFeed[currentInd].text = "Valider"
+            eFeed[currentInd].textColor = UIColor.red
         }
     }
     
@@ -412,6 +421,7 @@ class TabTile:Tile, UITextFieldDelegate
         modHour[currentInd].isHidden = true
         modWeight[currentInd].isHidden = true
         tFeed[currentInd].isHidden = false
+        deleteList[currentInd].isHidden = true
         eFeed[currentInd].text = "Editer"
         eFeed[currentInd].textColor = UIColor.black
         
@@ -485,22 +495,16 @@ class TabTile:Tile, UITextFieldDelegate
             response, error in
             if(error == nil)
             {
-                //print("JSON : \(response)")
                 let ids_ft = response!.value(forKey: "id_feedtime") as! String
                 let id_ft = Int(ids_ft)!
                 
                 self.cat.feeds.append(FeedTime(ID: id_ft, Id_cat: self.cat.getID(), Id_dispenser: 0, Weight: 0, Hour: "00:00", Enable: true))
                 Static.stopLoading()
-                //self.setContent()
                 
                 let feed = self.cat.feeds.last
                 
                 let height = self.subviews.last!.height
                 let y = self.subviews.last!.y + height + Static.tileSpacing * 0.5
-                
-//                let tmp = UIView(frame: CGRect(x: 0, y: y, width: self.width, height: 100))
-//                tmp.backgroundColor = UIColor.blue
-//                self.addSubview(tmp)
                 
                  let tmp   = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: y, width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
                 self.addSubview(tmp)
@@ -549,17 +553,28 @@ class TabTile:Tile, UITextFieldDelegate
                 umodHour.layer.borderColor = UIColor.black.cgColor
                 umodHour.layer.cornerRadius = 10
                 umodHour.isHidden = true
-                //umodHour.addTarget(self, action: #selector(DetailsCatBoardVC.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
                 umodHour.addTarget(self, action: #selector(TabTile.feedTimeField(_:)), for: .editingDidBegin)
                 
                 self.modHour.append(umodHour)
+                
+                let iDelete = UIImageView(frame: CGRect(x: Static.tileWidth*0.62, y: Static.tileHeight*0.1, width: Static.tileHeight*0.3, height: Static.tileHeight*0.3))
+                iDelete.image = Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight*0.3)
+                iDelete.isHidden = true;
+                iDelete.isUserInteractionEnabled = true
+                let aSelectorD : Selector = #selector(TabTile.deleteFeedTime)
+                let tapGestureD = UITapGestureRecognizer(target: self, action: aSelectorD)
+                tapGestureD.numberOfTapsRequired = 1
+                iDelete.addGestureRecognizer(tapGestureD)
+                
+                self.deleteList.append(iDelete)
                 
                 tmp.addSubview(utFeed)
                 tmp.addSubview(ueFeed)
                 tmp.addSubview(umodWeight)
                 tmp.addSubview(umodHour)
+                tmp.addSubview(iDelete)
+                self.feedTimeViews.append(tmp)
 
-                
                 let offset = Static.tileSpacing * 0.5
                 
                 self.height += tmp.height + offset
@@ -572,6 +587,44 @@ class TabTile:Tile, UITextFieldDelegate
                 print("err : \(error)")
             }
         }
+    }
+    
+    func deleteFeedTime()
+    {
+        let id = feedList[currentInd].ID
+        
+        FeedKatAPI.deleteFeedTime(id)
+        {
+            response, error in
+            if(error == nil)
+            {
+                self.cat.feeds.remove(at: self.currentInd)
+                self.feedList.remove(at: self.currentInd)
+                self.feedTimeViews[self.currentInd].removeFromSuperview()
+                self.feedTimeViews.remove(at: self.currentInd)
+                self.eFeed.remove(at: self.currentInd)
+                self.tFeed.remove(at: self.currentInd)
+                self.modHour.remove(at: self.currentInd)
+                self.modWeight.remove(at: self.currentInd)
+                
+                let height = Static.tileHeight*0.5
+                let offset = Static.tileSpacing * 0.5
+                
+                self.height -= height + offset
+                for i in self.currentInd..<self.feedList.count
+                {
+                    self.feedTimeViews[i].y -= height+offset
+                }
+                self.parent.list_tile.last!.y -= height + offset
+                self.ajout.y -= height + offset
+                self.parent.scrollView.contentSize.height -= height + offset
+            }
+            else
+            {
+                print("err : \(error)")
+            }
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder)
