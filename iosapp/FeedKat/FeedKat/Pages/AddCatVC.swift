@@ -23,7 +23,21 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     {
         super.viewDidLoad()
         initTop(title: "Ajouter un chat")
-        self.bot.removeFromSuperview()
+        for a in self.bot.subviews
+        {
+            a.removeFromSuperview()
+        }
+        
+        let botv = UILabel()
+        botv.textColor = UIColor.white
+        botv.text = "Enregistrer le chat"
+        botv.font = UIFont(name: "Arial Rounded MT Bold", size: 20)!
+        botv.numberOfLines = 1
+        botv.translatesAutoresizingMaskIntoConstraints = false
+        bot.addSubview(botv)
+        botv.sizeToFit()
+        bot.addConstraint(NSLayoutConstraint(item: botv, attribute: .centerX, relatedBy: .equal, toItem: bot, attribute: .centerX, multiplier: 1, constant: 0))
+        bot.addConstraint(NSLayoutConstraint(item: botv, attribute: .centerY, relatedBy: .equal, toItem: bot, attribute: .centerY, multiplier: 1, constant: 0))
         
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
@@ -46,10 +60,19 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         modImage.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.15, width: Static.screenWidth*0.4, height: Static.screenWidth*0.4)
         modImage.isUserInteractionEnabled = true
         modImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.pickImage)))
-        
         view.addSubview(modImage)
         
-        modBirthday.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.16 + Static.screenWidth*0.4, width: Static.screenWidth*0.5, height: Static.tileHeight*0.3)
+        modName.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.16 + Static.screenWidth*0.4, width: Static.screenWidth*0.5, height: Static.tileHeight*0.3)
+        modName.text = "Nom"
+        modName.textColor = Static.BlueColor
+        modName.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        modName.autocorrectionType = .no
+        modName.textAlignment = .center
+        modName.layer.borderWidth = 1
+        modName.layer.cornerRadius = 10
+        view.addSubview(modName)
+        
+        modBirthday.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.25 + Static.screenWidth*0.4, width: Static.screenWidth*0.5, height: Static.tileHeight*0.3)
         modBirthday.text = "Anniversaire"
         modBirthday.delegate = self
         modBirthday.textColor = Static.BlueColor
@@ -60,8 +83,8 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         modBirthday.layer.cornerRadius = 10
         modBirthday.addTarget(self, action: #selector(self.txtFieldDidChange(textField:)), for: UIControlEvents.editingChanged)
         modBirthday.addTarget(self, action: #selector(self.dateField(_:)), for: .editingDidBegin)
-
         view.addSubview(modBirthday)
+        
         
         
     }
@@ -112,7 +135,6 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     func handleDatePicker(_ sender: UIDatePicker)
     {
         modBirthday.text = timeFormatter.string(from: sender.date)
-//        modBirthday.text = sender.date
     }
     
     func txtFieldDidChange(textField: UITextField)
@@ -123,7 +145,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     func resignResponder()
     {
         modBirthday.resignFirstResponder()
-//        modWeight[currentInd].resignFirstResponder()
+        modName.resignFirstResponder()
     }
     
     func gotoBack()
