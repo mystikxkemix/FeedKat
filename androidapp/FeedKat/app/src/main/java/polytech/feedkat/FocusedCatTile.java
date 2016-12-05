@@ -32,6 +32,7 @@ import android.widget.TimePicker;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.github.mikephil.charting.charts.LineChart;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -459,8 +460,7 @@ public class FocusedCatTile extends Activity{
         lp_text_graph.gravity = Gravity.LEFT|Gravity.CENTER_VERTICAL;
         lp_text_graph.setMargins(Static.screen_x/100,0,0,0);
         text_graph.setLayoutParams(lp_text_graph);
-        barre_graph.addView(text_graph);
-
+        barre_graph.addView(text_graph); 
 
 
 
