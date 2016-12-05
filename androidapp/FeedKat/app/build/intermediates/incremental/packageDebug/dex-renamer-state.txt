@@ -1,7 +1,0 @@
-#Mon Dec 05 12:17:45 CET 2016
-base.0=/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_da05ff5c46e4d06122d280c6a932ddc3cf470322
-renamed.1=classes.dex
-renamed.0=classes2.dex
-file.1=/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6802b4c35974899b4ccd20aa21d043b5d836eaeb/classes.dex
-base.1=/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6802b4c35974899b4ccd20aa21d043b5d836eaeb
-file.0=/Users/mike/Documents/S8/projet4/git/FeedKat/androidapp/FeedKat/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_da05ff5c46e4d06122d280c6a932ddc3cf470322/classes.dex
