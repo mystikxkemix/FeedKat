@@ -19,7 +19,7 @@ public class TuileAlerte extends tuile{
     protected TextView alert_text;
     public TuileAlerte(Context context, int index)
     {
-        super(context, index);
+        super(context, index,1);
         this.setBackgroundColor(context.getResources().getColor(R.color.colorAlert));
 
         alert = new ImageView(context);

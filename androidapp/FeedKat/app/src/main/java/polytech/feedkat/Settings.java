@@ -20,7 +20,7 @@ public class Settings extends FrameLayout
         ArrayList<tuile> list = new ArrayList<>();
         for(i = 0;i<3;i++)
         {
-            tuile tu = new tuile(context,i);
+            tuile tu = new tuile(context,i,1);
             list.add(tu);
             settings_scroll.addView(tu);
         }

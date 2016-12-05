@@ -10,6 +10,8 @@ import android.widget.ImageView;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import static polytech.feedkat.UserData.id_user;
+
 public class NavigationActivity extends Activity {
 
     private ImageView buttonCat, buttonHome, buttonSettings;
@@ -17,14 +19,19 @@ public class NavigationActivity extends Activity {
     private Accueil accueil;
     private Chat chat;
     private Settings settings;
+    private FocusedCatTile focusedTile;
     private FrameLayout settings_scroll;
     private FrameLayout chat_scroll;
+    private FrameLayout focused_scroll;
     private ScrollView scroll;
     private TextView t;
     private FrameLayout.LayoutParams lp_barre;
     private FrameLayout barre_orange;
     private View chat_view, accueil_view, settings_view;
-    private int id_user;
+    private int id_user ;
+    private ListeChat cat;
+    int a;
+    int page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +50,7 @@ public class NavigationActivity extends Activity {
         settings_scroll = new FrameLayout(this);
         chat_scroll = new FrameLayout(this);
         body_scroll = (FrameLayout) findViewById(R.id.body_scroll);
+        focused_scroll = new FrameLayout(this);
         scroll = (ScrollView) findViewById(R.id.scroll);
 
         FrameLayout header = (FrameLayout) findViewById(R.id.header);
@@ -110,8 +118,8 @@ public class NavigationActivity extends Activity {
         //Texte header
         t.setGravity(View.TEXT_ALIGNMENT_CENTER);
         t.setTextSize(20);
-        t.setText("Acceuil");
-        accueil = new Accueil(this, body_scroll,id_user);
+        t.setText("Accueil");
+        accueil = new Accueil(this, body_scroll);
         chat = new Chat(this,chat_scroll);
         settings = new Settings(this, settings_scroll);
 
@@ -124,6 +132,26 @@ public class NavigationActivity extends Activity {
         footer.addView(barre_orange);
         header.addView(t);
 
+        page = getIntent().getIntExtra("page",0);
+
+        if(page == 0){
+            t.setText("Accueil");
+            lp_barre.setMargins(0, 0, 0, 0);
+            barre_orange.setLayoutParams(lp_barre);
+            scroll.removeAllViews();
+            Runtime.getRuntime().gc();
+            accueil = new Accueil(getApplicationContext(), body_scroll);
+            scroll.addView(body_scroll);
+        }
+        else{
+            t.setText("Chat");
+            lp_barre.setMargins(Static.screen_x / 3, 0, 0, 0);
+            barre_orange.setLayoutParams(lp_barre);
+            scroll.removeAllViews();
+            chat = new Chat(getApplicationContext(),chat_scroll);
+            scroll.addView(chat_scroll);
+            Runtime.getRuntime().gc();
+        }
 
         accueil_view.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -132,7 +160,7 @@ public class NavigationActivity extends Activity {
                 barre_orange.setLayoutParams(lp_barre);
                 scroll.removeAllViews();
                 Runtime.getRuntime().gc();
-                accueil = new Accueil(getApplicationContext(), body_scroll, id_user);
+                accueil = new Accueil(getApplicationContext(), body_scroll);
                 scroll.addView(body_scroll);
             }
         });
@@ -158,6 +186,33 @@ public class NavigationActivity extends Activity {
                 Runtime.getRuntime().gc();
             }
         });
+
+        for( a = 0 ; a < TuileChat.getList().size(); a ++){
+            final ListeChat lc = TuileChat.getList().get(a).my_cat;
+            TuileChat.getList().get(a).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(NavigationActivity.this, FocusedCatTile.class);
+                    intent.putExtra("id_cat", lc.c_id);
+                    intent.putExtra("last_page", 0);
+                    startActivity(intent);
+                }
+            });
+        }
+
+        for( a = 0 ; a < CatDetailTile.getList().size(); a ++){
+            final ListeChat lc = CatDetailTile.getList().get(a).my_cat;
+            CatDetailTile.getList().get(a).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent(NavigationActivity.this, FocusedCatTile.class);
+                    intent.putExtra("id_cat", lc.c_id);
+                    intent.putExtra("last_page", 1);
+                    startActivity(intent);
+                }
+            });
+        }
+
     }
 
     @Override
@@ -176,7 +231,7 @@ public class NavigationActivity extends Activity {
         barre_orange.setLayoutParams(lp_barre);
         scroll.removeAllViews();
         Runtime.getRuntime().gc();
-        accueil = new Accueil(getApplicationContext(), body_scroll, id_user);
+        accueil = new Accueil(getApplicationContext(), body_scroll);
         scroll.addView(body_scroll);
         return;
     }

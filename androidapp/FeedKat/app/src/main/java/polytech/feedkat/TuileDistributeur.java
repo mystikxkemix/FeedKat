@@ -20,9 +20,9 @@ public class TuileDistributeur extends tuile {
     protected View limite_jauge;
     protected TextView croquette;
 
-    public TuileDistributeur(Context context, int index, double remplissage)
+    public TuileDistributeur(Context context, int index, String name, int stock)
     {
-        super(context,index);
+        super(context,index, 1);
 
         distributeur = new ImageView(context);
         FrameLayout.LayoutParams lp_v = new FrameLayout.LayoutParams((int)(Static.tuile_y*0.8),(int)(Static.tuile_y*0.8));
@@ -42,24 +42,24 @@ public class TuileDistributeur extends tuile {
         nom_distrib.setGravity(Gravity.CENTER);
         nom_distrib.setTextSize(20);
         nom_distrib.setTextColor(context.getResources().getColor(R.color.colorBarre));
-        nom_distrib.setText("Distributeur_salon");
+        nom_distrib.setText(name);
         addView(nom_distrib);
 
         distrib_text = new View(context);
-        FrameLayout.LayoutParams lp_distrib = new FrameLayout.LayoutParams((int)((Static.tuile_x - (int)(Static.tuile_y*0.8)-(int)(Static.tuile_x*0.02)*3 - (int)(Static.tuile_y*0.35))*remplissage), (int)(Static.tuile_y*0.8)/4);
+        FrameLayout.LayoutParams lp_distrib = new FrameLayout.LayoutParams((int)((Static.tuile_x - (int)(Static.tuile_y*0.8)-(int)(Static.tuile_x*0.02)*3 - (int)(Static.tuile_y*0.35))*(stock*0.01)), (int)(Static.tuile_y*0.8)/4);
         lp_distrib.setMargins((int)(Static.tuile_x*0.02)*2+(int)(Static.tuile_y*0.8) + (int)(Static.tuile_y*0.35), (int)(Static.tuile_x*0.02), (int)(Static.tuile_x*0.02), (int)(Static.tuile_x*0.02));
         lp_distrib.gravity = Gravity.BOTTOM;
         distrib_text.setLayoutParams(lp_distrib);
 
-        if(remplissage < 0.25)
+        if(stock < 25)
         {
             distrib_text.setBackgroundColor(context.getResources().getColor(R.color.colorAlert));
         }
-        else if (remplissage < 0.5)
+        else if (stock < 50)
         {
             distrib_text.setBackgroundColor(context.getResources().getColor(R.color.colorBarre));
         }
-        else if (remplissage < 0.75)
+        else if (stock < 75)
         {
             distrib_text.setBackgroundColor(Color.YELLOW);
         }

@@ -20,15 +20,17 @@ public class ListeChat {
     String c_photo;
     String c_date_naissance;
     int c_dispenser;
+    int c_poids;
     ArrayList<Feedtimes> ft = null;
 
-    public ListeChat(int id, String name, int statut, String message, String photo, String birth, int id_dispenser, JSONArray feedtimes){
+    public ListeChat(int id, String name, int statut, String message, String photo, String birth, int id_dispenser, int poids, JSONArray feedtimes){
         c_id = id;
         c_name = name;
         c_message = message;
         c_statut = statut;
         c_date_naissance = birth;
         c_dispenser = id_dispenser;
+        c_poids = poids;
 
         ft = new ArrayList<>();
         for (int i = 0; i < feedtimes.length(); i++)

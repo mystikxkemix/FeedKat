@@ -25,10 +25,8 @@ public class Chat extends FrameLayout
         int k;
         for(k = 0 ; k < ListeChat.getList().size(); k++){
             ListeChat lc = ListeChat.getList().get(k);
-            nb_feedtimes = lc.ft.size();
-            GregorianCalendar calendar = new GregorianCalendar();
-            Date time  = calendar.getTime();
-            System.out.println("time" + time);
+            CatDetailTile tu = new CatDetailTile(context,k,lc);
+            chat_scroll.addView(tu);
         }
 
 

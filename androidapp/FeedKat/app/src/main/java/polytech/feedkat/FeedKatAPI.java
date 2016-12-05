@@ -25,7 +25,7 @@ public class FeedKatAPI
     private ImageLoader mImageLoader;
     private Boolean loggedIn = false;
 
-    private boolean isLocal = true;
+    private boolean isLocal = false;
     //private String localServerAddr = "http://10.0.2.2:3000"; // localhost with emulator
     private String localServerAddr = "http://192.168.43.12:80/api/index.php";
     private String prodServerAddr = "http://feedkat.ddns.net:80/api/index.php";
@@ -277,4 +277,80 @@ public class FeedKatAPI
         addToRequestQueue(req);
     }
 
+    public void getDispenserbyUserId(int id, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    {
+        String link = isLocal ? localServerAddr : prodServerAddr;
+        link += "/dispenser/user/"+id;
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.GET, link, null, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                try {
+                    if(response.getInt("error") == 0)
+                    {
+                        onSuccess.onResponse(response);
+                    }
+                    else
+                    {
+                        onError.onErrorResponse(getVolleyError(103, "Utilisateur inconnu"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                onError.onErrorResponse(error);
+            }
+        });
+        addToRequestQueue(req);
+    }
+
+    public void ModifyCat(int  id, String name,String birth, final Response.Listener<JSONObject> onSuccess, final Response.ErrorListener onError)
+    {
+        String link = isLocal ? localServerAddr : prodServerAddr;
+        link+="/cat";
+
+        JSONObject params = new JSONObject();
+
+        try {
+            params.put("id_cat", id);
+            params.put("name", name);
+            params.put("birth", birth);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return;
+        }
+
+        JsonObjectRequest req = new JsonObjectRequest(Request.Method.POST, link, params, new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response)
+            {
+                try {
+                    if(response.getInt("error") == 0)
+                    {
+                        onSuccess.onResponse(response);
+                    }
+                    else
+                    {
+                        onError.onErrorResponse(getVolleyError(102, "This cat doesn't exist"));
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    return;
+                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error)
+            {
+                if (onError != null) onError.onErrorResponse(error);
+            }
+        });
+
+        addToRequestQueue(req);
+    }
 }

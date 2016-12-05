@@ -15,12 +15,12 @@ public class tuile extends FrameLayout
 {
     protected View v;
 
-    public tuile(Context context, int index)
+    public tuile(Context context, int index, int type)
     {
         super(context);
         this.setBackgroundColor(Color.WHITE);
-        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(Static.tuile_x,Static.tuile_y);
-        lp.setMargins(Static.ecart_bordure,index*(Static.tuile_y+Static.ecart_tuile)+Static.ecart_tuile/2,Static.ecart_bordure,0);
+        FrameLayout.LayoutParams lp = new FrameLayout.LayoutParams(Static.tuile_x,type*Static.tuile_y);
+        lp.setMargins(Static.ecart_bordure,index*(type*Static.tuile_y+Static.ecart_tuile)+Static.ecart_tuile/2,Static.ecart_bordure,0);
         this.setLayoutParams(lp);
 
 

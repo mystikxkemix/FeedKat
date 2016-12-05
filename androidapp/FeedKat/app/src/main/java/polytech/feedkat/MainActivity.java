@@ -85,7 +85,7 @@ public class MainActivity extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 
-
+            button.setClickable(false);
             FeedKatAPI.getInstance(null).login(compte.getText().toString(), pass.getText().toString(), new Response.Listener<JSONObject>() {
                 @Override
                 public void onResponse(JSONObject response) {
@@ -108,18 +108,37 @@ public class MainActivity extends Activity {
                     FeedKatAPI.getInstance(null).getCatbyUserId(id, new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-                            System.out.println(response);
                             try {
                                 JSONArray cats = response.getJSONArray("cats");
                                 for (int i = 0; i < cats.length(); i++) {
                                     JSONObject cat = cats.getJSONObject(i);
-                                    new ListeChat(cat.getInt("id_cat"), cat.getString("name"), cat.getInt("ok"), cat.getString("status"), cat.getString("photo"), cat.getString("birth"), cat.getInt("id_dispenser"), cat.getJSONArray("feed_times"));
+                                    new ListeChat(cat.getInt("id_cat"), cat.getString("name"), cat.getInt("ok"), cat.getString("status"), cat.getString("photo"), cat.getString("birth"), cat.getInt("id_dispenser"), cat.getInt("weight"), cat.getJSONArray("feed_times"));
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }, new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+
+                        }
+                    });
+                    FeedKatAPI.getInstance(null).getDispenserbyUserId(id, new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            try {
+                                System.out.println(response);
+                                JSONArray disp = response.getJSONArray("dispensers");
+                                for (int i = 0; i < disp.length(); i++) {
+                                    JSONObject dispenser = disp.getJSONObject(i);
+                                    new Dispenser(dispenser.getInt("id_dispenser"), dispenser.getString("name"), dispenser.getInt("stock"));
                                 }
                                 startActivity(new Intent(MainActivity.this,NavigationActivity.class));
                             } catch (JSONException e) {
                                 e.printStackTrace();
                             }
-
                         }
                     }, new Response.ErrorListener() {
                         @Override
