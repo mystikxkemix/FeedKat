@@ -64,6 +64,7 @@ class DashBoardVC: GenVC
     
     func gotoCD(_ sender: AnyObject)
     {
+        Static.startLoading(view: self.view)
         let view = sender.view as UIView
         self.catId = view.tag
         self.performSegue(withIdentifier: "gotoCDfromDB", sender: self)

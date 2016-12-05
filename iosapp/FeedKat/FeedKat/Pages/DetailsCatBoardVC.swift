@@ -115,6 +115,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
         top.addSubview(arrow)
         arrow.addTarget(self, action: #selector(self.gotoBack(_:)), for: .touchUpInside)
         
+        Static.startLoading(view: self.view)
         cat!.getDetails()
         {
             res in
@@ -125,6 +126,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
                     let b = a as! TabTile
                     b.setContent()
                 }
+                Static.stopLoading()
             }
         }
     }
