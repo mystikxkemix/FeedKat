@@ -25,6 +25,8 @@ class AddCatTile : Tile
         addConstraint(NSLayoutConstraint(item: UIIcon, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: UIIcon, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0))
         addConstraint(NSLayoutConstraint(item: UIIcon, attribute: .width, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0))
+        
+       
     }
     
     required init?(coder aDecoder: NSCoder) {

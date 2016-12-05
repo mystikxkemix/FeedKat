@@ -36,9 +36,24 @@ class CatBoardVC : GenVC
                 list_tile.append(catt)
             }
         }
-        list_tile.append(AddCatTile())
+        let act = AddCatTile()
+        list_tile.append(act)
+        
+        let aSelectorD : Selector = #selector(self.gotoAC)
+        let tapGestureD = UITapGestureRecognizer(target: self, action: aSelectorD)
+        tapGestureD.numberOfTapsRequired = 1
+        act.addGestureRecognizer(tapGestureD)
+        
         super.loadScroll()
     }
+    
+    
+    func gotoAC()
+    {
+        Static.startLoading(view: self.view)
+        self.performSegue(withIdentifier: "gotoACfromCB", sender: self)
+    }
+    
     
     func gotoDB()
     {

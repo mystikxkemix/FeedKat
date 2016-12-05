@@ -244,6 +244,7 @@
                         <segue destination="P4R-OT-QVY" kind="show" identifier="fromCtoDB" animates="NO" id="EsU-UM-X64"/>
                         <segue destination="GZI-CS-CBk" kind="show" identifier="fromCtoO" animates="NO" id="kMD-lF-dxu"/>
                         <segue destination="l8O-Dm-xwz" kind="presentation" identifier="gotoCDfromC" modalTransitionStyle="crossDissolve" id="CuO-B0-f83"/>
+                        <segue destination="Xgj-9s-hUd" kind="presentation" identifier="gotoACfromCB" modalTransitionStyle="crossDissolve" id="85p-5E-rgP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s6E-KH-mot" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -272,10 +273,10 @@
             </objects>
             <point key="canvasLocation" x="3551" y="732"/>
         </scene>
-        <!--View Controller-->
+        <!--Add CatVC-->
         <scene sceneID="94Z-Se-cbp">
             <objects>
-                <viewController id="Xgj-9s-hUd" sceneMemberID="viewController">
+                <viewController id="Xgj-9s-hUd" customClass="AddCatVC" customModule="FeedKat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="KbZ-de-dfQ"/>
                         <viewControllerLayoutGuide type="bottom" id="UVL-N0-qIK"/>
@@ -285,16 +286,19 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                     </view>
+                    <connections>
+                        <segue destination="7kh-6F-N9V" kind="show" identifier="gotoCBfromAC" id="h7D-dF-OtT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vmb-Hg-GGG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3552" y="1770"/>
+            <point key="canvasLocation" x="3319" y="1543"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="GG2-dU-dMO"/>
-        <segue reference="3YL-D0-56A"/>
         <segue reference="uru-KZ-2Y1"/>
         <segue reference="CuO-B0-f83"/>
+        <segue reference="EsU-UM-X64"/>
+        <segue reference="kMD-lF-dxu"/>
     </inferredMetricsTieBreakers>
 </document>

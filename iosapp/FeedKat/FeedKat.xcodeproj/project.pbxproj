@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		22019D7EE7CDA607E978EB25 /* Pods_FeedKat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9231BA54E1F7BEFAB5CF3D83 /* Pods_FeedKat.framework */; };
+		2706EF1C1DF5E4FB00268466 /* AddCatVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2706EF1B1DF5E4FB00268466 /* AddCatVC.swift */; };
 		272501811DA4E87400A018A3 /* CatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501801DA4E87400A018A3 /* CatBoardVC.swift */; };
 		272501831DA4E91300A018A3 /* OptionBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272501821DA4E91300A018A3 /* OptionBoardVC.swift */; };
 		272847111D8972D8007DD040 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847101D8972D8007DD040 /* PopUp.swift */; };
@@ -59,6 +60,7 @@
 /* Begin PBXFileReference section */
 		096FCD34A70685F150C6AD8E /* Pods_FeedKatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FeedKatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		12BFD84A5786A56030A31DB8 /* Pods-FeedKat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FeedKat.release.xcconfig"; path = "Pods/Target Support Files/Pods-FeedKat/Pods-FeedKat.release.xcconfig"; sourceTree = "<group>"; };
+		2706EF1B1DF5E4FB00268466 /* AddCatVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddCatVC.swift; path = Pages/AddCatVC.swift; sourceTree = "<group>"; };
 		272501801DA4E87400A018A3 /* CatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CatBoardVC.swift; path = Pages/CatBoardVC.swift; sourceTree = "<group>"; };
 		272501821DA4E91300A018A3 /* OptionBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OptionBoardVC.swift; path = Pages/OptionBoardVC.swift; sourceTree = "<group>"; };
 		272847101D8972D8007DD040 /* PopUp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PopUp.swift; path = Tools/PopUp.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				272501821DA4E91300A018A3 /* OptionBoardVC.swift */,
 				27580DBD1DB75B8200D0C6C3 /* RegisterPage.swift */,
 				2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */,
+				2706EF1B1DF5E4FB00268466 /* AddCatVC.swift */,
 			);
 			name = Pages;
 			sourceTree = "<group>";
@@ -567,6 +570,7 @@
 				272847111D8972D8007DD040 /* PopUp.swift in Sources */,
 				27580DBE1DB75B8200D0C6C3 /* RegisterPage.swift in Sources */,
 				274F9F7C1DA7F0110051DCE8 /* DashCatTile.swift in Sources */,
+				2706EF1C1DF5E4FB00268466 /* AddCatVC.swift in Sources */,
 				274F9F741DA7F0080051DCE8 /* Static.swift in Sources */,
 				2738C7561DCCD29100ADFA11 /* DetailsCatBoardVC.swift in Sources */,
 				275FBEA01DD9ADA2007E5C9A /* TabTile.swift in Sources */,
