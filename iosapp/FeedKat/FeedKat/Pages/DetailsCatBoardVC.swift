@@ -196,10 +196,10 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
     func pickImage()
     {
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
-        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .camera
-//        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+//        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+//        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
         
         self.present(imagePicker, animated: true, completion: nil)
     }
