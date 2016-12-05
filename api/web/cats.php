@@ -32,6 +32,18 @@ $app->put('/cat', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
+	if($error == 0) {
+		// link with a collar
+		if($request->request->get('id_collar') != '') {
+			$upd_col = "update collar set 
+				id_cat = ".$request->request->get('id_cat')." 
+				AND mac = ".$request->request->get('mac')." 
+				WHERE id_collar = ".$request->request->get('id_collar')."";
+			$app['db']->query($upd_col);
+		}
+	}
+	
+	
     //$post = array(
     //    'error' => $error,
     //    'id_cat'  => $app['db']->lastInsertId()
