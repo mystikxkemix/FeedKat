@@ -65,20 +65,26 @@ $app->put('/cat', function (Request $request) use ($app) {
 
 // API : get a specific cat
 $app->get('/cat/{id}', function($id) use ($app) {
-    $cats = $app['db']->fetchAll('select 
+	$r = $app['db']->query('select
 		c.id_cat,
 		c.name,
 		c.birth,
-		if(photo!=\'\',1,0) photo, d.id_dispenser, u.id_user, 
-		group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
-		from cat c left join cat_dispenser cd using(id_cat) left join dispenser d using(id_dispenser) left join user u using(id_user) left join feed_times f using(id_cat) 
+		if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo, 
+		u.id_user, 
+		ifnull(group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)),'') feed_times 
+		from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
+		left join dispenser d using(id_dispenser)
 		where c.id_cat = \''.$id.'\' group by c.id_cat');
+	$cats = $r->fetchAll();
+	
 	if(count($cats) > 0) {
 		$feedtimes = explode(',',$cats[0]['feed_times']);
 		$cats[0]['feed_times'] = array();
-		foreach($feedtimes as $k => $v) {
-			$feedtime = explode('||',$v);
-			$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+		if(strlen($cats[0]['feed_times']) < 1) {
+			foreach($feedtimes as $k => $v) {
+				$feedtime = explode('||',$v);
+				$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+			}
 		}
 		$cats['error'] = 0;
 	}
