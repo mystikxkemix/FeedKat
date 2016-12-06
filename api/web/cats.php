@@ -32,6 +32,18 @@ $app->put('/cat', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
+    //$post = array(
+    //    'error' => $error,
+    //    'id_cat'  => $app['db']->lastInsertId()
+    //);
+	$post['error'] = $error;
+	$post['id_cat'] = $app['db']->lastInsertId();
+	
+	if($request->request->get('id_user') != '') {
+		$ins_cu = 'insert into cat_user (id_cat,id_user) values ('.$post['id_cat'].','.$request->request->get('id_user').')';
+		$app['db']->query($ins_cu);
+	}
+	
 	if($error == 0) {
 		// link with a collar
 		if($request->request->get('id_collar') != '') {
@@ -44,12 +56,6 @@ $app->put('/cat', function (Request $request) use ($app) {
 	}
 	
 	
-    //$post = array(
-    //    'error' => $error,
-    //    'id_cat'  => $app['db']->lastInsertId()
-    //);
-	$post['error'] = $error;
-	$post['id_cat'] = $app['db']->lastInsertId();
 	
     //$times = $app['db']->fetchAll('select * from feed_');
 	//return $app->json($times);
