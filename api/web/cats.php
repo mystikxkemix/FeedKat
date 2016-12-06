@@ -112,6 +112,7 @@ $app->get('/cat/user/{id}', function($id) use ($app) {
 			u.id_user, 
 			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
 			from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
+			left join dispenser d using(id_dispenser)
 			where u.id_user = \''.$id.'\' 
 				and c.id_cat is not null group by c.id_cat');
 		
