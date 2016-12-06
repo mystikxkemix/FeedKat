@@ -202,7 +202,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 		$cats = $r->fetchAll();
 		$r->closeCursor();
 		$data['error'] = 0;
-		$data['cats'] = $cats;
+		$data['cats'] = $cats[0];
 			$data['cats']['ok'] = 1;
 			if($icat == 0)
 				$data['cats']['ok'] = 0;
