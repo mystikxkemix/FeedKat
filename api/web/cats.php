@@ -228,12 +228,12 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			foreach($activities as $k => $v) {
 				if($v != '') {
 					$activity = explode('||',$v);
-					$data['cats']['activity_histo'][] = /*array('date' => $activity[0], 'value' => */$activity[1];//);
+					$data['cats']['activity_histo'][] = /*array('date' => $activity[0], 'value' => */(int)$activity[1];//);
 				}
 			}
-			$data['cats']['battery'] = 67;
-			$data['cats']['weight'] = 4670;
-			$data['cats']['weight_histo'] = array(4500,4550,4600,4550,4550,4660,4600);
+			$data['cats']['battery'] = (int)67;
+			$data['cats']['weight'] = (int)4670;
+			$data['cats']['weight_histo'] = array((int)4500,(int)4550,(int)4600,(int)4550,(int)4550,(int)4660,(int)4600);
 	}
 	
 	return $app->json($data);
