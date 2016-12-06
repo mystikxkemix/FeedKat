@@ -32,8 +32,14 @@ class OptionBoardVC : GenVC
         let aSelector : Selector = #selector(self.gotoAD)
         let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
         tapGesture.numberOfTapsRequired = 1
-        
         AddDisp.addGestureRecognizer(tapGesture)
+        
+        Logout.isUserInteractionEnabled = true
+        let lSelector : Selector = #selector(self.gotoCP)
+        let lapGesture = UITapGestureRecognizer(target: self, action: lSelector)
+        lapGesture.numberOfTapsRequired = 1
+        
+        Logout.addGestureRecognizer(lapGesture)
         
         super.loadScroll()
     }
@@ -41,6 +47,14 @@ class OptionBoardVC : GenVC
     func gotoAD()
     {
         self.performSegue(withIdentifier: "gotoADfromOB", sender: self)
+    }
+    
+    func gotoCP()
+    {
+        Static.userId = -1
+        Cat.list = [Cat]()
+        Dispenser.list = [Dispenser]()
+        self.performSegue(withIdentifier: "gotoCPfromOB", sender: self)
     }
     
     func gotoDB()

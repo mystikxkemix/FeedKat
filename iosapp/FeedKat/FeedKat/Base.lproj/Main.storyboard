@@ -222,6 +222,7 @@
                         <segue destination="P4R-OT-QVY" kind="show" identifier="fromOtoDB" animates="NO" id="PHU-YE-bc3"/>
                         <segue destination="7kh-6F-N9V" kind="show" identifier="fromOtoC" animates="NO" id="2Wq-lx-4cP"/>
                         <segue destination="5gN-6v-vA7" kind="show" identifier="gotoADfromOB" id="Msm-zN-twa"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="gotoCPfromOB" id="TO1-t0-CUi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T9v-OV-JMU" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -318,8 +319,8 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="POx-zS-wLU"/>
         <segue reference="2Wq-lx-4cP"/>
+        <segue reference="POx-zS-wLU"/>
         <segue reference="PHU-YE-bc3"/>
         <segue reference="CuO-B0-f83"/>
     </inferredMetricsTieBreakers>

@@ -159,6 +159,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     {
         if(modName.text! != "Nom" && modBirthday.text! != "Anniversaire")
         {
+            Static.startLoading(view: self.view)
             
             FeedKatAPI.addCat(id_user: Static.userId,name: modName.text!, Birthdate: self.date, image: self.isNewImage ? self.modImage.image! : nil)
             {
@@ -170,6 +171,9 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
                     let Id = Int(sId)!
                     
                     _ = Cat(ID: Id, Name: self.modName.text!, Message: "", Photo: self.modImage.image!.base64(format: .PNG), Status: 10, Weight: 0, FeedTimes: nil)
+                    
+                    Static.stopLoading()
+                    self.gotoBack()
                 }
             }
         }

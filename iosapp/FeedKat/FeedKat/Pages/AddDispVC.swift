@@ -14,6 +14,7 @@ class AddDispVC : GenVC
     {
         super.viewDidLoad()
         initTop(title: "Ajouter un distributeur")
+        UITitle.font = UIFont(name: "Arial Rounded MT Bold", size: 25)!
         for a in self.bot.subviews
         {
             a.removeFromSuperview()
@@ -22,7 +23,7 @@ class AddDispVC : GenVC
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        let alertController = UIAlertController (title: "Title", message: "Pour ajouter un distributeur vous devez vous connecter à son WIFI", preferredStyle: .alert)
+        let alertController = UIAlertController (title: "Ajout d'un distributeur", message: "Pour ajouter un distributeur vous devez vous connecter à son WIFI", preferredStyle: .alert)
         
         let settingsAction = UIAlertAction(title: "Réglages", style: .default) { (_) -> Void in
             guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
@@ -32,14 +33,22 @@ class AddDispVC : GenVC
             if UIApplication.shared.canOpenURL(settingsUrl) {
                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                     print("Settings opened: \(success)") // Prints true
+                    self.gotoBack()
                 })
             }
         }
         alertController.addAction(settingsAction)
-        let cancelAction = UIAlertAction(title: "Annuler", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Annuler", style: .default) { (_) -> Void in
+            self.gotoBack()
+        }
         alertController.addAction(cancelAction)
         
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func gotoBack()
+    {
+        self.performSegue(withIdentifier: "gotoOBfromAD", sender: self)
     }
 
 }
