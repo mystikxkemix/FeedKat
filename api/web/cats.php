@@ -260,7 +260,7 @@ $app->post('/cat', function (Request $request) use ($app) {
 					$upd_col[] = $col.' = NULL';
 				else {
 					if(base64_decode($request->request->get($col)) === false)
-						$upd_col[] = $col.' = \''.base64_decode($request->request->get($col)).'\'';
+						$upd_col[] = $col.' = \''.base64_decode(rtrim($request->request->get($col))).'\'';
 				}
 			}
 			else
