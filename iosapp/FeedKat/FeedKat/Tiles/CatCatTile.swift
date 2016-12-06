@@ -33,15 +33,18 @@ class CatCatTile: Tile
         {
             if(cat.getPhoto() != "")
             {
-                self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
                 if let checkedUrl = URL(string: cat.getPhoto())
                 {
-                    UiImage.contentMode = .scaleAspectFit
                     FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
                     {
                         data in
-                        cat.image = data
+                        cat.image = Static.getScaledUIImageWithHeight(data!, height: Static.tileHeight)
+                        self.UiImage.image = cat.image!
                     }
+                }
+                else
+                {
+                    self.UiImage.image = Static.getScaledImageWithHeight("Icon", height: Static.tileHeight)
                 }
             }
             else
