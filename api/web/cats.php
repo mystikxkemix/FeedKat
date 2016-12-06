@@ -259,7 +259,8 @@ $app->post('/cat', function (Request $request) use ($app) {
 				if(strlen($request->request->get($col)) < 1)
 					$upd_col[] = $col.' = NULL';
 				else {
-					$photo_b64 = rtrim($request->request->get($col));
+					//$photo_b64 = rtrim($request->request->get($col));
+					$photo_b64 = $request->request->get($col);
 					if(base64_decode($photo_b64) === false)
 						$upd_col[] = $col.' = \''.base64_decode($photo_b64).'\'';
 				}
