@@ -137,7 +137,7 @@ $app->get('/cat/user/{id}', function($id) use ($app) {
 				if(in_array(substr($data['cats'][$icat]['name'],0,1),array('A','E','I','O','U','Y')))
 					$data['cats'][$icat]['status'] .= '\'';
 				else
-					$data['cats'][$icat]['status'] .= 'e';
+					$data['cats'][$icat]['status'] .= 'e ';
 				$data['cats'][$icat]['status'] .= $data['cats'][$icat]['name'];
 			}
 			$feedtimes = explode(',',$data['cats'][$icat]['feed_times']);
