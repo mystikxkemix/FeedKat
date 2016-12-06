@@ -223,6 +223,14 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 					$data['cats']['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
 				}
 			}
+			$activities = explode(',',$data['cats']['activity_histo']);
+			$data['cats']['activity_histo'] = array();
+			foreach($activities as $k => $v) {
+				if($v != '') {
+					$activity = explode('||',$v);
+					$data['cats']['activity_histo'][] = array('date' => $activity[0], 'value' => $activity[1]);
+				}
+			}
 			$data['cats']['battery'] = 67;
 			$data['cats']['weight'] = 4670;
 	}
