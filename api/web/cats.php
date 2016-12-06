@@ -65,7 +65,7 @@ $app->put('/cat', function (Request $request) use ($app) {
 
 // API : get a specific cat
 $app->get('/cat/{id}', function($id) use ($app) {
-	$r = $app['db']->query('select
+    $cats = $app['db']->fetchAll('select
 		c.id_cat,
 		c.name,
 		c.birth,
@@ -75,16 +75,12 @@ $app->get('/cat/{id}', function($id) use ($app) {
 		from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 		left join dispenser d using(id_dispenser)
 		where c.id_cat = \''.$id.'\' group by c.id_cat');
-	$cats = $r->fetchAll();
-	
 	if(count($cats) > 0) {
 		$feedtimes = explode(',',$cats[0]['feed_times']);
 		$cats[0]['feed_times'] = array();
-		if(strlen($cats[0]['feed_times']) < 1) {
-			foreach($feedtimes as $k => $v) {
-				$feedtime = explode('||',$v);
-				$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
-			}
+		foreach($feedtimes as $k => $v) {
+			$feedtime = explode('||',$v);
+			$cats[0]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
 		}
 		$cats['error'] = 0;
 	}
