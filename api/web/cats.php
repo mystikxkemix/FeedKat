@@ -258,7 +258,6 @@ $app->delete('/cat/{id}', function(Request $request) use ($app) {
 // API : update a cat
 $app->post('/cat', function (Request $request) use ($app) {
 	$id = $request->request->get('id_cat');
-	
 	$cols = array('name','birth','photo','photo_type');
 	
 	$upd_col = array();
@@ -270,30 +269,37 @@ $app->post('/cat', function (Request $request) use ($app) {
 				else {
 					//$photo_b64 = rtrim($request->request->get($col));
 					$photo_b64 = $request->request->get($col);
-					if(base64_decode($photo_b64) === false)
-						$upd_col[] = $col.' = \''.base64_decode($photo_b64).'\'';
+					$photo_b64 = base64_decode($photo_b64);
+					if($photo_b64 !== false)
+						$upd_col[] = $col.' = \''.$photo_b64.'\'';
 				}
 			}
 			else
 				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
 		}
 	
-	$upd_sql = "update cat set ";
-	$upd_sql .= implode(', ',$upd_col);
-	$upd_sql .= " where id_cat = $id";
+	if(count($upd_col) > 0) {
+		$upd_sql = "update cat set ";
+		$upd_sql .= implode(', ',$upd_col);
+		$upd_sql .= " where id_cat = $id";
+		
+		//return $app->json($upd_sql);
+		$r = $app['db']->query($upd_sql);
 	
-	$r = $app['db']->query($upd_sql);
-	
-	if($r !== false)
-		$error = 0;
+		if($r !== false)
+			$error = 0;
+		else
+			$error = 1;
+	}
 	else
 		$error = 1;
 	
     $post = array(
         'error' => $error,
         'id_cat'  => $request->request->get('id_cat'),
-	'sql' => $upd_sql,
-	'postdata' => $request->request->all()
+		'fields' => $upd_col
+		//'sql' => $upd_sql,
+		//'postdata' => $request->request->all()
     );
 	
 	return $app->json($post);
