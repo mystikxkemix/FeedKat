@@ -296,8 +296,8 @@ $app->post('/cat', function (Request $request) use ($app) {
 	
     $post = array(
         'error' => $error,
-        'id_cat'  => $request->request->get('id_cat'),
-		'fields' => $upd_col
+        'id_cat'  => $request->request->get('id_cat')/*,
+		'fields' => $upd_col*/
 		//'sql' => $upd_sql,
 		//'postdata' => $request->request->all()
     );
