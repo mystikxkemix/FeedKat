@@ -241,7 +241,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 					$data['cats']['weight_histo'][] = /*array('date' => $activity[0], 'value' => */(int)$weight[1];//);
 				}
 			}
-			$data['cats']['weight'] = (int)first($data['cats']['weight_histo']);
+			$data['cats']['weight'] = (int)reset($data['cats']['weight_histo']);
 			//$data['cats']['weight_histo'] = array((int)4500,(int)4550,(int)4600,(int)4550,(int)4550,(int)4660,(int)4600);
 	}
 	
