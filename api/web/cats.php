@@ -193,7 +193,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			u.id_user, 
 			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times,
 			FLOOR(RAND() * 100) activity,
-			(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat) activity_histo
+			(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat limit 10) activity_histo
 			from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 			left join dispenser d using(id_dispenser)
 			where c.id_cat = \''.$id.'\' group by c.id_cat');
@@ -228,7 +228,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			foreach($activities as $k => $v) {
 				if($v != '') {
 					$activity = explode('||',$v);
-					$data['cats']['activity_histo'][] = array('date' => $activity[0], 'value' => $activity[1]);
+					$data['cats']['activity_histo'][] = array(/*'date' => $activity[0], */'value' => $activity[1]);
 				}
 			}
 			$data['cats']['battery'] = 67;
