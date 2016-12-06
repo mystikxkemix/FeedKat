@@ -233,6 +233,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			}
 			$data['cats']['battery'] = 67;
 			$data['cats']['weight'] = 4670;
+			$data['cats']['weight_histo'] = array(4500,4550,4600,4550,4550,4660,4600);
 	}
 	
 	return $app->json($data);
