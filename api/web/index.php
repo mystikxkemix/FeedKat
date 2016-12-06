@@ -25,14 +25,14 @@ function deleteId($idCol, $idVal, $table) {
 	return $post;
 }
 
-/*
+
 $app->before(function (Request $request) {
     if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
     }
 });
-*/
+
 
 require_once('sql.inc.php');
 
