@@ -228,7 +228,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			foreach($activities as $k => $v) {
 				if($v != '') {
 					$activity = explode('||',$v);
-					$data['cats']['activity_histo'][] = array(/*'date' => $activity[0], */'value' => $activity[1]);
+					$data['cats']['activity_histo'][] = /*array('date' => $activity[0], 'value' => */$activity[1];//);
 				}
 			}
 			$data['cats']['battery'] = 67;
