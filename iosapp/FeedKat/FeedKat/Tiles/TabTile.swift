@@ -194,7 +194,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
             self.feedTimeViews.append(v)
             
             let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
-            utFeed.text = "- \(feed.Weight)g à \(feed.Hour)"
+            utFeed.text = " \(feed.Weight)g à \(feed.Hour)"
             utFeed.textColor = UIColor.black
             utFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
             utFeed.textAlignment = NSTextAlignment.left
@@ -324,6 +324,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         lineWeight.rightAxis.enabled = false
         lineWeight.xAxis.labelPosition = .bottom
         lineWeight.gridBackgroundColor = Static.TransparentColor
+        lineWeight.xAxis.drawGridLinesEnabled = false
         
         lineWeight.tintColor = UIColor.black
         
@@ -338,7 +339,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
             yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(cat.historyWeight[idy])))
         }
         
-        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids par jour")
+        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids par jour (en g)")
         set1Weight.setCircleColor(Static.TransparentColor)
         set1Weight.circleHoleColor = Static.OrangeColor
         set1Weight.setColor(Static.BlueColor)
@@ -346,7 +347,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         let dataWeight = LineChartData(dataSet: set1Weight)
         dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 0))
         
-        if(cat.historyActivity.count > 0)
+        if(cat.historyWeight.count > 0)
         {
             lineWeight.data = dataWeight
         }

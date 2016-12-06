@@ -17,9 +17,10 @@ class ConnectionPage: UIViewController {
     
     @IBAction func tryConnection(_ sender: UIButton)
     {
-        //FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
         Static.startLoading(view: self.view)
-        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
+
+//            FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
+        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
         {
             response, error in
             if(error == nil && response != nil)
@@ -90,16 +91,14 @@ class ConnectionPage: UIViewController {
                 }
                 else
                 {
-                    Static.stopLoading()
-                    print("error ConnectionPage : \(error)")
-                    let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
-                    pop.ViewFunc()
+                    
                 }
             }
             else
             {
                 Static.stopLoading()
-                let pop = popUp(view: self.UIcontent, text: "Serveur introuvable")
+                print("error ConnectionPage : \(error)")
+                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
                 pop.ViewFunc()
             }
         }

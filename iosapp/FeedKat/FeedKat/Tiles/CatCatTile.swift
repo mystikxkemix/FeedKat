@@ -94,7 +94,7 @@ class CatCatTile: Tile
         UiLastFeed.numberOfLines=1
         UiLastFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 15)
         UiLastFeed.textAlignment = NSTextAlignment.left
-        addSubview(UiLastFeed)
+        //addSubview(UiLastFeed)
         
         var next:FeedTime = FeedTime()
         

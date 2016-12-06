@@ -168,7 +168,6 @@ open class FeedKatAPI:NSObject
                     let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
                     if (error == 0)
                     {
-                        print("JSON : \(JSON)")
                         handler(JSON as? NSDictionary, nil)
                         return
                     }
@@ -194,7 +193,10 @@ open class FeedKatAPI:NSObject
         var params = Parameters()
         params.updateValue(catId, forKey: "id_cat")
         params.updateValue(name, forKey: "name")
-        if(UiImage != nil) {params.updateValue(UiImage!.base64(format: ImageFormat.PNG), forKey: "photo")}
+        if(UiImage != nil) {
+            params.updateValue(UiImage!.base64(format: ImageFormat.PNG), forKey: "photo")
+            params.updateValue("image/png", forKey: "photo_type")
+        }
         
         if(birth != nil)
         {
@@ -207,13 +209,14 @@ open class FeedKatAPI:NSObject
             let birthdate = "\(year)-\(month)-\(day)"
             params.updateValue(birthdate, forKey: "birth")
         }
-
+        
         Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
             .responseJSON
             {
                 response in
                 if let JSON = response.result.value
                 {
+                    print("JSON : \(JSON)")
                     let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
                     if (error == 0)
                     {
