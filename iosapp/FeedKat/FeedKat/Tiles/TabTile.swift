@@ -1,7 +1,7 @@
 import UIKit
 import Charts
 
-class TabTile:Tile, UITextFieldDelegate
+class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
 {
     var UiImage:UIImageView!
     var cat:Cat
@@ -281,9 +281,12 @@ class TabTile:Tile, UITextFieldDelegate
     {
         
         let barActivity = BarChartView(frame: CGRect(x: Static.tileWidth*0.06, y: Static.tileHeight*0.9, width: Static.tileWidth*0.9, height: Static.tileHeight*2.2))
-        
+        barActivity.delegate = self
         barActivity.chartDescription?.text = "";
         barActivity.noDataText = "Data will be loaded soon."
+        barActivity.rightAxis.enabled = false
+        barActivity.xAxis.drawGridLinesEnabled = false
+        barActivity.xAxis.labelPosition = .bottom
         
         barActivity.drawBarShadowEnabled = false
         barActivity.drawValueAboveBarEnabled = false
@@ -292,21 +295,25 @@ class TabTile:Tile, UITextFieldDelegate
         barActivity.fitBars = true
         barActivity.pinchZoomEnabled = true
         barActivity.drawGridBackgroundEnabled = false
+        barActivity.gridBackgroundColor = Static.TransparentColor
         barActivity.drawBordersEnabled = false
         barActivity.dragEnabled = true
+        barActivity.drawValueAboveBarEnabled = false
         
         var yValsActivity: [BarChartDataEntry] = []
-        let tabActivity = [1000, 1500, 1300, 2000, 500, 1200, 1000, 1500, 1300, 2000, 500, 1200]
-        for idx in 0..<tabActivity.count {
-            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(tabActivity[idx])))
+        for idx in 0..<cat.historyActivity.count {
+            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(cat.historyActivity[idx])))
         }
         
         let set1Activity = BarChartDataSet(values: yValsActivity, label: "Activité")
         set1Activity.setColor(Static.OrangeColor)
         
         let dataActivity = BarChartData(dataSet: set1Activity)
-        dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 20))
-        barActivity.data = dataActivity
+        dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 0))
+        if(cat.historyActivity.count > 0)
+        {
+            barActivity.data = dataActivity
+        }
         
         addSubview(barActivity)
         
@@ -314,6 +321,9 @@ class TabTile:Tile, UITextFieldDelegate
         
         lineWeight.chartDescription?.text = "";
         lineWeight.noDataText = "Data will be loaded soon."
+        lineWeight.rightAxis.enabled = false
+        lineWeight.xAxis.labelPosition = .bottom
+        lineWeight.gridBackgroundColor = Static.TransparentColor
         
         lineWeight.tintColor = UIColor.black
         
@@ -324,22 +334,24 @@ class TabTile:Tile, UITextFieldDelegate
         lineWeight.dragEnabled = true
         
         var yValsWeight: [ChartDataEntry] = []
-        let tabWeight = [4.5, 4.3, 3.8, 4.9, 4, 3.0]
-        for idy in 0..<tabWeight.count {
-            yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(tabWeight[idy])))
+        for idy in 0..<cat.historyWeight.count {
+            yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(cat.historyWeight[idy])))
         }
         
-        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids")
+        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids par jour")
         set1Weight.setCircleColor(Static.TransparentColor)
         set1Weight.circleHoleColor = Static.OrangeColor
         set1Weight.setColor(Static.BlueColor)
         
         let dataWeight = LineChartData(dataSet: set1Weight)
-        dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 20))
-        lineWeight.data = dataWeight
+        dataWeight.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 0))
+        
+        if(cat.historyActivity.count > 0)
+        {
+            lineWeight.data = dataWeight
+        }
         
         addSubview(lineWeight)
-        
     }
     
     func InfoTapped()

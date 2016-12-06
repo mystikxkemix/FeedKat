@@ -22,6 +22,8 @@ class Cat:NSObject
     var loaded:Bool = false
     var weight:Int = 1000
     var statusBattery:Int = 75
+    var historyWeight:[Int] = [Int]()
+    var historyActivity:[Int] = [Int]()
     
     static func getList() -> [Cat]
     {
@@ -71,7 +73,7 @@ class Cat:NSObject
             response, error in
             if(error == nil)
             {
-                let cats = (response?.value(forKey: "cats") as! NSArray)[0] as! NSDictionary
+                let cats = response?.value(forKey: "cats") as! NSDictionary
                 self.statusBattery = cats.value(forKey: "battery") as? Int ?? -1
                 self.loaded = true
                 let sDate = cats.value(forKey: "birth") as? String ?? ""
@@ -79,6 +81,8 @@ class Cat:NSObject
                 dateFormatter.timeZone = NSTimeZone(name: "UTC") as TimeZone!
                 dateFormatter.dateFormat = "yyyy-MM-dd"
                 self.Birthdate = dateFormatter.date(from: sDate)!
+                self.historyActivity = cats.value(forKey: "activity_histo") as! [Int]
+                self.historyWeight = cats.value(forKey: "weight_histo") as! [Int]
                 
                 handler(true)
             }
