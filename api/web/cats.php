@@ -258,11 +258,12 @@ $app->delete('/cat/{id}', function(Request $request) use ($app) {
 // API : update a cat
 $app->post('/cat', function (Request $request) use ($app) {
 	$id = $request->request->get('id_cat');
-	$cols = array('name','birth','photo','photo_type');
+	$cols = array('name','birth','photo_type','photo');
 	
 	$upd_col = array();
 	foreach($cols as $col)
 		if($request->request->get($col) != '') {
+			/*
 			if($col == 'photo') { // photo is transmitted in base64
 				if(strlen($request->request->get($col)) < 1)
 					$upd_col[] = $col.' = NULL';
@@ -270,13 +271,24 @@ $app->post('/cat', function (Request $request) use ($app) {
 					//$photo_b64 = rtrim($request->request->get($col));
 					$photo_b64 = $request->request->get($col);
 					$photo_b64 = base64_decode($photo_b64);
-					if($photo_b64 !== false)
-						$upd_col[] = $col.' = \''.$photo_b64.'\'';
+					//if($photo_b64 !== false)
+					//	$upd_col[] = $col.' = \''.$photo_b64.'\'';
 				}
 			}
 			else
 				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
-		}
+			*/
+			if($col == 'photo') { // photo is transmitted in base64
+				if(strlen($request->request->get($col)) < 1)
+					$upd_col[] = $col.' = NULL';
+				else {
+					if(base64_decode($request->request->get($col)) != false)
+						$upd_col[] = $col.' = \''.addslashes(base64_decode($request->request->get($col))).'\'';
+				}
+			}
+			else
+				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
+		}	
 	
 	if(count($upd_col) > 0) {
 		$upd_sql = "update cat set ";
@@ -296,8 +308,8 @@ $app->post('/cat', function (Request $request) use ($app) {
 	
     $post = array(
         'error' => $error,
-        'id_cat'  => $request->request->get('id_cat')/*,
-		'fields' => $upd_col*/
+        'id_cat'  => $request->request->get('id_cat'),
+		'fields' => $upd_col
 		//'sql' => $upd_sql,
 		//'postdata' => $request->request->all()
     );
