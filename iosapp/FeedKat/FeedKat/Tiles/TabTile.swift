@@ -407,7 +407,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         eLabel!.textColor = UIColor.white
         reloadDate()
         
-        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: (parent.isNewImage ? self.UiImage.image : nil), birth: self.date)
+        FeedKatAPI.modifyCat(cat.getID(), name: name, UiImage: (parent.isNewImage ? self.UiImage.image! : nil), birth: self.date)
         {
             response, error in
             if(error == nil)
