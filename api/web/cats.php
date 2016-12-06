@@ -250,7 +250,7 @@ $app->delete('/cat/{id}', function(Request $request) use ($app) {
 $app->post('/cat', function (Request $request) use ($app) {
 	$id = $request->request->get('id_cat');
 	
-	$cols = array('name','birth','photo');
+	$cols = array('name','birth','photo','photo_type');
 	
 	$upd_col = array();
 	foreach($cols as $col)
