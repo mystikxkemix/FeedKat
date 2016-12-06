@@ -163,7 +163,7 @@ $app->get('/cat/dispenser/{id}', function($id) use ($app) {
 });
 
 
-// API : get cats by user ID
+// API : get cat by its ID
 // battery, weight, daily_activity
 $app->get('/cat/{id}/details', function($id) use ($app) {
 	global $addr;
@@ -190,13 +190,11 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			c.name,
 			c.birth,
 			if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo, 
-			d.id_dispenser, 
 			u.id_user, 
 			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
-			from cat c join cat_dispenser cd using(id_cat) join dispenser d using(id_dispenser) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
-			where c.id_cat = \''.$id.'\' 
-				group by c.id_cat');
-		
+			from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
+			left join dispenser d using(id_dispenser)
+			where c.id_cat = \''.$id.'\' group by c.id_cat');
 		
 		
 		$cats = $r->fetchAll();
@@ -227,6 +225,7 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			$data['cats'][$icat]['battery'] = 67;
 			$data['cats'][$icat]['weight'] = 4670;
 		}
+		$data['cats'] = $data['cats'][0];
 	}
 	
 	return $app->json($data);
