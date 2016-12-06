@@ -191,7 +191,9 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 			c.birth,
 			if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo, 
 			u.id_user, 
-			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times 
+			group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)) feed_times,
+			FLOOR(RAND() * 100) activity,
+			(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat) activity_histo
 			from cat c join cat_user cu using(id_cat) join user u using(id_user) left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 			left join dispenser d using(id_dispenser)
 			where c.id_cat = \''.$id.'\' group by c.id_cat');
@@ -201,31 +203,28 @@ $app->get('/cat/{id}/details', function($id) use ($app) {
 		$r->closeCursor();
 		$data['error'] = 0;
 		$data['cats'] = $cats;
-		foreach($data['cats'] as $icat => $kcat) {
-			$data['cats'][$icat]['ok'] = 1;
+			$data['cats']['ok'] = 1;
 			if($icat == 0)
-				$data['cats'][$icat]['ok'] = 0;
-			$data['cats'][$icat]['status'] = $data['cats'][$icat]['name'].' va bien !';
+				$data['cats']['ok'] = 0;
+			$data['cats']['status'] = $data['cats']['name'].' va bien !';
 			if($icat == 0) {
-				$data['cats'][$icat]['status'] = 'Attention à la nutrition d';
-				if(in_array(substr($data['cats'][$icat]['name'],0,1),array('A','E','I','O','U','Y')))
-					$data['cats'][$icat]['status'] .= '\'';
+				$data['cats']['status'] = 'Attention à la nutrition d';
+				if(in_array(substr($data['cats']['name'],0,1),array('A','E','I','O','U','Y')))
+					$data['cats']['status'] .= '\'';
 				else
-					$data['cats'][$icat]['status'] .= 'e';
-				$data['cats'][$icat]['status'] .= $data['cats'][$icat]['name'];
+					$data['cats']['status'] .= 'e ';
+				$data['cats']['status'] .= $data['cats']['name'];
 			}
-			$feedtimes = explode(',',$data['cats'][$icat]['feed_times']);
-			$data['cats'][$icat]['feed_times'] = array();
+			$feedtimes = explode(',',$data['cats']['feed_times']);
+			$data['cats']['feed_times'] = array();
 			foreach($feedtimes as $k => $v) {
 				if($v != '') {
 					$feedtime = explode('||',$v);
-					$data['cats'][$icat]['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
+					$data['cats']['feed_times'][] = array('id_feedtime' => $feedtime[0], 'id_dispenser' => $feedtime[1], 'time' => $feedtime[2], 'weight' => $feedtime[3], 'enabled' => $feedtime[4]);
 				}
 			}
-			$data['cats'][$icat]['battery'] = 67;
-			$data['cats'][$icat]['weight'] = 4670;
-		}
-		$data['cats'] = $data['cats'][0];
+			$data['cats']['battery'] = 67;
+			$data['cats']['weight'] = 4670;
 	}
 	
 	return $app->json($data);
