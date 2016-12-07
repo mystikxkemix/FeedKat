@@ -283,7 +283,7 @@ $app->post('/cat', function (Request $request) use ($app) {
 					$upd_col[] = $col.' = NULL';
 				else {
 					if(base64_decode($request->request->get($col)))
-						$upd_col[] = $col.' = \''.utf8_encode(base64_decode($request->request->get($col))).'\'';
+						$upd_col[] = $col.' = X\''.bin2hex(base64_decode($request->request->get($col))).'\'';
 				}
 			}
 			else
@@ -308,8 +308,8 @@ $app->post('/cat', function (Request $request) use ($app) {
 	
     $post = array(
         'error' => $error,
-        'id_cat'  => $request->request->get('id_cat'),
-		'fields' => $upd_col
+        'id_cat'  => $request->request->get('id_cat')/*,
+		'fields' => $upd_col*/
 		//'sql' => $upd_sql,
 		//'postdata' => $request->request->all()
     );
