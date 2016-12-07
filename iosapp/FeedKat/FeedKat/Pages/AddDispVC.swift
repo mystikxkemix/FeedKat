@@ -12,6 +12,8 @@ import SwiftSocket
 class AddDispVC : GenVC
 {
     var button:UIButton = UIButton()
+    var SSIDField:UITextField = UITextField()
+    var PASSField:UITextField = UITextField()
     
     override func viewDidLoad()
     {
@@ -19,13 +21,46 @@ class AddDispVC : GenVC
         button.setTitle("Suivant", for: .normal)
         button.backgroundColor = Static.BlueColor
         button.isHidden = true
-
+        
+        SSIDField.frame = CGRect(x: Static.screenWidth*0.2, y: Static.screenHeight*0.35, width: Static.screenWidth*0.6, height: Static.screenHeight*0.05)
+        SSIDField.textColor = Static.BlueColor
+        SSIDField.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        SSIDField.textAlignment = NSTextAlignment.left
+        SSIDField.text = "SSID"
+        SSIDField.isHidden = true
+//        SSIDField.placeholder = "SSID"
+        SSIDField.autocorrectionType = .no
+        SSIDField.textAlignment = .center
+        SSIDField.layer.borderWidth = 1
+        SSIDField.layer.cornerRadius = 10
+        self.view.addSubview(SSIDField)
+        
+        PASSField.frame = CGRect(x: Static.screenWidth*0.2, y: Static.screenHeight*0.45, width: Static.screenWidth*0.6, height: Static.screenHeight*0.05)
+        PASSField.textColor = Static.BlueColor
+        PASSField.text = "Clé WIFI"
+        PASSField.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
+        PASSField.textAlignment = NSTextAlignment.left
+        PASSField.isHidden = true
+//        PASSField.placeholder = "Clé WIFI"
+        PASSField.isSecureTextEntry = true
+        PASSField.autocorrectionType = .no
+        PASSField.textAlignment = .center
+        PASSField.layer.borderWidth = 1
+        PASSField.layer.cornerRadius = 10
+        self.view.addSubview(PASSField)
+        
         super.viewDidLoad()
         initTop(title: "Ajouter un distributeur")
         UITitle.font = UIFont(name: "Arial Rounded MT Bold", size: 25)!
         bot.removeFromSuperview()
         
         self.view.addSubview(button)
+        
+        view.isUserInteractionEnabled = true
+        let vSelector : Selector = #selector(self.response)
+        let vapGesture = UITapGestureRecognizer(target: self, action: vSelector)
+        vapGesture.numberOfTapsRequired = 1
+        view.addGestureRecognizer(vapGesture)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -40,6 +75,8 @@ class AddDispVC : GenVC
                 UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
                     print("Settings opened: \(success)") // Prints true
                     self.button.isHidden = false
+                    self.PASSField.isHidden = false
+                    self.SSIDField.isHidden = false
                     self.button.addTarget(self, action: #selector(self.connectAndSendTCP), for: UIControlEvents.touchUpInside)
                 })
             }
@@ -60,25 +97,44 @@ class AddDispVC : GenVC
     
     func connectAndSendTCP()
     {
-        let client = TCPClient(address: "192.168.4.1", port: 86)
-        switch client.connect(timeout: 10) {
-        case .success:
+        if(SSIDField.text != "" && SSIDField.text != "")
+        {
+        
             Static.startLoading(view: self.view)
-            _ = client.send(string: "coucou toi")
-            let array = client.read(23, timeout: 10) ?? [70, 65, 73, 76]
+
+            let client = TCPClient(address: "192.168.4.1", port: 86)
+            switch client.connect(timeout: 10) {
+            case .success:
+                let SSID = self.SSIDField.text!
+                let mdp = self.PASSField.text!
             
-            if let str = NSString(bytes: array, length: 23, encoding: String.Encoding.utf8.rawValue) {
-                print(str)
-                client.close()
+                _ = client.send(string: "FeedKat\r\n\(SSID)\r\n\(mdp)")
+                let array = client.read(20, timeout: 10) ?? [70, 65, 73, 76]
+            
+                if let str = NSString(bytes: array, length: 20, encoding: String.Encoding.utf8.rawValue)
+                {
+                    print("received : {\(str)}")
+                    client.close()
+                    Static.stopLoading()
+                }
+                else
+                {
+                    print("not a valid UTF-8 sequence")
+                    Static.stopLoading()
+                }
+                break
+            case .failure(let error):
+                print("Fuck : \(error)")
                 Static.stopLoading()
-            } else {
-                print("not a valid UTF-8 sequence")
+                break
             }
-            break
-        case .failure(let error):
-            print("Fuck : \(error)")
-            break
         }
+    }
+    
+    func response()
+    {
+        SSIDField.resignFirstResponder()
+        PASSField.resignFirstResponder()
     }
 
 }
