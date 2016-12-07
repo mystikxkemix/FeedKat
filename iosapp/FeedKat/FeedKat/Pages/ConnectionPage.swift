@@ -91,15 +91,16 @@ class ConnectionPage: UIViewController {
                 }
                 else
                 {
-                    
+                    let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
+                    pop.ViewFunc()
                 }
             }
             else
             {
                 Static.stopLoading()
                 print("error ConnectionPage : \(error)")
-                let pop = popUp(view: self.UIcontent, text: "Le couple Login/MotDePasse incorrect")
-                pop.ViewFunc()
+                
+                
             }
         }
     }
