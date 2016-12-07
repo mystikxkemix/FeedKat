@@ -52,7 +52,10 @@ class DashCatTile:Tile
                     FeedKatAPI.downloadImage(url: checkedUrl, view: UiImage)
                     {
                         data in
-                        cat.image = Static.getScaledUIImageWithHeight(data!, height: Static.tileHeight)
+                        if(data != nil)
+                        {
+                            cat.image = Static.getScaledUIImageWithHeight(data!, height: Static.tileHeight)
+                        }
                     }
                 }
             }

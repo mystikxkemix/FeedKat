@@ -19,8 +19,8 @@ class ConnectionPage: UIViewController {
     {
         Static.startLoading(view: self.view)
 
-//            FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
-        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+//        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
+        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
         {
             response, error in
             if(error == nil && response != nil)

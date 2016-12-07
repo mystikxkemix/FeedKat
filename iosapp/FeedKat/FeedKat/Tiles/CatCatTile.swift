@@ -97,7 +97,7 @@ class CatCatTile: Tile
         UiLastFeed.numberOfLines=1
         UiLastFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 15)
         UiLastFeed.textAlignment = NSTextAlignment.left
-        //addSubview(UiLastFeed)
+        addSubview(UiLastFeed)
         
         var next:FeedTime = FeedTime()
         
@@ -106,7 +106,7 @@ class CatCatTile: Tile
         for a in cat.getFeeds()
         {
             h = Static.StringToInt(str: a.Hour)
-            if(h[0] > Static.nowHour)
+            if(h[0] > Static.nowHour || (h[0] == Static.nowHour && h[1] > Static.nowMinute))
             {
                 next = a
                 break

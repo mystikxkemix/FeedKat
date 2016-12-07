@@ -512,6 +512,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 let id_ft = Int(ids_ft)!
                 
                 self.cat.feeds.append(FeedTime(ID: id_ft, Id_cat: self.cat.getID(), Id_dispenser: 0, Weight: 0, Hour: "00:00", Enable: true))
+                self.feedList = self.cat.feeds
                 Static.stopLoading()
                 
                 let feed = self.cat.feeds.last
@@ -535,6 +536,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 ueFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 18)
                 ueFeed.textAlignment = NSTextAlignment.right
                 ueFeed.isUserInteractionEnabled = true
+                ueFeed.tag = self.tFeed.count - 1
                 let aSelector : Selector = #selector(TabTile.FeedTapped)
                 let tapGesture = UITapGestureRecognizer(target: self, action: aSelector)
                 tapGesture.numberOfTapsRequired = 1
