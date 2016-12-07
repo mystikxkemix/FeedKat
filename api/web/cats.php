@@ -13,12 +13,22 @@ $app->get('/cat', function() use ($app) {
 
 $app->put('/cat', function (Request $request) use ($app) {
 
-	$data_cat = array('name','birth','photo');
+	$cols = array('name','birth','photo_type','photo');
 	
 	$ins_col = array();
-	foreach($data_cat as $col)
-		if($request->request->get($col) != '')	
-			$ins_col[$col] = '\''.$request->request->get($col).'\'';
+	foreach($cols as $col)
+		if($request->request->get($col) != '') {
+			if($col == 'photo') { // photo is transmitted in base64
+				if(strlen($request->request->get($col)) < 1)
+					$ins_col[] = $col.' = NULL';
+				else {
+					if(base64_decode($request->request->get($col)))
+						$ins_col[] = $col.' = X\''.bin2hex(base64_decode($request->request->get($col))).'\'';
+				}
+			}
+			else
+				$ins_col[] = $col.' = \''.$request->request->get($col).'\'';
+		}
 	
 	$ins_sql = "insert into cat ";
 	$ins_sql .= '('.implode(',',array_keys($ins_col)).')';
@@ -263,21 +273,6 @@ $app->post('/cat', function (Request $request) use ($app) {
 	$upd_col = array();
 	foreach($cols as $col)
 		if($request->request->get($col) != '') {
-			/*
-			if($col == 'photo') { // photo is transmitted in base64
-				if(strlen($request->request->get($col)) < 1)
-					$upd_col[] = $col.' = NULL';
-				else {
-					//$photo_b64 = rtrim($request->request->get($col));
-					$photo_b64 = $request->request->get($col);
-					$photo_b64 = base64_decode($photo_b64);
-					//if($photo_b64 !== false)
-					//	$upd_col[] = $col.' = \''.$photo_b64.'\'';
-				}
-			}
-			else
-				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
-			*/
 			if($col == 'photo') { // photo is transmitted in base64
 				if(strlen($request->request->get($col)) < 1)
 					$upd_col[] = $col.' = NULL';
@@ -288,7 +283,7 @@ $app->post('/cat', function (Request $request) use ($app) {
 			}
 			else
 				$upd_col[] = $col.' = \''.$request->request->get($col).'\'';
-		}	
+		}
 	
 	if(count($upd_col) > 0) {
 		$upd_sql = "update cat set ";
