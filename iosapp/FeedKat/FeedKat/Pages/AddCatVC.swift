@@ -67,7 +67,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         modImage.tintColor = UIColor.gray
         modImage.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.15, width: Static.screenWidth*0.4, height: Static.screenWidth*0.4)
         modImage.isUserInteractionEnabled = true
-        modImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.pickImage)))
+        modImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.openAlert)))
         view.addSubview(modImage)
         
         modName.frame = CGRect(x: Static.screenWidth*0.05, y: Static.screenHeight*0.16 + Static.screenWidth*0.4, width: Static.screenWidth*0.5, height: Static.tileHeight*0.3)
@@ -95,13 +95,36 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
         
     }
     
-    func pickImage()
+    func openAlert()
+    {
+        let alertController = UIAlertController (title: "Charger une photo", message: "", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Appareil photo", style: .default) { (_) -> Void in
+            self.pickImage(false)
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Librairie", style: .default) { (_) -> Void in
+            self.pickImage(true)
+        }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func pickImage(_ type:Bool)
     {
         imagePicker.delegate = self
-//        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
-//        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
-        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+        
+        if(type)
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+            imagePicker.allowsEditing = false
+        }
+        else
+        {
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+        }
         
         self.present(imagePicker, animated: true, completion: nil)
     }

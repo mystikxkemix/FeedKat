@@ -63,7 +63,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
             self.UiImage.image = self.cat?.image!
         }
         
-        UiImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailsCatBoardVC.pickImage)))
+        UiImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(DetailsCatBoardVC.openAlert)))
         
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
@@ -193,13 +193,36 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
         }
     }
     
-    func pickImage()
+    func openAlert()
+    {
+        let alertController = UIAlertController (title: "Charger une photo", message: "", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Appareil photo", style: .default) { (_) -> Void in
+            self.pickImage(false)
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Librairie", style: .default) { (_) -> Void in
+            self.pickImage(true)
+        }
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    func pickImage(_ type:Bool)
     {
         imagePicker.delegate = self
-        imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
-        imagePicker.allowsEditing = false
-//        imagePicker.sourceType = .camera
-//        imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+        
+        if(type)
+        {
+            imagePicker.sourceType = UIImagePickerControllerSourceType.savedPhotosAlbum;
+            imagePicker.allowsEditing = false
+        }
+        else
+        {
+            imagePicker.sourceType = .camera
+            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
+        }
         
         self.present(imagePicker, animated: true, completion: nil)
     }

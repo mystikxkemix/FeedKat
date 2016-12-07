@@ -60,8 +60,6 @@ class AddDispVC : GenVC
     
     func connectAndSendTCP()
     {
-        print("here")
-        
         let client = TCPClient(address: "192.168.4.1", port: 86)
         switch client.connect(timeout: 10) {
         case .success:
