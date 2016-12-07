@@ -27,7 +27,7 @@ function deleteId($idCol, $idVal, $table) {
 
 
 $app->before(function (Request $request) {
-    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) {
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) { // if json request
         $data = json_decode($request->getContent(), true);
         $request->request->replace(is_array($data) ? $data : array());
     }
