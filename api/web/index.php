@@ -48,7 +48,7 @@ $app->register(new Silex\Provider\DoctrineServiceProvider(),
 
 
 $app->get('/', function () {
-    return 'TEST - Hello world';
+    return 'Hello from FeedKat';
 });
 
 
