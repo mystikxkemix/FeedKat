@@ -78,6 +78,11 @@ DISPENSER MANAGEMENT
 */
 require_once('dispenser.php');
 
+/*
+MEASURE
+*/
+require_once('measure.php');
+
 
 
 
