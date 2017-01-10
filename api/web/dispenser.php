@@ -145,10 +145,10 @@ $app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) 
 	return $return;
 });
 
-$app->post('/batterymode', function (Request $request) use ($app) {
+$app->get('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
 //$app->get('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-	$serial = $request->request->get('serial');
-	$mode = $request->request->get('mode');
+	//$serial = $request->request->get('serial');
+	//$mode = $request->request->get('mode');
 	
 	if($mode == 1)
 		$r = $app['db']->query('update dispenser set onbattery_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and onbattery_from is null');
@@ -171,10 +171,10 @@ $app->post('/batterymode', function (Request $request) use ($app) {
 	return $return;
 });
 
-$app->post('/powerdown', function (Request $request) use ($app) {
+$app->post('/powerdown/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
 //$app->get('/powerdown/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-	$serial = $request->request->get('serial');
-	$mode = $request->request->get('mode');
+	//$serial = $request->request->get('serial');
+	//$mode = $request->request->get('mode');
 
 	if($mode == 1)
 		$r = $app['db']->query('update dispenser set powerdown_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and powerdown_from is null');
