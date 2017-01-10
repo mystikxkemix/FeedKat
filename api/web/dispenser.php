@@ -145,7 +145,7 @@ $app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) 
 	return $return;
 });
 
-$app->get('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
+$app->post('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
 //$app->get('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
 	//$serial = $request->request->get('serial');
 	//$mode = $request->request->get('mode');
