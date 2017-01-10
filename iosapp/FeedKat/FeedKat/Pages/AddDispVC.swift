@@ -110,14 +110,55 @@ class AddDispVC : GenVC
                 let SSID = "OnePlusX"
                 let mdp = "e2isylvain"
             
-                _ = client.send(string: "FeedKat\r\n\(SSID)\r\n\(mdp)")
+                _ = client.send(string: "FeedKat\r\n\(Static.userId)\r\n\(SSID)\r\n\(mdp)")
                 let array = client.read(20, timeout: 10) ?? [70, 65, 73, 76]
             
                 if let str = NSString(bytes: array, length: 20, encoding: String.Encoding.utf8.rawValue)
                 {
                     print("received : {\(str)}")
                     client.close()
-                    Static.stopLoading()
+                    if(str == "OKOK")
+                    {
+                        Static.delay(2.0)
+                        {
+                            FeedKatAPI.getDispById(Static.userId)
+                            {
+                                response,error in
+                                if(error == nil)
+                                {
+                                    Dispenser.clearList()
+                                    let ar = response?.value(forKey: "dispensers") as? [NSDictionary]
+                                    if(ar != nil)
+                                    {
+                                        for a in ar!
+                                        {
+                                            let name = a.value(forKey: "name") as! String
+                                            let sid = a.value(forKey: "id_dispenser") as! String
+                                            let id = Int(sid)!
+                                            let sstock = a.value(forKey: "stock") as! String
+                                            let stock = Int(sstock)!
+                                            
+                                            _ = Dispenser(ID: id, Name: name, Status: stock)
+                                        }
+                                    }
+                                    Static.stopLoading()
+                                    self.performSegue(withIdentifier: "gotoDBfromAD", sender: self)
+                                }
+                                else
+                                {
+                                    Static.stopLoading()
+                                    print("\(error)")
+                                }
+
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Static.stopLoading()
+                        let pop = popUp(view: self.view, text: "Couple SSID/MotDePasse incorrect")
+                        pop.ViewFunc()
+                    }
                 }
                 else
                 {

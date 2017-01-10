@@ -43,5 +43,10 @@ class Dispenser:NSObject
     {
         return self.Status
     }
+    
+    static func clearList()
+    {
+        list = []
+    }
 
 }
