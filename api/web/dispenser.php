@@ -6,7 +6,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 // API : get dispensers by user ID
 $app->get('/dispenser/user/{id}', function($id) use ($app) {
-    $data = $app['db']->fetchAll('select id_dispenser, name, stock from dispenser where id_user = \''.$id.'\'');
+    $data = $app['db']->fetchAll('select id_dispenser, name, stock, serial, last_lifesign, onbattery_from, powerdown_from from dispenser where id_user = \''.$id.'\'');
 	if(count($data) == 0)
 		$data = array('error' => 1);
 	else {
