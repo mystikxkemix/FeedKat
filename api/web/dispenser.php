@@ -127,9 +127,9 @@ $app->post('/dispenser', function (Request $request) use ($app) {
 	return $app->json($post);
 });
 
-$app->post('/lifesign', function (Request $request) use ($app) {
+$app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) {
 //$app->get('/lifesign/{serial}', function (Request $request,$serial) use ($app) {
-	$serial = $request->request->get('serial');
+	//$serial = $request->request->get('serial');
 	$r = $app['db']->query('update dispenser set last_lifesign = UNIX_TIMESTAMP() where serial = \''.$serial.'\'');
 	
 	if($r !== false) {
