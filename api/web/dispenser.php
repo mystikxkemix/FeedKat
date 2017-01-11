@@ -102,8 +102,8 @@ $app->put('/hello', function (Request $request) use ($app) {
 				from cat_user cu join user_dispenser ud using(id_user)');
 	}
 	
-    return $app->json($insert);
-    //return convertToSimpleMsg($insert,array('error','id_dispenser'));
+    //return $app->json($insert);
+    return convertToSimpleMsg($insert,array('error','id_dispenser'));
 });
 
 // API : add a new dispenser
@@ -293,6 +293,44 @@ $app->get('/alerts/{serial}', function (Request $request,$serial) use ($app) {
 	}
 
 	return $app->json($return);
+});
+
+// API : get config by dispenser serial
+$app->get('/dispenser/params/{serial}', function(Request $request, $serial) use ($app) {
+	/*
+	$d= $app['db']->fetchAll('select id_dispenser, stock, last_params from dispenser where serial = \''.$serial.'\'');
+	$d = $data[0];
+	*/
+	$txt = '';
+	
+	//$txt .= convertToSimpleMsg(array($d['id_dispenser'], $d['stock']), array('id_dispenser','stock'));
+	$d = $app['db']->fetchAll('select 
+		c.id_cat,
+		cl.id_collar,
+		cl.serial,
+		cl.mac,
+		ifnull(group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)), \'\') feed_times
+	from cat c 
+	join cat_dispenser cd using(id_cat) 
+	join dispenser d using(id_dispenser) 
+	join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 
+	left join collar cl on c.id_cat = cl.id_cat
+	where d.serial = \''.$serial.'\'
+	group by c.id_cat');
+	
+	foreach($d as $k=>$v) {
+		$txt .= convertToSimpleMsg(array($v['id_cat'], $v['id_collar']), array('id_cat','id_collar')).'|'.$v['serial'].'|'.$v['mac'].'|FT['.$v['feed_times'].']FT';
+		//print_r($v);
+		$txt .= '<br/>';
+	}
+	
+	if(count($data) == 0)
+		$data = array('error' => 1);
+	else {
+		$data = array('error' => 0, 'dispensers' => $data);
+	}
+	return $txt;
+	//return $app->json($data);
 });
 
 
