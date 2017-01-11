@@ -4,6 +4,27 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Response;
 
+// Used to display durations
+function duree($time) {
+	$tabTime = array("jours" => 86400,
+			"heures" => 3600,
+			"minutes" => 60/*,
+			"secondes" => 1*/);
+
+	$result = "";
+
+	foreach($tabTime as $unitTime => $nbSecInUnit) {
+		$$unitTime = floor($time/$nbSecInUnit);
+		$time = $time%$nbSecInUnit;
+			
+		if($$unitTime > 0 || !empty($result))
+			$result .= $$unitTime." $unitTime ";
+	}
+
+	return rtrim($result);
+}
+
+
 // API : get dispensers by user ID
 $app->get('/dispenser/user/{id}', function($id) use ($app) {
     $data = $app['db']->fetchAll('select id_dispenser, name, stock, serial, last_lifesign, onbattery_from, powerdown_from from dispenser where id_user = \''.$id.'\'');
@@ -56,8 +77,8 @@ function addDispenser($cols = array()) {
 		else
 			$error = 1;
 		
-		$post['error'] = $error;
-		$post['id_dispenser'] = $app['db']->lastInsertId();
+		$post['error'] = (int) $error;
+		$post['id_dispenser'] = (int) $app['db']->lastInsertId();
 	}
 	return $post;
 }
@@ -100,6 +121,7 @@ $app->put('/dispenser', function (Request $request) use ($app) {
 // API : update a dispenser
 $app->post('/dispenser', function (Request $request) use ($app) {
 	$id = $request->request->get('id_dispenser');
+	$serial = $request->request->get('serial');
 	
 	$cols = array('name', 'id_user', 'stock');
 	
@@ -110,7 +132,12 @@ $app->post('/dispenser', function (Request $request) use ($app) {
 	
 	$upd_sql = "update dispenser set ";
 	$upd_sql .= implode(', ',$upd_col);
-	$upd_sql .= " where id_dispenser = $id";
+	if($serial != '')
+		$where_sql = " where serial = '$serial'";
+	else
+		$where_sql = " where id_dispenser = $id";
+	
+	$upd_sql .= $where_sql;
 	
 	$r = $app['db']->query($upd_sql);
 	
@@ -119,9 +146,12 @@ $app->post('/dispenser', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
+	if(!($r = $app['db']->fetchAll('select id_dispenser from dispenser'.$where_sql)))
+		return array('error' => 1);
+	
     $post = array(
-        'error' => $error,
-        'id_dispenser'  => $request->request->get('id_dispenser')
+        'error' => (int) $error,
+        'id_dispenser'  => (int) $r[0]['id_dispenser']
     );
 	
 	return $app->json($post);
@@ -145,18 +175,10 @@ $app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) 
 	return $return;
 });
 
-$app->post('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-//$app->get('/batterymode/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-	//$serial = $request->request->get('serial');
-	//$mode = $request->request->get('mode');
+$app->post('/batterymode/{serial}', function (Request $request,$serial) use ($app) {
+//$app->get('/batterymode/{serial}', function (Request $request,$serial) use ($app) {
 	
-	if($mode == 1)
-		$r = $app['db']->query('update dispenser set onbattery_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and onbattery_from is null');
-	else {
-		$r = $app['db']->query('update dispenser set onbattery_from = NULL where serial = \''.$serial.'\' and onbattery_from is not null');
-		// powerdown mode automatically disabled when dispenser is plugged in
-		$r = $app['db']->query('update dispenser set powerdown_from = NULL where serial = \''.$serial.'\' and powerdown_from is not null');
-	}
+	$r = $app['db']->query('update dispenser set onbattery_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and onbattery_from is null');
 	
 	if($r !== false) {
 		$error = 0;
@@ -171,27 +193,42 @@ $app->post('/batterymode/{serial}/{mode}', function (Request $request,$serial,$m
 	return $return;
 });
 
-$app->post('/powerdown/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-//$app->get('/powerdown/{serial}/{mode}', function (Request $request,$serial,$mode) use ($app) {
-	//$serial = $request->request->get('serial');
-	//$mode = $request->request->get('mode');
+$app->post('/powerup/{serial}', function (Request $request,$serial) use ($app) {
+//$app->get('/powerdown/{serial}', function (Request $request,$serial) use ($app) {
+	
+	$r = $app['db']->query('update dispenser set onbattery_from = NULL where serial = \''.$serial.'\' and onbattery_from is not null');
+	// powerdown mode automatically disabled when dispenser is plugged in
+	$r = $app['db']->query('update dispenser set powerdown_from = NULL where serial = \''.$serial.'\' and powerdown_from is not null');
+	
+	if($r !== false) {
+		$error = 0;
+	} else $error = 1;
 
-	if($mode == 1)
-		$r = $app['db']->query('update dispenser set powerdown_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and powerdown_from is null');
-		else
-			$r = $app['db']->query('update dispenser set powerdown_from = NULL where serial = \''.$serial.'\' and powerdown_from is not null');
+	if($error == 0) $return = 'OK';
+	else $return = 'KO';
 
-			if($r !== false) {
-				$error = 0;
-			} else $error = 1;
+	// update available
+	//$return = 'UP';
 
-			if($error == 0) $return = 'OK';
-			else $return = 'KO';
+	return $return;
+});
 
-			// update available
-			//$return = 'UP';
+$app->post('/powerdown/{serial}', function (Request $request,$serial) use ($app) {
+//$app->get('/powerdown/{serial}', function (Request $request,$serial) use ($app) {
 
-			return $return;
+	$r = $app['db']->query('update dispenser set powerdown_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and powerdown_from is null');
+
+	if($r !== false) {
+		$error = 0;
+	} else $error = 1;
+
+	if($error == 0) $return = 'OK';
+	else $return = 'KO';
+
+	// update available
+	//$return = 'UP';
+
+	return $return;
 });
 
 
@@ -210,5 +247,54 @@ $app->post('/dispenser/{serial}/stock/{stock}', function (Request $request,$seri
 
 	return $return;
 });
+
+
+$app->get('/alerts/{serial}', function (Request $request,$serial) use ($app) {
+
+	$data = $app['db']->fetchAll('select \'onbattery\' alert, (UNIX_TIMESTAMP() - onbattery_from) amount from dispenser where onbattery_from is not null and serial = \''.$serial.'\' and powerdown_from is null
+			union
+			select \'powerdown\' alert, (UNIX_TIMESTAMP() - powerdown_from) amount from dispenser where powerdown_from is not null and serial = \''.$serial.'\'
+			union
+			select \'lifesign\' alert, (UNIX_TIMESTAMP() - last_lifesign) amount from dispenser where (UNIX_TIMESTAMP() - last_lifesign) > 3600 and serial = \''.$serial.'\' and powerdown_from is null
+			union
+			select \'foodstock\' alert, stock amount from dispenser where stock < 25 and serial = \''.$serial.'\'
+			union
+			select concat(\'collar_battery_\',cl.serial) alert, c.last_battery amount from dispenser d join cat_dispenser cd using (id_dispenser) join cat c using(id_cat) join collar cl using(id_cat) where d.serial = \''.$serial.'\' and c.last_battery < 25');
+	
+	$alert_caption =
+		array(
+				'onbattery' => 'Distributeur non branché au secteur',
+				'powerdown' => 'Distributeur éteint',
+				'lifesign' => 'Distributeur hors-ligne',
+				'foodstock' => 'Faible réserve de croquettes',
+				'collar_battery' => 'Niveau de pile faible');
+
+	$return['alerts'] = array();
+	
+	foreach($data as $k=>$v) {
+		$return['alerts'][$v['alert']] = new stdClass;
+		if($v['alert'] != 'foodstock' && strstr($v['alert'],'collar_battery') === false) {
+			$return['alerts'][$v['alert']]->duration = (int) $v['amount'];
+			$duration_caption = 'depuis '.duree($v['amount']);
+			$return['alerts'][$v['alert']]->caption = $alert_caption[$v['alert']].' '.$duration_caption;
+		}
+		elseif(strstr($v['alert'],'collar_battery') !== false) {
+				$return['alerts'][$v['alert']]->level = (int) $v['amount'];
+				$return['alerts'][$v['alert']]->caption = $alert_caption['collar_battery'].' ('.$v['amount'].'%)';
+				$col_serial = substr($v['alert'],strlen('collar_battery_'));
+				$return['alerts']['collar_battery'][$col_serial] = $return['alerts'][$v['alert']];
+				unset($return['alerts'][$v['alert']]);
+		}
+		else {
+			$return['alerts'][$v['alert']]->level = (int) $v['amount'];
+			$return['alerts'][$v['alert']]->caption = $alert_caption[$v['alert']].' ('.$v['amount'].'%)';
+
+		}
+	}
+
+	return $app->json($return);
+});
+
+
 
 ?>

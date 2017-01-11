@@ -64,8 +64,10 @@ function getCatInfo($keys = array(), $details = false) {
 			$feedtimes = explode(',',$data['cats'][$i]['feed_times']);
 			$data['cats'][$i]['feed_times'] = array();
 			foreach($feedtimes as $k => $v) {
-				$feedtime = explode('||',$v);
-				$data['cats'][$i]['feed_times'][] = array('id_feedtime' => (int) $feedtime[0], 'id_dispenser' => (int) $feedtime[1], 'time' => $feedtime[2], 'weight' => (int) $feedtime[3], 'enabled' => (int) $feedtime[4]);
+				if($v != '') {
+					$feedtime = explode('||',$v);
+					$data['cats'][$i]['feed_times'][] = array('id_feedtime' => (int) $feedtime[0], 'id_dispenser' => (int) $feedtime[1], 'time' => $feedtime[2], 'weight' => (int) $feedtime[3], 'enabled' => (int) $feedtime[4]);
+				}
 			}
 			
 			

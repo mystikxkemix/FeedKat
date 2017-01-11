@@ -11,28 +11,39 @@ $app->get('/cat', function() use ($app) {
 
 $app->put('/measure/activity', function (Request $request) use ($app) {
 
-	$cols = array('first_time','interval','activities');
-	
+	$cols = array('time','interval','activities');
+
+	$serial = $request->request->get('serial');
 	$mac = $request->request->get('mac');
 	
-	
+	/*
 	$ins_col = array();
 	foreach($cols as $col)
 		if($request->request->get($col) != '') {
 				$ins_col[] = $col.' = \''.$request->request->get($col).'\'';
 		}
+	*/
+
+	if($serial != '')
+		$where_sql = 'co.serial = \''.$serial.'\'';
+	else
+		$where_sql = 'co.mac = \''.$mac.'\'';
 	
-	$idcat = $app['db']->fetchAll('select id_cat from cat c join collar co using(id_cat) where co.mac = \''.$mac.'\'');
+	$idcat = $app['db']->fetchAll('select id_cat from cat c join collar co using(id_cat) where '.$where_sql);
 	if($r !== false) {
 		$id_cat = $idcat[0]['id_cat'];
 	}
 	
-	echo $id_cat;
-	
-	$ins_sql = "insert into cat_measure ";
-	$ins_sql .= '('.implode(',',array_keys($ins_col)).')';
-	$ins_sql .= " values (";
-	$ins_sql .= implode(', ',$ins_col).')';
+	$activities = explode(',',$request->request->get('activities'));
+	$interval = (int) $request->request->get('interval');
+	$time = (int) $request->request->get('time');
+	$date = $time;
+	$ins_sql = "insert into cat_measure (id_cat, measure_type, date, value) values ";
+	foreach($activities as $k => $activity) {
+		$actsql[] = "($id_cat, 'activity', FROM_UNIXTIME($date), $activity)";
+		$date += $interval;
+	}
+	$ins_sql .= implode(', ', $actsql);
 	
 	$r = $app['db']->query($ins_sql);
 	
@@ -41,15 +52,17 @@ $app->put('/measure/activity', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
+	return ($error ? 'KO' : 'OK');
+	
     //$post = array(
     //    'error' => $error,
     //    'id_cat'  => $app['db']->lastInsertId()
     //);
-	$post['error'] = $error;
+	//$post['error'] = $error;
 	
     //$times = $app['db']->fetchAll('select * from feed_');
 	//return $app->json($times);
-    return $app->json($post);
+    //return $app->json($post);
 });
 
 // API : delete a cat
