@@ -307,13 +307,13 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	$d = $app['db']->fetchAll('select 
 		c.id_cat,
 		cl.id_collar,
-		cl.serial,
-		cl.mac,
-		ifnull(group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)), \'\') feed_times
+		ifnull(cl.serial,\'------\') serial,
+		ifnull(cl.mac,\'00:00:00:00:00:00\') mac,
+		ifnull(group_concat(concat(LPAD(f.id_feedtime,3,\'0\'),\'||\',LPAD(f.id_dispenser,3,\'0\'),\'||\',DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\'))), \'\') feed_times
 	from cat c 
 	join cat_dispenser cd using(id_cat) 
 	join dispenser d using(id_dispenser) 
-	join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 
+	join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 and f.weight > 0
 	left join collar cl on c.id_cat = cl.id_cat
 	where d.serial = \''.$serial.'\'
 	group by c.id_cat');
