@@ -17,8 +17,8 @@ function duree($time) {
 		if($nbSecInUnit != 1 || ($nbSecInUnit == 1 && $result == '')) {
 			$$unitTime = floor($time/$nbSecInUnit);
 			$time = $time%$nbSecInUnit;
-				
-			if($$unitTime > 0 || !empty($result))
+			
+			//if($$unitTime > 0 || !empty($result))
 				$result .= $$unitTime." $unitTime ";
 		}
 	}
