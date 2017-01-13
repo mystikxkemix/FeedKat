@@ -334,5 +334,9 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 });
 
 
+$app->get('/time', function (Request $request) use ($app) {
+	return time();
+});
+
 
 ?>
