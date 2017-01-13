@@ -20,6 +20,9 @@ function duree($time) {
 		if($$unitTime > 0 || !empty($result))
 			$result .= $$unitTime." $unitTime ";
 	}
+	if($result == '') {
+		$result .= $tabTime['secondes'].' secondes';
+	}
 
 	return rtrim($result);
 }
