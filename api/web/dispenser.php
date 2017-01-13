@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 function duree($time) {
 	$tabTime = array("jours" => 86400,
 			"heures" => 3600,
-			"minutes" => 60/*,
-			"secondes" => 1*/);
+			"minutes" => 60,
+			"secondes" => 1);
 
 	$result = "";
 
@@ -18,7 +18,7 @@ function duree($time) {
 			$$unitTime = floor($time/$nbSecInUnit);
 			$time = $time%$nbSecInUnit;
 			
-			//if($$unitTime > 0 || !empty($result))
+			if($$unitTime > 0 || !empty($result))
 				$result .= $$unitTime." $unitTime ";
 		}
 	}
