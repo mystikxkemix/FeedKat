@@ -14,16 +14,15 @@ function duree($time) {
 	$result = "";
 
 	foreach($tabTime as $unitTime => $nbSecInUnit) {
-		$$unitTime = floor($time/$nbSecInUnit);
-		$time = $time%$nbSecInUnit;
-			
-		if($$unitTime > 0 || !empty($result))
-			$result .= $$unitTime." $unitTime ";
+		if($nbSecInUnit != 1 || ($nbSecInUnit == 1 && $result == '')) {
+			$$unitTime = floor($time/$nbSecInUnit);
+			$time = $time%$nbSecInUnit;
+				
+			if($$unitTime > 0 || !empty($result))
+				$result .= $$unitTime." $unitTime ";
+		}
 	}
-	if($result == '') {
-		$result .= $tabTime['secondes'].' secondes';
-	}
-
+	
 	return rtrim($result);
 }
 
