@@ -83,7 +83,11 @@ $app->put('/feedtimes', function (Request $request) use ($app) {
 
 // API : get free collars by user id
 $app->get('/freecollars/user/{id}', function($id) use ($app) {
-    $cats = $app['db']->fetchAll('select * from collar where id_cat is null and id_user = '.$id.'');
+    $cats = $app['db']->fetchAll('select id_collar, id_cat from collar where id_cat is null and id_user = '.$id.'');
+	foreach($cats as $k=>$v) {
+		$cats[$k]['id_collar'] = (int) $cats[$k]['id_collar'];
+		$cats[$k]['id_cat'] = (int) $cats[$k]['id_cat'];
+	}
 	return $app->json($cats);
 });
 
