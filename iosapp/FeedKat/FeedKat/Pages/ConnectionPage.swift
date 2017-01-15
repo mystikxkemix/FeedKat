@@ -29,65 +29,9 @@ class ConnectionPage: UIViewController {
                 if(id != nil)
                 {
                     Static.userId = Int(id!)!
-                    FeedKatAPI.getCatbyUserId(Static.userId)
-                    {
-                        response, error in
-                        if(error == nil)
-                        {
-                            let ar = response?.value(forKey: "cats") as? [NSDictionary]
-                            if(ar != nil)
-                            {
-                                for a in ar!
-                                {
-                                    let name = a.value(forKey: "name") as! String
-                                    let ids = a.value(forKey: "id_cat") as! String
-                                    let id = Int(ids)!
-                                    let message = a.value(forKey: "status") as! String
-                                    let status = a.value(forKey: "ok") as! Int
-                                    let photo = a.value(forKey: "photo") as! String
-                                    let weight = a.value(forKey: "weight") as! Int
-                                    let feed = a.value(forKey: "feed_times") as? [NSDictionary]
-                                    _ = Cat(ID: id, Name: name, Message: message, Photo: photo, Status:status, Weight:weight, FeedTimes: feed)
-                                }
-                            }
-
-                            FeedKatAPI.getDispById(Static.userId)
-                            {
-                                response, error in
-                                if(error == nil)
-                                {
-                                    let ar = response?.value(forKey: "dispensers") as? [NSDictionary]
-                                    if(ar != nil)
-                                    {
-                                        for a in ar!
-                                        {
-                                            let name = a.value(forKey: "name") as! String
-                                            let sid = a.value(forKey: "id_dispenser") as! String
-                                            let id = Int(sid)!
-                                            let sstock = a.value(forKey: "stock") as! String
-                                            let stock = Int(sstock)!
-                                            
-                                            _ = Dispenser(ID: id, Name: name, Status: stock)
-                                        }
-                                    }
-                                    Static.stopLoading()
-                                    self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
-                                }
-                                else
-                                {
-                                    Static.stopLoading()
-                                    print("\(error)")
-                                }
-                                
-                                
-                            }
-                        }
-                        else
-                        {
-                            Static.stopLoading()
-                            print("error getCatbyId : \(error)")
-                        }
-                    }
+                    DataCache.cache(Static.userId, forKey: FeedKatAPI.userIdCacheKey)
+                    Static.stopLoading()
+                    self.alreadyConnected()
                 }
                 else
                 {
@@ -105,6 +49,74 @@ class ConnectionPage: UIViewController {
         }
     }
     
+    func alreadyConnected()
+    {
+        let id = DataCache.getInt(forKey: FeedKatAPI.userIdCacheKey)
+        if(id == nil){return}
+        
+        Static.startLoading(view: self.view)
+        Static.userId = id!
+        
+        FeedKatAPI.getCatbyUserId(Static.userId)
+        {
+            response, error in
+            if(error == nil)
+            {
+                let ar = response?.value(forKey: "cats") as? [NSDictionary]
+                if(ar != nil)
+                {
+                    for a in ar!
+                    {
+                        let name = a.value(forKey: "name") as! String
+                        let id = a.value(forKey: "id_cat") as! Int
+                        let message = a.value(forKey: "status") as! String
+                        let status = a.value(forKey: "ok") as! Int
+                        let photo = a.value(forKey: "photo") as! String
+                        let weight = a.value(forKey: "weight") as! Int
+                        let feed = a.value(forKey: "feed_times") as? [NSDictionary]
+                        _ = Cat(ID: id, Name: name, Message: message, Photo: photo, Status:status, Weight:weight, FeedTimes: feed)
+                    }
+                }
+                
+                FeedKatAPI.getDispById(Static.userId)
+                {
+                    response, error in
+                    if(error == nil)
+                    {
+                        let ar = response?.value(forKey: "dispensers") as? [NSDictionary]
+                        if(ar != nil)
+                        {
+                            for a in ar!
+                            {
+                                let name = a.value(forKey: "name") as! String
+                                let sid = a.value(forKey: "id_dispenser") as! String
+                                let id = Int(sid)!
+                                let sstock = a.value(forKey: "stock") as! String
+                                let stock = Int(sstock)!
+                                
+                                _ = Dispenser(ID: id, Name: name, Status: stock)
+                            }
+                        }
+                        Static.stopLoading()
+                        self.performSegue(withIdentifier: "gotoDashBoard", sender: self)
+                    }
+                    else
+                    {
+                        Static.stopLoading()
+                        print("\(error)")
+                    }
+                    
+                    
+                }
+            }
+            else
+            {
+                Static.stopLoading()
+                print("error getCatbyId : \(error)")
+            }
+        }
+    }
+    
     @IBAction func gotoRegister(_ sender: UIButton)
     {
         self.performSegue(withIdentifier: "gotoRegister", sender: self)
@@ -114,6 +126,7 @@ class ConnectionPage: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        alreadyConnected()
         // Do any additional setup after loading the view, typically from a nib.
     }
     

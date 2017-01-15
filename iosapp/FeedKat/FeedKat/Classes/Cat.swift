@@ -44,15 +44,12 @@ class Cat:NSObject
         {
             for a in FeedTimes!
             {
-                let ids_ft = a.value(forKey: "id_feedtime") as! String
-                let id_ft = Int(ids_ft)!
-                let ids_ds = a.value(forKey: "id_dispenser") as! String
-                let id_ds = Int(ids_ds)!
+                let id_ft = a.value(forKey: "id_feedtime") as! Int
+                let id_ds = a.value(forKey: "id_dispenser") as! Int
                 let time = a.value(forKey: "time") as! String
-                let sweight = a.value(forKey: "weight") as! String
-                let weight = Int(sweight)!
-                let sena = a.value(forKey: "enabled") as! String
-                let ena = Int(sena)! == 1
+                let weight = a.value(forKey: "weight") as! Int
+                let iena = a.value(forKey: "enabled") as! Int
+                let ena = iena == 1
                 
                 feeds.append(FeedTime(ID: id_ft, Id_cat: ID, Id_dispenser: id_ds, Weight: weight, Hour: time, Enable: ena))
             }

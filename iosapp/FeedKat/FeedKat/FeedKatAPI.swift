@@ -8,6 +8,11 @@ open class FeedKatAPI:NSObject
     fileprivate static var prodServerAddr = "http://89.3.239.45:80/api/index.php"
     fileprivate static var localServerAddr = "http://192.168.43.12:80/api/index.php"
     
+    
+    public static let userIdCacheKey = "userIdCacheKey"
+    public static let catArrayCacheKey = "catArrayCacheKey"
+    public static let dispArrayCacheKey = "dispArrayCacheKey"
+    
     open static func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url)
         {   (data, response, error) in

@@ -52,6 +52,7 @@ class OptionBoardVC : GenVC
     func gotoCP()
     {
         Static.userId = -1
+        DataCache.removeCache(forKey: FeedKatAPI.userIdCacheKey)
         Cat.list = [Cat]()
         Dispenser.list = [Dispenser]()
         self.performSegue(withIdentifier: "gotoCPfromOB", sender: self)
