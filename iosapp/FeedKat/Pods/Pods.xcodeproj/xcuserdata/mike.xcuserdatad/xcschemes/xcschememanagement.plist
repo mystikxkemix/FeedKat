@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MadJohTools.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-FeedKat.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -47,6 +52,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2942145962CB4C02A3C8FA010873EC86</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2FFA3C6DF3E25F3169E86F0B3B7AE918</key>
 		<dict>
 			<key>primary</key>
@@ -57,12 +67,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>829D315371FBD5CC615E865AB7A42655</key>
+		<key>800592712F20E957A4590FE4B7FFDBB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9CCC5B3D9DAF42FDD83C6B3DCDFF18E3</key>
+		<key>E08D57D3EBE6985F7955BB963F733430</key>
 		<dict>
 			<key>primary</key>
 			<true/>

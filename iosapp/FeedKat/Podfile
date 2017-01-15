@@ -6,6 +6,7 @@ target 'FeedKat' do
 pod 'Alamofire', '~> 4.0'
 pod 'Charts'
 pod 'SwiftSocket'
+pod 'MadJohTools'
 
 end
 

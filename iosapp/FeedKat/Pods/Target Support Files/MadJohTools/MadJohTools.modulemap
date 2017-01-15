@@ -1,0 +1,6 @@
+framework module MadJohTools {
+  umbrella header "MadJohTools-umbrella.h"
+
+  export *
+  module * { export * }
+}
