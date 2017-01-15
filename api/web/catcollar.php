@@ -79,4 +79,13 @@ $app->delete('/cat/{id}', function(Request $request) use ($app) {
 $app->put('/feedtimes', function (Request $request) use ($app) {
 	$data_feedtime = array('id_cat','id_dispenser','time','weight','enabled');
 	*/
+	
+
+// API : get free collars by user id
+$app->get('/freecollars/user/{id}', function($id) use ($app) {
+    $cats = $app['db']->fetchAll('select * from collar where id_cat is null and id_user = '.$id.'');
+	return $app->json($cats);
+});
+
+
 ?>
