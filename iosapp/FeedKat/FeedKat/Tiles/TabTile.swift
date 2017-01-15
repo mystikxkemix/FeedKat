@@ -665,8 +665,9 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 print("err : \(error)")
             }
         }
-        
     }
+    
+    
     
     required init?(coder aDecoder: NSCoder)
     {
