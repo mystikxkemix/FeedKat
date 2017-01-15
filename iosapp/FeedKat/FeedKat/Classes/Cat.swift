@@ -70,7 +70,8 @@ class Cat:NSObject
             response, error in
             if(error == nil)
             {
-                let cats = response?.value(forKey: "cats") as! NSDictionary
+                let tabcats = response?.value(forKey: "cats") as! [NSDictionary]
+                let cats = tabcats[0]
                 self.statusBattery = cats.value(forKey: "battery") as? Int ?? -1
                 self.loaded = true
                 let sDate = cats.value(forKey: "birth") as? String ?? ""

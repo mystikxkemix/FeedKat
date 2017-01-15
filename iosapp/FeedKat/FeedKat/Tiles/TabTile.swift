@@ -1,5 +1,6 @@
 import UIKit
 import Charts
+import MadJohTools
 
 class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
 {
@@ -185,11 +186,11 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
     func initFeed()
     {
         var i = 1;
-        var v:UIView
+        var v:DragToActionView
         for feed in cat.feeds
         {
             self.feedList.append(feed)
-            v = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
+            v = DragToActionView(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth*0.95, height: Static.tileHeight*0.5))
             addSubview(v)
             self.feedTimeViews.append(v)
             
@@ -260,6 +261,31 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
             v.addSubview(umodHour)
             v.addSubview(iDelete)
             i+=1
+            
+            v.actionWidth = Static.tileWidth*0.20
+            v.setActionHeightMultiplier(0.8)
+            v.setActionColor(color: Static.TransparentColor)
+            v.setActionImage(img: Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight))
+            
+            v.addActionTarget {
+                
+                FeedKatAPI.deleteFeedTime(feed.ID, handler: {_,_ in })
+                
+                for view in self.feedTimeViews
+                {
+                    view.removeFromSuperview()
+                }
+                let offset = v.height + Static.tileSpacing*0.5
+                
+                self.parent.list_tile.last!.y -= offset
+                self.parent.list_tile.last!.heightAnchor.constraint(equalToConstant: self.parent.list_tile.last!.height - offset).isActive = true
+                self.parent.scrollView.contentSize.height -= offset
+                self.banner.height -= offset
+                self.heightAnchor.constraint(equalToConstant: self.height - offset).isActive = true
+                self.ajout.removeFromSuperview()
+                self.cat.feeds.remove(at: self.cat.feeds.index(of: feed)!)
+                self.initFeed()
+            }
         }
         
         ajout = UILabel(frame: CGRect(x: Static.tileWidth*0.05, y: CGFloat(i)*(Static.tileHeight*0.5 + Static.tileSpacing*0.5), width: Static.tileWidth, height: Static.tileHeight*0.5))

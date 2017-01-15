@@ -12,7 +12,6 @@ import UIKit
 public class MadJohPopup
 {
     // TODO add further params
-    public static var textFont: UIFont!
     public static var textColor: UIColor!
     public static var borderColor: UIColor!
     
@@ -41,7 +40,7 @@ public class MadJohPopup
         let textView = UILabel()
         textView.numberOfLines = 0
         textView.text = text
-        if (textFont != nil) { textView.font = textFont }
+        if (MadJohTools.textFont != nil) { textView.font = MadJohTools.textFont }
         textView.textColor = textColor ?? UIColor.black
         textView.textAlignment = .center
         textView.isUserInteractionEnabled = false

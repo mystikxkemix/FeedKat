@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MadJohTools
 
 class ConnectionPage: UIViewController {
 
@@ -124,6 +125,7 @@ class ConnectionPage: UIViewController {
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        MadJohTools.textFont = UIFont(name: "Arial Rounded MT Bold", size: 20)
         alreadyConnected()
         // Do any additional setup after loading the view, typically from a nib.
     }

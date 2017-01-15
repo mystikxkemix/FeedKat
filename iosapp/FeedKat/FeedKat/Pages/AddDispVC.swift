@@ -105,10 +105,10 @@ class AddDispVC : GenVC
             let client = TCPClient(address: "192.168.4.1", port: 86)
             switch client.connect(timeout: 10) {
             case .success:
-//                let SSID = self.SSIDField.text!
-//                let mdp = self.PASSField.text!
-                let SSID = "OnePlusX"
-                let mdp = "e2isylvain"
+            let SSID = self.SSIDField.text!
+            let mdp = self.PASSField.text!
+//                let SSID = "OnePlusX"
+//                let mdp = "e2isylvain"
             
                 _ = client.send(string: "FeedKat\r\n\(Static.userId)\r\n\(SSID)\r\n\(mdp)")
                 let array = client.read(20, timeout: 10) ?? [70, 65, 73, 76]

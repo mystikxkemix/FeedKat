@@ -15,6 +15,7 @@
 		272847141D8972E1007DD040 /* ConnectionPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847121D8972E1007DD040 /* ConnectionPage.swift */; };
 		272847151D8972E1007DD040 /* DashBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272847131D8972E1007DD040 /* DashBoardVC.swift */; };
 		272937AF1E2BB5410016A774 /* DataCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 272937AE1E2BB5410016A774 /* DataCache.swift */; };
+		272937B51E2BCA850016A774 /* MadJohTools.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 272937B41E2BCA850016A774 /* MadJohTools.framework */; };
 		27325A3D1DF60A75004AC6CF /* AddDispVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27325A3C1DF60A75004AC6CF /* AddDispVC.swift */; };
 		2738C7561DCCD29100ADFA11 /* DetailsCatBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */; };
 		274610571DEF0D0E00BEE8E6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 274610561DEF0D0E00BEE8E6 /* Assets.xcassets */; };
@@ -69,6 +70,8 @@
 		272847121D8972E1007DD040 /* ConnectionPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectionPage.swift; path = Pages/ConnectionPage.swift; sourceTree = "<group>"; };
 		272847131D8972E1007DD040 /* DashBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DashBoardVC.swift; path = Pages/DashBoardVC.swift; sourceTree = "<group>"; };
 		272937AE1E2BB5410016A774 /* DataCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataCache.swift; path = Tools/DataCache.swift; sourceTree = "<group>"; };
+		272937B01E2BCA3E0016A774 /* MadJohTools.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = MadJohTools.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		272937B41E2BCA850016A774 /* MadJohTools.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MadJohTools.framework; path = "../../../../../../../../Library/Developer/Xcode/DerivedData/FeedKat-frvaigyyvhahfbehvyeybynjllow/Build/Products/Debug-iphoneos/MadJohTools/MadJohTools.framework"; sourceTree = "<group>"; };
 		27325A3C1DF60A75004AC6CF /* AddDispVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddDispVC.swift; path = Pages/AddDispVC.swift; sourceTree = "<group>"; };
 		2738C7551DCCD29100ADFA11 /* DetailsCatBoardVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailsCatBoardVC.swift; path = Pages/DetailsCatBoardVC.swift; sourceTree = "<group>"; };
 		274610561DEF0D0E00BEE8E6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -112,6 +115,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				272937B51E2BCA850016A774 /* MadJohTools.framework in Frameworks */,
 				22019D7EE7CDA607E978EB25 /* Pods_FeedKat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -138,6 +142,7 @@
 		1E8AFBBBA0D9EF90221A51B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				272937B41E2BCA850016A774 /* MadJohTools.framework */,
 				9231BA54E1F7BEFAB5CF3D83 /* Pods_FeedKat.framework */,
 				096FCD34A70685F150C6AD8E /* Pods_FeedKatTests.framework */,
 				28B425EEFFF46E976653D89E /* Pods_FeedKatUITests.framework */,
@@ -208,6 +213,7 @@
 		27FFCE5F1D87DDB1005718E2 = {
 			isa = PBXGroup;
 			children = (
+				272937B01E2BCA3E0016A774 /* MadJohTools.framework */,
 				27FFCE6A1D87DDB1005718E2 /* FeedKat */,
 				27FFCE7F1D87DDB1005718E2 /* FeedKatTests */,
 				27FFCE8A1D87DDB1005718E2 /* FeedKatUITests */,
@@ -730,7 +736,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 88FF6F86B1682755CCBB2CCE /* Pods-FeedKat.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -750,7 +755,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 12BFD84A5786A56030A31DB8 /* Pods-FeedKat.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";

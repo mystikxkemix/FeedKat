@@ -99,6 +99,11 @@ public class DragToActionView : UIView
         }
     }
     
+    public func setActionHeightMultiplier(_ height: CGFloat)
+    {
+        self.actionHeightMultiplier = height
+    }
+    
     public func setActionImage(img: UIImage)
     {
         action.setImage(img.getScaledWithHeight(height: action.height * actionHeightMultiplier), for: .normal)
@@ -162,4 +167,5 @@ public class DragToActionView : UIView
     }
     
     required public init?(coder aDecoder: NSCoder) {super.init(coder: aDecoder)}
+    
 }

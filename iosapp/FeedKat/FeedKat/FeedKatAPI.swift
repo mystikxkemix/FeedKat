@@ -168,6 +168,7 @@ open class FeedKatAPI:NSObject
         Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
             .responseJSON
             { response in
+                
                 if let JSON = response.result.value
                 {
                     let error = (JSON as! NSDictionary).value(forKey: "error") as! Int

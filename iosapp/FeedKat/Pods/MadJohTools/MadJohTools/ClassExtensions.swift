@@ -220,61 +220,61 @@ public extension UILabel
         self.attributedText = myString
     }
     
-    public func adjustFont(_ maxFont: UIFont, maxWidth: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(_ maxFont: UIFont, maxWidth: CGFloat, fontName: String? = nil)
     {
         adjustFont(maxTextSize: maxFont.pointSize, maxWidth: maxWidth, fontName: fontName)
     }
     
-    public func adjustFont(_ maxFont: UIFont, maxHeight: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(_ maxFont: UIFont, maxHeight: CGFloat, fontName: String? = nil)
     {
         adjustFont(maxTextSize: maxFont.pointSize, maxHeight: maxHeight, fontName: fontName)
     }
     
-    public func adjustFont(_ maxFont: UIFont, maxWidth: CGFloat, maxHeight: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(_ maxFont: UIFont, maxWidth: CGFloat, maxHeight: CGFloat, fontName: String? = nil)
     {
         adjustFont(maxTextSize: maxFont.pointSize, maxWidth: maxWidth, maxHeight: maxHeight, fontName: fontName)
     }
     
-    public func adjustFont(maxTextSize: CGFloat, maxWidth: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(maxTextSize: CGFloat, maxWidth: CGFloat, fontName: String? = nil)
     {
         var size = CGFloat(maxTextSize)
-        var font = UIFont(name: fontName, size: size)
+        var font = fontName == nil ? UIFont(name: MadJohTools.textFont.fontName, size: size) : (UIFont(name: fontName!, size: size) ?? UIFont.systemFont(ofSize: size))
         
         self.font = font
         self.sizeToFit()
         
         while (self.width > maxWidth && size > 1) {
             size -= 1
-            font = UIFont(name: fontName, size: size)
+            font = fontName == nil ? UIFont(name: MadJohTools.textFont.fontName, size: size) : (UIFont(name: fontName!, size: size) ?? UIFont.systemFont(ofSize: size))
             self.font = font
             self.sizeToFit()
         }
     }
     
-    public func adjustFont(maxTextSize: CGFloat, maxHeight: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(maxTextSize: CGFloat, maxHeight: CGFloat, fontName: String? = nil)
     {
         var size = CGFloat(maxTextSize)
-        var font = UIFont(name: fontName, size: size)
+        var font = fontName == nil ? UIFont(name: MadJohTools.textFont.fontName, size: size) : (UIFont(name: fontName!, size: size) ?? UIFont.systemFont(ofSize: size))
         
         self.font = font
         self.sizeToFit()
         
         while (self.height > maxHeight && size > 1) {
             size -= 1
-            font = UIFont(name: fontName, size: size)
+            font = fontName == nil ? UIFont(name: MadJohTools.textFont.fontName, size: size) : (UIFont(name: fontName!, size: size) ?? UIFont.systemFont(ofSize: size))
             self.font = font
             self.sizeToFit()
         }
     }
     
-    public func adjustFont(maxTextSize: CGFloat, maxWidth: CGFloat, maxHeight: CGFloat, fontName: String = "Nunito-Bold")
+    public func adjustFont(maxTextSize: CGFloat, maxWidth: CGFloat, maxHeight: CGFloat, fontName: String? = nil)
     {
         self.adjustFont(maxTextSize: maxTextSize, maxWidth: maxWidth, fontName: fontName)
         let size = self.font.pointSize
         self.adjustFont(maxTextSize: maxTextSize, maxWidth: maxHeight, fontName: fontName)
         let size2 = self.font.pointSize
         
-        self.font = UIFont(name: fontName, size: min(size, size2))
+        self.font = fontName == nil ? UIFont(name: MadJohTools.textFont.fontName, size: min(size, size2)) : (UIFont(name: fontName!, size: min(size, size2)) ?? UIFont.systemFont(ofSize: min(size, size2)))
     }
 }
 
