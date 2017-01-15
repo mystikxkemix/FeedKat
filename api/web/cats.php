@@ -7,8 +7,6 @@ use Symfony\Component\HttpFoundation\Response;
 function getCatInfo($keys = array(), $details = false) {
 	global $app, $addr;
 	
-	$details = true;
-	
 	foreach($keys as $k=>$v) {
 		$keys[$k] = addslashes($v);
 	}
@@ -30,6 +28,12 @@ function getCatInfo($keys = array(), $details = false) {
 	else
 		$where = '';
 	
+	/*
+	,
+		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat limit 1) activity,
+		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat limit 1) weight
+		*/
+	
 	$r = $app['db']->fetchAll('select
 		c.id_cat,
 		c.name,
@@ -38,11 +42,9 @@ function getCatInfo($keys = array(), $details = false) {
 		ifnull(d.id_dispenser,\'\') id_dispenser, 
 		ifnull(u.id_user,\'\') id_user,
 		ifnull(group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)), \'\') feed_times,
-		ifnull(last_activity,\'\') last_activity,
-		ifnull(last_battery,\'\') last_battery,
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat limit 1) activity,
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat limit 1) weight'.
-			($details == true ? ',
+		ifnull(last_activity,\'\') activity,
+		ifnull(last_battery,\'\') battery'.
+			(/*$details */ true == true ? ',
 		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat limit 10) activity_histo,
 		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat limit 10) weight_histo' : '').'
 		
@@ -84,7 +86,8 @@ function getCatInfo($keys = array(), $details = false) {
 
 			
 			// Battery
-			$data['cats'][$i]['battery'] = (int) 67;
+			//$data['cats'][$i]['battery'] = (int) 67;
+			
 			// Activity
 			$activities = explode(',',$data['cats'][$i]['activity_histo']);
 			$data['cats'][$i]['activity_histo'] = array();
@@ -94,7 +97,8 @@ function getCatInfo($keys = array(), $details = false) {
 					$data['cats'][$i]['activity_histo'][] = /*array('date' => $activity[0], 'value' => */(int)$activity[1];//);
 				}
 			}
-			$data['cats'][$i]['activity'] = (int)reset($data['cats'][$i]['activity_histo']);
+			//$data['cats'][$i]['activity'] = (int)reset($data['cats'][$i]['activity_histo']);
+			
 			// Weight
 			$weights = explode(',',$data['cats'][$i]['weight_histo']);
 			$data['cats'][$i]['weight_histo'] = array();
@@ -106,12 +110,13 @@ function getCatInfo($keys = array(), $details = false) {
 			}
 			$data['cats'][$i]['weight'] = (int)reset($data['cats'][$i]['weight_histo']);
 			
-			// DETAILS
-			
-			// END DETAILS
+			if(!$details) {
+				unset($data['cats'][$i]['activity_histo']);
+				unset($data['cats'][$i]['weight_histo']);
+			}
 			
 			foreach($cat as $fname => $fdata) {
-				if(strstr($fname, 'id_') !== false || in_array($fname, array('enabled', 'activity'))) {
+				if(strstr($fname, 'id_') !== false || in_array($fname, array('enabled', 'activity', 'battery'))) {
 					$data['cats'][$i][$fname] = (int) $data['cats'][$i][$fname];
 				}
 			}
@@ -151,7 +156,7 @@ $app->get('/cat/user/{id}', function($id) use ($app) {
 // API : get cat by its ID
 // battery, weight, daily_activity
 $app->get('/cat/{id}/details', function($id) use ($app) {
-	return $app->json(getCatInfo(array('id_cat' => $id)), true);
+	return $app->json(getCatInfo(array('id_cat' => $id), true));
 });
 
 $app->put('/cat', function (Request $request) use ($app) {
