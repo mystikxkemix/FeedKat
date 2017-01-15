@@ -19,8 +19,8 @@ class ConnectionPage: UIViewController {
     {
         Static.startLoading(view: self.view)
 
-//        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
-        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
+//        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
+        FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
         {
             response, error in
             if(error == nil && response != nil)
@@ -105,8 +105,6 @@ class ConnectionPage: UIViewController {
                         Static.stopLoading()
                         print("\(error)")
                     }
-                    
-                    
                 }
             }
             else
