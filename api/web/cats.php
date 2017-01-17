@@ -34,7 +34,7 @@ function getCatInfo($keys = array(), $details = false) {
 		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat limit 1) weight
 		*/
 	
-	$r = $app['db']->fetchAll('select
+	$sql = 'select
 		c.id_cat,
 		c.name,
 		c.birth,
@@ -45,8 +45,8 @@ function getCatInfo($keys = array(), $details = false) {
 		ifnull(last_activity,\'\') activity,
 		ifnull(last_battery,\'\') battery'.
 			(/*$details */ true == true ? ',
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat order by `date` desc limit 48) activity_histo,
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat order by `date` desc) weight_histo' : '').'
+		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by c.id_cat order by `date` desc limit 48) activity_histo,
+		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by c.id_cat order by `date` desc limit 48) weight_histo' : '').'
 		
 		from 
 			cat c 
@@ -56,7 +56,9 @@ function getCatInfo($keys = array(), $details = false) {
 			user u using(id_user) 
 		left join 
 			feed_times f on f.id_cat = c.id_cat and f.enabled = 1
-		'.$where.'group by c.id_cat');
+		'.$where.'group by c.id_cat';
+	
+	$r = $app['db']->fetchAll($sql);
 	
 	if(count($r) > 0)
 		$data['cats'] = $r;
