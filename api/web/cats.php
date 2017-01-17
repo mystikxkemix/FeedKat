@@ -75,6 +75,7 @@ function getCatInfo($keys = array(), $details = false) {
 			
 			$data['cats'][$i]['ok'] = 1;
 			$data['cats'][$i]['status'] = $data['cats'][$i]['name'].' va bien !';
+			/*
 			if($i == 0) {
 				$data['cats'][$i]['status'] = 'Attention à la nutrition d';
 				if(in_array(substr($data['cats'][$i]['name'],0,1),array('A','E','I','O','U','Y')))
@@ -83,7 +84,7 @@ function getCatInfo($keys = array(), $details = false) {
 						$data['cats'][$i]['status'] .= 'e ';
 						$data['cats'][$i]['status'] .= $data['cats'][$i]['name'];
 			}
-
+			*/
 			
 			// Battery
 			//$data['cats'][$i]['battery'] = (int) 67;
