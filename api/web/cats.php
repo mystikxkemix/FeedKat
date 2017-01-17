@@ -45,8 +45,8 @@ function getCatInfo($keys = array(), $details = false) {
 		ifnull(last_activity,\'\') activity,
 		ifnull(last_battery,\'\') battery'.
 			(/*$details */ true == true ? ',
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat limit 10 order by `date` desc) activity_histo,
-		(select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat limit 10 order by `date` desc) weight_histo' : '').'
+		(select * from (select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'activity\' and id_cat = c.id_cat group by id_cat order by `date` desc) limit 48) activity_histo,
+		(select * from (select group_concat(concat(date,\'||\',value)) from cat_measure where measure_type = \'weight\' and id_cat = c.id_cat group by id_cat order by `date` desc)  limit 48) weight_histo' : '').'
 		
 		from 
 			cat c 
