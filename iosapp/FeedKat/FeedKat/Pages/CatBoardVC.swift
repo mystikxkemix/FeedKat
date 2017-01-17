@@ -27,10 +27,9 @@ class CatBoardVC : GenVC
     {
         if(Cat.getList().count != 0)
         {
-            
             for a in Cat.getList()
             {
-                let catt = CatCatTile(cat:a)
+                let catt = CatCatTile(cat:a, parent:self)
                 catt.tag = Cat.getList().index(of: a)!
                 catt.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.gotoCD(_:))))
                 list_tile.append(catt)

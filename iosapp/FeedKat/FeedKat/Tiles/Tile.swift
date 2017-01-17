@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MadJohTools
 
-class Tile:UIView
+class Tile:DragToActionView
 {
     var banner:UIView!
     
@@ -39,6 +40,8 @@ class Tile:UIView
         addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.01, constant: 0))
+        
+        setEnabled(false)
     }
     
     init(height: CGFloat)
@@ -57,6 +60,8 @@ class Tile:UIView
         addConstraint(NSLayoutConstraint(item: banner, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: banner, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.01, constant: 0))
+        
+        setEnabled(false)
     }
     
     init(title: String)
@@ -87,7 +92,8 @@ class Tile:UIView
         addConstraint(NSLayoutConstraint(item: utitle, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: utitle, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: utitle, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.99, constant: 0))
-
+        
+        setEnabled(false)
     }
     
     required init?(coder aDecoder: NSCoder)

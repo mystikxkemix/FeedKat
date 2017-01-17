@@ -8,12 +8,13 @@
 
 import UIKit
 
-public class DragToActionView : UIView
+open class DragToActionView : UIView
 {
     private var posX : CGFloat = 0
     private var oldWidth : CGFloat = 0
     private var action = UIButton()
     private var completionHandler : () -> () = {}
+    private var isEnabled = true
     
     public var actionWidth : CGFloat = 0
     private var actionHeightMultiplier = 0.5 as CGFloat
@@ -34,16 +35,21 @@ public class DragToActionView : UIView
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(self.hideAction)))
     }
     
-    override public func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
+    override open func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesBegan(touches, with: event)
         
         shouldLetSuperViewsScroll(false)
     }
     
-    override public func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
+    override open func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesMoved(touches, with: event)
+        
+        if(!isEnabled)
+        {
+            return
+        }
         
         let touch = (touches as NSSet).allObjects[0] as! UITouch
         let oldPos = touch.previousLocation(in: self)
@@ -52,7 +58,7 @@ public class DragToActionView : UIView
         self.move(by: moveX)
     }
     
-    override public func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
+    override open func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?)
     {
         super.touchesEnded(touches, with: event)
         
@@ -73,7 +79,6 @@ public class DragToActionView : UIView
     }
     
     // PUBLIC
-    
     public func setActionY(_ y: CGFloat)
     {
         self.action.y = y
@@ -122,6 +127,16 @@ public class DragToActionView : UIView
     public func addActionTarget(_ handler: @escaping () -> ())
     {
         self.completionHandler = handler
+    }
+    
+    public func setEnabled(_ enable:Bool)
+    {
+        isEnabled = enable
+    }
+    
+    public func hideActionButton(_ hide:Bool)
+    {
+        self.action.isHidden = hide
     }
     
     // PRIVATE

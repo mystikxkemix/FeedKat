@@ -25,7 +25,6 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
     var tFeed:[UILabel] = []
     var modWeight:[UITextField] = []
     var modHour:[UITextField] = []
-    var deleteList:[UIImageView] = []
     let timeFormatter = DateFormatter()
     var feedList:[FeedTime] = []
     
@@ -244,22 +243,10 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
             
             self.modHour.append(umodHour)
             
-            let iDelete = UIImageView(frame: CGRect(x: Static.tileWidth*0.62, y: Static.tileHeight*0.1, width: Static.tileHeight*0.3, height: Static.tileHeight*0.3))
-            iDelete.image = Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight*0.5)
-            iDelete.isHidden = true;
-            iDelete.isUserInteractionEnabled = true
-            let aSelectorD : Selector = #selector(TabTile.deleteFeedTime)
-            let tapGestureD = UITapGestureRecognizer(target: self, action: aSelectorD)
-            tapGestureD.numberOfTapsRequired = 1
-            iDelete.addGestureRecognizer(tapGestureD)
-            
-            self.deleteList.append(iDelete)
-            
             v.addSubview(utFeed)
             v.addSubview(ueFeed)
             v.addSubview(umodWeight)
             v.addSubview(umodHour)
-            v.addSubview(iDelete)
             i+=1
             
             v.actionWidth = Static.tileWidth*0.20
@@ -389,6 +376,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         }
         else
         {
+            self.hideActionButton(true)
             UiImage.isUserInteractionEnabled = true
             eLabel!.text = "Valider"
             eLabel!.textColor = UIColor.red
@@ -410,9 +398,10 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         }
         else
         {
+            self.hideActionButton(true)
+            print()
             modHour[currentInd].isHidden = false
             modWeight[currentInd].isHidden = false
-            deleteList[currentInd].isHidden = false
             tFeed[currentInd].isHidden = true
             eFeed[currentInd].text = "Valider"
             eFeed[currentInd].textColor = UIColor.red
@@ -422,6 +411,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
     func InfoShouldReturn(userText: UITextField) -> Bool
     {
         resignInfoResponder()
+        self.hideActionButton(false)
         UiImage.isUserInteractionEnabled = false
         nameEdit!.isHidden = true
         nameText!.isHidden = false
@@ -460,7 +450,6 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         modHour[currentInd].isHidden = true
         modWeight[currentInd].isHidden = true
         tFeed[currentInd].isHidden = false
-        deleteList[currentInd].isHidden = true
         eFeed[currentInd].text = "Editer"
         eFeed[currentInd].textColor = UIColor.black
         
@@ -546,7 +535,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 let height = self.subviews.last!.height
                 let y = self.subviews.last!.y + height + Static.tileSpacing * 0.5
                 
-                 let tmp   = UIView(frame: CGRect(x: Static.tileWidth*0.05, y: y, width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
+                let tmp = DragToActionView(frame: CGRect(x: Static.tileWidth*0.05, y: y, width: Static.tileWidth*0.9, height: Static.tileHeight*0.5))
                 self.addSubview(tmp)
                 
                 let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
@@ -607,14 +596,37 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 tapGestureD.numberOfTapsRequired = 1
                 iDelete.addGestureRecognizer(tapGestureD)
                 
-                self.deleteList.append(iDelete)
-                
                 tmp.addSubview(utFeed)
                 tmp.addSubview(ueFeed)
                 tmp.addSubview(umodWeight)
                 tmp.addSubview(umodHour)
                 tmp.addSubview(iDelete)
                 self.feedTimeViews.append(tmp)
+                
+                tmp.actionWidth = Static.tileWidth*0.20
+                tmp.setActionHeightMultiplier(0.8)
+                tmp.setActionColor(color: Static.TransparentColor)
+                tmp.setActionImage(img: Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight))
+                
+                tmp.addActionTarget {
+                    
+                    FeedKatAPI.deleteFeedTime(feed?.ID, handler: {_,_ in })
+                    
+                    for view in self.feedTimeViews
+                    {
+                        view.removeFromSuperview()
+                    }
+                    let offset = tmp.height + Static.tileSpacing*0.5
+                    
+                    self.parent.list_tile.last!.y -= offset
+                    self.parent.list_tile.last!.heightAnchor.constraint(equalToConstant: self.parent.list_tile.last!.height - offset).isActive = true
+                    self.parent.scrollView.contentSize.height -= offset
+                    self.banner.height -= offset
+                    self.heightAnchor.constraint(equalToConstant: self.height - offset).isActive = true
+                    self.ajout.removeFromSuperview()
+                    self.cat.feeds.remove(at: self.cat.feeds.index(of: feed!)!)
+                    self.initFeed()
+                }
 
                 let offset = Static.tileSpacing * 0.5
                 

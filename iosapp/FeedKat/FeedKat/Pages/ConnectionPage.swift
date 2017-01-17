@@ -20,7 +20,6 @@ class ConnectionPage: UIViewController {
     {
         Static.startLoading(view: self.view)
 
-//        FeedKatAPI.login("kevin.berenger@gmail.com", password: "toto")
         FeedKatAPI.login(account.text!.lowercased(), password: password.text!)
         {
             response, error in
@@ -127,6 +126,8 @@ class ConnectionPage: UIViewController {
         super.viewDidLoad()
         MadJohTools.textFont = UIFont(name: "Arial Rounded MT Bold", size: 20)
         alreadyConnected()
+        
+        
         // Do any additional setup after loading the view, typically from a nib.
     }
     

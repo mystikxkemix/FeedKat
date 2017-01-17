@@ -14,10 +14,12 @@ class CatCatTile: Tile
     var UiName:UILabel!
     var UiLastFeed:UILabel!
     var UiNextFeed:UILabel!
+    var parent:CatBoardVC!
     
-    init(cat: Cat)
+    init(cat: Cat, parent:CatBoardVC)
     {
         super.init(type: -1)
+        self.parent = parent
         let marg=Static.tileWidth*0.03+Static.tileHeight
         let iconsize = Static.tileHeight*0.35
         
@@ -143,6 +145,20 @@ class CatCatTile: Tile
 
         addSubview(UiNextFeed)
         
+        setEnabled(true)
+        actionWidth = Static.tileWidth*0.20
+        setActionHeightMultiplier(0.5)
+        setActionColor(color: Static.TransparentColor)
+        setActionImage(img: Static.getScaledImageWithHeight("Icon_cross", height: Static.tileHeight))
+        
+        addActionTarget {
+            
+            Cat.list.remove(at: Cat.list.index(of: cat)!)
+            self.parent.container.removeAllSubviews()
+            self.parent.list_tile = []
+            self.parent.loadScroll()
+            
+        }
     }
     
     required init?(coder aDecoder: NSCoder)
