@@ -57,7 +57,7 @@ function getCatInfo($keys = array(), $details = false) {
 		left join 
 			feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 		'.$where.'group by c.id_cat';
-	
+		
 	$r = $app['db']->fetchAll($sql);
 	
 	if(count($r) > 0)
@@ -92,6 +92,7 @@ function getCatInfo($keys = array(), $details = false) {
 			//$data['cats'][$i]['battery'] = (int) 67;
 			
 			// Activity
+			
 			$activities = explode(',',$data['cats'][$i]['activity_histo']);
 			$data['cats'][$i]['activity_histo'] = array();
 			foreach($activities as $k => $v) {
