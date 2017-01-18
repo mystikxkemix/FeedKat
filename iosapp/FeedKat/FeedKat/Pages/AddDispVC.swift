@@ -98,8 +98,8 @@ class AddDispVC : GenVC
     
     func connectAndSendTCP()
     {
-//        if(SSIDField.text != "" && SSIDField.text != "")
-//        {
+        if(SSIDField.text != "" && SSIDField.text != "")
+        {
         
             Static.startLoading(view: self.view)
 
@@ -172,7 +172,7 @@ class AddDispVC : GenVC
                 Static.stopLoading()
                 break
             }
-//        }
+        }
     }
     
     func response()

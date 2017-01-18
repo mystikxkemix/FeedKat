@@ -316,14 +316,11 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         
         var yValsActivity: [BarChartDataEntry] = []
         for idx in 0..<cat.historyActivity.count {
-            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)*0.5), y: Double(cat.historyActivity[idx])))
+            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(cat.historyActivity[idx])))
         }
         
         let set1Activity = BarChartDataSet(values: yValsActivity, label: "Activité")
         set1Activity.setColor(Static.OrangeColor)
-        set1Activity.highlightLineWidth = 10
-        set1Activity.barBorderWidth = 10
-        set1Activity.formLineWidth = 10
         
         let dataActivity = BarChartData(dataSet: set1Activity)
         dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 0))
@@ -342,7 +339,6 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         lineWeight.xAxis.labelPosition = .bottom
         lineWeight.gridBackgroundColor = Static.TransparentColor
         lineWeight.xAxis.drawGridLinesEnabled = false
-        
         
         lineWeight.tintColor = UIColor.black
         
@@ -457,6 +453,13 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         tFeed[currentInd].isHidden = false
         eFeed[currentInd].text = "Editer"
         eFeed[currentInd].textColor = UIColor.black
+        
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "H:mm ZZZZ"
+//        let localDate = formatter.date(from: modHour[currentInd].text! + " " + formatter.timeZone.abbreviation()!)
+//        formatter.timeZone = TimeZone(identifier: "UTC")
+//        formatter.dateFormat = "H:mm"
+//        print("Time : \(formatter.string(from: localDate!))")
         
         FeedKatAPI.modifyFeedTime(feedList[currentInd].ID, weight: Int(modWeight[currentInd].text!)!, Time: modHour[currentInd].text!)
         {
