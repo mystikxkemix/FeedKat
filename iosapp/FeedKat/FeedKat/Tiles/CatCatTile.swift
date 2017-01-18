@@ -20,7 +20,7 @@ class CatCatTile: Tile
     {
         super.init(type: -1)
         self.parent = parent
-        let marg=Static.tileWidth*0.03+Static.tileHeight
+        let marg=Static.tileWidth*0.03+Static.tileHeight*0.75
         let iconsize = Static.tileHeight*0.35
         
         UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: 0, width: Static.tileHeight, height: Static.tileHeight))
@@ -99,7 +99,7 @@ class CatCatTile: Tile
         UiLastFeed.numberOfLines=1
         UiLastFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 15)
         UiLastFeed.textAlignment = NSTextAlignment.left
-        addSubview(UiLastFeed)
+//        addSubview(UiLastFeed)
         
         var next:FeedTime = FeedTime()
         
@@ -117,24 +117,26 @@ class CatCatTile: Tile
         
         if(cat.getFeeds().count != 0)
         {
+            var text = "Prochain Repas : "
             if(next.Hour != "")
             {
-            h = Static.StringToInt(str: next.Hour)
-            if( (h[0]-Static.nowHour) == 0)
-            {
-                UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[1] - Static.nowMinute)min"
-            }
-            else
-            {
-                if( (h[0]-Static.nowHour) > 0)
+                h = Static.StringToInt(str: next.Hour)
+                if( (h[0]-Static.nowHour) == 0)
                 {
-                    UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[0] - Static.nowHour)h"
+                    text += "\(next.Weight)g dans \(h[1] - Static.nowMinute)min"
                 }
                 else
                 {
-                    UiNextFeed.text = "Next feed : \(next.Weight)g dans \(h[0] - Static.nowHour + 24)h"
+                    if( (h[0]-Static.nowHour) > 0)
+                    {
+                        text += "\(next.Weight)g dans \(h[0] - Static.nowHour)h"
+                    }
+                    else
+                    {
+                        text += "\(next.Weight)g dans \(h[0] - Static.nowHour + 24)h"
+                    }
                 }
-            }
+                UiNextFeed.text = text
             }
         }
         

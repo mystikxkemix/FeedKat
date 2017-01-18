@@ -22,7 +22,19 @@ class FeedTime:NSObject {
         self.Id_cat = Id_cat
         self.Id_dispenser = Id_dispenser
         self.Weight = Weight
-        self.Hour = Hour
+        
+        var hour = ""
+        let tab = Hour.components(separatedBy: ":")
+        for st in 0..<(tab.count-1)
+        {
+            hour += tab[st]
+            if(st != tab.count-2)
+            {
+                hour += ":"
+            }
+        }
+        
+        self.Hour = hour
         self.Enable = Enable
         super.init()
     }

@@ -117,6 +117,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TabTile.resignInfoResponder)))
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
+        timeFormatter.dateFormat = "H:mm"
     
         eDate!.text = timeFormatter.string(from: self.date!)
         
@@ -303,8 +304,9 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         
         barActivity.drawBarShadowEnabled = false
         barActivity.drawValueAboveBarEnabled = false
+        barActivity.xAxis.calculate(min: 0, max: Double(cat.historyActivity.count - 1)*0.5)
+        barActivity.setVisibleXRangeMinimum(Double(cat.historyActivity.count - 1)*0.5)
         
-        barActivity.maxVisibleCount = 6
         barActivity.fitBars = true
         barActivity.pinchZoomEnabled = true
         barActivity.drawGridBackgroundEnabled = false
@@ -315,11 +317,14 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         
         var yValsActivity: [BarChartDataEntry] = []
         for idx in 0..<cat.historyActivity.count {
-            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)), y: Double(cat.historyActivity[idx])))
+            yValsActivity.append(BarChartDataEntry(x: Double(Float(idx)*0.5), y: Double(cat.historyActivity[idx])))
         }
         
         let set1Activity = BarChartDataSet(values: yValsActivity, label: "Activité")
         set1Activity.setColor(Static.OrangeColor)
+        set1Activity.highlightLineWidth = 10
+        set1Activity.barBorderWidth = 10
+        set1Activity.formLineWidth = 10
         
         let dataActivity = BarChartData(dataSet: set1Activity)
         dataActivity.setValueFont(UIFont(name: "Arial Rounded MT Bold", size: 0))
@@ -339,6 +344,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         lineWeight.gridBackgroundColor = Static.TransparentColor
         lineWeight.xAxis.drawGridLinesEnabled = false
         
+        
         lineWeight.tintColor = UIColor.black
         
         lineWeight.maxVisibleCount = 6
@@ -349,10 +355,10 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         
         var yValsWeight: [ChartDataEntry] = []
         for idy in 0..<cat.historyWeight.count {
-            yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(cat.historyWeight[idy])))
+            yValsWeight.append(ChartDataEntry(x: Double(idy), y: Double(cat.historyWeight[idy])*0.001))
         }
         
-        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids par jour (en g)")
+        let set1Weight = LineChartDataSet(values: yValsWeight, label: "Poids par jour (en Kg)")
         set1Weight.setCircleColor(Static.TransparentColor)
         set1Weight.circleHoleColor = Static.OrangeColor
         set1Weight.setColor(Static.BlueColor)
