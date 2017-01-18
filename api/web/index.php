@@ -17,14 +17,15 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 function deleteId($idCol, $idVal, $table) {
 	global $app;
 	
-	$r = $app['db']->query('delete from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
-	
+	$sql = 'delete from '.$table.' where '.$idCol.' = \''.$idVal.'\''
+	$r = $app['db']->query($sql);
 	
 	$error = ($r !== false) ? 0 : 1;
     $post = array(
         'error' => $error,
         $idCol  => $idVal
     );
+	$post['sql'] = $sql;
     //$json = $app['db']->query('select * from '.$table.' where '.$idCol.' = \''.$idVal.'\'');
 
 	return $post;
