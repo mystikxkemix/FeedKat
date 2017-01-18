@@ -17,7 +17,7 @@ $app->register(new Silex\Provider\MonologServiceProvider(), array(
 function deleteId($idCol, $idVal, $table) {
 	global $app;
 	
-	$sql = 'delete from '.$table.' where '.$idCol.' = \''.$idVal.'\''
+	$sql = 'delete from '.$table.' where '.$idCol.' = \''.$idVal.'\'';
 	$r = $app['db']->query($sql);
 	
 	$error = ($r !== false) ? 0 : 1;
