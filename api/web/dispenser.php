@@ -161,13 +161,25 @@ $app->post('/dispenser', function (Request $request) use ($app) {
 $app->post('/dispenser/lifesign/{serial}', function (Request $request,$serial) use ($app) {
 //$app->get('/lifesign/{serial}', function (Request $request,$serial) use ($app) {
 	//$serial = $request->request->get('serial');
+	
+	$to_update = false;
+	$upd = $app['db']->fetchAll("select 1 from dispenser d where d.last_feedtime_update > d.last_lifesign limit 1");
+	if(count($upd) > 0) {
+		$to_update = true;
+	}
+	
 	$r = $app['db']->query('update dispenser set last_lifesign = UNIX_TIMESTAMP() where serial = \''.$serial.'\'');
 	
 	if($r !== false) {
 		$error = 0;
 	} else $error = 1;
 	
-	if($error == 0) $return = 'LIFESIGN_OK';
+	
+	if($error == 0) 
+		if($to_update)
+			$return = 'LIFESIGN_UP';
+		else
+			$return = 'LIFESIGN_OK';
 	else $return = 'LIFESIGN_KO';
 	
 	// update available

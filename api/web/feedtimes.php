@@ -57,6 +57,10 @@ $app->post('/feedtimes', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
+	$sql = "update feed_times ft join cat c using(id_cat) join cat_dispenser cd using (id_cat) join dispenser d using (id_dispenser) SET d.last_feedtime_update = UNIX_TIMESTAMP() where ft.id_feedtime = $id";
+	
+	$r = $app['db']->query($sql);
+	
     $post = array(
         'error' => $error,
         'id_feedtime'  => $request->request->get('id_feedtime')
@@ -92,7 +96,7 @@ $app->put('/feedtimes', function (Request $request) use ($app) {
 			$ins_col[$col] = '\''.$request->request->get($col).'\'';
 	
 	$ins_sql = "insert into feed_times ";
-	$ins_sql .= '('.implode(',',array_keys($ins_col)).')';
+	$ins_sql .= '('.implode(',', array_keys($ins_col)).')';
 	$ins_sql .= " values (";
 	$ins_sql .= implode(', ',$ins_col).')';
 	
