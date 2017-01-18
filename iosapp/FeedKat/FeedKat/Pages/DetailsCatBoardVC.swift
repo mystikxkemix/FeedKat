@@ -35,6 +35,7 @@ class DetailsCatBoardVC : UIViewController, UITextFieldDelegate, UINavigationCon
         let offsety = Static.tileHeight*0.6 + Static.tileWidth*0.02
         
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         
         UiImage = UIImageView(frame : CGRect(x: Static.tileWidth*0.01, y: Static.tileHeight*0.6, width: Static.tileHeight*1.2, height: Static.tileHeight*1.2))
         

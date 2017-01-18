@@ -50,6 +50,7 @@ class AddDispVC : GenVC
         self.view.addSubview(PASSField)
         
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
         initTop(title: "Ajouter un distributeur")
         UITitle.font = UIFont(name: "Arial Rounded MT Bold", size: 25)!
         bot.removeFromSuperview()

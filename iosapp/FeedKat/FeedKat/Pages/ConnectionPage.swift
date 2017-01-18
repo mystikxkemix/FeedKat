@@ -126,7 +126,7 @@ class ConnectionPage: UIViewController {
         super.viewDidLoad()
         MadJohTools.textFont = UIFont(name: "Arial Rounded MT Bold", size: 20)
         alreadyConnected()
-        
+        self.hideKeyboardWhenTappedAround() 
         
         // Do any additional setup after loading the view, typically from a nib.
     }

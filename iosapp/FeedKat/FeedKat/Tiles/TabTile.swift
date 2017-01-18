@@ -117,7 +117,6 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
         self.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(TabTile.resignInfoResponder)))
         timeFormatter.dateStyle = .medium
         timeFormatter.timeStyle = .none
-        timeFormatter.dateFormat = "H:mm"
     
         eDate!.text = timeFormatter.string(from: self.date!)
         

@@ -23,6 +23,7 @@ class AddCatVC : GenVC, UITextFieldDelegate, UIImagePickerControllerDelegate, UI
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround() 
         initTop(title: "Ajouter un chat")
         for a in self.bot.subviews
         {

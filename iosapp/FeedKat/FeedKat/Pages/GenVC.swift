@@ -22,6 +22,7 @@ class GenVC : UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
+        hideKeyboardWhenTappedAround()
         
         bot = UIView()
         bot.backgroundColor = Static.BlueColor
