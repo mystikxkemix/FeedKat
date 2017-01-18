@@ -307,7 +307,7 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	//$txt .= convertToSimpleMsg(array($d['id_dispenser'], $d['stock']), array('id_dispenser','stock'));
 	$sql = 'select 
 		ifnull(cl.serial,\'------\') serial,
-		ifnull(group_concat(concat(DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\'))), \'\') feed_times
+		ifnull(group_concat(concat(DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\')) order by f.time asc), \'\') feed_times
 	from cat c 
 	join cat_dispenser cd using(id_cat) 
 	join dispenser d using(id_dispenser) 
