@@ -41,7 +41,7 @@ function getCatInfo($keys = array(), $details = false) {
 		if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo,
 		ifnull(d.id_dispenser,\'\') id_dispenser, 
 		ifnull(u.id_user,\'\') id_user,
-		ifnull(group_concat(concat(f.id_feedtime,\'||\',f.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)), \'\') feed_times,
+		ifnull(group_concat(concat(f.id_feedtime,\'||\',d.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled)), \'\') feed_times,
 		ifnull(last_activity,\'\') activity,
 		ifnull(last_battery,\'\') battery'.
 			(/*$details */ true == true ? ',
@@ -57,7 +57,7 @@ function getCatInfo($keys = array(), $details = false) {
 		left join 
 			feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 		'.$where.'group by c.id_cat';
-		
+
 	$r = $app['db']->fetchAll($sql);
 	
 	if(count($r) > 0)
