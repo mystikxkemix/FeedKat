@@ -479,7 +479,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
     
     func reloadFeed()
     {
-        tFeed[currentInd].text = "- \(feedList[currentInd].Weight)g à \(feedList[currentInd].Hour)"
+        tFeed[currentInd].text = "\(feedList[currentInd].Weight)g à \(feedList[currentInd].Hour)"
     }
     
     func resignInfoResponder()
@@ -539,7 +539,7 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 self.addSubview(tmp)
                 
                 let utFeed = UILabel(frame: CGRect(x: 0, y: 0, width: Static.tileWidth, height: Static.tileHeight*0.5))
-                utFeed.text = "- \(feed!.Weight)g à \(feed!.Hour)"
+                utFeed.text = "\(feed!.Weight)g à \(feed!.Hour)"
                 utFeed.textColor = UIColor.black
                 utFeed.font = UIFont(name: "Arial Rounded MT Bold", size: 20)
                 utFeed.textAlignment = NSTextAlignment.left
