@@ -57,7 +57,6 @@ function getCatInfo($keys = array(), $details = false) {
 		left join 
 			feed_times f on f.id_cat = c.id_cat and f.enabled = 1
 		'.$where.'
-		order by f.time asc
 		group by c.id_cat';
 	
 	// query
