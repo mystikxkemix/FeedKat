@@ -35,7 +35,10 @@ $app->put('/measure/activity', function (Request $request) use ($app) {
 	}
 	
 	$activities = explode(',',$request->request->get('activities'));
-	$interval = (int) $request->request->get('interval');
+	if($request->request->get('interval') == '')
+		$interval = 1800;
+	else
+		$interval = (int) $request->request->get('interval');
 	$time = (int) $request->request->get('time');
 	$date = $time;
 	$ins_sql = "insert into cat_measure (id_cat, measure_type, date, value) values ";
