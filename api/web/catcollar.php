@@ -10,20 +10,20 @@ $app->get('/collar', function() use ($app) {
 	return $app->json($data);
 });
 
-$app->put('/collar', function (Request $request) use ($app) {
-
-	$data_cat = array('id_cat','mac');
+function addCollar($ar_fields) {
+	$data_cat = $ar_fields;
 	
 	$ins_col = array();
-	foreach($data_cat as $col)
-		if($request->request->get($col) != '')	
-			$ins_col[$col] = '\''.$request->request->get($col).'\'';
+	foreach($data_cat as $col => $v)
+		if($v != '')	
+			$ins_col[$col] = '\''.$v.'\'';
 	
-	$ins_sql = "insert into collar ";
+	$ins_sql = "insert ignore into collar ";
 	$ins_sql .= '('.implode(',',array_keys($ins_col)).')';
 	$ins_sql .= " values (";
 	$ins_sql .= implode(', ',$ins_col).')';
-	
+	echo 'sql:';
+	echo $ins_sql;
 	$r = $app['db']->query($ins_sql);
 	
 	if($r !== false)
@@ -34,7 +34,23 @@ $app->put('/collar', function (Request $request) use ($app) {
 	$post['error'] = $error;
 	$post['id_collar'] = $app['db']->lastInsertId();
 	
-    return $app->json($post);
+	return $post;
+}
+
+$app->put('/collar', function (Request $request) use ($app) {
+	$data = array('id_cat','serial','mac');
+	foreach($data as $v) 
+		if($request->request->get($v) != '')
+			$fields[$v] = $request->request->get($v);
+    return $app->json(addCollar($fields));
+});
+$app->put('/collar/{serial}', function (Request $request, $serial) use ($app) {
+	$data = array('id_cat','mac');
+	foreach($data as $v) 
+		if($request->request->get($v) != '')
+			$fields[$v] = $request->request->get($v);
+	$fields['serial'] = $serial;
+    return $app->json(addCollar($fields));
 });
 
 

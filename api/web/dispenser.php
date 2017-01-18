@@ -85,21 +85,20 @@ function addDispenser($cols = array()) {
 	return $post;
 }
 
-//$app->get('/hello/{id_user}/{serial}', function (Request $request, $id_user, $serial) use ($app) {
-$app->put('/hello', function (Request $request) use ($app) {
-	$cols = array('name', 'id_user', 'serial', 'stock');
-
+$app->put('/dispenser/hello/{id_user}/{serial}', function (Request $request, $id_user, $serial) use ($app) {
+//$app->put('/hello', function (Request $request) use ($app) {
+	//$cols = array('name', 'id_user', 'serial');
+	$cols = array('serial','id_user');
+	
 	$ins_col = array();
 	foreach($cols as $col)
-		if($request->request->get($col) != '')
-		//if($$col != '')
-			$ins_col[$col] = $request->request->get($col);
-			//$ins_col[$col] = $$col;
+		if($$col != '')
+			$ins_col[$col] = $$col;
 	$insert = addDispenser($ins_col);
 	
 	if($insert['error'] == 0) { // then create a link between dispenser and user 
-		$app['db']->query('insert into user_dispenser (id_user,id_dispenser) values (\''.$ins_col['id_user'].'\', \''.$insert['id_dispenser'].'\')');
-		$app['db']->query('insert into cat_dispenser (id_cat, id_dispenser)
+		$app['db']->query('insert ignore into user_dispenser (id_user,id_dispenser) values (\''.$ins_col['id_user'].'\', \''.$insert['id_dispenser'].'\')');
+		$app['db']->query('insert ignore into cat_dispenser (id_cat, id_dispenser)
 				select cu.id_cat, ud.id_dispenser
 				from cat_user cu join user_dispenser ud using(id_user)');
 	}
@@ -159,7 +158,7 @@ $app->post('/dispenser', function (Request $request) use ($app) {
 	return $app->json($post);
 });
 
-$app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) {
+$app->post('/dispenser/lifesign/{serial}', function (Request $request,$serial) use ($app) {
 //$app->get('/lifesign/{serial}', function (Request $request,$serial) use ($app) {
 	//$serial = $request->request->get('serial');
 	$r = $app['db']->query('update dispenser set last_lifesign = UNIX_TIMESTAMP() where serial = \''.$serial.'\'');
@@ -168,8 +167,8 @@ $app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) 
 		$error = 0;
 	} else $error = 1;
 	
-	if($error == 0) $return = 'OK';
-	else $return = 'KO';
+	if($error == 0) $return = 'LIFESIGN_OK';
+	else $return = 'LIFESIGN_KO';
 	
 	// update available
 	//$return = 'UP';
@@ -177,7 +176,7 @@ $app->post('/lifesign/{serial}', function (Request $request,$serial) use ($app) 
 	return $return;
 });
 
-$app->post('/batterymode/{serial}', function (Request $request,$serial) use ($app) {
+$app->post('/dispenser/batterymode/{serial}', function (Request $request,$serial) use ($app) {
 //$app->get('/batterymode/{serial}', function (Request $request,$serial) use ($app) {
 	
 	$r = $app['db']->query('update dispenser set onbattery_from = UNIX_TIMESTAMP() where serial = \''.$serial.'\' and onbattery_from is null');
@@ -186,8 +185,8 @@ $app->post('/batterymode/{serial}', function (Request $request,$serial) use ($ap
 		$error = 0;
 	} else $error = 1;
 	
-	if($error == 0) $return = 'OK';
-	else $return = 'KO';
+	if($error == 0) $return = 'BATTMODE_OK';
+	else $return = 'BATTMODE_KO';
 
 	// update available
 	//$return = 'UP';
@@ -195,7 +194,7 @@ $app->post('/batterymode/{serial}', function (Request $request,$serial) use ($ap
 	return $return;
 });
 
-$app->post('/powerup/{serial}', function (Request $request,$serial) use ($app) {
+$app->post('/dispenser/powerup/{serial}', function (Request $request,$serial) use ($app) {
 //$app->get('/powerdown/{serial}', function (Request $request,$serial) use ($app) {
 	
 	$r = $app['db']->query('update dispenser set onbattery_from = NULL where serial = \''.$serial.'\' and onbattery_from is not null');
@@ -206,8 +205,8 @@ $app->post('/powerup/{serial}', function (Request $request,$serial) use ($app) {
 		$error = 0;
 	} else $error = 1;
 
-	if($error == 0) $return = 'OK';
-	else $return = 'KO';
+	if($error == 0) $return = 'POWERUP_OK';
+	else $return = 'POWERUP_KO';
 
 	// update available
 	//$return = 'UP';
@@ -224,8 +223,8 @@ $app->post('/powerdown/{serial}', function (Request $request,$serial) use ($app)
 		$error = 0;
 	} else $error = 1;
 
-	if($error == 0) $return = 'OK';
-	else $return = 'KO';
+	if($error == 0) $return = 'POWERDOWN_OK';
+	else $return = 'POWERDOWN_KO';
 
 	// update available
 	//$return = 'UP';
@@ -241,8 +240,8 @@ $app->post('/dispenser/{serial}/stock/{stock}', function (Request $request,$seri
 		$error = 0;
 	} else $error = 1;
 
-	if($error == 0) $return = 'OK';
-	else $return = 'KO';
+	if($error == 0) $return = 'STOCK_OK';
+	else $return = 'STOCK_KO';
 
 	// update available
 	//$return = 'UP';
@@ -303,27 +302,29 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	$d= $app['db']->fetchAll('select id_dispenser, stock, last_params from dispenser where serial = \''.$serial.'\'');
 	$d = $data[0];
 	*/
-	$txt = '';
+	$txt = 'DISPENSER_PARAMS\r\n';
 	
 	//$txt .= convertToSimpleMsg(array($d['id_dispenser'], $d['stock']), array('id_dispenser','stock'));
-	$d = $app['db']->fetchAll('select 
-		c.id_cat,
-		cl.id_collar,
+	$sql = 'select 
 		ifnull(cl.serial,\'------\') serial,
-		ifnull(cl.mac,\'00:00:00:00:00:00\') mac,
-		ifnull(group_concat(concat(LPAD(f.id_feedtime,3,\'0\'),\'||\',LPAD(f.id_dispenser,3,\'0\'),\'||\',DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\'))), \'\') feed_times
+		ifnull(group_concat(concat(DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\'))), \'\') feed_times
 	from cat c 
 	join cat_dispenser cd using(id_cat) 
 	join dispenser d using(id_dispenser) 
-	join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 and f.weight > 0
+	left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 and f.weight > 0
 	left join collar cl on c.id_cat = cl.id_cat
 	where d.serial = \''.$serial.'\'
-	group by c.id_cat');
+	group by c.id_cat';
 	
+	$d = $app['db']->fetchAll($sql);
+	
+	$i=0;
 	foreach($d as $k=>$v) {
-		$txt .= convertToSimpleMsg(array($v['id_cat'], $v['id_collar']), array('id_cat','id_collar')).'|'.$v['serial'].'|'.$v['mac'].'|FT['.$v['feed_times'].']FT';
+		$i++;
+		if($i > 1)
+			$txt .= '\r\n';
+		$txt .= $v['serial'].'|FT['.$v['feed_times'].']FT';
 		//print_r($v);
-		$txt .= '<br/>';
 	}
 	
 	if(count($data) == 0)
