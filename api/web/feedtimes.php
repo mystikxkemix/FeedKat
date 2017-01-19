@@ -112,13 +112,15 @@ $app->put('/feedtimes', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
-	$sql = "update feed_times ft join cat c using(id_cat) join cat_dispenser cd using (id_cat) join dispenser d using (id_dispenser) SET d.last_feedtime_update = UNIX_TIMESTAMP() where ft.id_feedtime = ".$app['db']->lastInsertId();
+	$id = $app['db']->lastInsertId();
+	
+	$sql = "update feed_times ft join cat c using(id_cat) join cat_dispenser cd using (id_cat) join dispenser d using (id_dispenser) SET d.last_feedtime_update = UNIX_TIMESTAMP() where ft.id_feedtime = $id";
 	
 	$r = $app['db']->query($sql);
 	
     $post = array(
         'error' => $error,
-        'id_feedtime'  => $app['db']->lastInsertId()
+        'id_feedtime'  => $id
     );
 	
     //$times = $app['db']->fetchAll('select * from feed_times');
