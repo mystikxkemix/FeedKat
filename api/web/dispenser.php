@@ -107,6 +107,28 @@ $app->put('/dispenser/hello/{id_user}/{serial}', function (Request $request, $id
     return convertToSimpleMsg($insert,array('error','id_dispenser'));
 });
 
+$app->put('/dispenser', function (Request $request) use ($app) {
+	$cols = array('serial','id_user', 'serial');
+	
+	$ins_col = array();
+	foreach($cols as $col)
+		if($request->request->get($col) != '')
+			$ins_col[$col] = $request->request->get($col);
+	$insert = addDispenser($ins_col);
+	
+	if($insert['error'] == 0) { // then create a link between dispenser and user 
+		$app['db']->query('insert ignore into user_dispenser (id_user,id_dispenser) values (\''.$ins_col['id_user'].'\', \''.$insert['id_dispenser'].'\')');
+		$app['db']->query('insert ignore into cat_dispenser (id_cat, id_dispenser)
+				select cu.id_cat, ud.id_dispenser
+				from cat_user cu join user_dispenser ud using(id_user)');
+	}
+	
+    return $app->json($insert);
+    //return convertToSimpleMsg($insert,array('error','id_dispenser'));
+});
+
+
+/*
 // API : add a new dispenser
 $app->put('/dispenser', function (Request $request) use ($app) {
 	$cols = array('name', 'id_user', 'serial', 'stock');
@@ -118,6 +140,7 @@ $app->put('/dispenser', function (Request $request) use ($app) {
 	
     return $app->json(addDispenser($ins_col));
 });
+*/
 
 // API : update a dispenser
 $app->post('/dispenser', function (Request $request) use ($app) {
