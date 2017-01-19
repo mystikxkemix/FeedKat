@@ -119,7 +119,7 @@ $app->get('/catbasics/{serial}', function (Request $request, $serial) use ($app)
 		cat c using(id_cat)
 	where cl.serial = '$serial'";
 	
-	$data = $app['db']->fetchAll($sql);
+	$data = $app['db']->fetchAll($sql){0};
 	
 	$data['error'] = 0;
 	
