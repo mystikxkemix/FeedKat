@@ -107,6 +107,7 @@ $app->get('/freecollars/user/{id}', function($id) use ($app) {
 	return $app->json($cats);
 });
 
+/*
 
 $app->get('/catbasics/{serial}', function (Request $request, $serial) use ($app) {
 	// serial = FKC001
@@ -125,5 +126,7 @@ $app->get('/catbasics/{serial}', function (Request $request, $serial) use ($app)
 	
 	return $app->json($data);
 });
+
+*/
 
 ?>
