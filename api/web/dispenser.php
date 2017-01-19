@@ -314,12 +314,14 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	$d= $app['db']->fetchAll('select id_dispenser, stock, last_params from dispenser where serial = \''.$serial.'\'');
 	$d = $data[0];
 	*/
-	$txt = 'DISPENSER_PARAMS\r\n';
+	$txt = 'DISPENSER_PARAMS:';
+	
 	
 	//$txt .= convertToSimpleMsg(array($d['id_dispenser'], $d['stock']), array('id_dispenser','stock'));
 	$sql = 'select 
 		ifnull(cl.serial,\'------\') serial,
-		ifnull(group_concat(concat(DATE_FORMAT(f.time,\'%H%i\'),\'||\',LPAD(f.weight,3,\'0\')) order by f.time asc), \'\') feed_times
+		count(f.id_feedtime) nb,
+		ifnull(group_concat(concat(DATE_FORMAT(f.time,\'%H,%i\'),\',\',LPAD(f.weight,3,\'0\')) order by f.time asc separator \':\'), \'\') feed_times
 	from cat c 
 	join cat_dispenser cd using(id_cat) 
 	join dispenser d using(id_dispenser) 
@@ -330,14 +332,17 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	
 	$d = $app['db']->fetchAll($sql);
 	
+	$txt .= count($d).':';
 	$i=0;
 	foreach($d as $k=>$v) {
-		$i++;
-		if($i > 1)
-			$txt .= '\r\n';
-		$txt .= $v['serial'].'|FT['.$v['feed_times'].']FT';
+		if($i > 0)
+			$txt .= ':';
+		$txt .= $v['serial'].':'.$v['nb'].':'.$v['feed_times'];
 		//print_r($v);
+		$i++;
 	}
+	
+	$txt .= ':END';
 	
 	if(count($data) == 0)
 		$data = array('error' => 1);
