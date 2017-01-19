@@ -318,6 +318,7 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	
 	
 	//$txt .= convertToSimpleMsg(array($d['id_dispenser'], $d['stock']), array('id_dispenser','stock'));
+	/*
 	$sql = 'select 
 		ifnull(cl.serial,\'------\') serial,
 		count(f.id_feedtime) nb,
@@ -329,6 +330,17 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	left join collar cl on c.id_cat = cl.id_cat
 	where d.serial = \''.$serial.'\'
 	group by c.id_cat';
+	*/
+	$sql = 'select 
+		ifnull(cl.serial,\'------\') serial,
+		ifnull(concat(DATE_FORMAT(f.time,\'%H,%i\'),\',\',LPAD(f.weight,3,\'0\')), \'\') feed_times
+	from cat c 
+	join cat_dispenser cd using(id_cat) 
+	join dispenser d using(id_dispenser) 
+	left join feed_times f on f.id_cat = c.id_cat and f.enabled = 1 and f.weight > 0
+	left join collar cl on c.id_cat = cl.id_cat
+	where d.serial = \''.$serial.'\'
+	order by f.time asc, c.id_cat asc';
 	
 	$d = $app['db']->fetchAll($sql);
 	
@@ -337,7 +349,7 @@ $app->get('/dispenser/params/{serial}', function(Request $request, $serial) use 
 	foreach($d as $k=>$v) {
 		if($i > 0)
 			$txt .= ':';
-		$txt .= $v['serial'].':'.$v['nb'].':'.$v['feed_times'];
+		$txt .= $v['serial'].':'.$v['feed_times'];
 		//print_r($v);
 		$i++;
 	}
