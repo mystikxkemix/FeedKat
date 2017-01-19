@@ -107,10 +107,10 @@ $app->get('/freecollars/user/{id}', function($id) use ($app) {
 	return $app->json($cats);
 });
 
-/*
 
-$app->get('/catbasics/{serial}', function (Request $request, $serial) use ($app) {
+$app->get('/catbasics/{serial}', function ($serial) use ($app) {
 	// serial = FKC001
+	$serial = addslashes($serial);
 	
 	$sql = "select 
 		c.id_cat, c.name, c.birth, (select value from cat_measure cm where cm.measure_type = 'weight' and cm.id_cat = c.id_cat order by cm.`date` desc limit 1) weight
@@ -120,13 +120,13 @@ $app->get('/catbasics/{serial}', function (Request $request, $serial) use ($app)
 		cat c using(id_cat)
 	where cl.serial = '$serial'";
 	
-	$data = $app['db']->fetchAll($sql){0};
+	$data = $app['db']->fetchAll($sql);
+	
+	$data = reset($data);
 	
 	$data['error'] = 0;
 	
 	return $app->json($data);
 });
-
-*/
 
 ?>
