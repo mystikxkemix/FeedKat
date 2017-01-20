@@ -13,6 +13,10 @@ open class FeedKatAPI:NSObject
     public static let catArrayCacheKey = "catArrayCacheKey"
     public static let dispArrayCacheKey = "dispArrayCacheKey"
     
+    
+    ///////////////////
+    //    GENERIC    //
+    ///////////////////
     open static func getDataFromUrl(url: URL, completion: @escaping (_ data: Data?, _  response: URLResponse?, _ error: Error?) -> Void) {
         URLSession.shared.dataTask(with: url)
         {   (data, response, error) in
@@ -32,15 +36,9 @@ open class FeedKatAPI:NSObject
         }
     }
     
-    open static func login(_ mail: String!, password: String!, handler: @escaping (NSDictionary?, NSError?) -> ())
+    open static func sendRequest(_ url:String!, method:HTTPMethod!, parameters:Parameters, handler: @escaping (NSDictionary?, NSError?) -> ())
     {
-        let link = (isLocal ? localServerAddr : prodServerAddr) + "/login"
-        
-        var params = Parameters()
-        _ = params.updateValue(mail, forKey: "mail")
-        _ = params.updateValue(password, forKey: "password")
-        
-        Alamofire.request(link, method: HTTPMethod.post, parameters: params, encoding: JSONEncoding.default)
+        Alamofire.request(url, method: method, parameters: parameters, encoding: JSONEncoding.default)
             .responseJSON
             { response in
                 if let JSON = response.result.value
@@ -53,7 +51,7 @@ open class FeedKatAPI:NSObject
                     }
                     else
                     {
-                        handler(nil, NSError(domain: "Could not login", code: 0, userInfo: nil))
+                        handler(nil, NSError(domain: "Error", code: 1, userInfo: nil))
                         return
                     }
                 }
@@ -62,7 +60,39 @@ open class FeedKatAPI:NSObject
                     handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
                     return
                 }
+        }
+    }
+    
+    ///////////////////
+    //     USER      //
+    ///////////////////
+    open static func login(_ mail: String!, password: String!, handler: @escaping (NSDictionary?, NSError?) -> ())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/login"
+        
+        var params = Parameters()
+        _ = params.updateValue(mail, forKey: "mail")
+        _ = params.updateValue(password, forKey: "password")
+        
+        sendRequest(link, method: HTTPMethod.post, parameters: params)
+        {
+            response, error in
+            if(error == nil)
+            {
+                handler(response, nil)
             }
+            else
+            {
+                if(error?.code == -1)
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not login", code: 0, userInfo: nil))
+                }
+            }
+        }
     }
     
     open static func register(_ mail: String!, password: String!,last: String!, first: String!, handler: @escaping (NSDictionary?, NSError?) -> ())
@@ -100,6 +130,42 @@ open class FeedKatAPI:NSObject
         }
     }
     
+    open static func getNewFreeCollar(_ userId:Int!, handler:@escaping(NSDictionary?, NSError?) -> ())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/freecollars/user/\(userId!)"
+        
+        Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
+            .responseJSON
+            {
+                response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+        
+    }
+    
+    
+    ///////////////////
+    //      CATS     //
+    ///////////////////
     open static func getCatbyUserId(_ userId:Int!, handler: @escaping (NSDictionary?, NSError?) -> ())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/user/\(userId!)"
@@ -130,37 +196,6 @@ open class FeedKatAPI:NSObject
             }
     }
     
-    open static func getDispById(_ userId:Int!, handler: @escaping (NSDictionary?, NSError?)->())
-    {
-        let link = (isLocal ? localServerAddr : prodServerAddr) + "/dispenser/user/\(userId!)"
-        
-        Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
-            .responseJSON
-            { response in
-                if let JSON = response.result.value
-                {
-                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
-                    if (error == 0)
-                    {
-                        handler(JSON as? NSDictionary, nil)
-                        return
-                    }
-                    else
-                    {
-                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
-                        return
-                    }
-                }
-                else
-                {
-                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
-                    return
-                    
-                }
-        }
-        
-    }
-    
     open static func getCatDetails(_ catId:Int!, handler: @escaping (NSDictionary?, NSError?)->())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/cat/\(catId!)/details"
@@ -189,7 +224,7 @@ open class FeedKatAPI:NSObject
                     return
                     
                 }
-            }
+        }
     }
     
     open static func modifyCat(_ catId:Int!, name:String!, UiImage:UIImage?, birth:Date?, handler:@escaping(NSDictionary?, NSError?) -> ())
@@ -240,8 +275,8 @@ open class FeedKatAPI:NSObject
                     return
                     
                 }
-            }
-
+        }
+        
     }
     
     open static func addCat(id_user: Int, name: String, Birthdate: Date, image:UIImage?, handler:@escaping(NSDictionary?, NSError?)->())
@@ -288,6 +323,81 @@ open class FeedKatAPI:NSObject
         }
     }
 
+    ///////////////////
+    //   DISPENSER   //
+    ///////////////////
+    open static func getDispById(_ userId:Int!, handler: @escaping (NSDictionary?, NSError?)->())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/dispenser/user/\(userId!)"
+        
+        Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
+            .responseJSON
+            { response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+        
+    }
+    
+    open static func putDisp(_ userId:Int!, serialDisp:String!, nameDisp:String!, handler: @escaping (NSDictionary?, NSError?)->())
+    {
+        let link = (isLocal ? localServerAddr : prodServerAddr) + "/dispenser"
+        
+        var params = Parameters()
+        params.updateValue(userId, forKey: "id_user")
+        params.updateValue(serialDisp, forKey: "serial_disp")
+        params.updateValue(nameDisp, forKey: "name")
+        
+        Alamofire.request(link, method: HTTPMethod.put, parameters: params, encoding: JSONEncoding.default)
+            .responseJSON
+            { response in
+                if let JSON = response.result.value
+                {
+                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
+                    if (error == 0)
+                    {
+                        handler(JSON as? NSDictionary, nil)
+                        return
+                    }
+                    else
+                    {
+                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
+                        return
+                    }
+                }
+                else
+                {
+                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
+                    return
+                    
+                }
+        }
+
+    }
+    
+    
+   
+    ///////////////////
+    //   FEEDTIMES   //
+    ///////////////////
     open static func modifyFeedTime(_ feedtimeId:Int!, weight:Int, Time:String, handler:@escaping(NSDictionary?, NSError?)->())
     {
         let link = (isLocal ? localServerAddr : prodServerAddr) + "/feedtimes"
@@ -394,37 +504,5 @@ open class FeedKatAPI:NSObject
                     
                 }
         }
-    }
-    
-    open static func getNewFreeCollar(_ userId:Int!, handler:@escaping(NSDictionary?, NSError?) -> ())
-    {
-        let link = (isLocal ? localServerAddr : prodServerAddr) + "/freecollars/user/\(userId!)"
-        
-        Alamofire.request(link, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default)
-            .responseJSON
-            {
-                response in
-                if let JSON = response.result.value
-                {
-                    let error = (JSON as! NSDictionary).value(forKey: "error") as! Int
-                    if (error == 0)
-                    {
-                        handler(JSON as? NSDictionary, nil)
-                        return
-                    }
-                    else
-                    {
-                        handler(nil, NSError(domain: "Wrong user Id", code: 1, userInfo: nil))
-                        return
-                    }
-                }
-                else
-                {
-                    handler(nil, NSError(domain: "Could not connect to the server.", code: -1, userInfo: nil))
-                    return
-                    
-                }
-        }
-
     }
 }

@@ -470,10 +470,6 @@ class TabTile:Tile, UITextFieldDelegate, ChartViewDelegate
                 self.feedList[self.currentInd].Hour = self.modHour[self.currentInd].text!
                 self.reloadFeed()
             }
-            else
-            {
-                
-            }
         }
     
         

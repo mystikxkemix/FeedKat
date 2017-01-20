@@ -65,14 +65,17 @@ class GenVC : UIViewController
         UITitle = UILabel()
         UITitle.translatesAutoresizingMaskIntoConstraints = false
         UITitle.textColor = UIColor.white
+        UITitle.textAlignment = .center
         UITitle.text = title
-        UITitle.font = UIFont(name: "Arial Rounded MT Bold", size: 30)!
+        UITitle.font = UIFont(name: "Arial Rounded MT Bold", size: 25)!
         UITitle.numberOfLines = 1
-        UITitle.sizeToFit()
         
         top.addSubview(UITitle)
+        top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .width, relatedBy: .equal, toItem: top, attribute: .width, multiplier: 0.8, constant: 0))
+        top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .height, relatedBy: .equal, toItem: top, attribute: .height, multiplier: 0.9, constant: 0))
         top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .centerX, relatedBy: .equal, toItem: top, attribute: .centerX, multiplier: 1, constant: 0))
         top.addConstraint(NSLayoutConstraint(item: UITitle, attribute: .centerY, relatedBy: .equal, toItem: top, attribute: .centerY, multiplier: 1, constant: 5))
+        UITitle.sizeToFit()
         
     }
     
