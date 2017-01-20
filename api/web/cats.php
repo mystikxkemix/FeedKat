@@ -283,4 +283,40 @@ $app->post('/cat', function (Request $request) use ($app) {
 	return $app->json($post);
 });
 
+
+// API : update a cat
+$app->post('/cat/{serial}/weight/{weight}', function ($serial, $weight) use ($app) {
+	
+	if($weight == '' || $serial == '')
+		return 'WEIGHT_FAIL';
+	
+	$sql = "select c.id_cat from cat c join collar co using(id_cat) where co.serial = '$serial'";
+	
+	$datacat = $app['db']->fetchAll($sql);
+	$id_cat = $datacat[0]['id_cat'];
+	
+	$sql = "insert into cat_measure (id_cat, measure_type, date, value)	values ($id_cat, 'weight', NOW(), $weight)";
+	
+	$r = $app['db']->query($sql);
+
+	if($r !== false)
+		$error = 0;
+	else
+		$error = 1;
+	
+	if(!$error)
+		return 'WEIGHT_OK';
+	else
+		return 'WEIGHT_FAIL';
+	
+	/*
+    $post = array(
+        'error' => $error,
+        'id_cat'  => $request->request->get('id_cat')
+    );
+	
+	return $app->json($post);
+	*/
+});
+
 ?>
