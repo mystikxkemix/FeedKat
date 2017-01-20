@@ -51,7 +51,7 @@ $app->put('/measure/activity', function (Request $request) use ($app) {
 	$r = $app['db']->query($ins_sql);
 	
 	$battery = $request->request->get('battery');
-	$r = $app['db']->query("update collar co join cat c using(id_cat) set c.last_battery = battery where ".$where_sql);
+	$r = $app['db']->query("update collar co join cat c using(id_cat) set c.last_battery = $battery where ".$where_sql);
 	
 	if($r !== false)
 		$error = 0;
