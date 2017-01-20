@@ -41,7 +41,7 @@ function getCatInfo($keys = array(), $details = false) {
 		if(photo!=\'\',concat(\'http://'.$addr.'/api/img.php?id_cat=\',c.id_cat),\'\') photo,
 		ifnull(d.id_dispenser,\'\') id_dispenser, 
 		ifnull(u.id_user,\'\') id_user,
-		ifnull(group_concat(concat(f.id_feedtime,\'||\',d.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled) order by f.time asc), \'\') feed_times,
+		ifnull(distinct group_concat(concat(f.id_feedtime,\'||\',d.id_dispenser,\'||\',f.time,\'||\',f.weight,\'||\',f.enabled) order by f.time asc), \'\') feed_times,
 		ifnull(last_activity,\'\') activity,
 		ifnull(last_battery,\'\') battery'.
 			(/*$details */ true == true ? ',
