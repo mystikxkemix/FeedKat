@@ -65,7 +65,7 @@ function getCatInfo($keys = array(), $details = false) {
 	if(count($r) > 0)
 		$data['cats'] = $r;
 	
-	if(count($data['cats']) > 0) {
+	//if(count($data['cats']) > 0) {
 		foreach($data['cats'] as $i => $cat) {
 			$feedtimes = explode(',',$data['cats'][$i]['feed_times']);
 			$data['cats'][$i]['feed_times'] = array();
@@ -129,11 +129,12 @@ function getCatInfo($keys = array(), $details = false) {
 		}
 		$data['error'] = 0;
 		$data['count'] = count($data['cats']);
+		/*
 	}
 	else {
 		$data['error'] = 1;
 		$data['count'] = count($data['cats']);
-	}
+	}*/
 	return $data;
 }
 
