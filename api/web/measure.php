@@ -11,6 +11,13 @@ $app->get('/cat', function() use ($app) {
 
 $app->put('/measure/activity', function (Request $request) use ($app) {
 
+    if (0 === strpos($request->headers->get('Content-Type'), 'application/json')) { // if json request
+		$jsondec = json_decode($request->getContent(), true);
+		if($jsondec == null) 
+			return 'ACTIVITY_FAIL';
+    }
+	
+	
 	$cols = array('time','interval','activities');
 
 	$serial = $request->request->get('serial');
@@ -58,7 +65,7 @@ $app->put('/measure/activity', function (Request $request) use ($app) {
 	else
 		$error = 1;
 	
-	return ($error ? 'KO' : 'OK');
+	return ($error ? 'ACTIVITY_FAIL' : 'ACTIVITY_OK');
 	
     //$post = array(
     //    'error' => $error,
