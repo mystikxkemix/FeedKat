@@ -108,7 +108,7 @@ $app->put('/dispenser/hello/{id_user}/{serial}', function (Request $request, $id
 });
 
 $app->put('/dispenser', function (Request $request) use ($app) {
-	$cols = array('serial','id_user', 'serial');
+	$cols = array('serial','id_user');
 	
 	$ins_col = array();
 	foreach($cols as $col)
@@ -328,6 +328,48 @@ $app->get('/alerts/{serial}', function (Request $request,$serial) use ($app) {
 		}
 	}
 
+	return $app->json($return);
+});
+
+
+$app->get('/alerts/{serial}/simple', function (Request $request,$serial) use ($app) {
+
+	$data = $app['db']->fetchAll('select \'onbattery\' alert, (UNIX_TIMESTAMP() - onbattery_from) amount from dispenser where onbattery_from is not null and serial = \''.$serial.'\' and powerdown_from is null
+			union
+			select \'powerdown\' alert, (UNIX_TIMESTAMP() - powerdown_from) amount from dispenser where powerdown_from is not null and serial = \''.$serial.'\'
+			union
+			select \'lifesign\' alert, (UNIX_TIMESTAMP() - last_lifesign) amount from dispenser where (UNIX_TIMESTAMP() - last_lifesign) > 3600 and serial = \''.$serial.'\' and powerdown_from is null
+			union
+			select \'foodstock\' alert, stock amount from dispenser where stock < 25 and serial = \''.$serial.'\'
+			union
+			select concat(\'collar_battery_\',cl.serial) alert, c.last_battery amount from dispenser d join cat_dispenser cd using (id_dispenser) join cat c using(id_cat) join collar cl using(id_cat) where d.serial = \''.$serial.'\' and c.last_battery < 25');
+	
+	$alert_caption =
+		array(
+				'onbattery' => 'Distributeur non branché au secteur',
+				'powerdown' => 'Distributeur éteint',
+				'lifesign' => 'Distributeur hors-ligne',
+				'foodstock' => 'Faible réserve de croquettes',
+				'collar_battery' => 'Niveau de pile faible');
+
+	$return['alerts'] = array();
+	
+	foreach($data as $k=>$v) {
+		if(strstr($v['alert'],'collar_battery') !== false) {
+			$data[$k]['caption'] = $alert_caption['collar_battery'].' ('.$v['amount'].'%)';
+		}
+		else {
+			$data[$k]['caption'] = $alert_caption[$v['alert']].' depuis '.duree($v['amount']);
+		}
+	}
+	
+	$return = array();
+	foreach($data as $k=>$v) {
+		$return[] = $v['caption'];
+	}
+	$val = $return;
+	$return = new stdClass;
+	$return->alerts = $val;
 	return $app->json($return);
 });
 
